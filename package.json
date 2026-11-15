@@ -1,0 +1,27 @@
+{
+  "name": "vtplan",
+  "version": "1.0.0",
+  "description": "Virginia Tech course and instructor grade estimates with calibrated ranges",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p .",
+    "backtest": "node bench/grades.backtest.ts",
+    "backtest:matters": "node bench/matters.backtest.ts",
+    "build": "node scripts/build-site.ts",
+    "pilot": "node scripts/build-site.ts --top 30",
+    "check": "npm run typecheck && npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "engines": { "node": ">=22.18" },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  },
+  "type": "module"
+}
