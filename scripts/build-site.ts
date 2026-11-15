@@ -7,7 +7,7 @@ import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
 import { parseRoadmaps } from '../src/plan/roadmap.ts';
 import { PLAN_JS, renderPlan, renderPlanIndex } from '../src/site/plan-page.ts';
-import { CSS, SEARCH_JS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
+import { APP_JS, CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
 const topArg = process.argv.indexOf('--top');
@@ -26,7 +26,7 @@ const sizes: number[] = [];
 const write = (path: string, html: string) => { writeFileSync(join(OUT, path), html); if (path.endsWith('.html')) sizes.push(Buffer.byteLength(html)); };
 
 write('style.css', CSS);
-write('search.js', SEARCH_JS);
+write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));
 write('index.html', renderIndex(site, links, roadmaps.length));
@@ -37,9 +37,11 @@ write('about.html', renderAbout(site));
 for (const c of site.courses) write(`course/${links.course.get(c.course)}.html`, renderCourse(c, site, links));
 for (const p of site.profs) write(`prof/${links.prof.get(p.key)}.html`, renderProf(p, site, links));
 for (const s of new Set(site.courses.map((c) => c.subject))) write(`subject/${s}.html`, renderSubject(s, site, links));
+// [label, link, kind]: c = course, i = instructor, m = degree plan. The palette groups by kind.
 write('search.json', JSON.stringify([
-  ...site.courses.map((c) => [`${c.course} ${c.title}`, `course/${links.course.get(c.course)}.html`]),
-  ...site.profs.map((p) => [`${p.name} (${p.subject})`, `prof/${links.prof.get(p.key)}.html`]),
+  ...site.courses.map((c) => [`${c.course} ${c.title}`, `course/${links.course.get(c.course)}.html`, 'c']),
+  ...site.profs.map((p) => [`${p.name} (${p.subject})`, `prof/${links.prof.get(p.key)}.html`, 'i']),
+  ...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']),
 ]));
 
 sizes.sort((a, b) => a - b);

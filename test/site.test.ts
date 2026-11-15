@@ -5,7 +5,7 @@ import { BASELINE_PARAMS } from '../src/grades/estimate.ts';
 import { spreadOf } from '../src/grades/matters.ts';
 import { defaultGrid, tune } from '../src/grades/tune.ts';
 import { buildSite, dedupeRows, termLabel } from '../src/site/model.ts';
-import { esc, renderCourse, renderIndex, renderProf, rmpUrl, slugs } from '../src/site/render.ts';
+import { bOrBetter, esc, renderCourse, renderIndex, renderProf, rmpUrl, slugs } from '../src/site/render.ts';
 
 let crn = 10000;
 function row(course: string, instructor: string, term: number, gpa: number, graded = 40, title = 'Intro'): UdcRow {
@@ -99,8 +99,8 @@ test('professor page: flagged names are never pooled across courses', () => {
   assert.deepEqual(abbott.panels.map((p) => p.course), ['CS 1114', 'CS 2505']); // no CS 5000
   assert.equal(abbott.panels[0]!.history[0]!.term, 4047); // newest first
   assert.equal(abbott.dist!.students, 640); // both undergrad courses, not CS 5000
-  assert.match(renderProf(abbott, s, linksFor(s)), /All Courses/);
-  assert.doesNotMatch(renderProf(lee, s, linksFor(s)), /All Courses/);
+  assert.match(renderProf(abbott, s, linksFor(s)), /id="overall"/);
+  assert.doesNotMatch(renderProf(lee, s, linksFor(s)), /id="overall"/);
 });
 
 test('--top keeps the most-taken courses and only their instructors', () => {
@@ -143,4 +143,19 @@ test('home page links both ways in: grades and the degree planner', () => {
   assert.ok(html.includes('href="plan/index.html"'));
   assert.ok(html.includes('href="course/CS-1114.html"')); // most-taken courses
   assert.ok(html.includes('href="subject/CS.html"'));
+});
+
+test('course page: compare buttons carry the estimate and a spread taken from the 80% range', () => {
+  const s = site();
+  const c = s.courses[0]!;
+  const html = renderCourse(c, s, linksFor(s));
+  const a = c.instructors[0]!;
+  const m = /class="pick"[^>]*data-n="Abbott" data-g="([\d.]+)" data-s="([\d.]+)"/.exec(html)!;
+  assert.ok(Math.abs(Number(m[1]) - a.gpa) < 0.001);
+  assert.ok(Math.abs(Number(m[2]) - (a.hi - a.lo) / 2.563) < 0.001);
+  assert.equal((html.match(/class="pick"/g) ?? []).length, c.instructors.length + 1); // plus "a new instructor"
+  assert.ok(html.includes('id="cmp"'));
+  // Fixture grades: 50% A, 30% B.
+  assert.ok(Math.abs(bOrBetter(c.dist) - 80) < 1e-9);
+  assert.ok(html.includes('got a B or higher'));
 });

@@ -2,7 +2,7 @@
 
 **Verdict:** the engine is sound and it measurably beats what every VT grade site shows today. That alone will not pull students off RateMyProfessors. The data says this works as a second tab students open next to RMP, not as a replacement for it. One unverified blocker could cap it further: whether the public timetable still shows instructor names.
 
-## What was built (TypeScript, no runtime dependencies, 31 unit tests)
+## What was built (TypeScript, no runtime dependencies, 32 unit tests)
 
 **#5 Honest grade estimates.** Predicts next-term section GPA for a (course, instructor) pair:
 - Small samples are pulled toward the course mean (shrinkage).
@@ -13,11 +13,12 @@
 **#3 Instructor identity.** Flags last-name keys that probably merge several people and stops pooling them across courses.
 
 **Static site (added Nov 14, 2026).** `npm run build` turns the CSVs in `data/` into a full site in `dist/`:
-- Layout: a search bar on every page, then cards with the facts on the left and a grade bar chart (W, F, D, C, B, A) on the right.
-- Course pages: an "All Instructors" card, tiles for course average, section size, withdraw rate and the instructor-matters verdict, the term trend, then one card per instructor with grades given, most common grade, and expected section GPA with its 80% range. A "new or unlisted instructor" card closes the list.
-- Instructor pages: an "All Courses" card, then one card per course with term history. Flagged names get a warning and no cross-course total.
-- Subject lists, search over courses and last names, and a method page.
-- Degree planner (`plan/`): pick a major, start from its official roadmap in the 2026-2027 VT catalog, choose 3, 3.5, 4, 4.5 or 5 years, move courses between terms, tick off finished ones. Each course shows its average GPA and an "Instructor matters" tag, and each term shows credits, a typical GPA, and flags for a heavy load or several low-GPA courses together. 15 College of Engineering majors so far. The plan is saved in the visitor's browser.
+- Design: original, not modelled on another site. Left rail with search and navigation (bottom tabs on phones), serif headlines, ruled sections.
+- Course pages: a one-line verdict headline, four key numbers (course GPA, share with a B or higher, withdraw rate, section size), a grade mix strip, then the lane chart: every instructor on one shared GPA axis with the expected section GPA, its 80% range, the course average and a history-depth marker. Tapping a row opens the detail; tapping the compare button on two rows gives a sentence such as "would average higher about 8 times in 10".
+- Instructor pages: the same key numbers and lane chart, one row per course, with term history in each row's detail. Flagged names get a warning and no cross-course total.
+- Search palette: opens with "/" or Cmd/Ctrl+K from any page, groups results into courses, instructors and degree plans, and works with arrow keys.
+- Subject lists and a method page.
+- Degree planner (`plan/`): pick a major, start from its official roadmap in the 2026-2027 VT catalog, choose 3, 3.5, 4, 4.5 or 5 years, move courses between terms, tick off finished ones, rebalance heavy terms with one button, and copy the plan as text. A bar overview shows credits per term. Each course shows its average GPA and an "Instructor matters" tag, and each term shows credits, a typical GPA, and flags for a heavy load or several low-GPA courses together. 15 College of Engineering majors so far. The plan is saved in the visitor's browser.
 - Planner limit: plans other than 4 years are a rearrangement of the official roadmap. Prerequisites and term offerings are not checked, and the page says so.
 - Every instructor links out to a RateMyProfessors search for that last name at VT, so reviews are one click away. Reviews are never copied.
 - `npm run pilot` builds only the 30 most-taken courses (22% of undergrad enrollments).
@@ -56,7 +57,7 @@ Data: 45,143 rows of VT UDC exports, Fall 2019 to Spring 2024. Test set: Fall 20
 
 ## Site build numbers (measured, Apple silicon laptop)
 - 3,420 course pages and 4,567 instructor pages in about 15 seconds (12 of them parameter tuning).
-- Median page 5.5 KB of HTML, largest 138 KB, one shared 4 KB stylesheet, and one small shared search script as the only JavaScript.
+- Median page 7 KB of HTML, largest 163 KB, one shared 13 KB stylesheet, and two small shared scripts (search and compare; planner).
 - Verdicts across all courses: 226 matters, 224 modest, 379 barely, 2,591 not enough history. In the 30 pilot courses: 14 matters, 8 modest, 3 barely, 5 not enough history.
 - Not measured: competitor page weight and load time. No competitor site was fetched for this.
 
