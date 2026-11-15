@@ -14,12 +14,44 @@ export const termLabel = (t: number) => (t % 2 === 0 ? `Spring ${t / 2}` : `Fall
 
 export interface Estimate { gpa: number; lo: number; hi: number }
 
-export interface InstructorLine extends Estimate {
+/** Grade counts for one bar chart, in students. Bars run W, F, D, C, B, A. */
+export interface Dist {
+  bars: Array<{ label: string; n: number }>;
+  students: number;
+  /** Plain student-weighted GPA of these sections (what was given, not an estimate). */
+  gpa: number;
+  /** Most common letter group and its share of graded students, in percent. */
+  top: { label: string; pct: number };
+}
+
+export function gradeDist(rows: UdcRow[]): Dist {
+  const n: Record<string, number> = { W: 0, F: 0, D: 0, C: 0, B: 0, A: 0 };
+  let students = 0, sum = 0;
+  for (const r of rows) {
+    students += r.graded;
+    sum += r.gpa * r.graded;
+    n.W! += r.withdraws;
+    for (const g of GRADE_COLS) n[g[0]!]! += ((r.pct[g] || 0) * r.graded) / 100;
+  }
+  const letters = ['A', 'B', 'C', 'D', 'F'].map((label) => ({ label, pct: students ? (n[label]! / students) * 100 : 0 }));
+  const top = letters.reduce((a, b) => (b.pct > a.pct ? b : a));
+  return { bars: Object.entries(n).map(([label, v]) => ({ label, n: v })), students, gpa: students ? sum / students : NaN, top };
+}
+
+/** Span of terms a set of rows covers, for "6 terms from Fall 2019 to Spring 2023". */
+export interface Span { terms: number; firstTerm: number; lastTerm: number }
+const spanOf = (rows: UdcRow[]): Span => {
+  const t = [...new Set(rows.map((r) => r.term))];
+  return { terms: t.length, firstTerm: Math.min(...t), lastTerm: Math.max(...t) };
+};
+
+export interface InstructorLine extends Estimate, Span {
   name: string;
+  /** Grades this name gave in this course, every term in the data. */
+  dist: Dist;
   key: string; // "CS|Chen"
   students: number;
   sections: number;
-  lastTerm: number;
   ambiguous: boolean;
   reason: string;
 }
@@ -36,8 +68,8 @@ export interface CoursePage {
   sections: number;
   firstTerm: number;
   lastTerm: number;
-  /** Share of grades by letter group over the course's last 4 offered terms, in percent. */
-  dist: Array<{ label: string; pct: number }>;
+  /** Grades given over the course's last 4 offered terms. */
+  dist: Dist;
   withdrawRate: number;
   trend: Array<{ term: number; gpa: number; students: number }>;
   instructors: InstructorLine[];
@@ -45,8 +77,9 @@ export interface CoursePage {
   spread: Spread;
 }
 
-export interface ProfPanel extends Estimate {
+export interface ProfPanel extends Estimate, Span {
   course: string;
+  dist: Dist;
   title: string;
   courseMean: number;
   students: number;
@@ -62,6 +95,8 @@ export interface ProfPage {
   reason: string;
   /** Shrunk average gap to course means across courses. Undefined for flagged names: never pooled. */
   effect: number | undefined;
+  /** All courses together. Undefined for flagged names: never pooled. */
+  dist: Dist | undefined;
   panels: ProfPanel[];
 }
 
@@ -115,12 +150,9 @@ export function coursePage(course: string, rs: UdcRow[], f: Fit): CoursePage {
     return { gpa, lo, hi };
   };
 
-  const graded = recentSecs.reduce((a, r) => a + r.graded, 0);
-  const dist = LETTER_GROUPS.map((label) => ({
-    label,
-    pct: recentSecs.reduce((a, r) => a + GRADE_COLS.filter((g) => g[0] === label).reduce((b, g) => b + (r.pct[g] || 0), 0) * r.graded, 0) / graded,
-  }));
-  const withdraws = recentSecs.reduce((a, r) => a + r.withdraws, 0);
+  const dist = gradeDist(recentSecs);
+  const withdraws = dist.bars[0]!.n;
+  const graded = dist.students;
 
   const byInstr = group(rs, (r) => r.instructor);
   const instructors: InstructorLine[] = [];
@@ -131,7 +163,7 @@ export function coursePage(course: string, rs: UdcRow[], f: Fit): CoursePage {
     if (lastTerm < f.target - RECENT_TERMS) { earlier.push({ name, key, lastTerm }); continue; }
     const pred = h.predict({ course, subject, instructor: name });
     const a = f.ambiguity.get(key);
-    instructors.push({ name, key, ...est(pred.gpa, pred.students), students: pred.students, sections: pred.sections, lastTerm, ambiguous: !!a?.ambiguous, reason: a?.reason ?? '' });
+    instructors.push({ name, key, ...est(pred.gpa, pred.students), ...spanOf(mine), dist: gradeDist(mine), students: pred.students, sections: pred.sections, ambiguous: !!a?.ambiguous, reason: a?.reason ?? '' });
   }
   // Sorted by name, never by GPA (see skills.md editing rules).
   instructors.sort((a, b) => a.name.localeCompare(b.name));
@@ -164,12 +196,13 @@ export function profPage(key: string, rs: UdcRow[], f: Fit, courses: Map<string,
     const history = [...(group(mine, (r) => r.term) as Map<number, UdcRow[]>)]
       .map(([term, t]) => ({ term, gpa: wmean(t), students: t.reduce((x, r) => x + r.graded, 0), sections: t.length }))
       .sort((x, y) => y.term - x.term);
-    panels.push({ course, title: cp.title, courseMean: cp.mean, gpa: pred.gpa, lo, hi, students: pred.students, sections: pred.sections, history });
+    panels.push({ course, title: cp.title, courseMean: cp.mean, ...spanOf(mine), dist: gradeDist(mine), gpa: pred.gpa, lo, hi, students: pred.students, sections: pred.sections, history });
   }
   panels.sort((x, y) => x.course.localeCompare(y.course));
   const e = f.history.instrEffect.get(key);
   const effect = !ambiguous && e && e.w > 0 && panels.length >= 2 ? e.sum / (e.w + f.params.kInstr) : undefined;
-  return { key, subject, name, ambiguous, reason: a?.reason ?? '', effect, panels };
+  const shown = rs.filter((r) => courses.has(r.course));
+  return { key, subject, name, ambiguous, reason: a?.reason ?? '', effect, dist: ambiguous ? undefined : gradeDist(shown), panels };
 }
 
 /** `top`: build only the N most-taken courses (the pilot in the report's validation plan). */

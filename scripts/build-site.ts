@@ -5,7 +5,7 @@ import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
-import { CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
+import { CSS, SEARCH_JS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
 const topArg = process.argv.indexOf('--top');
@@ -24,6 +24,7 @@ const sizes: number[] = [];
 const write = (path: string, html: string) => { writeFileSync(join(OUT, path), html); if (path.endsWith('.html')) sizes.push(Buffer.byteLength(html)); };
 
 write('style.css', CSS);
+write('search.js', SEARCH_JS);
 write('index.html', renderIndex(site));
 write('about.html', renderAbout(site));
 for (const c of site.courses) write(`course/${links.course.get(c.course)}.html`, renderCourse(c, site, links));

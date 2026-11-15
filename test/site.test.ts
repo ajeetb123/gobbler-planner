@@ -77,7 +77,14 @@ test('course page: sorted by name, flags, earlier instructors, verdict, wider un
   assert.ok(abbott.lo <= abbott.gpa && abbott.gpa <= abbott.hi);
   // Never narrower than a known instructor (equal here: the tiny fixture uses one pooled band).
   assert.ok(c.unknown.hi - c.unknown.lo >= abbott.hi - abbott.lo);
-  assert.ok(Math.abs(c.dist.reduce((a, d) => a + d.pct, 0) - 100) < 1e-6);
+  // Fixture rows: 40 graded (50% A, 30% B, 20% C), 2 withdraws. Last 4 terms x 3 sections = 12 sections.
+  assert.deepEqual(c.dist.bars.map((b) => b.label), ['W', 'F', 'D', 'C', 'B', 'A']);
+  assert.deepEqual(c.dist.bars.map((b) => Math.round(b.n)), [24, 0, 0, 96, 144, 240]);
+  assert.equal(c.dist.students, 480);
+  assert.deepEqual(c.dist.top, { label: 'A', pct: 50 });
+  assert.equal(abbott.terms, 8);
+  assert.equal(abbott.dist.students, 320);
+  assert.ok(Math.abs(abbott.dist.gpa - 3.6) < 1e-9);
   assert.ok(Math.abs(c.withdrawRate - 2 / 42) < 1e-9);
 });
 
@@ -86,10 +93,14 @@ test('professor page: flagged names are never pooled across courses', () => {
   const lee = s.profs.find((p) => p.key === 'CS|Lee')!;
   assert.ok(lee.ambiguous);
   assert.equal(lee.effect, undefined);
+  assert.equal(lee.dist, undefined); // no "All Courses" total for a flagged name
   assert.match(renderProf(lee, s, linksFor(s)), /may cover more than one person/);
   const abbott = s.profs.find((p) => p.key === 'CS|Abbott')!;
   assert.deepEqual(abbott.panels.map((p) => p.course), ['CS 1114', 'CS 2505']); // no CS 5000
   assert.equal(abbott.panels[0]!.history[0]!.term, 4047); // newest first
+  assert.equal(abbott.dist!.students, 640); // both undergrad courses, not CS 5000
+  assert.match(renderProf(abbott, s, linksFor(s)), /All Courses/);
+  assert.doesNotMatch(renderProf(lee, s, linksFor(s)), /All Courses/);
 });
 
 test('--top keeps the most-taken courses and only their instructors', () => {

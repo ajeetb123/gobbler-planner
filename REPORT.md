@@ -13,8 +13,9 @@
 **#3 Instructor identity.** Flags last-name keys that probably merge several people and stops pooling them across courses.
 
 **Static site (added Nov 14, 2026).** `npm run build` turns the CSVs in `data/` into a full site in `dist/`:
-- Course pages: course average, grade split, withdraw rate, term trend, expected section GPA per instructor with 80% range, a "new or unlisted instructor" row, and a verdict on whether instructor choice matters.
-- Instructor pages: one panel per course with term history. Flagged names get a warning and no cross-course number.
+- Layout: a search bar on every page, then cards with the facts on the left and a grade bar chart (W, F, D, C, B, A) on the right.
+- Course pages: an "All Instructors" card, tiles for course average, section size, withdraw rate and the instructor-matters verdict, the term trend, then one card per instructor with grades given, most common grade, and expected section GPA with its 80% range. A "new or unlisted instructor" card closes the list.
+- Instructor pages: an "All Courses" card, then one card per course with term history. Flagged names get a warning and no cross-course total.
 - Subject lists, search over courses and last names, and a method page.
 - Every instructor links out to a RateMyProfessors search for that last name at VT, so reviews are one click away. Reviews are never copied.
 - `npm run pilot` builds only the 30 most-taken courses (22% of undergrad enrollments).
@@ -52,8 +53,8 @@ Data: 45,143 rows of VT UDC exports, Fall 2019 to Spring 2024. Test set: Fall 20
 8. **"Does the instructor matter" verdict.** Label from past terms, then measure the real gap between the same instructors next term (717 course-terms): "barely" courses had a median real gap of 0.19, "modest" 0.31, "matters" 0.52. A real gap of 0.3 or more showed up in 26%, 51% and 72% of them. The label separates courses, but "barely" is not a guarantee, and the page wording reflects that.
 
 ## Site build numbers (measured, Apple silicon laptop)
-- 3,420 course pages and 4,567 instructor pages in about 13 seconds (12 of them parameter tuning).
-- Median page 3.4 KB of HTML, largest 58 KB, one shared 2.1 KB stylesheet, no JavaScript except the home page search.
+- 3,420 course pages and 4,567 instructor pages in about 15 seconds (12 of them parameter tuning).
+- Median page 5.5 KB of HTML, largest 138 KB, one shared 4 KB stylesheet, and one small shared search script as the only JavaScript.
 - Verdicts across all courses: 226 matters, 224 modest, 379 barely, 2,591 not enough history. In the 30 pilot courses: 14 matters, 8 modest, 3 barely, 5 not enough history.
 - Not measured: competitor page weight and load time. No competitor site was fetched for this.
 
