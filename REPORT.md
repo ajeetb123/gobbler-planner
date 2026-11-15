@@ -16,6 +16,7 @@
 - Course pages: course average, grade split, withdraw rate, term trend, expected section GPA per instructor with 80% range, a "new or unlisted instructor" row, and a verdict on whether instructor choice matters.
 - Instructor pages: one panel per course with term history. Flagged names get a warning and no cross-course number.
 - Subject lists, search over courses and last names, and a method page.
+- Every instructor links out to a RateMyProfessors search for that last name at VT, so reviews are one click away. Reviews are never copied.
 - `npm run pilot` builds only the 30 most-taken courses (22% of undergrad enrollments).
 
 ## Backtest on real data
@@ -97,4 +98,4 @@ None of the existing free VT grade sites do these.
 - `npm run build`: full site into `dist/`. `npm run pilot`: top 30 courses only.
 - View it: `python3 -m http.server 4173 --directory dist`, then open http://localhost:4173
 
-**Data is stale.** The exports end at Spring 2024, so pages say "Fall 2024". Before any launch, download current exports from UDC, drop the CSVs into `data/`, and rebuild. Overlapping files are fine.
+**Data is stale.** The UDC page itself runs to 2026-27, but the two files in this repo end at Spring 2024, so pages say "Fall 2024". UDC shows one course at a time and blocks scripted clients, so ask UDC / Institutional Research for the full file. Then drop the CSVs into `data/`, and rebuild. Overlapping files are fine.

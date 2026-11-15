@@ -5,7 +5,7 @@ import { BASELINE_PARAMS } from '../src/grades/estimate.ts';
 import { spreadOf } from '../src/grades/matters.ts';
 import { defaultGrid, tune } from '../src/grades/tune.ts';
 import { buildSite, dedupeRows, termLabel } from '../src/site/model.ts';
-import { esc, renderCourse, renderProf, slugs } from '../src/site/render.ts';
+import { esc, renderCourse, renderProf, rmpUrl, slugs } from '../src/site/render.ts';
 
 let crn = 10000;
 function row(course: string, instructor: string, term: number, gpa: number, graded = 40, title = 'Intro'): UdcRow {
@@ -114,4 +114,14 @@ test('slugs are unique even on case-insensitive file systems', () => {
   const m = slugs(["CS|O'Brien", 'CS|O Brien', 'CS|o brien', 'CS|Chen']);
   assert.equal(new Set([...m.values()].map((v) => v.toLowerCase())).size, 4);
   assert.equal(m.get('CS|Chen'), 'CS-Chen');
+});
+
+test('RateMyProfessors links: VT search by last name, encoded, on course and instructor pages', () => {
+  assert.equal(rmpUrl('MADRID PADILLA'), 'https://www.ratemyprofessors.com/search/professors/1349?q=MADRID%20PADILLA');
+  const s = site();
+  const links = linksFor(s);
+  assert.ok(renderCourse(s.courses[0]!, s, links).includes('search/professors/1349?q=Abbott'));
+  assert.ok(renderProf(s.profs.find((p) => p.key === 'CS|Abbott')!, s, links).includes('search/professors/1349?q=Abbott'));
+  const odd = renderProf(s.profs.find((p) => p.name === 'A&B <Team>')!, s, links);
+  assert.ok(odd.includes('q=A%26B%20%3CTeam%3E'));
 });

@@ -20,6 +20,15 @@ export function slugs(keys: string[]): Map<string, string> {
   return out;
 }
 
+/** Virginia Tech's school id on RateMyProfessors (checked Nov 14, 2026). */
+export const RMP_SCHOOL_ID = 1349;
+/**
+ * Link to a RateMyProfessors search for this last name at VT. A search, not a profile: the grade
+ * data has last names only, so the reader picks the right person. We link out and never copy reviews.
+ */
+export const rmpUrl = (name: string) => `https://www.ratemyprofessors.com/search/professors/${RMP_SCHOOL_ID}?q=${encodeURIComponent(name)}`;
+const rmpLink = (name: string, text: string) => `<a href="${esc(rmpUrl(name))}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+
 export interface Links { course: Map<string, string>; prof: Map<string, string> }
 
 export const CSS = `:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#e3e3e3;--card:#f6f6f4;--acc:#861f41;--bar:#c9c9c9;--warn:#fff4d6;--warnb:#e0b020}
@@ -45,7 +54,7 @@ function layout(title: string, desc: string, root: string, crumb: string, body: 
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"></head><body><main>
 <nav class="crumb"><a href="${root}index.html">VT grade estimates</a>${crumb}</nav>
 ${body}
-<footer>Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. The source lists instructors by last name only and hides sections with fewer than 5 graded students. Estimates are for one section's average GPA, not for an individual student. Not affiliated with Virginia Tech. <a href="${root}about.html">How the numbers are made</a>.</footer>
+<footer>Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. The source lists instructors by last name only and hides sections with fewer than 5 graded students. Estimates are for one section's average GPA, not for an individual student. Not affiliated with Virginia Tech or RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.</footer>
 </main></body></html>`;
 }
 
@@ -83,7 +92,7 @@ export function renderCourse(c: CoursePage, site: Site, links: Links): string {
   const next = termLabel(site.target);
   const prof = (key: string, name: string) => `<a href="../prof/${links.prof.get(key)}.html">${esc(name)}</a>`;
   const rows = c.instructors.map((i) => `<div class="row"><div class="top"><span>${prof(i.key, i.name)}${i.ambiguous ? ` <span title="${esc(i.reason)}">⚠</span>` : ''}</span><span>${est(i)}</span></div>${bar(i, c.mean)}
-<div class="mut">${i.students === 0 ? 'No graded history in this course in the training data. Showing the course average with a wider range.' : `From ${i.students.toLocaleString('en-US')} students in ${i.sections} section${i.sections === 1 ? '' : 's'}. Last taught ${termLabel(i.lastTerm)}.`}${i.ambiguous ? ` This last name may cover more than one person (${esc(i.reason)}).` : ''}</div></div>`).join('\n');
+<div class="mut">${i.students === 0 ? 'No graded history in this course in the training data. Showing the course average with a wider range.' : `From ${i.students.toLocaleString('en-US')} students in ${i.sections} section${i.sections === 1 ? '' : 's'}. Last taught ${termLabel(i.lastTerm)}.`}${i.ambiguous ? ` This last name may cover more than one person (${esc(i.reason)}).` : ''} ${rmpLink(i.name, 'Reviews on RateMyProfessors')}</div></div>`).join('\n');
   const body = `<h1>${esc(c.course)} · ${esc(c.title)}</h1>
 <div class="stats"><div class="stat"><b>${c.mean.toFixed(2)}</b>course average GPA, recent terms weighted more</div><div class="stat"><b>${c.typicalSize}</b>students in a typical section</div><div class="stat"><b>${(c.withdrawRate * 100).toFixed(1)}%</b>withdraw rate, last ${Math.min(4, c.trend.length)} offered terms</div><div class="stat"><b>${c.students.toLocaleString('en-US')}</b>graded students, ${termLabel(c.firstTerm)} to ${termLabel(c.lastTerm)}</div></div>
 <div class="note">${VERDICT[c.spread.verdict](c)}</div>
@@ -112,7 +121,9 @@ export function renderProf(p: ProfPage, site: Site, links: Links): string {
 <table><tr><th>Term</th><th>Section GPA</th><th>Students</th></tr>${x.history.map((h) => `<tr><td>${termLabel(h.term)}</td><td>${h.gpa.toFixed(2)}</td><td>${h.students}</td></tr>`).join('')}</table></div>`).join('\n');
   return layout(`${p.name} (${p.subject}) grade history · Virginia Tech`, `Grade history for ${p.name} in ${p.subject} at Virginia Tech, by course, from official grade data.`, '../',
     ` / <a href="../subject/${esc(p.subject)}.html">${esc(p.subject)}</a> / ${esc(p.name)}`,
-    `<h1>${esc(p.name)} · ${esc(p.subject)}</h1>${head}<h2>By course</h2>${panels}`, site);
+    `<h1>${esc(p.name)} · ${esc(p.subject)}</h1>${head}
+<div class="note">Grades say nothing about teaching. ${rmpLink(p.name, `Read student reviews for "${esc(p.name)}" on RateMyProfessors`)}. The search can return several people with this last name: match the department and first name.</div>
+<h2>By course</h2>${panels}`, site);
 }
 
 export function renderSubject(subject: string, site: Site, links: Links): string {
@@ -141,5 +152,5 @@ export function renderAbout(site: Site): string {
 <h2>What a number means</h2><p>The expected average GPA of one section of a course next term (${termLabel(site.target)}) under a given instructor name. It is not a prediction of your grade.</p>
 <h2>How it differs from a plain average</h2><ul><li>Small samples are pulled toward the course average (prior worth ${p.kIC} students).</li><li>Each term back counts ${p.decay} times the one after it, so recent terms weigh more.</li><li>An instructor's record in other courses is used only when the last name is not flagged as possibly several people.</li><li>Ranges come from how far past estimates missed, grouped by amount of history and section size.</li></ul>
 <h2>How it was checked</h2><p>Each term from Fall 2022 to Spring 2024 was predicted using only earlier terms: 15,122 undergraduate sections, 579,589 graded students. Average error was 0.185 GPA points against 0.193 for the plain instructor average that other grade sites show (3.7% lower, 95% interval 2.8% to 4.6%). The 80% ranges contained the real result 79.7% of the time. For first-time instructor and course pairings nothing beat the course average, and the page says so.</p>
-<h2>Limits</h2><ul><li>Grades are not teaching quality. This says nothing about clarity, fairness or workload.</li><li>Last names only: a flagged name may be more than one person.</li><li>Sections with fewer than 5 graded students are missing from the source.</li><li>Next term's instructor assignments are not on this site.</li></ul>`, site);
+<h2>Limits</h2><ul><li>Grades are not teaching quality. This says nothing about clarity, fairness or workload. Each instructor links to a RateMyProfessors search for that.</li><li>Last names only: a flagged name may be more than one person.</li><li>Sections with fewer than 5 graded students are missing from the source.</li><li>Next term's instructor assignments are not on this site.</li></ul>`, site);
 }
