@@ -127,3 +127,9 @@ test('ambiguity flags common surnames and implausible teaching loads', () => {
   assert.ok(a.get('CS|Zorn')!.ambiguous);
   assert.equal(a.get('CS|Quill')!.ambiguous, false);
 });
+
+test('parseUdc skips Winter and Summer rows (current exports include them)', () => {
+  const line = (term: string) => `"2025-26","${term}","CS","1114","Intro","Abbott","3.0","50","0","0","30","0","0","20","0","0","0","0","0","1","40","12345","3"`;
+  const rows = parseUdc([HEADER, line('Fall'), line('Winter'), line('Summer I'), line('Summer II'), line('Spring')].join('\n'));
+  assert.deepEqual(rows.map((r) => r.termLabel), ['Fall 2025', 'Spring 2026']);
+});

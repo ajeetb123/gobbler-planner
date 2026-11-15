@@ -81,7 +81,8 @@ export function parseUdc(text: string): UdcRow[] {
     graded: col('Graded Enrollment'), crn: col('CRN'),
   };
   const gradeIdx = GRADE_COLS.map((g) => col(`${g} (%)`));
-  const rows: UdcRow[] = body.map((r) => {
+  // Current UDC exports also carry Winter, Summer I and Summer II. Estimates are Fall/Spring only.
+  const rows: UdcRow[] = body.filter((r) => r[c.term] === 'Fall' || r[c.term] === 'Spring').map((r) => {
     const t = termIndex(r[c.year]!, r[c.term]!);
     const pct = {} as Record<Grade, number>;
     GRADE_COLS.forEach((g, i) => (pct[g] = Number(r[gradeIdx[i]!])));
