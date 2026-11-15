@@ -1,0 +1,229 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 14, 2026.
+# Format: "## slug | name | catalog path", then the grid as text. "A or B" = either course. "(n)" = credits.
+# An item with "()" is one of the choices for the "Select one..." item before it.
+
+## computer-science | Computer Science | college-engineering/computer-science/computer-science-bs/
+First Year
+ Fall: CS 1114 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Natural Science Elective (4), sum 16
+ Spring: CS 2114 (3), ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), Natural Science Elective (4), sum 16
+Second Year
+ Fall: CS 1944 (1), CS 2104 (3), CS 2505 (3), MATH 2534or MATH 3034 (3), Pathways 2, 3, 6a, or 7 (3), Pathways 2, 3, 6a, or 7 (3), sum 16
+ Spring: CS 2506 (3), MATH 2114 (3), MATH 2204or CMDA 2005 (3), Communications Elective (3), Advanced Natural Science Elective (4), sum 16
+Third Year
+ Fall: CS 3114 (3), CS 3/4/5XXX (3), MATH 3134 (3), Professional Writing Elective (3), Pathways 2, 3, 6a, or 7 (3), sum 15
+ Spring: CS 3214 (3), CS 3604 (3), ENGE 3900 (0), Statistics Elective (3), Pathways 2, 3, 6a, or 7 (3), Pathways 2, 3, 6a, or 7 (3), sum 15
+Fourth Year
+ Fall: CS 3304 (3), CS Theory Elective (3), CS 3/4/5XXX (3), CS Technical Elective 3 (3), Free Elective (3), sum 15
+ Spring: CS 4944 (1), CS 4XXX (3), CS 4/5XXX (3), Pathways 2, 3, 6a, or 7 (3), Free Elective (4), sum 14
+TOTAL 123
+
+## mechanical-engineering | Mechanical Engineering | college-engineering/mechanical-engineering/mechanical-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2, 3, 6A, or 7 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ME 2004 (3), ESM 2104 (3), ISE 2214 (1), MATH 2204 (3), PHYS 2306 (4), ME 2114 (2), sum 16
+ Spring: ECE 2054 (3), ESM 2204 (3), ESM 2304 (3), MATH 2214 (3), ME 3024 (3), Pathways 2, 3, 6A, or 7 (3), sum 18
+Third Year
+ Fall: ME 3124 (3), ME 3404 (3), ME 3524 (4), ME 3624 (4), STAT 3704 (2), sum 16
+ Spring: ME 3304 (3), ME 3534 (4), ME 4005 (3), MSE 2034 (3), Pathways 2, 3, 6A, or 7 (3), sum 16
+Fourth Year
+ Fall: ME 4015 (3), ENGE 3900 (0), Technical Elective (3), Technical Elective (3), Technical Elective (3), Pathways 2, 3, 6A, or 7 (3), sum 15
+ Spring: ME 4016 (3), Technical Elective (3), Technical Elective (3), Pathways 2, 3, 6A, or 7 (3), Pathways 2, 3, 6A, or 7 (3), sum 15
+TOTAL 128
+
+## aerospace-engineering | Aerospace Engineering | college-engineering/aerospace-ocean-engineering/aerospace-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 and/or 7 1 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), CS 1064 (3), sum 16
+Second Year
+ Fall: AOE 2014 (3), AOE 2104 (3), MATH 2114 (3), MATH 2204 (3), PHYS 2306 (4), sum 16
+ Spring: AOE 2024 (3), AOE 2054 (3), AOE 2074 (3), ESM 2304 (3), MATH 2214 (3), sum 15
+Third Year
+ Fall: AOE 3014 (3), AOE 3034 (3), AOE 3124 (3), AOE 3154 (3), Select one of the following math electives: (3), AOE/MATH 4404 (), MATH 4564 (), MATH 4574 (), STAT 4705 (), sum 15
+ Spring: AOE 3054 (3), AOE 3114 (3), AOE 3134or AOE 3144 (3), AOE 3164 (3), ECON 2005 (3), Track Technical Elective (3), sum 18
+Fourth Year
+ Fall: AOE 4105 (1), Vehicle Design Choice (3), Select one of the following math electives: (3), AOE/MATH 4404 (), MATH 4564 (), MATH 4574 (), STAT 4705 (), Track Technical Elective (3), Technical Elective (3), Pathways 6a (3), sum 16
+ Spring: AOE 4106 (1), Vehicle Design Choice (3), Track Technical Elective (3), Technical Elective (3), Pathways 2 (3), Pathways 3 (3), ENGE 3900 (0), sum 16
+TOTAL 128
+
+## electrical-engineering | Electrical Engineering | college-engineering/electrical-computer-engineering/electrical-engineering-bs/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3106 (3), ECE 3204 (3), ECE 3274 (1), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 13
+Fourth Year
+ Fall: ECE 3304 (3), ECE 3704 (3), ECE 4805 (3), MATH Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ECE 3614 (3), ECE 4806 (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## computer-engineering | Computer Engineering | college-engineering/electrical-computer-engineering/computer-engineering-bs/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathway 2 or 3 or 6a (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6a (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3504 (3), ECE 3514 (3), ECE 3544 (4), STAT 4714 (3), sum 16
+ Spring: ECE 3574 (3), Secondary Focus Elective (3), Technical Elective (3), Pathways 2 or 3 or 6a (3), Free Elective (1), sum 13
+Fourth Year
+ Fall: ECE 4805 (3), MATH 2534 (3), Technical Elective (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6a (3), sum 15
+ Spring: ECE 4806 (3), Secondary Focus Elective (3), Technical Elective (3), Pathways Concept 2, 3, or 6a (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## civil-engineering | Civil Engineering | college-engineering/civil-environmental-engineering/civil-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1225 (4), ENGE 1215 (2), Pathways (3), sum 16
+ Spring: ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), ENGE 1216 (2), Pathways (3), sum 16
+Second Year
+ Fall: ESM 2104 (3), MATH 2114 (3), MATH 2204 (3), CEE 2834 (3), CEE 2804 (3), sum 15
+ Spring: ESM 2204 (3), GEOS 2104 (3), CEE 3804 (3), MATH 2214 (3), CEE 2814 (4), sum 16
+Third Year
+ Fall: CEE 3304 (4), ISE 2014 (2), CEE Fundamental Elective + Lab (4), CEE Fundamental Elective (3), Pathways (3), ENGE 3900 (0), sum 16
+ Spring: CEE 3814 (3), CEE Fundamental Elective + Lab (4), CEE Fundamental Elective (3), CEE Fundamental Elective (3), CEE 4804 (3), sum 16
+Fourth Year
+ Fall: CEE Fundamental Elective (3), CEE Advanced Elective (Design Project) (3), CEE Advanced Elective (3), Technical Elective (3), Restricted Electives (3), Pathways (3), sum 18
+ Spring: CEE Advanced Elective (3), CEE Advanced Elective (3), Technical Elective (3), Restricted Elective (3), Pathways (3), sum 15
+TOTAL 128
+
+## industrial-systems-engineering | Industrial and Systems Engineering | college-engineering/industrial-systems-engineering/industrial-systems-engineering-bs/
+First Year
+ Fall: ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Programming Elective (3), Pathways 2, 3, 6A, or 7 (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), Pathways 2, 3, 6A, or 7 (3), sum 16
+Second Year
+ Fall: ISE 2004 (1), ISE 2014 (2), ISE 2214 (1), ISE 2804 (3), MATH 2114 (3), MATH 2204 (3), PHYS 2306 (4), sum 17
+ Spring: ISE 2024 (3), ISE 2034 (3), ISE 2404 (3), ISE 3614 (3), MATH 2214 (3), sum 15
+Third Year
+ Fall: ISE 3034 (3), ISE 3214 (3), ISE 3414 (3), STAT 4706 (3), ESM 2104 (3), sum 15
+ Spring: ISE 3424 (3), ISE 3624 (3), ISE 4204 (3), ISE 4404 (3), ISE Technical Elective (3), sum 15
+Fourth Year
+ Fall: ISE 4005 (2), Engineering Science Elective (3), ISE Technical Elective (3), Technical Elective (3), Pathways 2, 3, 6A, or 7 (3), ENGE 3900 (0), sum 14
+ Spring: ISE 4006 (2), ISE Technical Elective (3), Technical Elective (3), Pathways 2, 3, 6A, or 7 (3), Pathways 2, 3, 6A, or 7 (3), sum 14
+TOTAL 121
+
+## chemical-engineering | Chemical Engineering | college-engineering/chemical-engineering/chemical-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1225 (4), ENGE 1215 (2), Elective (Pathways Concept 2, 3, or 7) (3), sum 16
+ Spring: CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), ENGE 1216 (2), sum 17
+Second Year
+ Fall: CHEM 2535or CHEM 2565 (3), CHEM 2545 (1), CHE 2004 (1), CHE 2114 (3), PHYS 2306 (4), MATH 2114 (3), MATH 2204 (3), sum 18
+ Spring: CHEM 2536or CHEM 2566 (3), CHE 2164 (3), CHE 3134 (3), MATH 2214 (3), Elective (Pathways Concept 2, 3, or 7) (3), sum 15
+Third Year
+ Fall: CHE 3114 (3), CHE 3124 (3), CHE 3185 (2), ENGL 3764 (3), Elective (Pathways Concept 2, 3, or 7) (3), sum 14
+ Spring: CHEM 3625 (1), CHE 3015 (3), CHE 3154 (3), CHE 3144 (3), Select one of the following: (3), STAT 4604 (), STAT 4705 (), sum 13
+ Summer: CHE 4014 (4), sum 4
+Fourth Year
+ Fall: CHE 3186 (2), CHE 4185 (4), ENGE 3900 (0), Elective (Pathways Concept 2, 3, or 7) (3), CHE Elective (3), Technical Elective (3), sum 15
+ Spring: CHE 4186 (4), CHE Elective (3), Technical Elective (3), Elective (Pathways Concept 2, 3, or 7) (3), Elective (Pathways Concept 6a) (3), sum 16
+TOTAL 128
+
+## biological-systems-engineering | Biological Systems Engineering | college-engineering/biological-systems-engineering/biological-systems-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 16
+ Spring: CHEM 1036 (3), ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), sum 16
+Second Year
+ Fall: BSE 2004 (3), BIOL 1105 (3), ESM 2104 (3), ISE 2014 (2), MATH 2114 (3), MATH 2204 (3), sum 17
+ Spring: BSE 2504 (3), BSE 3144 (2), BIOL 1106 (3), MATH 2214 (3), PHYS 2306 (4), sum 15
+Third Year
+ Fall: BSE 3154 (3), STAT 3704 (2), BSE Fundamental Course or Technical Elective (3), CHEM Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 17
+ Spring: BSE 3504 (3), BIOL 2604 (3), ISE 3034 (3), BSE Fundamental Course (3), BSE Fundamental Course or Technical Elective (3), ENGE 3900 (0), sum 15
+Fourth Year
+ Fall: BSE 4125 (2), BSE Elective (3), BSE Elective (3), Engineering Topics Elective (3), Engineering Topics Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 17
+ Spring: BSE 4126 (3), BSE Elective (3), Engineering Topics Elective (3), Technical Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 15
+TOTAL 128
+
+## biomedical-engineering | Biomedical Engineering | college-engineering/biomedical-engineering-mechanics/biomedical-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1225 (4), ENGE 1215 (2), Pathways 2 or 3 (3), sum 16
+ Spring: ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), ENGE 1216 (2), sum 16
+Second Year
+ Fall: BIOL 1105 (3), BMES 2014 (1), BMES 2074 (2), ESM 2104 (3), MATH 2204 (3), PHYS 2306 (4), sum 16
+ Spring: BMES 2104 (3), BMES 2054 (3), ESM 2304 (3), MATH 2214 (3), MSE 2034 (3), sum 15
+Third Year
+ Fall: BMES 3024 (2), BMES 3234 (3), ESM 2204 (3), STAT 3615or STAT 4604 (3), BMES 4064 (3), ENGE 3900 Bridge Experience 1 (0), sum 14
+ Spring: BMES 3034 (2), BMES 3184 (3), Technical Elective (3), Technical Elective (3), Pathways 2 or 3 (3), sum 14
+Fourth Year
+ Fall: BMES 4015 (3), BMES 4134 (3), Technical Elective (3), Technical Elective (3), Pathways 2 or 3 (3), Pathways 6a (3), sum 18
+ Spring: BMES 4016 (3), Technical Elective (3), Technical Elective (3), Technical Elective (3), Pathways 2/7 or 3/7 (3), sum 15
+TOTAL 124
+
+## building-construction | Building Construction | college-engineering/building-construction/building-construction-bs/
+First Year
+ Fall: BC 1114 (3), COMM 1015or ENGL 1105 (3), GEOS 1004 (3), GEOS 1104 (1), Pathway 6a (3), sum 13
+ Spring: ACIS 1004 (3), BC 1124 (2), COMM 1016or ENGL 1106 (3), MATH 1025 (3), Pathway 2 (3), sum 14
+Second Year
+ Fall: BC 2004 (1), BC 2014 (3), BC 2114 (3), BC 2134 (2), ECON 2005or AAEC 1005 (3), PHYS 2205 (3), PHYS 2215 (1), sum 16
+ Spring: BC 2024 (3), BC 2044 (3), BC 2064 (3), BC 2104 (3), BC 2214 (3), ECON 2006or AAEC 1006 (3), sum 18
+Third Year
+ Fall: BC 3064 (3), BC 3114 (3), BC 3134 (3), CEM 3084 (3), Free Electives (1), sum 13
+ Spring: BC 4164 (3), MGT 3304 (3), Business & Management Elective (3), Technical Electives (3), Technical Electives (3), ENGE 3900 (0), sum 15
+Fourth Year
+ Fall: BC 4064 (3), BC 4434 (3), FIN 3054 (3), Technical Electives (3), Pathways 2 + 7 (3), sum 15
+ Spring: BC 4444 (4), ENGL 3764 (3), Business & Management Elective (3), Technical Electives (3), Pathway 6d (3), sum 16
+TOTAL 120
+
+## construction-engineering-management | Construction Engineering and Management | college-engineering/construction-engineering-management/construction-engineering-management-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathway 2 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: CEM 2104 (3), CEM 2404 (1), ESM 2104 (3), GEOS 2104 (3), MATH 2204 (3), MATH 2214 (3), sum 16
+ Spring: BC 2114 (3), CEM 2824 (3), CEE 4074 (3), ESM 2204 (3), STAT 3704 (2), sum 14
+Third Year
+ Fall: BC 3114 (3), CEE 3404 (3), CEE 3684 (3), CEE 3784 (1), CEM 3024 (3), CEM 3084 (3), ENGE 3900 (0), sum 16
+ Spring: BC 3064 (3), CEE 3514 (3), CEE 3714 (1), CEM 3134 (3), ECON 2005 (3), Pathway 2,7 (3), sum 16
+Fourth Year
+ Fall: BC 4064 (3), CEM 4445 (3), ECON 2006 (3), Advanced Course (3), Technical Elective (3), sum 15
+ Spring: CEM 4446 (3), CEM 4024 (3), Advanced Course (3), Technical Elective (3), Pathway 6a (3), sum 15
+TOTAL 124
+
+## materials-science-engineering | Materials Science and Engineering | college-engineering/materials-science-engineering/materials-science-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), sum 13
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: MSE 2044 (4), MSE 2884 (1), ESM 2104 (3), ISE 2214 (1), MATH 2204 (3), PHYS 2306 (4), sum 16
+ Spring: MSE 2054 (3), MSE 2114 (1), MSE 3314 (1), CHEM 1036 (3), ESM 2204 (3), MATH 2214 (3), Pathways Concept 2, 3, or 6a (3), sum 17
+Third Year
+ Fall: MSE 3114 (1), MSE 3134 (3), MSE 4034 (3), MSE 4424 (1), ECON 2005 (3), Physical Materials Course (3), Physical Materials Course (3), sum 17
+ Spring: MSE 3044 (3), MSE 3054 (3), MSE 3064 (1), MSE 3884 (1), MSE 4644 (3), Physical Materials Course (3), Technical Elective (3), sum 17
+Fourth Year
+ Fall: MSE 4055 (3), MSE 4075 (1), MSE 4085 (2), Technical Elective (3), Technical Elective (3), Pathways Concept 2, 3, or 6a (3), ENGE 3900 (0), sum 15
+ Spring: MSE 4076 (2), MSE 4086 (1), Physical Materials Course (3), Technical Elective (3), Pathways Concept 2, 3, or 6a (3), Pathways Concept 2, 3, or 6a (3), sum 15
+TOTAL 126
+
+## mining-engineering | Mining Engineering | college-engineering/mining-minerals-engineering/mining-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2, 3, 6a, or 7 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), Pathways Concept 2, 3, 6a, or 7 (3), sum 19
+Second Year
+ Fall: MINE 2504 (3), MINE 2534 (3), GEOS 1004 (3), GEOS 1104 (1), ESM 2104 (3), MATH 2204 (3), sum 16
+ Spring: MINE 2544 (2), MINE 2564 (3), ESM 2204 (3), ESM 2304 (3), MATH 2214 (3), Pathways Concept 2, 3, 6a, or 7 (3), sum 17
+Third Year
+ Fall: MINE 3604 (3), MINE 3624 (3), MINE 3634 (3), MINE 3664 (3), MINE 3674 (3), sum 15
+ Spring: MINE 3564 (3), MINE 3574 (3), MINE 3584 (3), MINE 3644 (2), GEOS 3404or GEOS 4824 (3), Pathways Concept 2, 3, 6a, or 7 (3), sum 17
+Fourth Year
+ Fall: MINE 4614 (3), MINE 4624 (3), MINE 4635 (2), MINE 4654 (3), MINE 4664 (1), Technical Elective (3), ENGE 3900 (0), sum 15
+ Spring: MINE 4636 (2), MINE 4644 (2), GEOS 4624 (3), Technical Elective (3), Pathways Concept 2, 3, 6a, or 7 (3), sum 13
+TOTAL 128
+
+## ocean-engineering | Ocean Engineering | college-engineering/aerospace-ocean-engineering/ocean-engineering-bs/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 and/or 7 1 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), CS 1064 (3), sum 16
+Second Year
+ Fall: AOE 2014 (3), AOE 2204 (3), MATH 2114 (3), MATH 2204 (3), PHYS 2306 (4), sum 16
+ Spring: AOE 2024 (3), AOE 2054 (3), AOE 2074 (3), ESM 2304 (3), MATH 2214 (3), sum 15
+Third Year
+ Fall: AOE 3014 (3), AOE 3034 (3), AOE 3214 (3), ECON 2005 (3), Track Technical Elective (3), sum 15
+ Spring: AOE 3224 (3), AOE 3234 (3), AOE 3264 (3), AOE 3054 (3), Select one of the following math electives: (3), AOE/MATH 4404 (), MATH 4564 (), MATH 4574 (), Technical Elective (3), sum 18
+Fourth Year
+ Fall: AOE 4205 (1), AOE 4265 (3), STAT 4705 (3), Track Technical Elective (3), Technical Elective (3), Pathways 6a (3), sum 16
+ Spring: AOE 4206 (1), AOE 4266 (3), Track Technical Elective (3), Technical Elective (3), Pathways 2 (3), Pathways 3 (3), ENGE 3900 (0), sum 16
+TOTAL 128

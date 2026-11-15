@@ -1,10 +1,12 @@
 // Run: npm run build            (every undergrad course)
 //      npm run build -- --top 30   (pilot: the 30 most-taken courses)
 // Reads every CSV in data/, writes a static site to dist/.
-import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
+import { parseRoadmaps } from '../src/plan/roadmap.ts';
+import { PLAN_JS, renderPlan, renderPlanIndex } from '../src/site/plan-page.ts';
 import { CSS, SEARCH_JS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
@@ -19,13 +21,18 @@ const tModel = performance.now();
 
 const links = { course: slugs(site.courses.map((c) => c.course)), prof: slugs(site.profs.map((p) => p.key)) };
 rmSync(OUT, { recursive: true, force: true });
-for (const d of ['course', 'prof', 'subject']) mkdirSync(join(OUT, d), { recursive: true });
+for (const d of ['course', 'prof', 'subject', 'plan']) mkdirSync(join(OUT, d), { recursive: true });
 const sizes: number[] = [];
 const write = (path: string, html: string) => { writeFileSync(join(OUT, path), html); if (path.endsWith('.html')) sizes.push(Buffer.byteLength(html)); };
 
 write('style.css', CSS);
 write('search.js', SEARCH_JS);
-write('index.html', renderIndex(site));
+const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
+  .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));
+write('index.html', renderIndex(site, links, roadmaps.length));
+write('plan.js', PLAN_JS);
+write('plan/index.html', renderPlanIndex(roadmaps, site));
+for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, site, links));
 write('about.html', renderAbout(site));
 for (const c of site.courses) write(`course/${links.course.get(c.course)}.html`, renderCourse(c, site, links));
 for (const p of site.profs) write(`prof/${links.prof.get(p.key)}.html`, renderProf(p, site, links));
@@ -40,6 +47,7 @@ const kb = (n: number) => (n / 1024).toFixed(1);
 const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
 for (const c of site.courses) v[c.spread.verdict]++;
 console.log(`Built ${site.courses.length} course pages and ${site.profs.length} instructor pages for ${termLabel(site.target)} (data ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)})`);
+console.log(`Degree planner: ${roadmaps.length} majors`);
 console.log(`Covers ${(site.enrollmentShare * 100).toFixed(0)}% of undergrad enrollments. Flagged names: ${site.profs.filter((p) => p.ambiguous).length}`);
 console.log(`Instructor verdicts: matters ${v.matters}, modest ${v.some}, barely ${v.barely}, not enough history ${v.unknown}`);
 console.log(`Params: kIC=${site.params.kIC} decay=${site.params.decay} instrEffect=${site.params.useInstructorEffect} kInstr=${site.params.kInstr}`);

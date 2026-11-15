@@ -2,7 +2,7 @@
 
 **Verdict:** the engine is sound and it measurably beats what every VT grade site shows today. That alone will not pull students off RateMyProfessors. The data says this works as a second tab students open next to RMP, not as a replacement for it. One unverified blocker could cap it further: whether the public timetable still shows instructor names.
 
-## What was built (TypeScript, no runtime dependencies, 21 unit tests)
+## What was built (TypeScript, no runtime dependencies, 31 unit tests)
 
 **#5 Honest grade estimates.** Predicts next-term section GPA for a (course, instructor) pair:
 - Small samples are pulled toward the course mean (shrinkage).
@@ -17,6 +17,8 @@
 - Course pages: an "All Instructors" card, tiles for course average, section size, withdraw rate and the instructor-matters verdict, the term trend, then one card per instructor with grades given, most common grade, and expected section GPA with its 80% range. A "new or unlisted instructor" card closes the list.
 - Instructor pages: an "All Courses" card, then one card per course with term history. Flagged names get a warning and no cross-course total.
 - Subject lists, search over courses and last names, and a method page.
+- Degree planner (`plan/`): pick a major, start from its official roadmap in the 2026-2027 VT catalog, choose 3, 3.5, 4, 4.5 or 5 years, move courses between terms, tick off finished ones. Each course shows its average GPA and an "Instructor matters" tag, and each term shows credits, a typical GPA, and flags for a heavy load or several low-GPA courses together. 15 College of Engineering majors so far. The plan is saved in the visitor's browser.
+- Planner limit: plans other than 4 years are a rearrangement of the official roadmap. Prerequisites and term offerings are not checked, and the page says so.
 - Every instructor links out to a RateMyProfessors search for that last name at VT, so reviews are one click away. Reviews are never copied.
 - `npm run pilot` builds only the 30 most-taken courses (22% of undergrad enrollments).
 

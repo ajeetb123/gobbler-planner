@@ -5,7 +5,7 @@ import { BASELINE_PARAMS } from '../src/grades/estimate.ts';
 import { spreadOf } from '../src/grades/matters.ts';
 import { defaultGrid, tune } from '../src/grades/tune.ts';
 import { buildSite, dedupeRows, termLabel } from '../src/site/model.ts';
-import { esc, renderCourse, renderProf, rmpUrl, slugs } from '../src/site/render.ts';
+import { esc, renderCourse, renderIndex, renderProf, rmpUrl, slugs } from '../src/site/render.ts';
 
 let crn = 10000;
 function row(course: string, instructor: string, term: number, gpa: number, graded = 40, title = 'Intro'): UdcRow {
@@ -135,4 +135,12 @@ test('RateMyProfessors links: VT search by last name, encoded, on course and ins
   assert.ok(renderProf(s.profs.find((p) => p.key === 'CS|Abbott')!, s, links).includes('search/professors/1349?q=Abbott'));
   const odd = renderProf(s.profs.find((p) => p.name === 'A&B <Team>')!, s, links);
   assert.ok(odd.includes('q=A%26B%20%3CTeam%3E'));
+});
+
+test('home page links both ways in: grades and the degree planner', () => {
+  const s = site();
+  const html = renderIndex(s, linksFor(s), 15);
+  assert.ok(html.includes('href="plan/index.html"'));
+  assert.ok(html.includes('href="course/CS-1114.html"')); // most-taken courses
+  assert.ok(html.includes('href="subject/CS.html"'));
 });

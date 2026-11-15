@@ -32,30 +32,44 @@ const rmpLink = (name: string, text: string) => `<a href="${esc(rmpUrl(name))}" 
 
 export interface Links { course: Map<string, string>; prof: Map<string, string> }
 
-export const CSS = `:root{--bg:#f7f6f3;--card:#fff;--fg:#1c1b1a;--mut:#6b6966;--line:#e4e1db;--acc:#7a1f3d;--bar:#c8a96a;--band:#d9d5cc;--p1:#fdf0c4;--p1f:#5c4a00;--p2:#dcefdc;--p2f:#1f4d24;--p3:#e3e9f6;--p3f:#243b6b;--warn:#fff4d6;--warnb:#d9a514}
-@media(prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1d1c;--fg:#eeece8;--mut:#a3a09a;--line:#34322f;--acc:#e7a3b8;--bar:#b89a5c;--band:#4a4742;--p1:#4a3f12;--p1f:#f5e3a0;--p2:#1f3a23;--p2f:#bfe5c3;--p3:#232f4a;--p3f:#c5d3f2;--warn:#3a3010;--warnb:#a08020}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}a{color:var(--acc)}
-header{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px}
-.hd{max-width:900px;margin:0 auto;display:flex;gap:12px;align-items:center}.brand{font-weight:700;text-decoration:none;white-space:nowrap}
-.search{position:relative;flex:1}.search input{width:100%;padding:9px 14px;font:inherit;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg)}
-#r{position:absolute;left:0;right:0;top:100%;margin:4px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--line);border-radius:10px;max-height:60vh;overflow:auto;box-shadow:0 6px 20px #0002}
-#r:empty{display:none}#r li{padding:8px 14px;border-top:1px solid var(--line)}#r li:first-child{border:0}#r a{text-decoration:none;display:block}
-main{max-width:900px;margin:0 auto;padding:16px}h1{font-size:1.7rem;margin:.3em 0 .5em;color:var(--acc)}h2{font-size:1.1rem;margin:1.6em 0 .4em}
-.crumb,.mut,footer{color:var(--mut);font-size:.85rem}footer{border-top:1px solid var(--line);margin-top:2.5em;padding-top:1em}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0;display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap}
-.info{flex:1 1 320px;min-width:0}.card h3{margin:0 0 2px;font-size:1.1rem}.card h3 a{text-decoration:none}.big h3{font-size:1.4rem}
-.pill{display:inline-block;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:600;margin:6px 6px 0 0;background:var(--p1);color:var(--p1f)}.pill.g{background:var(--p2);color:var(--p2f)}.pill.b{background:var(--p3);color:var(--p3f)}
+export const CSS = `:root{--bg:#faf8f5;--card:#fff;--fg:#211f1d;--mut:#6f6b66;--line:#e8e3dc;--acc:#7a1f3d;--acc2:#c2571a;--soft:#f6ece6;--bar:#cdb07a;--band:#ddd8cf;--p1:#fbefc9;--p1f:#5c4a00;--p2:#e0efe0;--p2f:#1f4d24;--p3:#e6ebf7;--p3f:#243b6b;--warn:#fff4d6;--warnb:#d9a514;--sh:0 1px 2px #0000000a,0 4px 14px #0000000d}
+@media(prefers-color-scheme:dark){:root{--bg:#151413;--card:#1f1e1c;--fg:#efece7;--mut:#a6a29b;--line:#35322e;--acc:#eba9bd;--acc2:#f0a36f;--soft:#2a2220;--bar:#b89a5c;--band:#4a4742;--p1:#4a3f12;--p1f:#f5e3a0;--p2:#1f3a23;--p2f:#bfe5c3;--p3:#232f4a;--p3f:#c5d3f2;--warn:#3a3010;--warnb:#a08020;--sh:none}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:2px}
+header{position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 16px}
+.hd{max-width:960px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:700;text-decoration:none;white-space:nowrap;color:var(--fg);font-size:1.05rem}
+.logo{display:inline-block;background:var(--acc);color:#fff;border-radius:7px;padding:1px 7px;margin-right:2px;font-size:.9rem}@media(prefers-color-scheme:dark){.logo{color:#1a1213}}
+.nav{display:flex;gap:4px}.nav a{text-decoration:none;color:var(--fg);padding:6px 10px;border-radius:8px;font-size:.92rem;white-space:nowrap}.nav a:hover{background:var(--soft)}
+.search{position:relative;flex:1 1 220px}.search input{width:100%;padding:9px 16px;font:inherit;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg)}
+#r{position:absolute;left:0;right:0;top:100%;margin:6px 0 0;padding:4px;list-style:none;background:var(--card);border:1px solid var(--line);border-radius:12px;max-height:60vh;overflow:auto;box-shadow:var(--sh)}
+#r:empty{display:none}#r li{padding:0}#r a,#r li:not(:has(a)){text-decoration:none;display:block;padding:8px 12px;border-radius:8px;color:var(--fg)}#r a:hover{background:var(--soft)}
+main{max-width:960px;margin:0 auto;padding:18px 16px 40px}h1{font-size:1.75rem;line-height:1.25;margin:.3em 0 .5em}h2{font-size:1.15rem;margin:1.8em 0 .5em}
+.crumb,.mut,footer{color:var(--mut);font-size:.86rem}.crumb{margin-bottom:4px}footer{border-top:1px solid var(--line);margin-top:3em;padding-top:1em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap;box-shadow:var(--sh)}
+.info{flex:1 1 320px;min-width:0}.card h3{margin:0 0 2px;font-size:1.1rem}.card h3 a{text-decoration:none}.card h3 a:hover{text-decoration:underline}.big h3{font-size:1.4rem}
+.pill{display:inline-block;border-radius:7px;padding:1px 9px;font-size:.8rem;font-weight:600;margin:6px 6px 0 0;background:var(--p1);color:var(--p1f)}.pill.g{background:var(--p2);color:var(--p2f)}.pill.b{background:var(--p3);color:var(--p3f)}
 .hist{flex:0 0 230px;max-width:100%}.hist .n{text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
 .bars{display:flex;gap:5px;align-items:flex-end;height:80px}.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;text-align:center}
-.col b{display:block;background:var(--bar);border-radius:3px 3px 0 0;min-height:1px}.col i{font-style:normal;font-size:.68rem;color:var(--mut);border-top:1px solid var(--line)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
-.tile b{display:block;font-size:1.7rem;line-height:1.2}.tile span{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}a.tile{text-decoration:none;color:var(--fg)}
-.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:10px 14px;margin:10px 0}.warn{background:var(--warn);border-left-color:var(--warnb)}
+.col b{display:block;background:var(--bar);border-radius:4px 4px 0 0;min-height:1px}.col i{font-style:normal;font-size:.68rem;color:var(--mut);border-top:1px solid var(--line)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--sh)}
+.tile b{display:block;font-size:1.7rem;line-height:1.2}.tile span{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}a.tile{text-decoration:none;color:var(--fg)}a.tile:hover,a.door:hover{border-color:var(--acc)}
+.note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:10px;padding:10px 14px;margin:12px 0}.warn{background:var(--warn);border-left-color:var(--warnb)}
 .track{position:relative;height:8px;background:var(--bg);border-radius:4px;margin:10px 0 2px;max-width:420px}
 .band{position:absolute;top:0;height:8px;background:var(--band);border-radius:4px}.dot{position:absolute;top:-3px;width:4px;height:14px;background:var(--acc);border-radius:2px}.cm{position:absolute;top:-3px;width:1px;height:14px;background:var(--mut)}
 ul.plain{list-style:none;padding:0;margin:0}ul.plain li{padding:4px 0}.cols{columns:3 180px}table{border-collapse:collapse;font-size:.85rem;margin-top:6px}td,th{padding:2px 14px 2px 0;text-align:left}
 details{margin-top:6px}summary{cursor:pointer;color:var(--mut);font-size:.85rem}svg{max-width:100%;height:auto}
-.hero{text-align:center;padding:6vh 0 2vh}.hero h1{font-size:2rem}`;
+.hero{background:linear-gradient(135deg,var(--soft),var(--card));border:1px solid var(--line);border-radius:20px;padding:36px 28px;margin:8px 0 16px}.hero h1{font-size:2.1rem;margin:0 0 .3em;max-width:22ch}.hero p{max-width:56ch;margin:.2em 0;color:var(--mut);font-size:1.02rem}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}a.door{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:var(--fg);box-shadow:var(--sh)}
+.door b{display:block;font-size:1.15rem;margin-bottom:4px}.door .go{display:block;margin-top:10px;color:var(--acc);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 13px;text-decoration:none;color:var(--fg);font-size:.92rem}.chips a:hover{border-color:var(--acc);color:var(--acc)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;background:var(--soft);border-radius:12px;padding:4px}.seg button{font:inherit;border:0;background:none;color:var(--fg);padding:7px 14px;border-radius:9px;cursor:pointer}.seg button[aria-pressed=true]{background:var(--card);box-shadow:var(--sh);font-weight:700;color:var(--acc)}
+.ctl{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:10px 0}.prog{flex:1 1 200px}.meter{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:4px}.meter i{display:block;height:8px;background:var(--acc);width:0}
+.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:7px 14px;border-radius:9px;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}.term{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}.term h3{margin:0;font-size:1.02rem}
+.it{display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--line);padding:9px 0!important}.it .mid{flex:1;min-width:0}.it .nm{font-size:.95rem}.it.done .nm{text-decoration:line-through;color:var(--mut)}.it input{margin-top:5px;width:16px;height:16px;accent-color:var(--acc)}
+.mv{display:flex;gap:2px}.mv button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:7px;width:28px;height:28px;cursor:pointer}.mv button:disabled{opacity:.3;cursor:default}
+.flag{background:var(--warn);border-radius:7px;padding:2px 9px;font-size:.8rem;font-weight:600;margin-top:6px;display:inline-block}
+@media(max-width:560px){.nav{order:3;width:100%;justify-content:space-between}.hero{padding:24px 18px}.hero h1{font-size:1.6rem}}`;
 
 /**
  * Shared search: one small JSON index, fetched on the first keystroke. `data-root` makes links work from sub-folders.
@@ -63,14 +77,14 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--mut);font-size:.85rem}
  */
 export const SEARCH_JS = `(()=>{const q=document.getElementById('q'),r=document.getElementById('r'),root=document.body.dataset.root;let d;q.addEventListener('input',async()=>{d??=await(await fetch(root+'search.json')).json();const s=q.value.trim().toLowerCase().replace(/\\s+/g,' ');r.textContent='';if(s.length<2)return;let n=0;const add=(t,h)=>{const li=document.createElement('li'),a=document.createElement('a');a.href=root+h;a.textContent=t;li.append(a);r.append(li);n++};const w=x=>(' '+x.toLowerCase()).includes(' '+s);for(const[t,h]of d)if(n<40&&w(t))add(t,h);for(const[t,h]of d)if(n<40&&!w(t)&&t.toLowerCase().includes(s))add(t,h);if(!n){const li=document.createElement('li');li.textContent='No match. Try "CS 2114" or a last name.';r.append(li)}});document.addEventListener('click',e=>{if(!e.target.closest('.search'))r.textContent=''})})();`;
 
-function layout(title: string, desc: string, root: string, crumb: string, body: string, site: Site): string {
+export function layout(title: string, desc: string, root: string, crumb: string, body: string, site: Site, extraScript = ''): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"></head><body data-root="${root}">
-<header><div class="hd"><a class="brand" href="${root}index.html">VT Grades</a><div class="search"><input type="search" id="q" placeholder="Search courses or instructors" autocomplete="off" aria-label="Search courses and instructors"><ul id="r"></ul></div></div></header>
+<header><div class="hd"><a class="brand" href="${root}index.html"><span class="logo">VT</span> Grades</a><div class="search"><input type="search" id="q" placeholder="Search courses or instructors" autocomplete="off" aria-label="Search courses and instructors"><ul id="r"></ul></div><nav class="nav"><a href="${root}index.html">Grades</a><a href="${root}plan/index.html">Degree planner</a><a href="${root}about.html">About</a></nav></div></header>
 <main>${crumb ? `<nav class="crumb">${crumb}</nav>` : ''}
 ${body}
 <footer>Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. The source lists instructors by last name only and hides sections with fewer than 5 graded students. Expected GPA is for one section's average, not for an individual student. Not affiliated with Virginia Tech or RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.</footer>
-</main><script src="${root}search.js" defer></script></body></html>`;
+</main><script src="${root}search.js" defer></script>${extraScript}</body></html>`;
 }
 
 const num = (n: number) => Math.round(n).toLocaleString('en-US');
@@ -166,13 +180,17 @@ export function renderSubject(subject: string, site: Site, links: Links): string
 <h2>Instructors (${ps.length})</h2><ul class="plain cols">${ps.map((p) => `<li><a href="../prof/${links.prof.get(p.key)}.html">${esc(p.name)}</a>${p.ambiguous ? ' ⚠' : ''}</li>`).join('')}</ul>`, site);
 }
 
-export function renderIndex(site: Site): string {
+export function renderIndex(site: Site, links: Links, majors: number): string {
   const subjects = [...new Set(site.courses.map((c) => c.subject))].sort();
-  return layout('VT Grades: Virginia Tech grades by course and instructor', 'Grades given and expected section GPA for Virginia Tech courses by instructor, from official grade data.', '', '',
-    `<div class="hero"><h1>What grades does this course give, and does the instructor change that?</h1>
-<p class="mut">Official Virginia Tech grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Search above for a course like "CS 2114" or a last name.</p></div>
-<div class="tiles"><div class="tile"><b>${num(site.courses.length)}</b><span>Courses</span></div><div class="tile"><b>${num(site.profs.length)}</b><span>Instructor names</span></div><div class="tile"><b>${subjects.length}</b><span>Subjects</span></div></div>
-<h2>Browse by subject</h2><div class="card"><ul class="plain cols info">${subjects.map((s) => `<li><a href="subject/${esc(s)}.html">${esc(s)}</a></li>`).join('')}</ul></div>`, site);
+  const popular = [...site.courses].sort((a, b) => b.students - a.students).slice(0, 12).sort((a, b) => a.course.localeCompare(b.course, 'en', { numeric: true }));
+  return layout('VT Grades: Virginia Tech grades and degree planner', 'Grades by course and instructor from official Virginia Tech data, plus a degree planner built on the official roadmaps.', '', '',
+    `<div class="hero"><h1>Pick classes knowing what you're walking into.</h1>
+<p>Real grade data for every Virginia Tech course and instructor, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Plan your whole degree with it in view.</p></div>
+<div class="doors"><a class="door" href="#browse"><b>Look up grades</b>Search a course or a last name in the bar above, or browse by subject. See the grades given and what to expect next term.<span class="go">Browse subjects →</span></a>
+<a class="door" href="plan/index.html"><b>Plan your degree</b>Start from your major's official roadmap. Choose how many years you want to take, move courses around, and tick off what you've done.<span class="go">Open the planner →</span></a></div>
+<div class="tiles"><div class="tile"><b>${num(site.courses.length)}</b><span>Courses</span></div><div class="tile"><b>${num(site.profs.length)}</b><span>Instructor names</span></div><div class="tile"><b>${subjects.length}</b><span>Subjects</span></div><div class="tile"><b>${majors}</b><span>Majors in the planner</span></div></div>
+<h2>Most-taken courses</h2><div class="chips">${popular.map((c) => `<a href="course/${links.course.get(c.course)}.html" title="${esc(c.title)}">${esc(c.course)}</a>`).join('')}</div>
+<h2 id="browse">Browse by subject</h2><div class="chips">${subjects.map((s) => `<a href="subject/${esc(s)}.html">${esc(s)}</a>`).join('')}</div>`, site);
 }
 
 export function renderAbout(site: Site): string {
