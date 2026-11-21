@@ -80,6 +80,7 @@ export function parseRoadmaps(text: string): Roadmap[] {
 }
 
 import { planIssues, type CheckItem } from './prereq.ts';
+import { optimize } from './optimize.ts';
 
 /** First segment of a catalog path -> college name as shown on the site. */
 export const COLLEGES: Record<string, string> = {
@@ -200,7 +201,9 @@ export function pack(r: Roadmap, sl: Array<{ label: string; weight: number }>, c
     weightLeft -= slot.weight;
     terms.push({ label: slot.label, items });
   });
-  return check ? smooth(terms, sl.map((x) => x.weight), check) : terms;
+  // Greedy fill, then local repair and balancing, then a bounded exact search starting from that answer (optimize.ts).
+  const weights = sl.map((x) => x.weight);
+  return check ? optimize(smooth(terms, weights, check), weights, check).terms : terms;
 }
 
 /** Terms may differ by this many credits (per unit of slot weight) before smooth() stops moving courses. */

@@ -66,6 +66,8 @@ export interface Issue {
   coLate: string[];
   /** Codes of later courses that need this one. */
   unlocks: string[];
+  /** Items this one cannot do without, as [item id, gap]: gap 1 = must be in an earlier term, 0 = same term or earlier. Does not depend on where things sit. */
+  needs: Array<[string, number]>;
   /** Terms this course can slip before a chain of later courses runs past the last term. Undefined when nothing depends on it. */
   slack?: number;
 }
@@ -93,7 +95,7 @@ export function planIssues(items: Record<string, CheckItem>, terms: string[][], 
   }));
   const out: Record<string, Issue> = {};
   const edges: Record<string, Array<[string, number]>> = {};
-  for (const id in where) out[id] = { late: [], coLate: [], unlocks: [] };
+  for (const id in where) out[id] = { late: [], coLate: [], unlocks: [], needs: [] };
   for (const id in where) {
     if (done.includes(id)) continue;
     const it = items[id]!, t = where[id]!;
@@ -104,6 +106,7 @@ export function planIssues(items: Record<string, CheckItem>, terms: string[][], 
       // An item is needed when the requirement cannot be met without it.
       const needed = inPlan.filter((j) => !ev(e, (c) => at[c] !== undefined && owner[c] !== j));
       for (const j of needed) {
+        out[id]!.needs.push([j, gap]);
         (edges[j] = edges[j] || []).push([id, gap]);
         if (it.cs[0] && !out[j]!.unlocks.includes(it.cs[0])) out[j]!.unlocks.push(it.cs[0]);
       }

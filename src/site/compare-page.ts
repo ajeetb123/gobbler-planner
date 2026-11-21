@@ -2,7 +2,7 @@
 // Ships every roadmap as JSON plus switchCost's source; all work happens in the browser.
 import { collegeOf, type Roadmap } from '../plan/roadmap.ts';
 import { checkItem, type CourseInfo } from '../plan/prereq.ts';
-import { switchCost } from '../plan/switch.ts';
+import { doubleMajor, switchCost } from '../plan/switch.ts';
 import { brand, layout } from './render.ts';
 import type { Site } from './model.ts';
 
@@ -54,6 +54,7 @@ export function packCompare(majors: CompareMajor[]) {
  * #from=slug&to=slug preselects majors (the planner links here with #from).
  */
 export const COMPARE_JS = `(()=>{const switchCost=${switchCost.toString()};
+const doubleMajor=${doubleMajor.toString()};
 const P=JSON.parse(document.getElementById('cmp-data').textContent),D=P.m,PER=${TERM_CREDITS},$=id=>document.getElementById(id),F=$('from'),T=$('to'),W=$('done'),out=$('out'),rank=$('rank');
 D.forEach(m=>{m.terms=m.terms.map(x=>({label:x[0],ids:x[1]}));for(const id in m.items){const a=m.items[id];m.items[id]={cr:a[0],cs:a[1],code:a[2]==null?a[1][0]:undefined,label:a[2]==null?P.t[a[1][0]]:a[2]}}});
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e},by=s=>D.find(m=>m.slug===s);
@@ -65,8 +66,18 @@ W.append(new Option('Nothing yet','0'));m.terms.forEach((x,i)=>W.append(new Opti
 const doneIds=()=>{const m=by(F.value);return W.value==='ticks'?ticks(m):m.terms.slice(0,+W.value).flatMap(t=>t.ids)};
 const arr=m=>Object.keys(m.items).map(id=>({id,...m.items[id]})),nm=(m,id)=>{const i=m.items[id];return i.code?i.code+' '+i.label:i.label},tm=c=>Math.ceil(c/PER);
 function col(title,sub,rows){const s=el('section');s.append(el('h3',null,title),el('div','mut',sub));const ul=el('ul');rows.forEach(r=>ul.append(el('li',null,r)));if(!rows.length)ul.append(el('li','mut','None.'));s.append(ul);return s}
+let mode=h.get('mode')==='double'?'double':'switch';
+function drawDouble(a,b){const r=doubleMajor(arr(a),arr(b)),lede=el('p','lede');
+lede.textContent=r.extra?'Adding '+b.name+' to '+a.name+' takes about '+r.extra+' extra credits.':'Adding '+b.name+' to '+a.name+' fits inside the credits you already need.';
+lede.append(el('small',null,r.total+' credits for both, against '+a.total+' for '+a.name+' alone. At '+PER+' credits a term that is '+tm(r.total)+' terms'+(tm(r.total)>tm(a.total)?', '+(tm(r.total)-tm(a.total))+' more than one major.':', the same as one major.')+' '+r.shared.length+' courses count for both'+(r.freeRoom?', and '+a.name+' has '+r.freeRoom+' free-elective credits the second major can use.':'.')));
+const cols=el('div','cols');cols.append(col('Counts for both','On both roadmaps: take once.',r.shared.map(([x])=>nm(a,x)+' ('+a.items[x].cr+')')),col('Added by '+b.name,'What the second major needs on top.',r.extraItems.map(x=>nm(b,x)+' ('+b.items[x].cr+')')));out.append(lede,cols);
+D.filter(m=>m!==a).map(m=>({m,r:doubleMajor(arr(a),arr(m))})).sort((x,y)=>x.r.extra-y.r.extra||y.r.shared.length-x.r.shared.length).slice(0,${RANK_SHOWN}).forEach(({m,r})=>{const bt=el('button');bt.type='button';bt.append(el('b',null,m.name),el('span',null,'+'+r.extra+' credits \u00b7 '+r.shared.length+' shared'));if(m===b)bt.setAttribute('aria-current','true');
+bt.onclick=()=>{T.value=m.slug;draw();out.scrollIntoView({behavior:'smooth',block:'start'})};rank.append(bt)})}
 function draw(){const a=by(F.value),b=by(T.value),done=doneIds();out.textContent='';rank.textContent='';
+[...$('mode').children].forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.m===mode)));$('donerow').hidden=mode==='double';$('lfrom').textContent=mode==='double'?'First major ':'From ';$('lto').textContent=mode==='double'?'Second major ':'To ';
+$('rankh').textContent=mode==='double'?'Easiest second majors':'Where your credits go furthest';$('rankp').textContent=mode==='double'?'The ${RANK_SHOWN} majors that add the fewest credits to your first one. Tap one to see it.':'The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.';
 if(a===b){out.append(el('p','note','Pick two different majors.'));return}
+if(mode==='double')return drawDouble(a,b);
 const r=switchCost(arr(a),arr(b),done),stay=a.total-r.doneCredits,extra=tm(r.remaining)-tm(stay),lede=el('p','lede');
 lede.textContent=r.doneCredits?r.counted+' of your '+r.doneCredits+' finished credits count toward '+b.name+'.':'Nothing finished yet, so nothing is lost by switching.';
 lede.append(el('small',null,r.remaining+' credits left in '+b.name+', against '+stay+' if you stay in '+a.name+'. At '+PER+' credits a term that is '+tm(r.remaining)+' more terms'+(extra>0?', '+extra+' more than staying.':extra<0?', '+(-extra)+' fewer than staying.':', the same as staying.')));
@@ -76,18 +87,20 @@ col("Doesn't match",'No place for these on the '+b.name+' roadmap.',r.unmatched.
 const rows=D.filter(m=>m!==a).map(m=>({m,r:switchCost(arr(a),arr(m),done)})).sort((x,y)=>x.r.remaining-y.r.remaining);
 rows.slice(0,${RANK_SHOWN}).forEach(({m,r})=>{const bt=el('button');bt.type='button';bt.append(el('b',null,m.name),el('span',null,r.counted+' count · '+r.remaining+' left'));if(m===b)bt.setAttribute('aria-current','true');
 bt.onclick=()=>{T.value=m.slug;draw();out.scrollIntoView({behavior:'smooth',block:'start'})};rank.append(bt)})}
+$('mode').addEventListener('click',e=>{const m=e.target.dataset.m;if(m&&m!==mode){mode=m;if(m==='double')gpTrack('double',T.value);draw()}});
 F.onchange=()=>{if(T.value===F.value)T.value=D.find(m=>m.slug!==F.value).slug;fillDone();draw()};T.onchange=()=>{gpTrack('compare',T.value);draw()};W.onchange=draw;fillDone();draw()})();`;
 
 export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseInfo>, site?: Site): string {
   const json = JSON.stringify(packCompare(compareData(roadmaps, courses))).replace(/</g, '\\u003c');
   return layout(`Switch majors · ${brand(site)}`, 'See what carries over when you switch between Virginia Tech majors, and how many credits are left.', '../',
     `<a href="index.html">Degree planner</a>`,
-    `<h1>What if I switch majors?</h1><p class="sub">Pick where you are, where you'd go, and what you've finished.</p>
-<div class="ctl"><label>From <select class="sel" id="from"></select></label><label>To <select class="sel" id="to"></select></label></div>
-<div class="ctl"><label>Finished so far <select class="sel" id="done"></select></label></div>
+    `<h1>Switch majors, or add one</h1><p class="sub">See what carries over if you switch, or what a second major adds.</p>
+<div class="ctl"><div class="seg" id="mode" role="group" aria-label="What to compare"><button type="button" data-m="switch" aria-pressed="true">Switch majors</button><button type="button" data-m="double" aria-pressed="false">Double major</button></div></div>
+<div class="ctl"><label><span id="lfrom">From </span><select class="sel" id="from"></select></label><label><span id="lto">To </span><select class="sel" id="to"></select></label></div>
+<div class="ctl" id="donerow"><label>Finished so far <select class="sel" id="done"></select></label></div>
 <noscript><p class="note warn">This page needs JavaScript.</p></noscript>
 <div id="out" aria-live="polite"></div>
-<h2>Where your credits go furthest</h2><p class="mut">The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.</p><div class="majors" id="rank"></div>
-<p class="note">An estimate from the two official roadmaps: same course first, then elective slots with the same name, then free electives. The department you're moving into decides what really counts, and changing majors can have its own requirements. Ask an advisor before you act on this.</p>
+<h2 id="rankh">Where your credits go furthest</h2><p class="mut" id="rankp">The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.</p><div class="majors" id="rank"></div>
+<p class="note">An estimate from the two roadmaps: same course first, then elective slots with the same name, then free electives. The department you're moving into decides what really counts, changing majors can have its own requirements, and a double major has limits on how many courses may count twice. Ask an advisor before you act on this.</p>
 <script type="application/json" id="cmp-data">${json}</script>`, site, 'switch', `<script src="../compare.js" defer></script>`);
 }

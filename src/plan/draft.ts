@@ -2,6 +2,7 @@
 // The requirement list is official; the order is ours: by course level, then moved so prerequisites come first.
 import { parseItems, plainSlots, credits, smooth, type PlanItem, type Roadmap, type Term } from './roadmap.ts';
 import { checkItems, planIssues, type CourseInfo } from './prereq.ts';
+import { optimize } from './optimize.ts';
 
 export interface Requirements {
   slug: string;
@@ -54,7 +55,8 @@ export function draftRoadmap(req: Requirements, courses: Map<string, CourseInfo>
   // 3000- and 4000-level courses are not offered a term more than a year ahead of that window.
   const due = (i: PlanItem) => Math.min(n - 1 - depth(i), Math.ceil((level(i) * n) / 4) - 1);
   const earliest = (i: PlanItem) => Math.max(0, Math.floor(((level(i) - 1) * n) / 4) - 2);
-  const queue = all.filter((i) => i.code).sort((a, b) => due(a) - due(b) || level(a) - level(b) || a.code!.localeCompare(b.code!));
+  const queueAll = all.filter((i) => i.code);
+  const queue = [...queueAll].sort((a, b) => due(a) - due(b) || level(a) - level(b) || a.code!.localeCompare(b.code!));
   // Placeholders keep the catalog's order, except ones that are clearly upper-level ("4000-Level ...", or a
   // choice list of 3000/4000-level courses): those go to the back so they land in the later years.
   const upper = (i: PlanItem) => {
@@ -94,7 +96,10 @@ export function draftRoadmap(req: Requirements, courses: Map<string, CourseInfo>
     placed.push(items);
   }
   // Same repair and balancing pass the rearranged layouts get, then final ids by term.
-  const fixed = smooth(placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items })), placed.map(() => 1), check);
+  const ones = placed.map(() => 1);
+  // The search may rebalance, but a named course keeps its level floor (no 4000-level course in year one).
+  const floor = Object.fromEntries(queueAll.map((i) => [i.id, earliest(i)]));
+  const fixed = optimize(smooth(placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items })), ones, check), ones, check, undefined, floor).terms;
   const terms: Term[] = fixed.map((t, ti) => ({ label: t.label, items: t.items.map((i, k) => ({ ...i, id: `t${ti}-${k}`, src: ti })) }));
   return { slug: req.slug, name: req.name, catalogPath: req.catalogPath, total: req.total, terms, printedSums: terms.map((t) => credits(t.items)), draft: true };
 }

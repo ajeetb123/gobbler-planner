@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { readdirSync } from 'node:fs';
 import { byCollege, credits, parseNoRoadmap, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
 import { checkItems, parseExpr, parsePrereqs, planIssues } from '../src/plan/prereq.ts';
-import { switchCost, type SwitchItem } from '../src/plan/switch.ts';
+import { doubleMajor, switchCost, type SwitchItem } from '../src/plan/switch.ts';
 import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { baseYears } from '../src/plan/roadmap.ts';
 import { compareData, COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
@@ -89,12 +89,12 @@ test('repack with prerequisites: few conflicts left, every course kept, loads st
     for (const y of YEAR_OPTIONS) {
       const terms = repack(r, y, check);
       assert.equal(terms.flatMap((t) => t.items).length, r.terms.flatMap((t) => t.items).length, `${r.slug} ${y}`);
-      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 24, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
+      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 23, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
       conflicts += Object.values(planIssues(check, ids(terms), [])).filter((v) => v.late.length || v.coLate.length).length;
     }
   }
-  // 37 over 512 rearranged layouts on Nov 21, 2026 after the repair pass (was 47), mostly a two-part capstone in a 3-year plan. The page flags them.
-  assert.ok(conflicts <= 37, `conflicts: ${conflicts}`);
+  // 25 over 512 rearranged layouts on Nov 21, 2026 with the branch-and-bound scheduler (47 greedy, 37 with repair). The page flags them.
+  assert.ok(conflicts <= 25, `conflicts: ${conflicts}`);
 });
 
 test('switchCost: same course carries, same-name electives likely carry, each target slot is used once', () => {
@@ -182,8 +182,8 @@ test('every saved requirement list becomes a balanced draft with few conflicts',
     assert.ok(!r.terms.slice(0, 2).some((t) => t.items.some((i) => i.code && /^[A-Z]+ 4/.test(i.code))), q.slug);
     conflicts += Object.values(planIssues(checkItems(r.terms, courses, true), ids(r.terms), [])).filter((v) => v.late.length || v.coLate.length).length;
   }
-  // 6 on Nov 21, 2026 after the repair pass (was 13). Drafts hide nothing: the page shows them.
-  assert.ok(conflicts <= 6, `conflicts: ${conflicts}`);
+  // 2 on Nov 21, 2026 with the branch-and-bound scheduler (13 greedy, 6 with repair). Drafts hide nothing: the page shows them.
+  assert.ok(conflicts <= 2, `conflicts: ${conflicts}`);
 });
 
 test('draft pages say they are drafts; official pages do not', () => {
@@ -196,4 +196,33 @@ test('draft pages say they are drafts; official pages do not', () => {
   assert.equal(index.split('<span><i class="tag">draft</i>').length - 1, 1);
   const arch = draftRoadmap(reqs.find((q) => q.slug === 'architecture-barch')!, courses);
   assert.equal(JSON.parse(/id="plan-data">(.*?)<\/script>/s.exec(renderPlan(arch, courses))![1]!).base, '5');
+});
+
+// ---- double major ----
+test('doubleMajor: shared courses count once, free electives absorb extra work, same major adds nothing', () => {
+  const it = (id: string, cr: number, label: string, ...cs: string[]): SwitchItem => ({ id, cr, label, cs });
+  const first = [it('a', 4, 'Calc', 'MATH 1225'), it('b', 3, 'Intro', 'CS 1114'), it('c', 3, 'Pathways 2'), it('d', 3, 'Free Elective'), it('e', 3, 'Free Elective')];
+  const second = [it('p', 4, 'Calc', 'MATH 1225'), it('q', 3, 'Circuits', 'ECE 2024'), it('r', 3, 'Signals', 'ECE 2714'), it('s', 3, 'Fields', 'ECE 3105'), it('t', 3, 'pathways 2'), it('u', 3, 'Free Elective')];
+  const r = doubleMajor(first, second);
+  assert.deepEqual(r.shared, [['a', 'p'], ['c', 't']]);
+  assert.deepEqual(r.extraItems, ['q', 'r', 's']);
+  assert.equal(r.freeRoom, 6);
+  assert.equal(r.extra, 3); // 9 credits of extra courses, 6 fit in the first major's free electives
+  assert.equal(r.total, 19);
+  assert.equal(doubleMajor(first, first).extra, 0);
+  assert.equal(doubleMajor(first, []).total, 16);
+});
+
+test('doubleMajor on real data: sane for every pair, and close majors cost less than distant ones', () => {
+  const data = compareData(real, courses);
+  const arr = (m: (typeof data)[number]) => Object.entries(m.items).map(([id, i]) => ({ id, ...i }));
+  const get = (slug: string) => arr(data.find((m) => m.slug === slug)!);
+  for (const a of data.slice(0, 40)) for (const b of data) {
+    const r = doubleMajor(arr(a), arr(b));
+    assert.ok(r.extra >= 0 && r.total >= a.total && r.total <= a.total + b.total, `${a.slug}+${b.slug}`);
+    assert.equal(new Set(r.shared.map((x) => x[1])).size, r.shared.length);
+    if (a === b) assert.equal(r.extra, 0);
+  }
+  const cs = get('computer-science');
+  assert.ok(doubleMajor(cs, get('computer-engineering')).extra < doubleMajor(cs, get('mining-engineering')).extra);
 });

@@ -16,11 +16,18 @@ Results, method and open risks: [REPORT.md](REPORT.md). Working notes for contri
 
 Not affiliated with Virginia Tech.
 
+## What it does
+
+- Term-by-term plans for 213 majors and options (128 official roadmaps, 85 drafts built from requirement lists), 3 to 5 years
+- Prerequisite checking with a branch-and-bound scheduler for rearranged plans
+- Switch-major and double-major comparison
+- Ask: retrieval over catalog facts (BM25, typo handling), no AI model
+- A small API with anonymous usage counts and a password-protected dashboard
+
 ## Run in Docker
 
 ```bash
-docker build -t gobbler-plan .
-docker run --rm -p 8080:8080 gobbler-plan   # http://localhost:8080
+docker compose up --build   # site and API together at http://localhost:8080
 ```
 
 The image is built in two stages (Node builds the static pages, nginx serves them as a non-root user) and has a `/healthz` endpoint. Every push runs the tests, builds the image and smoke-tests the running container in GitHub Actions; pushes to `main` publish it to GitHub Container Registry.

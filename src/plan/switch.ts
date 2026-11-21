@@ -57,3 +57,45 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
   res.remaining = to.reduce((a, t) => a + t.cr, 0) - res.counted;
   return res;
 }
+
+export interface DoubleResult {
+  /** Courses that count for both majors: [first-major item, second-major item]. */
+  shared: Array<[string, string]>;
+  /** Second-major items the first major does not cover: these are the added work. */
+  extraItems: string[];
+  /** Credits in the first major's free electives, which the second major's courses can fill. */
+  freeRoom: number;
+  /** Credits beyond the first major's total. */
+  extra: number;
+  /** Credits for both majors together. */
+  total: number;
+}
+
+/**
+ * Cost of adding a second major. Each course is counted once:
+ * 1) a first-major course fills a second-major slot that lists it (named course, or elective slot with the same
+ *    name). Free-elective slots are left out of this step on both sides;
+ * 2) what the second major still needs is "extra work";
+ * 3) the first major's free electives are room to put that extra work in at no added credits, and the second
+ *    major's own free electives are already met by the first major's other courses.
+ * Total = first major + whatever extra work does not fit in its free electives.
+ * An estimate from two roadmaps. Departments limit double counting in ways this cannot see.
+ * Self-contained on purpose: compare-page.ts ships this function's source to the browser. Do not use imports in it.
+ */
+export function doubleMajor(first: SwitchItem[], second: SwitchItem[]): DoubleResult {
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const isFree = (i: SwitchItem) => i.cs.length === 0 && /free elective/i.test(i.label);
+  const used: Record<string, boolean> = {};
+  const shared: Array<[string, string]> = [];
+  for (const a of first) {
+    if (isFree(a)) continue;
+    const named = a.cs.length > 0;
+    const hit = second.find((b) => !used[b.id] && !isFree(b) && (named ? b.cs.some((c) => a.cs.includes(c)) : b.cs.length === 0 && norm(b.label) === norm(a.label)));
+    if (hit) { used[hit.id] = true; shared.push([a.id, hit.id]); }
+  }
+  const sum = (xs: SwitchItem[]) => xs.reduce((t, i) => t + i.cr, 0);
+  const extraItems = second.filter((b) => !used[b.id] && !isFree(b));
+  const freeRoom = sum(first.filter(isFree));
+  const extra = Math.max(0, sum(extraItems) - freeRoom);
+  return { shared, extraItems: extraItems.map((b) => b.id), freeRoom, extra, total: sum(first) + extra };
+}
