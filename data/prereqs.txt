@@ -1,0 +1,266 @@
+# Prerequisites and corequisites for every course named on a saved roadmap.
+# Read from catalog.vt.edu/course-descriptions/<subject>/ (2026-2027 catalog), Nov 21, 2026, one subject page at a time in a browser.
+# Format: CODE | title | prerequisites | corequisites   (text exactly as the catalog prints it)
+AAEC 1005 | Economics of the Food and Fiber System | |
+AAEC 1006 | Economics of the Food and Fiber System | |
+ACIS 1004 | Accounting Foundations | |
+AOE 2014 | Statics and Mechanics of Materials | PHYS 2305 and MATH 1226 | MATH 2204 or MATH 2204H or MATH 2406H
+AOE 2024 | Thin-Walled Structures | (ESM 2104 and ESM 2204) or AOE 2014 and (MATH 2204 or MATH 2204H or MATH 2406H) | MATH 2214
+AOE 2054 | Electronics for Aerospace and Ocean Engineers | |
+AOE 2074 | Data and Algorithms for Aerospace and Ocean Engineers | MATH 1226 and CS 1064 |
+AOE 2104 | Introduction to Aerospace Engineering and Aircraft Performance | PHYS 2305 | ESM 2104 or ESM 2114.
+AOE 2204 | Introduction to Ocean Engineering | PHYS 2305 | MATH 2204
+AOE 3014 | Fluid Dynamics for Aerospace and Ocean Engineers | (AOE 2104 or AOE 2204) and (MATH 2214 or MATH 2214H or MATH 2406H) and ESM 2304 |
+AOE 3034 | System Dynamics and Control | ESM 2304 and (MATH 2214 or MATH 2214H or MATH 2406H) |
+AOE 3054 | Experimental Methods | AOE 2024 and AOE 2054 and AOE 3014 and AOE 3034 |
+AOE 3114 | Aerodynamics & Compressibility | AOE 3014 | AOE 3164
+AOE 3124 | Aerospace Structures | AOE 2024 or AOE 3024 |
+AOE 3134 | Air Vehicle Dynamics | AOE 3034 |
+AOE 3144 | Space Vehicle Dynamics | AOE 3034 and AOE 3154 |
+AOE 3154 | Astromechanics | ESM 2304 |
+AOE 3164 | Aerothermodynamics and Propulsion Systems | AOE 3014 | AOE 3114
+AOE 3214 | Ocean Wave Mechanics | | AOE 3014
+AOE 3224 | Ocean Structures | AOE 2024 |
+AOE 3234 | Ocean Vehicle Dynamics | AOE 3014 and AOE 3034 and AOE 3214 |
+AOE 3264 | Thermodynamics and Marine Propulsion | AOE 2204 and AOE 3014 |
+AOE 4105 | Experiments for Aerospace Design | AOE 3054 | 4065 or 4165 for 4105. 4066 or 4166 for 4106.
+AOE 4106 | Experiments for Aerospace Design | AOE 4105 | 4065 or 4165 for 4105. 4066 or 4166 for 4106.
+AOE 4205 | Experiments for Ocean Vehicle Design | AOE 3054 | AOE 4265
+AOE 4206 | Experiments for Ocean Vehicle Design | AOE 3054 | AOE 4266
+AOE 4265 | Ocean Vehicle Design | AOE 2204 and AOE 3214 and AOE 3224 and AOE 3234 and AOE 3264 | AOE 4205
+AOE 4266 | Ocean Vehicle Design | AOE 4265 | AOE 4206
+BC 1114 | Introduction to Building Construction | |
+BC 1124 | Construction Documents and Safety | |
+BC 2004 | Construction Surveying | BC 1124 |
+BC 2014 | Construction Principles I | BC 1224 or (BC 1124 and BC 1114) |
+BC 2024 | Construction Principles II | BC 2014 | BC 2064
+BC 2044 | Construction Materials | | BC 2214
+BC 2064 | Integrated Construction I | BC 2014 and BC 2114 |
+BC 2104 | Building Effective Construction Teams | BC 1224 or BC 1124 |
+BC 2114 | Information Technology in Design and Construction | (BC 1114 and BC 1124) or CEM 2104 or BC 1224 | BC 2014
+BC 2134 | Construction Data Analysis | MATH 1025 or MATH 1225 |
+BC 2214 | Why Buildings Stand Up | (BC 1224 or BC 1124) and (MATH 1025 or MATH 1225) |
+BC 3064 | Integrated Construction II | (BC 2064 or CEM 2104) and (PHYS 2205 and PHYS 2215 or PHYS 2305) | BC 3114
+BC 3114 | Building Systems Technology | BC 2024 and (PHYS 2305 or PHYS 2205 and PHYS 2215) or (CEM 2104 and PHYS 2305) |
+BC 3134 | Temporary Structures in Construction | (BC 2044 and BC 2024 and BC 2214) or CEE 3684 |
+BC 4064 | Integrated Construction III | BC 3064 |
+BC 4164 | Production Planning and Process Design for Construction | BC 3064 |
+BC 4434 | Construction Practice I | BC 3064 and BC 3114 and BC 3134 | BC 4064
+BC 4444 | Construction Practice II | BC 4434 and BC 4064 |
+BIOL 1105 | Principles of Biology | |
+BIOL 1106 | Principles of Biology | |
+BIOL 2604 | General Microbiology | (BIOL 1105 or ISC 2105) and BIOL 1106 and (CHEM 1036 or CHEM 1056 or CHEM 1056H or ISC 2105) |
+BMES 2014 | Biomedical Engineering Professional Practice | |
+BMES 2054 | Electrical Principles for Biomedical Engineers | PHYS 2306 | MATH 2214
+BMES 2074 | Computational Methods in Biomedical Engineering | MATH 1226 and (ENGE 1215 or ENGE 1414) | MATH 2114 or MATH 2114H or MATH 2405H
+BMES 2104 | Introduction to Biomedical Engineering | (ENGE 1216 or ENGE 1414) and MATH 1226 |
+BMES 3024 | BME Cell Engineering Laboratory and Design | BIOL 1105 |
+BMES 3034 | Bioinstrumentation Laboratory and Design for Living Systems | BMES 2104 and (ECE 3054 or BMES 2054) |
+BMES 3184 | Problem Solving in BME | BMES 2014 and BMES 2104 and (ESM 2074 or BMES 2074) and MATH 2214 |
+BMES 3234 | Foundations of Biotransport | BIOL 1105 and MATH 2204 and MATH 2214 |
+BMES 4015 | BME Senior Design and Project | BMES 3034 and BMES 3184 and BMES 4064 and (ESM 2204 or ESM 2304) |
+BMES 4016 | BME Senior Design and Project | BMES 4015 |
+BMES 4064 | Introduction to Medical Physiology | |
+BMES 4134 | Global, Societal, and Ethical Considerations in Biomedical Engineering | BMES 2104 |
+BSE 2004 | Introduction to Biological Systems Engineering | ENGE 1215 or ENGE 1414 |
+BSE 2504 | Introduction to Fluid Mechanics | PHYS 2305 and ESM 2104 |
+BSE 3144 | Engineering Analysis for Biological Systems using Numerical Methods | MATH 1226 |
+BSE 3154 | Thermodynamics of Biological Systems | CHEM 1036 and PHYS 2305 and (MATH 2204 or MATH 2204H) |
+BSE 3504 | Transport Processes in Biological Systems | BSE 3154 and ESM 3024 and MATH 2214 |
+BSE 4125 | Comprehensive Design Project | (BSE 3534 and BSE 3524) or (BSE 3324 and BSE 3334) |
+BSE 4126 | Comprehensive Design Project | BSE 4125 |
+CEE 2804 | Introduction to Civil and Environmental Engineering | |
+CEE 2814 | Geomatics | ENGE 1216 or ENGE 1414 | CEE 2834
+CEE 2834 | Civil Engineering Drawings and Virtual Modeling | |
+CEE 3304 | Fluid Mechanics for Civil and Environmental Engineering | ESM 2104 and CEE 2804 |
+CEE 3404 | Introduction to Structural Engineering | ESM 2204 |
+CEE 3514 | Introduction to Geotechnical Engineering | ESM 2204 and GEOS 2104 |
+CEE 3684 | Civil Engineering Materials | CHEM 1045 and CHEM 1035 and ESM 2204 and GEOS 2104 and (CEE 2814 or CEM 2824) | CEE 3784
+CEE 3714 | Introduction to Geotechnical Engineering Laboratory | ESM 2204 and GEOS 2104 | CEE 3514
+CEE 3784 | Civil Engineering Materials Laboratory | CHEM 1045 and CHEM 1035 and ESM 2204 and GEOS 2104 and (CEE 2814 or CEM 2824) | CEE 3684
+CEE 3804 | Computer Applications for Civil and Environmental Engineers | |
+CEE 3814 | Analytical Tools in Civil and Environmental Engineering | CEE 3804 |
+CEE 4074 | Construction Engineering: Means and Methods | CEE 3014 or CEM 2104 |
+CEE 4804 | Professional and Legal Issues in Civil Engineering | CEE 2804 | CEE 3304
+CEM 2104 | Introduction to Construction Engineering and Management | |
+CEM 2404 | Construction Project Documents | | CEM 2104
+CEM 2824 | Construction Site Analysis | | 2104 or BC 1224 or CEE 2834.
+CEM 3024 | Construction Estimating and Scheduling | CEM 2104 or BC 2024 |
+CEM 3084 | Construction Economy | CEM 2104 or BC 2024 |
+CEM 3134 | Temporary Structures in Construction | (BC 2044 and BC 2024 and BC 2214) or CEE 3684 |
+CEM 4024 | Construction Law and Contract Administration | |
+CEM 4445 | CEM Capstone | CEM 3024 | CEM 3134
+CEM 4446 | CEM Capstone | CEM 3084 and CEM 4445 and CEM 3134 |
+CHE 2004 | Chemical Engineering Sophomore Seminar | |
+CHE 2114 | Mass and Energy Balances | MATH 1226 and (CHEM 1036 or CHEM 1056) |
+CHE 2164 | Chemical Engineering Thermodynamics | CHE 2114 and MATH 2204 and PHYS 2306 |
+CHE 3015 | Process Measurement & Control | MATH 2214 and CHE 3114 | 3124, (3184 or 3185), (3044 or 3154) for 3015
+CHE 3114 | Fluid Transport | CHE 2114 and PHYS 2305 and MATH 2204 | MATH 2214
+CHE 3124 | Chemical Engineering Simulations and Process Modeling | CHE 2114 and MATH 2214 | CHE 3114
+CHE 3134 | Separation Processes | CHE 2114 and MATH 2204 and PHYS 2306 | CHE 2164 2164
+CHE 3144 | Mass Transfer | CHE 3114 and CHE 2164 and MATH 2214 |
+CHE 3154 | Heat Transfer Analysis | CHE 2164 and CHE 3114 |
+CHE 3185 | Chemical Reactor Analysis and Design | CHE 2114 and (MATH 2214 or MATH 2214H) | CHE 2164, CHE 3114
+CHE 3186 | Chemical Reactor Analysis and Design | CHE 3185 and CHE 3114 and CHE 3144 and (CHE 3044 or CHE 3154) |
+CHE 4014 | Chemical Engineering Laboratory | CHE 2164 and CHE 3015 and CHE 3114 and CHE 3124 and CHE 3134 and CHE 3144 and (CHE 3044 or CHE 3154) and CHE 3185 and ENGL 3764 |
+CHE 4185 | Process and Plant Design | CHE 3015 and (CHE 3044 or CHE 3154) and CHE 3124 and CHE 3134 and CHE 3144 and (CHE 3184 or CHE 3185) and ENGL 3764 |
+CHE 4186 | Process and Plant Design | CHE 4185 |
+CHEM 1035 | General Chemistry | CHEM 1014 or MATH 1014 or MATH 1025 or MATH 1536 or MATH 1225 or MATH 1214 or MATH 1524 |
+CHEM 1036 | General Chemistry | CHEM 1035 or CHEM 1055 or CHEM 1055H |
+CHEM 1045 | General Chemistry Laboratory | CHEM 1014 or MATH 1014 or MATH 1025 or MATH 1536 or MATH 1225 or MATH 1214 or MATH 1524 | CHEM 1035
+CHEM 1046 | General Chemistry Laboratory | CHEM 1045 or CHEM 1065 | CHEM 1036
+CHEM 2535 | Organic Chemistry | CHEM 1036 or CHEM 1056 or CHEM 1056H or ISC 1106 or ISC 1106H |
+CHEM 2536 | Organic Chemistry | CHEM 2535 or (CHEM 2565 or CHEM 2565H) |
+CHEM 2545 | Organic Chemistry Laboratory | CHEM 1046 or CHEM 1065 or ISC 1116 | CHEM 2535
+CHEM 2565 | Principles of Organic Chemistry | CHEM 1035 or CHEM 1055 |
+CHEM 2566 | Principles of Organic Chemistry | CHEM 2565 or CHEM 2535 |
+CHEM 3625 | Physical Chemistry Laboratory | CHEM 3615 or CHEM 3615H or CHEM 4615 or CHE 2164 |
+CMDA 2005 | Integrated Quantitative Sciences | MATH 1226 | MATH 2114 or MATH 2114H or MATH 2405H
+COMM 1015 | Communication Skills | |
+COMM 1016 | Communication Skills | COMM 1015 |
+CS 1064 | Introduction to Programming in Python | |
+CS 1114 | Introduction to Software Design | | MATH 1225
+CS 1944 | Computer Science First Year Seminar | CS 1114 or CS 2064 or ECE 2514 |
+CS 2104 | Introduction to Problem Solving in Computer Science | CS 1114 or CS 1064 or ECE 2514 |
+CS 2114 | Software Design and Data Structures | CS 1114 or CS 2064 |
+CS 2505 | Introduction to Computer Organization | CS 2114 |
+CS 2506 | Introduction to Computer Organization | (CS 2114 or ECE 3514) and (CS 2505 or ECE 2564) and (MATH 2534 or MATH 3034) |
+CS 3114 | Data Structures and Algorithms | (CS 2114 or ECE 3514) and (CS 2505 or ECE 2564) and (MATH 2534 or MATH 3034) |
+CS 3214 | Computer Systems | (CS 2506 and CS 2114) or (ECE 2564 and ECE 3574) |
+CS 3304 | Comparative Languages | CS 3114 |
+CS 3604 | Professionalism in Computing | CS 1944 and (CS 2114 or ECE 3514) and (COMM 2004 or COMM 2014) |
+CS 4944 | Seminar | CS 3604 |
+ECE 1004 | Introduction to ECE Concepts | |
+ECE 2024 | Circuits and Devices | ECE 1004 and (MATH 2114 or MATH 2114H or MATH 2405H) | MATH 2214, PHYS 2306
+ECE 2054 | Applied Electrical Theory | PHYS 2306 | MATH 2214
+ECE 2214 | Physical Electronics | ECE 2024 |
+ECE 2514 | Computational Engineering | ECE 1004 |
+ECE 2544 | Fundamentals of Digital Systems | ECE 1004 |
+ECE 2564 | Embedded Systems | ECE 2514 and ECE 2544 |
+ECE 2714 | Signals and Systems | ECE 2024 and (MATH 2214 or MATH 2214H or MATH 2406H) |
+ECE 2804 | Integrated Design Project | ECE 2024 and ECE 2514 and ECE 2544 | ECE 2214 and (ECE 2564 or ECE 2714)
+ECE 3004 | AC Circuit Analysis | ECE 2714 |
+ECE 3074 | AC Circuit Design Laboratory | ECE 2804 | ECE 3004
+ECE 3105 | Electromagnetic Fields | ECE 2214 and (MATH 2204 or MATH 2204H or MATH 2406H) and PHYS 2306 |
+ECE 3106 | Electromagnetic Fields | ECE 3105 |
+ECE 3204 | Analog Electronics | ECE 2214 and ECE 2714 |
+ECE 3274 | Analog Electronics Laboratory | ECE 2804 | ECE 3204
+ECE 3304 | Introduction to Power Systems | ECE 3004 |
+ECE 3504 | Principles of Computer Architecture | ECE 2544 |
+ECE 3514 | Data Structures & Algorithms | ECE 2514 |
+ECE 3544 | Digital Design I | ECE 2544 |
+ECE 3574 | Applied Software Design | ECE 3514 |
+ECE 3614 | Introduction to Communication Systems | ECE 2714 and STAT 4714 |
+ECE 3704 | Continuous and Discrete System Theory | ECE 2714 |
+ECE 4805 | Senior Design Project | ECE 2214 and ECE 2564 and ECE 2714 and ECE 2804 and (ECE 3004 or ECE 3504) and (ECE 3105 or ECE 3514) and (ECE 3106 or ECE 3134 or ECE 3204 or ECE 3214 or ECE 3304 or ECE 3544 or ECE 3564 or ECE 3574 or ECE 3614 or ECE 3704 or ECE 4205 or ECE 4234 or ECE 4254 or ECE 4424 or ECE 4524 or ECE 4540 or ECE 4580 or ECE 4704) |
+ECE 4806 | Senior Design Project | ECE 4805 |
+ECON 2005 | Principles of Economics | |
+ECON 2006 | Principles of Economics | ECON 2005 |
+ENGE 1215 | Foundations of Engineering | |
+ENGE 1216 | Foundations of Engineering | ENGE 1215 |
+ENGE 3900 | Bridge Experience | |
+ENGL 1105 | First-Year Writing | |
+ENGL 1106 | First-Year Writing | ENGL 1105 |
+ENGL 3764 | Technical Writing | ENGL 1106 or COMM 1016 |
+ESM 2104 | Statics | MATH 1226 | PHYS 2305 AND (MATH 2204 or MATH 2204H or MATH 2406H)
+ESM 2204 | Mechanics of Deformable Bodies | (ESM 2104 or ESM 2114 or AOE 2014) and (MATH 2204 or MATH 2204H or MATH 2406H) |
+ESM 2304 | Dynamics | (ESM 2104 or AOE 2014) and (MATH 2204 or MATH 2204H or MATH 2406H) | MATH 2214
+FIN 3054 | Legal and Ethical Environment of Business | |
+GEOS 1004 | Earth Science: Our Past, Present, and Future | |
+GEOS 1104 | Introduction to Earth Sciences Laboratory | |
+GEOS 2104 | Elements of Geology for Engineering | |
+GEOS 3404 | Elements of Structural Geology | GEOS 1004 or GEOS 2024 or GEOS 2104 |
+GEOS 4624 | Mineral Deposits | GEOS 1004 or GEOS 2104 or GEOS 2024 |
+GEOS 4824 | Engineering Geology | (GEOS 1004 or GEOS 2024 or GEOS 2104) and (PHYS 2305 or PHYS 2205) and (CHEM 1035 or CHEM 1015) and (MATH 1225 or MATH 1025) |
+ISE 2004 | Introduction to Industrial and Systems Engineering | |
+ISE 2014 | Engineering Economy | |
+ISE 2024 | Probability Foundations for Industrial and Systems Engineers | MATH 2204 or MATH 2204H |
+ISE 2034 | Data Management for Industrial and Systems Engineers | CS 1044 or CS 1064 or CS 1114 or ECE 1574 |
+ISE 2214 | Manufacturing Processes Laboratory | |
+ISE 2404 | Deterministic Operations Research I | MATH 1114 or MATH 2114 |
+ISE 2804 | Foundations of Systems Engineering | |
+ISE 3034 | Technical Communication for Engineers | ENGL 1106 |
+ISE 3214 | Facilities Planning and Logistics | ISE 2014 and ISE 2404 |
+ISE 3414 | Probabilistic Operations Research | ISE 2024 and (MATH 2204 or MATH 2204H or MATH 2406H) and (MATH 2214 or MATH 2214H) |
+ISE 3424 | Discrete-Event Computer Simulation | ISE 3414 |
+ISE 3614 | Human Factors Engineering and Ergonomics | |
+ISE 3624 | Industrial Ergonomics | ISE 3614 and ESM 2104 |
+ISE 4005 | Project Management and Systems Design | ISE 2034 and ISE 2214 and ISE 3034 and ISE 3214 and ISE 3424 and ISE 3624 and ISE 4204 and ISE 2004 and ISE 2804 |
+ISE 4006 | Project Management and Systems Design | ISE 4005 |
+ISE 4204 | Production Planning and Inventory Control | ISE 2404 and ISE 3414 and STAT 4706 |
+ISE 4404 | Statistical Quality Control | ISE 3414 and STAT 4706 |
+MATH 1025 | Elementary Calculus | |
+MATH 1225 | Calculus of a Single Variable | MATH 1214 |
+MATH 1226 | Calculus of a Single Variable | MATH 1225 |
+MATH 2114 | Introduction to Linear Algebra | MATH 1225 or MATH 1226 |
+MATH 2204 | Introduction to Multivariable Calculus | MATH 1226 |
+MATH 2214 | Introduction to Differential Equations | (MATH 2114 or MATH 2114H or MATH 2405H) and MATH 1226 |
+MATH 2534 | Introduction to Discrete Mathematics | CS 1114 or ECE 1574 or ECE 1004 or CS 2064 |
+MATH 3034 | Introduction to Proofs | MATH 2114 or MATH 2114H or MATH 2405H |
+MATH 3134 | Applied Combinatorics and Graph Theory | MATH 1226 and (MATH 2534 or MATH 3034) |
+MATH 4404 | Applied Numerical Methods | MATH 4564 and (ESM 2074 or AOE 2074) |
+MATH 4564 | Operational Methods for Engineers | (MATH 2214 or MATH 2214H) or MATH 2406H or CMDA 2006 |
+MATH 4574 | Vector and Complex Analysis for Engineers | MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
+ME 2004 | Engineering Analysis Using Numerical Methods | MATH 1226 and (MATH 2114 or MATH 2114H or MATH 2405H or MATH 2214 or MATH 2214H or MATH 2406H) |
+ME 2114 | Introduction to Thermal and Fluid Engineering | PHYS 2305 and MATH 1226 |
+ME 3024 | Engineering Design and Economics | ESM 2104 and ENGL 1106 |
+ME 3124 | Thermodynamics | ME 2114 and CHEM 1035 and (MATH 2204 or MATH 2204H or MATH 2406H) |
+ME 3304 | Heat and Mass Transfer | ME 2134 and ME 3414 and (MATH 2214 or MATH 2214H or MATH 2406H) and (MATH 2204 or MATH 2204H or MATH 2406H) |
+ME 3404 | Fluid Mechanics | (ME 2124 and MATH 2214 and MATH 2204) or (ME 2124 and MATH 2214 and MATH 2204H) or (ME 2124 and MATH 2214 and MATH 2224) or (ME 2124 and MATH 2214 and MATH 2224H) or (ME 2124 and MATH 2214H and MATH 2204) or (ME 2124 and MATH 2214H and MATH 2204H) or (ME 2124 and MATH 2214H and MATH 2224) or (ME 2124 and MATH 2214H and MATH 2224H) or (ME 2124 and MATH 2405H and MATH 2406H) |
+ME 3524 | Mechanical Vibrations | ESM 2304 and (MATH 2114 or MATH 2114H or MATH 2405H) and (MATH 2214 or MATH 2214H or MATH 2406H) and ME 2004 |
+ME 3534 | Controls Engineering I | ME 2004 and (MATH 2114 or MATH 2114H or MATH 2405H) and (MATH 2214 or MATH 2214H or MATH 2406H) and (MATH 2204 or MATH 2204H or MATH 2406H) and ESM 2104 and ESM 2304 |
+ME 3624 | Mechanical Design | ME 2004 and ESM 2204 and (MATH 2214 or MATH 2214H or MATH 2406H) |
+ME 4005 | Mechanical Engineering Lab | (STAT 3704 or STAT 4604 or STAT 4705 or STAT 4714) and ME 3524 and ECE 2054 | ME 3534
+ME 4015 | Engineering Design and Project | ME 3024 and ME 3524 and ME 3534 and ME 3624 and ME 4005 and (ME 3304 or MSE 2034) and ME 3414 and ME 2134 |
+ME 4016 | Engineering Design and Project | ME 4015 |
+MGT 3304 | Management Theory and Leadership Practice | |
+MINE 2504 | Introduction to Mining Engineering | |
+MINE 2534 | Mine Surveying and Mapping | MATH 1226 |
+MINE 2544 | Leadership for Responsible Mining | ENGL 1105 | MINE 2504
+MINE 2564 | Resource Exploration and Design | GEOS 1004 | MINE 2504
+MINE 3564 | Underground Mine Design | MINE 2564 and MINE 3604 |
+MINE 3574 | Surface Mine and Quarry Design | MINE 2564 and MINE 3674 |
+MINE 3584 | Ventilation Engineering | MINE 2504 |
+MINE 3604 | Mining Geomechanics | MINE 2504 and GEOS 1004 and ESM 2204 |
+MINE 3624 | Mineral Resource Project Management | MINE 2504 | MINE 2564
+MINE 3634 | Fundamentals of Mineral Processing | MINE 2504 and GEOS 1004 and CHEM 1035 |
+MINE 3644 | Applications in Mineral Processing | MINE 3634 |
+MINE 3664 | Fluids and Thermodynamics for Resources | MATH 2214 |
+MINE 3674 | Explosives and Rock Fragmentation | MINE 2504 and GEOS 1004 and ESM 2204 |
+MINE 4614 | Health and Safety Systems | MINE 3564 or MINE 3574 |
+MINE 4624 | Mine and Water Reservoir Engineering | (MINE 3564 or MINE 3574) and MINE 3664 |
+MINE 4635 | Mining Engineering Capstone | MINE 2544 and (MINE 3564 or MINE 3574) and MINE 3624 |
+MINE 4636 | Mining Engineering Capstone | MINE 4635 |
+MINE 4644 | Environmental Management for Mining and Geoenergy | MINE 3564 or MINE 3574 |
+MINE 4654 | Mine Power Systems and Automation | MATH 2214 |
+MINE 4664 | Resource Engineering Leadership Seminar | |
+MSE 2034 | Elements of Materials Engineering | |
+MSE 2044 | Fundamentals of Materials Engineering | CHEM 1035 | PHYS 2305
+MSE 2054 | Fundamentals of Materials Science | MSE 2044 or MSE 2034 |
+MSE 2114 | Math Programming MSE I | MSE 2044 or MSE 2034 |
+MSE 2884 | Materials Engineering Professional Development I | |
+MSE 3044 | Transport Phenomena in MSE | (MSE 2044 or MSE 2034) and MATH 2214 |
+MSE 3054 | Mechanical Behavior of Materials | ESM 2204 and (MSE 2034 or MSE 2044 or MSE 3094 or AOE 3094 or CEE 3684) |
+MSE 3064 | Mechanical Behavior of Materials Laboratory | ESM 2204 | ESM 3054
+MSE 3114 | Mathematics Programming in Materials Science II | MSE 2114 |
+MSE 3134 | Crystallography and Crystal Structures | MSE 2044 or MSE 2034 |
+MSE 3314 | Materials Laboratory I | MSE 2044 or MSE 2034 |
+MSE 3884 | Materials Engineering Professional Development II | MSE 2884 |
+MSE 4034 | Thermodynamics of Materials Systems | MSE 2044 or MSE 2034 | CHEM 1036
+MSE 4055 | Materials Selection and Design I and II | (MSE 3204 and MSE 3304) or (MSE 3204 and MSE 4414) or (MSE 3204 and MSE 4554) or (MSE 3304 and MSE 4414) or (MSE 3304 and MSE 4554) or (MSE 4414 and MSE 4554) | MSE 3054
+MSE 4075 | Senior Design Laboratory | MSE 4644 | MSE 4055, MSE 4085
+MSE 4076 | Senior Design Laboratory | MSE 4075 | MSE 4086
+MSE 4085 | Senior Capstone Recitation | MSE 3884 | 4075 or 4095H for 4085, 4076 or 4096H for 4086. (2H,2C) for 4085. (1H,1C) for 4086.
+MSE 4086 | Senior Capstone Recitation | MSE 4085 | 4075 or 4095H for 4085, 4076 or 4096H for 4086. (2H,2C) for 4085. (1H,1C) for 4086.
+MSE 4424 | Materials Laboratory II | MSE 2044 or MSE 2034 |
+MSE 4644 | Materials Optimization Through Designed Experiments | MSE 3314 or MSE 4424 |
+PHYS 2205 | General Physics | MATH 1025 or MATH 1026 or MATH 1225 or MATH 1524 |
+PHYS 2215 | General Physics Laboratory | | PHYS 2205
+PHYS 2305 | Foundations of Physics | MATH 1225 | MATH 1226
+PHYS 2306 | Foundations of Physics | MATH 1226 and PHYS 2305 |
+STAT 3615 | Biological Statistics | MATH 1225 or MATH 1025 or MATH 1524 or ISC 1105 |
+STAT 3704 | Statistics for Engineering Applications | MATH 2224 or MATH 2224H or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
+STAT 4604 | Statistical Methods for Engineers | MATH 1226 |
+STAT 4705 | Probability and Statistics for Engineers | MATH 2224 or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
+STAT 4706 | Probability and Statistics for Engineers | STAT 4705 or STAT 4105 or ISE 2024 |
+STAT 4714 | Probability and Statistics for Electrical Engineers | MATH 2224 or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |

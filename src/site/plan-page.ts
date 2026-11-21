@@ -1,7 +1,8 @@
 // Degree planner pages. The page ships the roadmap as JSON; PLAN_JS draws the board and keeps
 // the student's changes in their own browser (localStorage). Nothing is sent anywhere.
 import { credits, repack, YEAR_OPTIONS, type Roadmap } from '../plan/roadmap.ts';
-import { esc, layout, type Links } from './render.ts';
+import { checkItems, planIssues, type CourseInfo, type Expr } from '../plan/prereq.ts';
+import { brand, esc, layout, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
 import type { Site } from './model.ts';
 
 /** A term above this many credits gets a "heavy load" flag. */
@@ -15,35 +16,46 @@ export interface PlanData {
   total: number;
   heavy: number;
   low: number;
-  /** g = course average GPA, v = instructor-matters verdict, h = link to the course page. */
-  items: Record<string, { code?: string; label: string; cr: number; alt: string[]; ch: string[]; g?: number; v?: string; h?: string }>;
+  /** g = course average GPA, v = instructor-matters verdict, h = link to the course page (all three only with grade data).
+   *  cs / pre / co = what planIssues needs: codes this slot stands for, prerequisites, corequisites. */
+  items: Record<string, { code?: string; label: string; cr: number; alt: string[]; ch: string[]; cs: string[]; pre?: Expr; co?: Expr; g?: number; v?: string; h?: string }>;
   plans: Record<string, Array<{ label: string; ids: string[] }>>;
 }
 
-export function planData(r: Roadmap, site: Site, links: Links): PlanData {
-  const byCourse = new Map(site.courses.map((c) => [c.course, c]));
+export function planData(r: Roadmap, courses: Map<string, CourseInfo>, site?: Site, links?: Links): PlanData {
+  const byCourse = new Map((site?.courses ?? []).map((c) => [c.course, c]));
+  const check = checkItems(r.terms, courses);
   const items: PlanData['items'] = {};
   for (const i of r.terms.flatMap((t) => t.items)) {
     const c = i.code ? byCourse.get(i.code) : undefined;
     items[i.id] = {
-      code: i.code, label: i.code ? (c?.title ?? i.label.replace(i.code, '').trim()) : i.label, cr: i.credits, alt: i.alt, ch: i.choices,
-      g: c ? Math.round(c.mean * 100) / 100 : undefined, v: c?.spread.verdict, h: c ? `course/${links.course.get(c.course)}.html` : undefined,
+      code: i.code, label: i.code ? (c?.title ?? courses.get(i.code)?.title ?? i.label.replace(i.code, '').trim()) : i.label, cr: i.credits, alt: i.alt, ch: i.choices,
+      ...check[i.id]!,
+      g: c ? Math.round(c.mean * 100) / 100 : undefined, v: c?.spread.verdict, h: c && links ? `course/${links.course.get(c.course)}.html` : undefined,
     };
   }
   const plans: PlanData['plans'] = {};
-  for (const y of YEAR_OPTIONS) plans[String(y)] = repack(r, y).map((t) => ({ label: t.label, ids: t.items.map((i) => i.id) }));
+  for (const y of YEAR_OPTIONS) plans[String(y)] = repack(r, y, check).map((t) => ({ label: t.label, ids: t.items.map((i) => i.id) }));
   return { slug: r.slug, name: r.name, total: credits(r.terms.flatMap((t) => t.items)), heavy: HEAVY_CREDITS, low: LOW_GPA, items, plans };
 }
 
 /**
  * Planner script. State per major in localStorage: chosen length, moved courses, finished courses.
+ * Every redraw runs planIssues (the same function the tests cover, shipped as source): a course placed before a
+ * prerequisite gets a note, a course with no room to slip gets a "can't slip" tag.
+ * Share: the state travels in the URL hash (#y=years&d=done ids&m=id_term moves). A plan opened from such a link
+ * is shown but not saved until the visitor chooses "Keep as my plan", so a link never overwrites someone's own plan.
  * Balance: moves unfinished elective slots (items without a course code) from the heaviest
  * Fall/Spring term to the lightest until they are within 3 credits. Named courses never move on their own.
  */
-export const PLAN_JS = `(()=>{const D=JSON.parse(document.getElementById('plan-data').textContent),root=document.body.dataset.root,KEY='vtplan:'+D.slug;
+export const PLAN_JS = `(()=>{const planIssues=${planIssues.toString()};
+const D=JSON.parse(document.getElementById('plan-data').textContent),root=document.body.dataset.root,KEY='vtplan:'+D.slug;
 let S;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch{S={}}
+const P=new URLSearchParams(location.hash.slice(1));let shared=P.has('y');
+if(shared){const ok=x=>D.items['t'+x]?'t'+x:null,p={};(P.get('m')||'').split('.').forEach(x=>{const[a,b]=x.split('_'),id=ok(a);if(id&&/^\\d+$/.test(b))p[id]=+b});
+S={years:P.get('y'),pos:{[P.get('y')]:p},done:(P.get('d')||'').split('.').map(ok).filter(Boolean)}}
 S.years=D.plans[S.years]?S.years:'4';S.pos=S.pos||{};S.done=S.done||[];
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}};
+const save=()=>{if(shared)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}};
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const $=id=>document.getElementById(id),board=$('board'),yearsEl=$('years'),over=$('over');
 const cr=ids=>ids.reduce((a,id)=>a+D.items[id].cr,0),short=l=>l.replace(' year, ',' ').replace('First','Y1').replace('Second','Y2').replace('Third','Y3').replace('Fourth','Y4').replace('Fifth','Y5').replace('Spring','Sp').replace('Summer','Su').replace('Fall','F');
@@ -53,14 +65,19 @@ function move(id,from,d){const to=from+d;if(to<0||to>=D.plans[S.years].length)re
 function balance(){let moved=0;for(let n=0;n<60;n++){const ts=terms().map((t,i)=>({i,ids:t.ids,c:cr(t.ids),su:t.label.includes('Summer')})).filter(t=>!t.su);
 const hi=ts.reduce((a,b)=>b.c>a.c?b:a),lo=ts.reduce((a,b)=>b.c<a.c?b:a);if(hi.c-lo.c<=3)break;
 const id=hi.ids.find(x=>!D.items[x].code&&!S.done.includes(x)&&D.items[x].cr>0&&D.items[x].cr<hi.c-lo.c);if(!id)break;put(id,lo.i);moved++}save();draw();return moved}
-function draw(){board.textContent='';over.textContent='';const ts=terms();let doneCr=0;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
+const CAT='https://catalog.vt.edu/course-descriptions/';
+function draw(){board.textContent='';over.textContent='';const ts=terms(),I=planIssues(D.items,ts.map(t=>t.ids),S.done),nm2=j=>D.items[j].code||D.items[j].label;let doneCr=0,bad=0;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
 ts.forEach((t,ti)=>{const card=el('section','term'),list=el('div');card.id='t'+ti;let c=0,gs=0,gw=0,low=0;
 t.ids.forEach(id=>{const it=D.items[id],done=S.done.includes(id);c+=it.cr;if(done)doneCr+=it.cr;if(it.g!=null){gs+=it.g*it.cr;gw+=it.cr;if(it.g<D.low&&!done)low++}
 const li=el('div','it'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
 cb.onchange=()=>{S.done=cb.checked?[...S.done,id]:S.done.filter(x=>x!==id);save();draw()};
-const mid=el('div','mid'),nm=el('div','nm');if(it.h){const a=el('a',null,it.code);a.href=root+it.h;nm.append(a,' '+it.label)}else nm.textContent=(it.code?it.code+' ':'')+it.label;
+const mid=el('div','mid'),nm=el('div','nm');if(it.code){const a=el('a',null,it.code);if(it.h)a.href=root+it.h;else{a.href=CAT+it.code.split(' ')[0].toLowerCase()+'/';a.target='_blank';a.rel='noopener noreferrer';a.title='Catalog description'}nm.append(a,' '+it.label)}else nm.textContent=it.label;
 mid.append(nm,el('div','mut',it.cr+' cr'+(it.alt.length?' · or '+it.alt.join(', '):'')+(it.ch.length?' · choose one: '+it.ch.join(', '):'')));
 if(it.g!=null)mid.append(el('span','tag','avg GPA '+it.g.toFixed(2)));if(it.v==='matters')mid.append(el('span','tag hot','instructor matters'));
+const v=I[id];if(!done&&v.slack===0){const s=el('span','tag hot',"can't slip");s.title='Later courses chain off this one. Moving it later pushes graduation back.';mid.append(s)}
+if(!done&&v.unlocks.length)mid.append(el('div','mut','Needed for '+v.unlocks.slice(0,4).join(', ')+(v.unlocks.length>4?' and '+(v.unlocks.length-4)+' more':'')));
+if(v.late.length){bad++;mid.append(el('div','flag','Needs '+v.late.map(nm2).join(', ')+' in an earlier term'))}
+if(v.coLate.length){bad++;mid.append(el('div','flag','Take '+v.coLate.map(nm2).join(', ')+' in the same term or earlier'))}
 const mv=el('div','mv'),l=el('button',null,'\\u2190'),r=el('button',null,'\\u2192');l.setAttribute('aria-label','Move to the term before');r.setAttribute('aria-label','Move to the term after');l.title='Earlier';r.title='Later';
 l.disabled=ti===0;r.disabled=ti===ts.length-1;l.onclick=()=>move(id,ti,-1);r.onclick=()=>move(id,ti,1);mv.append(l,r);li.append(cb,mid,mv);list.append(li)});
 const heavy=c>D.heavy,load=el('div','meter load'),fill=el('i');fill.style.width=Math.min(100,c/max*100)+'%';if(heavy)fill.style.background='var(--acc)';load.append(fill);
@@ -68,37 +85,60 @@ card.append(el('h3',null,t.label),el('div','mut',c+' credits'+(gw?' · typical G
 if(heavy)card.append(el('div','flag','Heavy load: '+c+' credits'));if(low>=3)card.append(el('div','flag',low+' courses here average below '+D.low.toFixed(1)));
 if(!t.ids.length)card.append(el('div','mut','Nothing planned here.'));card.append(list);board.append(card);
 const o=el('a',heavy?'hv':t.label.includes('Summer')?'sm':''),b=el('i');o.href='#t'+ti;o.title=t.label+': '+c+' credits';b.style.height=Math.round(c/max*52)+'px';o.append(el('span',null,String(c)),b,el('span',null,short(t.label)));over.append(o)});
-$('prog').textContent=doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
+const cf=$('conf');cf.textContent=bad?bad+' prerequisite conflict'+(bad>1?'s':'')+' in this layout. Look for the notes under each course.':'No prerequisite conflicts.';cf.className=bad?'flag':'mut';
+$('shared').hidden=!shared;$('prog').textContent=doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
 [...yearsEl.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.y===S.years)));$('note').hidden=S.years==='4';$('summer').hidden=!(+S.years<4)}
 const say=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
 yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y){S.years=y;save();draw()}});
 $('balance').onclick=e=>{const n=balance();say(e.target,n?'Moved '+n+' elective'+(n>1?'s':''):'Already even')};
 $('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+terms().map(t=>t.label+' ('+cr(t.ids)+' cr)\\n'+t.ids.map(id=>'  '+(S.done.includes(id)?'[x] ':'[ ] ')+(D.items[id].code?D.items[id].code+' ':'')+D.items[id].label).join('\\n')).join('\\n');try{await navigator.clipboard.writeText(txt);say(e.target,'Copied')}catch{say(e.target,'Copy blocked')}};
+$('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
+$('keep').onclick=()=>{shared=false;save();history.replaceState(null,'',location.pathname);draw()};
 $('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){S={years:S.years,pos:{},done:[]};save();draw()}};draw()})();`;
 
 const CATALOG = 'https://catalog.vt.edu/undergraduate/';
 
-export function renderPlan(r: Roadmap, site: Site, links: Links): string {
+export function renderPlan(r: Roadmap, courses: Map<string, CourseInfo>, site?: Site, links?: Links): string {
   // "</" inside JSON would end the script tag early.
-  const json = JSON.stringify(planData(r, site, links)).replace(/</g, '\\u003c');
-  const body = `<h1>${esc(r.name)}</h1><p class="sub">Degree plan · ${r.total} credits · from the <a href="${CATALOG}${esc(r.catalogPath)}#roadmaptext" target="_blank" rel="noopener noreferrer">official 2026-2027 roadmap ↗</a></p>
+  const json = JSON.stringify(planData(r, courses, site, links)).replace(/</g, '\\u003c');
+  const ext = (href: string, text: string) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
+  const body = `<h1>${esc(r.name)}</h1><p class="sub">Degree plan · ${r.total} credits · from the ${ext(`${CATALOG}${esc(r.catalogPath)}#roadmaptext`, 'official 2026-2027 roadmap')} · <a href="compare.html#from=${esc(r.slug)}">What if I switch majors?</a></p>
+<p class="note warn" id="shared" hidden><b>You're viewing a shared plan.</b> Changes you make here are not saved. <button type="button" class="btn" id="keep">Keep as my plan</button></p>
 <div class="ctl"><b>Graduate in</b><div class="seg" id="years" role="group" aria-label="Years to graduate">${YEAR_OPTIONS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === 4}">${y} yr</button>`).join('')}</div></div>
 <div class="over" id="over" aria-label="Credits per term"></div><p class="mut">Credits per term. Tap a bar to jump to that term.</p>
-<div class="ctl"><div style="flex:1 1 220px"><span id="prog" class="mut"></span><div class="meter"><i id="bar"></i></div></div><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="copy">Copy plan</button><button type="button" class="btn" id="reset">Start over</button></div>
-<p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the 4-year roadmap over the length you chose and keeps course sequences in order, but it does not check prerequisites or which term a course is offered. Take it to your advisor before you rely on it.</p>
+<div class="ctl"><div style="flex:1 1 220px"><span id="prog" class="mut"></span><div class="meter"><i id="bar"></i></div></div><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="share" title="Copy a link that opens this exact plan">Share link</button><button type="button" class="btn" id="copy">Copy as text</button><button type="button" class="btn" id="reset">Start over</button></div>
+<p id="conf" class="mut" role="status"></p>
+<p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the 4-year roadmap over the length you chose and keeps prerequisites in order where it can. It does not know which term a course is offered. Take it to your advisor before you rely on it.</p>
 <p class="note" id="summer" hidden>Finishing in under 4 years uses summer terms. AP, IB or transfer credit can replace some of them: tick those courses as done.</p>
-<p class="mut">Tick a course when it's done. Arrows move it a term. "Instructor matters" means grades differ a lot by who teaches it: open the course before you register. Saved in this browser only.</p>
+<p class="mut">Tick a course when it's done (AP and transfer credit too). Arrows move it a term, and a note appears if the move breaks a prerequisite. "Can't slip" means later courses chain off it with no spare term.${site ? ' "Instructor matters" means grades differ a lot by who teaches it.' : ''} Saved in this browser only.</p>
+${site ? '' : `<p class="mut">Choosing a section? See past grades on ${ext(UDC_URL, "VT's grade distribution page")} and instructor reviews on ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}. Course codes open the catalog description.</p>`}
 <noscript><p class="note warn">The planner needs JavaScript. The official roadmap is on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <script type="application/json" id="plan-data">${json}</script>`;
-  return layout(`${r.name} degree plan · VT Grades`, `Plan a Virginia Tech ${r.name} degree term by term from the official roadmap, with grade data for every course.`, '../',
+  return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a Virginia Tech ${r.name} degree term by term from the official roadmap, with prerequisite checks.`, '../',
     `<a href="index.html">Degree planner</a>`, body, site, 'plan', `<script src="../plan.js" defer></script>`);
 }
 
-export function renderPlanIndex(roadmaps: Roadmap[], site: Site): string {
+/** Planner landing page. `home` renders it as the site's front page (planner-only build), so links gain a "plan/" prefix. */
+export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false): string {
   const sorted = [...roadmaps].sort((a, b) => a.name.localeCompare(b.name));
-  return layout('Degree planner · VT Grades', 'Plan your Virginia Tech degree from the official roadmap, with grade data for every course.', '../', '',
-    `<div class="hero"><h1>Your degree, <em>term by term</em>.</h1><p>Start from your major's official roadmap. Choose 3 to 5 years, rebalance heavy terms with one tap, and see the grade data for every course as you go.</p></div>
-<h2>Choose a major</h2><div class="majors">${sorted.map((r) => `<a href="${esc(r.slug)}.html"><b>${esc(r.name)}</b><span>${r.total} credits →</span></a>`).join('')}</div>
-<p class="mut">${sorted.length} College of Engineering majors so far, read from the 2026-2027 catalog. Other colleges and minors are not added yet.</p>`, site, 'plan');
+  const pre = home ? 'plan/' : '';
+  return layout(`${home ? 'Virginia Tech degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your Virginia Tech degree from the official roadmap: 3 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
+    `<div class="hero"><h1>Your degree, <em>term by term</em>.</h1><p>Start from your major's official roadmap. Choose 3 to 5 years, move courses and see at once if a prerequisite breaks, and send the plan to your advisor as a link. No login.</p></div>
+<h2>Choose a major</h2><div class="majors">${sorted.map((r) => `<a href="${pre}${esc(r.slug)}.html"><b>${esc(r.name)}</b><span>${r.total} credits →</span></a>`).join('')}</div>
+<p class="mut">${sorted.length} College of Engineering majors so far, read from the 2026-2027 catalog. Other colleges and minors are not added yet.</p>
+<div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
+<a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
+}
+
+export function renderPlanAbout(): string {
+  return layout(`How it works · ${brand()}`, 'Where the Virginia Tech degree planner gets its data and what it checks.', '', '',
+    `<h1>How it works</h1><p class="sub">What the planner knows, what it checks, and where it stops.</p>
+<h2>Roadmaps</h2><p>Each major's plan is the official 8-semester roadmap from the 2026-2027 Virginia Tech catalog. The 4-year view is that roadmap unchanged. Every term's credits are checked against the totals the catalog prints.</p>
+<h2>3 to 5 years</h2><p>Other lengths spread the same courses over more or fewer terms. Plans under 4 years use summer terms at half load. A course waits until its prerequisites sit in an earlier term, and corequisites move together. The planner does not know which term a course is offered.</p>
+<h2>Prerequisite checks</h2><p>Prerequisites and corequisites are read from each course's catalog description. Move a course ahead of something it needs and a note appears under it. Three limits: a requirement only placement scores or off-roadmap courses can meet is not checked; a requirement the official roadmap itself does not follow is not checked; and a few corequisites the catalog writes in free text are skipped.</p>
+<h2>"Can't slip"</h2><p>A course gets this tag when later courses chain off it and there is no spare term left: moving it one term later pushes the end of the chain past your last term.</p>
+<h2>Switching majors</h2><p>The comparison matches what you've finished against the other major's roadmap: same course first, then elective slots with the same name, then free electives. It is an estimate from the two roadmaps. The department you're moving into decides what really counts.</p>
+<h2>Sharing and privacy</h2><p>Your plan is saved in your browser only. "Share link" puts the plan in the link itself, so nothing is uploaded. Opening someone's link never overwrites your own plan unless you choose to keep it.</p>
+<h2>What this is not</h2><p>It is not a degree audit and it does not know your record. Use HokieGPS and your advisor for the official check. For past grades, use ${`<a href="${UDC_URL}" target="_blank" rel="noopener noreferrer">VT's grade distribution page ↗</a>`}.</p>`, undefined, 'about');
 }

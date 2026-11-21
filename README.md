@@ -6,7 +6,8 @@ Virginia Tech course and instructor grade pages: expected section GPA with calib
 npm install
 npm run check      # typecheck + tests
 npm run backtest   # walk-forward accuracy backtest
-npm run build      # static site into dist/
+npm run build      # public site into dist/: degree planner only, no grade data
+npm run build:grades  # private build that adds the grade pages
 ```
 
 Results, method and open risks: [REPORT.md](REPORT.md). Working notes for contributors: [skills.md](skills.md).

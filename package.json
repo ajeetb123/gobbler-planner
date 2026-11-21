@@ -11,7 +11,8 @@
     "backtest": "node bench/grades.backtest.ts",
     "backtest:matters": "node bench/matters.backtest.ts",
     "build": "node scripts/build-site.ts",
-    "pilot": "node scripts/build-site.ts --top 30",
+    "build:grades": "node scripts/build-site.ts --grades",
+    "pilot": "node scripts/build-site.ts --grades --top 30",
     "check": "npm run typecheck && npm test"
   },
   "keywords": [],

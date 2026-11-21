@@ -84,6 +84,7 @@ dialog{border:0;border-radius:16px;padding:0;width:min(600px,calc(100vw - 24px))
 .it{display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--rule);padding:8px 0}.it .mid{flex:1;min-width:0}.it .nm{font-size:.94rem}.it.done .nm{text-decoration:line-through;color:var(--mut)}.it input{margin-top:5px;width:16px;height:16px;accent-color:var(--acc)}
 .tag{display:inline-block;font-size:.74rem;font-weight:600;border:1px solid var(--rule);border-radius:6px;padding:0 7px;margin:4px 6px 0 0;color:var(--mut)}.tag.hot{border-color:var(--acc);color:var(--acc)}
 .mv{display:flex;gap:2px}.mv button{font:inherit;border:1px solid var(--rule);background:none;color:var(--ink);border-radius:7px;width:27px;height:27px;cursor:pointer}.mv button:disabled{opacity:.25;cursor:default}.flag{font-size:.8rem;font-weight:600;color:var(--acc);margin-top:4px}
+.sel{font:inherit;padding:7px 10px;border:1px solid var(--rule);border-radius:9px;background:var(--sheet);color:var(--ink);max-width:100%}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 28px;margin-top:1.4em}.cols section{border-top:2px solid var(--ink);padding:10px 0 18px}.cols h3{margin:0 0 4px;font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:1.1rem}.cols ul{list-style:none;margin:0;padding:0;font-size:.92rem}.cols li{border-top:1px solid var(--rule);padding:6px 0}.majors button{font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:10px;padding:12px 0;cursor:pointer;text-align:left}.majors button:hover{color:var(--acc)}.it .mut{font-size:.82rem}
 .majors{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 28px;border-top:2px solid var(--ink)}.majors a{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--rule);text-decoration:none}.majors a:hover{color:var(--acc)}.majors span{color:var(--mut);font-size:.85rem;white-space:nowrap}
 footer{margin-top:4em;padding-top:1em;border-top:1px solid var(--rule);font-size:.8rem;color:var(--mut)}
 @media(max-width:820px){.shell{display:block}.rail{position:static;height:auto;flex-direction:row;align-items:center;padding:12px 16px;border-right:0;border-bottom:1px solid var(--rule)}.rail .nav,.rail .fine,.brand small,.find kbd{display:none}.brand{font-size:1.2rem}.find{flex:1}
@@ -109,7 +110,7 @@ q.addEventListener('input',async()=>{d??=await(await fetch(root+'search.json')).
 const hits=[];for(const[t,h,k]of d){const sc=score(t,s);if(sc>=0)hits.push([sc,t,h,k])}hits.sort((a,b)=>a[0]-b[0]);let n=0;
 const best=k=>Math.min(9,...hits.filter(x=>x[3]===k).map(x=>x[0]));for(const k of['c','i','m'].sort((x,y)=>best(x)-best(y))){const g=hits.filter(x=>x[3]===k).slice(0,8);if(!g.length)continue;const h=document.createElement('li');h.className='grp';h.textContent=K[k];r.append(h);
 for(const[,t,href]of g){const li=document.createElement('li'),a=document.createElement('a');a.href=root+href;a.textContent=t;li.append(a);r.append(li);n++}}
-if(!n){const li=document.createElement('li');li.className='grp';li.textContent='No match. Try "CS 2114" or a last name.';r.append(li)}paint()});
+if(!n){const li=document.createElement('li');li.className='grp';li.textContent='No match.';r.append(li)}paint()});
 q.addEventListener('keydown',e=>{const as=r.querySelectorAll('a');if(e.key==='ArrowDown'){sel=Math.min(sel+1,as.length-1);paint();as[sel]&&as[sel].scrollIntoView({block:'nearest'});e.preventDefault()}else if(e.key==='ArrowUp'){sel=Math.max(sel-1,0);paint();as[sel]&&as[sel].scrollIntoView({block:'nearest'});e.preventDefault()}else if(e.key==='Enter'&&as[sel])location.href=as[sel].href});
 const bar=document.getElementById('cmp'),picks=[];if(!bar)return;
 const phi=x=>{const t=1/(1+.2316419*Math.abs(x)),p=1-Math.exp(-x*x/2)/Math.sqrt(2*Math.PI)*t*(.31938153+t*(-.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>=0?p:1-p};
@@ -119,22 +120,31 @@ if(picks.length<2){bar.textContent=picks.length?'Now pick a second one to compar
 let[a,b2]=picks.map(p=>({n:p.dataset.n,g:+p.dataset.g,s:+p.dataset.s}));if(b2.g>a.g)[a,b2]=[b2,a];const gap=a.g-b2.g,t=Math.round(phi(gap/Math.hypot(a.s,b2.s))*10);
 bar.textContent=t<=5||gap<.005?'Too close to call. A section under '+a.n+' and one under '+b2.n+' are expected to land about the same.':'A section under '+a.n+' would average higher than one under '+b2.n+(t>=10?' more than 9':' about '+t)+' times in 10. Expected gap: '+gap.toFixed(2)+' GPA.'}))})();`;
 
-type Tab = 'grades' | 'plan' | 'about';
+type Tab = 'grades' | 'plan' | 'switch' | 'about';
 
-export function layout(title: string, desc: string, root: string, crumb: string, body: string, site: Site, tab: Tab = 'grades', extraScript = ''): string {
+/** VT's own grade distribution page and the RateMyProfessors school page: the planner-only build links out to both. */
+export const UDC_URL = 'https://udc.vt.edu/irdata/data/courses/grades';
+export const RMP_SCHOOL_URL = `https://www.ratemyprofessors.com/school/${RMP_SCHOOL_ID}`;
+/** Site name. Without grade data (`site` undefined) the build is the planner alone. */
+export const brand = (site?: Site) => (site ? 'VT Grades' : 'VT Plan');
+
+export function layout(title: string, desc: string, root: string, crumb: string, body: string, site?: Site, tab: Tab = 'grades', extraScript = ''): string {
   const cur = (t: Tab) => (t === tab ? ' aria-current="page"' : '');
-  const nav = `<a href="${root}index.html"${cur('grades')}>Grades</a><a href="${root}plan/index.html"${cur('plan')}>Degree planner</a>`;
+  const nav = `${site ? `<a href="${root}index.html"${cur('grades')}>Grades</a>` : ''}<a href="${root}plan/index.html"${cur('plan')}>Degree planner</a><a href="${root}plan/compare.html"${cur('switch')}>Switch majors</a>`;
+  const source = site
+    ? `Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. Not affiliated with Virginia Tech or RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.`
+    : `Roadmaps and prerequisites come from the Virginia Tech 2026-2027 Academic Catalog. This is a planning aid, not a degree audit: confirm your plan with your advisor and HokieGPS. Not affiliated with Virginia Tech. <a href="${root}about.html">How it works</a>.`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"></head><body data-root="${root}">
-<div class="shell"><aside class="rail"><a class="brand" href="${root}index.html">VT Grades<i>.</i><small>What the grades say, before you register</small></a>
+<div class="shell"><aside class="rail"><a class="brand" href="${root}index.html">${brand(site)}<i>.</i><small>${site ? 'What the grades say, before you register' : 'Your degree, term by term'}</small></a>
 <button type="button" class="find" data-search><span>Search</span><kbd>/</kbd></button>
 <nav class="nav" aria-label="Sections">${nav}<a href="${root}about.html"${cur('about')}>How it works</a></nav>
-<div class="fine">Official VT grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Not affiliated with Virginia Tech or RateMyProfessors.</div></aside>
+<div class="fine">${site ? `Official VT grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Not affiliated with Virginia Tech or RateMyProfessors.` : 'Built on the official VT catalog. No login. Your plan stays in your browser. Not affiliated with Virginia Tech.'}</div></aside>
 <main>${crumb ? `<nav class="crumb" aria-label="Breadcrumb">${crumb}</nav>` : ''}
 ${body}
-<footer>Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. Not affiliated with Virginia Tech or RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.</footer></main></div>
+<footer>${source}</footer></main></div>
 <nav class="tabs" aria-label="Sections">${nav}<button type="button" data-search>Search</button></nav>
-<dialog id="pal" aria-label="Search"><input id="q" type="search" placeholder="Course, last name or major" autocomplete="off" aria-label="Search courses, instructors and degree plans"><ul id="r"></ul><div class="hint">↑ ↓ to move · Enter to open · Esc to close</div></dialog>
+<dialog id="pal" aria-label="Search"><input id="q" type="search" placeholder="${site ? 'Course, last name or major' : 'Search a major'}" autocomplete="off" aria-label="Search"><ul id="r"></ul><div class="hint">↑ ↓ to move · Enter to open · Esc to close</div></dialog>
 <script src="${root}app.js" defer></script>${extraScript}</body></html>`;
 }
 

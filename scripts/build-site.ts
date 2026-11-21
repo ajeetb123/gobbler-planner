@@ -1,12 +1,15 @@
-// Run: npm run build            (every undergrad course)
-//      npm run build -- --top 30   (pilot: the 30 most-taken courses)
-// Reads every CSV in data/, writes a static site to dist/.
+// Run: npm run build                      (public build: degree planner only, no grade data)
+//      npm run build -- --grades          (private build: adds grade pages from every CSV in data/)
+//      npm run build -- --grades --top 30 (pilot: the 30 most-taken courses)
+// Writes a static site to dist/. UDC has not authorized republishing its grade data, so grades are opt-in.
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
 import { parseRoadmaps } from '../src/plan/roadmap.ts';
-import { PLAN_JS, renderPlan, renderPlanIndex } from '../src/site/plan-page.ts';
+import { parsePrereqs } from '../src/plan/prereq.ts';
+import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
+import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
 import { APP_JS, CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
@@ -15,13 +18,15 @@ const top = topArg > 0 ? Number(process.argv[topArg + 1]) : undefined;
 if (top !== undefined && !(top > 0)) throw new Error('--top needs a positive number');
 const OUT = 'dist';
 
+const grades = process.argv.includes('--grades');
+if (top !== undefined && !grades) throw new Error('--top only applies with --grades');
 const files = readdirSync('data').filter((f) => f.endsWith('.csv')).sort().map((f) => join('data', f));
-const site = buildSite(loadUdc(files), { top });
+const site = grades ? buildSite(loadUdc(files), { top }) : undefined;
 const tModel = performance.now();
 
-const links = { course: slugs(site.courses.map((c) => c.course)), prof: slugs(site.profs.map((p) => p.key)) };
+const links = site && { course: slugs(site.courses.map((c) => c.course)), prof: slugs(site.profs.map((p) => p.key)) };
 rmSync(OUT, { recursive: true, force: true });
-for (const d of ['course', 'prof', 'subject', 'plan']) mkdirSync(join(OUT, d), { recursive: true });
+for (const d of site ? ['course', 'prof', 'subject', 'plan'] : ['plan']) mkdirSync(join(OUT, d), { recursive: true });
 const sizes: number[] = [];
 const write = (path: string, html: string) => { writeFileSync(join(OUT, path), html); if (path.endsWith('.html')) sizes.push(Buffer.byteLength(html)); };
 
@@ -29,29 +34,38 @@ write('style.css', CSS);
 write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));
-write('index.html', renderIndex(site, links, roadmaps.length));
+const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
 write('plan.js', PLAN_JS);
+write('compare.js', COMPARE_JS);
 write('plan/index.html', renderPlanIndex(roadmaps, site));
-for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, site, links));
-write('about.html', renderAbout(site));
-for (const c of site.courses) write(`course/${links.course.get(c.course)}.html`, renderCourse(c, site, links));
-for (const p of site.profs) write(`prof/${links.prof.get(p.key)}.html`, renderProf(p, site, links));
-for (const s of new Set(site.courses.map((c) => c.subject))) write(`subject/${s}.html`, renderSubject(s, site, links));
+write('plan/compare.html', renderCompare(roadmaps, courses, site));
+for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, courses, site, links));
 // [label, link, kind]: c = course, i = instructor, m = degree plan. The palette groups by kind.
-write('search.json', JSON.stringify([
-  ...site.courses.map((c) => [`${c.course} ${c.title}`, `course/${links.course.get(c.course)}.html`, 'c']),
-  ...site.profs.map((p) => [`${p.name} (${p.subject})`, `prof/${links.prof.get(p.key)}.html`, 'i']),
-  ...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']),
-]));
+const search: string[][] = [...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']), ['Switch majors: what carries over', 'plan/compare.html', 'm']];
+if (site && links) {
+  write('index.html', renderIndex(site, links, roadmaps.length));
+  write('about.html', renderAbout(site));
+  for (const c of site.courses) write(`course/${links.course.get(c.course)}.html`, renderCourse(c, site, links));
+  for (const p of site.profs) write(`prof/${links.prof.get(p.key)}.html`, renderProf(p, site, links));
+  for (const s of new Set(site.courses.map((c) => c.subject))) write(`subject/${s}.html`, renderSubject(s, site, links));
+  search.unshift(...site.courses.map((c) => [`${c.course} ${c.title}`, `course/${links.course.get(c.course)}.html`, 'c']),
+    ...site.profs.map((p) => [`${p.name} (${p.subject})`, `prof/${links.prof.get(p.key)}.html`, 'i']));
+} else {
+  write('index.html', renderPlanIndex(roadmaps, undefined, true));
+  write('about.html', renderPlanAbout());
+}
+write('search.json', JSON.stringify(search));
 
 sizes.sort((a, b) => a - b);
 const kb = (n: number) => (n / 1024).toFixed(1);
-const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
-for (const c of site.courses) v[c.spread.verdict]++;
-console.log(`Built ${site.courses.length} course pages and ${site.profs.length} instructor pages for ${termLabel(site.target)} (data ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)})`);
-console.log(`Degree planner: ${roadmaps.length} majors`);
-console.log(`Covers ${(site.enrollmentShare * 100).toFixed(0)}% of undergrad enrollments. Flagged names: ${site.profs.filter((p) => p.ambiguous).length}`);
-console.log(`Instructor verdicts: matters ${v.matters}, modest ${v.some}, barely ${v.barely}, not enough history ${v.unknown}`);
-console.log(`Params: kIC=${site.params.kIC} decay=${site.params.decay} instrEffect=${site.params.useInstructorEffect} kInstr=${site.params.kInstr}`);
+console.log(`Degree planner: ${roadmaps.length} majors, prerequisites for ${courses.size} courses`);
+if (site) {
+  const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
+  for (const c of site.courses) v[c.spread.verdict]++;
+  console.log(`Built ${site.courses.length} course pages and ${site.profs.length} instructor pages for ${termLabel(site.target)} (data ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)})`);
+  console.log(`Covers ${(site.enrollmentShare * 100).toFixed(0)}% of undergrad enrollments. Flagged names: ${site.profs.filter((p) => p.ambiguous).length}`);
+  console.log(`Instructor verdicts: matters ${v.matters}, modest ${v.some}, barely ${v.barely}, not enough history ${v.unknown}`);
+  console.log(`Params: kIC=${site.params.kIC} decay=${site.params.decay} instrEffect=${site.params.useInstructorEffect} kInstr=${site.params.kInstr}`);
+} else console.log('Planner-only build: no grade data included (pass --grades for the private build).');
 console.log(`Page weight (HTML, uncompressed): median ${kb(sizes[Math.floor(sizes.length / 2)]!)} KB, largest ${kb(sizes[sizes.length - 1]!)} KB, shared CSS ${kb(Buffer.byteLength(CSS))} KB, total ${(sizes.reduce((a, b) => a + b, 0) / 1048576).toFixed(1)} MB`);
 console.log(`Time: tune + model ${((tModel - t0) / 1000).toFixed(1)}s, render + write ${((performance.now() - tModel) / 1000).toFixed(1)}s`);

@@ -77,6 +77,8 @@ export function parseRoadmaps(text: string): Roadmap[] {
   return out;
 }
 
+import { planIssues, type CheckItem } from './prereq.ts';
+
 export const credits = (items: PlanItem[]) => items.reduce((a, i) => a + i.credits, 0);
 const subject = (i: PlanItem) => i.code?.split(' ')[0];
 
@@ -103,18 +105,29 @@ export function slots(years: number): Array<{ label: string; weight: number }> {
  * Otherwise courses are spread by credits (summers get half a share), following the catalog's order;
  * elective slots may move earlier to fill a light term. One guard stands in for prerequisites we do not have: a course never shares a term with a
  * same-subject course from an earlier official term (MATH 1225 and MATH 1226 stay apart).
- * Real prerequisites and which term a course is offered in are NOT checked.
+ * With `check` (from checkItems in prereq.ts) a course is also held back until its prerequisites sit in an earlier term.
+ * Which term a course is offered in is NOT handled. The last term takes whatever is left, so a tight plan can
+ * still end with conflicts: the planner page flags those.
  */
-export function repack(r: Roadmap, years: number): Term[] {
+export function repack(r: Roadmap, years: number, check?: Record<string, CheckItem>): Term[] {
   if (years === 4) return r.terms;
   const sl = slots(years);
   const queue = r.terms.flatMap((t) => t.items);
   const terms: Term[] = [];
+  // depth = how many later terms the courses that chain off this one still need (from the official layout).
+  const depth: Record<string, number> = {};
+  if (check)
+    for (const [id, v] of Object.entries(planIssues(check, r.terms.map((t) => t.items.map((i) => i.id)), [])))
+      if (v.slack !== undefined) depth[id] = r.terms.length - 1 - v.slack - queue.find((q) => q.id === id)!.src;
   let left = credits(queue);
   let weightLeft = sl.reduce((a, x) => a + x.weight, 0);
   sl.forEach((slot, k) => {
     const items: PlanItem[] = [];
     const target = (left * slot.weight) / weightLeft;
+    // Issues for `x` if it joined this term: terms so far, this term with x, everything else after.
+    const ids = (xs: PlanItem[]) => xs.map((x) => x.id);
+    const trialIssues = (x: PlanItem) =>
+      planIssues(check!, [...terms.map((t) => ids(t.items)), [...ids(items.filter((i) => i !== x)), x.id], ids(queue.filter((q) => q !== x))], [])[x.id]!;
     for (;;) {
       const have = credits(items);
       // Take the first queued course that fits. A course may jump the queue (an elective filling a gap),
@@ -124,10 +137,23 @@ export function repack(r: Roadmap, years: number): Term[] {
         const sub = subject(next);
         if (sub !== undefined && queue.slice(0, i).some((q) => subject(q) === sub)) return false;
         if (items.some((it) => subject(it) !== undefined && subject(it) === sub && it.src < next.src)) return false;
+        if (check?.[next.id]?.pre) {
+          // Trial layout: terms so far, this term with the candidate, everything else after.
+          if (trialIssues(next).late.length) return false;
+        }
+        // No room to wait: the chain behind this course needs every term that is left.
+        if ((depth[next.id] ?? 0) >= sl.length - 1 - k) return true;
         return items.length === 0 || have + next.credits / 2 <= target;
       });
       if (pick < 0) break;
-      items.push(...queue.splice(pick, 1));
+      const [picked] = queue.splice(pick, 1);
+      items.push(picked!);
+      // Corequisites travel together: pull a waiting corequisite into this term when its own prerequisites allow.
+      if (check?.[picked!.id]?.co && k < sl.length - 1)
+        for (const j of trialIssues(picked!).coLate) {
+          const q = queue.findIndex((x) => x.id === j);
+          if (q >= 0 && !trialIssues(queue[q]!).late.length) items.push(...queue.splice(q, 1));
+        }
     }
     left -= credits(items);
     weightLeft -= slot.weight;

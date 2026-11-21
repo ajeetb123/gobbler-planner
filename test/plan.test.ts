@@ -1,9 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { parsePrereqs } from '../src/plan/prereq.ts';
 import { credits, parseRoadmaps, repack, slots, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
 
 const real = parseRoadmaps(readFileSync('data/roadmaps/engineering.txt', 'utf8'));
+const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
 
 test('parseRoadmaps: names with commas and brackets, "or" pairs, choice lists', () => {
   const [r] = parseRoadmaps(`## demo | Demo | x/y/
@@ -94,7 +96,7 @@ function demoSite() {
 test('planData: grade data is attached to known courses, elective slots stay plain', () => {
   const { site, links } = demoSite();
   const cs = real.find((r) => r.slug === 'computer-science')!;
-  const d = planData(cs, site, links);
+  const d = planData(cs, courses, site, links);
   const first = d.items[cs.terms[0]!.items[0]!.id]!;
   assert.equal(first.code, 'CS 1114');
   assert.equal(first.label, 'Intro to Software Design');
@@ -112,7 +114,7 @@ test('planData: grade data is attached to known courses, elective slots stay pla
 
 test('plan pages: embedded JSON cannot close its script tag, and every major is listed', () => {
   const { site, links } = demoSite();
-  const html = renderPlan(real.find((r) => r.slug === 'computer-science')!, site, links);
+  const html = renderPlan(real.find((r) => r.slug === 'computer-science')!, courses, site, links);
   const json = /<script type="application\/json" id="plan-data">(.*?)<\/script>/s.exec(html)![1]!;
   assert.ok(!json.includes('</'));
   assert.equal(JSON.parse(json).items['t0-3'].label, 'Calculus </script> & more');
