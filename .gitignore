@@ -6,3 +6,7 @@ data/*.csv
 # Personal study notes: kept on the owner's machine only, never pushed.
 docs/LEARN.md
 learning/
+
+# Local settings such as the dashboard password. Never commit.
+.env
+*.db

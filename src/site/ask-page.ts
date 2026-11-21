@@ -22,7 +22,7 @@ export const ASK_JS = `(()=>{const E=(${askEngine.toString()})();
 const root=document.body.dataset.root,$=id=>document.getElementById(id),el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const q=$('aq'),out=$('aout');let ix;
 const ready=fetch(root+'ask.json').then(r=>r.json()).then(d=>{ix=E.buildIndex(d)}).catch(()=>{out.textContent='Could not load the course data. Reload the page to try again.'});
-function show(text){out.textContent='';if(!ix||!text.trim())return;const a=E.answer(ix,text);
+function show(text){out.textContent='';if(!ix||!text.trim())return;const a=E.answer(ix,text);gpTrack('ask',a.intent);if(a.intent==='none')gpTrack('ask-miss',text);
 const box=el('div','ans');a.lines.forEach(l=>box.append(el('p',null,l)));out.append(box);
 if(a.sources.length){const s=el('p','mut','Sources: ');a.sources.forEach((x,i)=>{const l=el('a',null,x.label+(x.external?' \\u2197':''));l.href=x.external?x.href:root+x.href;if(x.external){l.target='_blank';l.rel='noopener noreferrer'}s.append(l,i<a.sources.length-1?' \\u00b7 ':'')});out.append(s)}
 const rel=a.related.filter(h=>h.score>0);if(rel.length){out.append(el('h2',null,'Closest matches'));const g=el('div','chips');rel.forEach(h=>{const b=el('button',null,h.doc.k==='c'?h.doc.id+' '+h.doc.title:h.doc.title);b.type='button';b.onclick=()=>ask(h.doc.k==='c'?h.doc.id:h.doc.title+' plan');g.append(b)});out.append(g)}}
@@ -38,5 +38,5 @@ export function renderAsk(site?: Site): string {
 <div class="chips">${EXAMPLES.map((x) => `<button type="button" data-q="${x}">${x}</button>`).join('')}</div>
 <noscript><p class="note warn">Ask needs JavaScript.</p></noscript>
 <div id="aout" aria-live="polite"></div>
-<p class="note"><b>How this works.</b> No AI model is involved. Your question is matched against 2,000 or so courses and degree plans with a search ranking built for this site, and the answer is assembled by fixed rules from the facts stored for the best match. It runs in your browser: your question is not sent anywhere. It can pick the wrong course or major, so check "Closest matches" and the catalog link, and ask your advisor before you rely on it.</p>`, site, 'ask', `<script src="ask.js" defer></script>`);
+<p class="note"><b>How this works.</b> No AI model is involved. Your question is matched against 2,000 or so courses and degree plans with a search ranking built for this site, and the answer is assembled by fixed rules from the facts stored for the best match. The answer is worked out in your browser. A question that finds no match is saved, with nothing identifying you, so the site can learn to answer it (<a href="about.html#privacy">privacy</a>). It can pick the wrong course or major, so check "Closest matches" and the catalog link, and ask your advisor before you rely on it.</p>`, site, 'ask', `<script src="ask.js" defer></script>`);
 }

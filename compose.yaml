@@ -1,11 +1,30 @@
-# Local run:  docker compose up --build   then open http://localhost:8080
+# The whole app: static site behind nginx, plus the API it forwards /api and /admin to.
+#   docker compose up --build        then open http://localhost:8080
+# Dashboard: put ADMIN_PASSWORD=<a long password you choose> in a file named .env next to this one
+# (git-ignored), then open http://localhost:8080/admin. Without it the dashboard stays off.
 services:
   web:
     build: .
     image: gobbler-plan:local
     ports:
       - "8080:8080"
+    depends_on:
+      - api
     read_only: true
     tmpfs:
       - /tmp
     restart: unless-stopped
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: gobbler-plan-api:local
+    environment:
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - gobbler-data:/data
+    # No "ports": only nginx can reach the API, which is what makes X-Real-IP trustworthy.
+    read_only: true
+    restart: unless-stopped
+volumes:
+  gobbler-data:

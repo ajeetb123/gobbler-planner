@@ -2,7 +2,7 @@
 // the student's changes in their own browser (localStorage). Nothing is sent anywhere.
 import { baseYears, byCollege, collegeOf, credits, repack, YEAR_OPTIONS, type Roadmap } from '../plan/roadmap.ts';
 import { checkItems, planIssues, type CourseInfo, type Expr } from '../plan/prereq.ts';
-import { brand, DISCLAIMER, esc, layout, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
+import { brand, DISCLAIMER, esc, layout, PRIVACY, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
 import type { Site } from './model.ts';
 
 /** A term above this many credits gets a "heavy load" flag. */
@@ -97,13 +97,13 @@ if(firstBad){const go=el('button','lnk','Show the first one');go.type='button';g
 $('shared').hidden=!shared;$('prog').textContent=doneCr>=D.total&&D.total>0?'All '+D.total+' credits done. Congratulations.':doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
 [...yearsEl.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.y===S.years)));$('note').hidden=S.years===D.base;$('summer').hidden=!(+S.years<4)}
 const say=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
-yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y&&y!==S.years){snap();S.years=y;save();draw()}});
-$('undo').onclick=()=>{if(!U.length)return;S=clean(JSON.parse(U.pop()));$('undo').disabled=!U.length;save();draw()};
-$('balance').onclick=e=>{const n=balance();say(e.target,n?'Moved '+n+' elective'+(n>1?'s':''):'Already even')};
+yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y&&y!==S.years){snap();S.years=y;save();draw();gpTrack('years',y)}});
+$('undo').onclick=()=>{if(!U.length)return;gpTrack('undo');S=clean(JSON.parse(U.pop()));$('undo').disabled=!U.length;save();draw()};
+$('balance').onclick=e=>{gpTrack('balance');const n=balance();say(e.target,n?'Moved '+n+' elective'+(n>1?'s':''):'Already even')};
 $('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+terms().map(t=>t.label+' ('+cr(t.ids)+' cr)\\n'+t.ids.map(id=>'  '+(S.done.includes(id)?'[x] ':'[ ] ')+(D.items[id].code?D.items[id].code+' ':'')+D.items[id].label).join('\\n')).join('\\n');try{await navigator.clipboard.writeText(txt);say(e.target,'Copied')}catch{say(e.target,'Copy blocked')}};
-$('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
-$('print').onclick=()=>print();
-$('keep').onclick=()=>{shared=false;save();history.replaceState(null,'',location.pathname);draw()};
+$('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.');gpTrack('share');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
+$('print').onclick=()=>{gpTrack('print');print()};
+$('keep').onclick=()=>{gpTrack('keep');shared=false;save();history.replaceState(null,'',location.pathname);draw()};
 $('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S={years:S.years,pos:{},done:[]};save();draw()}};draw()})();`;
 
 const CATALOG = 'https://catalog.vt.edu/undergraduate/';
@@ -154,8 +154,9 @@ export function renderPlanAbout(): string {
 <h2>Prerequisite checks</h2><p>Prerequisites and corequisites are read from each course's catalog description. Move a course ahead of something it needs and a note appears under it. Three limits: a requirement only placement scores or off-roadmap courses can meet is not checked; a requirement the official roadmap itself does not follow is not checked; and a few corequisites the catalog writes in free text are skipped.</p>
 <h2>"Can't slip"</h2><p>A course gets this tag when later courses chain off it and there is no spare term left: moving it one term later pushes the end of the chain past your last term.</p>
 <h2>Switching majors</h2><p>The comparison matches what you've finished against the other major's roadmap: same course first, then elective slots with the same name, then free electives. It is an estimate from the two roadmaps. The department you're moving into decides what really counts.</p>
-<h2>Ask</h2><p>The Ask page answers questions like "what do I need before CS 3214?". No AI model is involved: a search ranking built for this site finds the course or major you mean, and fixed rules assemble the answer from the catalog facts stored for it, with links to the sources. It runs in your browser, so your question is not sent anywhere. It can pick the wrong match, so check the catalog link.</p>
-<h2>Sharing and privacy</h2><p>Your plan is saved in your browser only. "Share link" puts the plan in the link itself, so nothing is uploaded. Opening someone's link never overwrites your own plan unless you choose to keep it.</p>
+<h2>Ask</h2><p>The Ask page answers questions like "what do I need before CS 3214?". No AI model is involved: a search ranking built for this site finds the course or major you mean, and fixed rules assemble the answer from the catalog facts stored for it, with links to the sources. The answer is worked out in your browser. It can pick the wrong match, so check the catalog link.</p>
+<h2>Sharing</h2><p>"Share link" puts the plan in the link itself, so the plan is not uploaded. Opening someone's link never overwrites your own plan unless you choose to keep it.</p>
+<h2 id="privacy">Privacy</h2><p>${PRIVACY}</p><p>What is counted: which page was opened, which feature was used (for example "plan length changed to 3 years" or "share link copied"), and the day. To count visitors without knowing who they are, the server turns each request's address into a scrambled code using a secret that is thrown away every day, so the code cannot be turned back into an address or matched from one day to the next. On the Ask page, a question that finds no match is saved as text, with nothing identifying you, so the site can learn to answer it; questions that do get an answer are not saved. Counts are deleted after 180 days. Nothing is sold or shared.</p>
 <h2>What this is not</h2><p>It is not a degree audit and it does not know your record. Use the university's own degree audit and your advisor for the official check. For past grades, use ${`<a href="${UDC_URL}" target="_blank" rel="noopener noreferrer">Virginia Tech's grade distribution page ↗</a>`}.</p>
-<h2>Who runs this</h2><p>${DISCLAIMER} The name, the design and the planning logic are ours. Roadmaps, requirements and prerequisites are facts taken from the university's public 2026-2027 catalog, and every plan links back to its catalog page. The site is free, has no ads, and collects nothing about you.</p>`, undefined, 'about');
+<h2>Who runs this</h2><p>${DISCLAIMER} The name, the design and the planning logic are ours. Roadmaps, requirements and prerequisites are facts taken from the university's public 2026-2027 catalog, and every plan links back to its catalog page. The site is free and has no ads. See Privacy above for the little it counts.</p>`, undefined, 'about');
 }

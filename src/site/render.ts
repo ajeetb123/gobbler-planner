@@ -104,6 +104,13 @@ main{padding:20px 16px 110px}.tabs{display:flex;position:fixed;left:0;right:0;bo
  * the bar says how often one section would average higher, treating both as independent normals.
  */
 export const APP_JS = `(()=>{const root=document.body.dataset.root,dlg=document.getElementById('pal'),q=document.getElementById('q'),r=document.getElementById('r');let d,sel=0;
+// Anonymous usage counts for the owner's dashboard: an event type, this page's name and a short value. Nothing is
+// sent if the browser asks not to be tracked (Do Not Track or Global Privacy Control), and nothing breaks if no
+// server is listening (the static-only build).
+const page=((location.pathname.split('/').pop()||'index.html').replace(/\\.html$/,'')||'index').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,80)||'index';
+const quiet=navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
+window.gpTrack=(t,v)=>{if(quiet||!navigator.sendBeacon)return;try{navigator.sendBeacon(root+'api/event',new Blob([JSON.stringify({t,p:page,v:v==null?'':String(v).slice(0,120)})],{type:'text/plain'}))}catch{}};
+gpTrack('view');
 const open=()=>{if(!dlg.open){dlg.showModal();q.value='';r.textContent='';q.focus()}};
 document.querySelectorAll('[data-search]').forEach(b=>b.addEventListener('click',open));
 document.addEventListener('keydown',e=>{const t=e.target.tagName;if((e.key==='/'&&t!=='INPUT'&&t!=='TEXTAREA')||((e.metaKey||e.ctrlKey)&&e.key==='k')){e.preventDefault();open()}});
@@ -133,6 +140,8 @@ export const RMP_SCHOOL_URL = `https://www.ratemyprofessors.com/school/${RMP_SCH
 /** Site name. Without grade data (`site` undefined) the build is the planner alone. */
 export const brand = (site?: Site) => (site ? 'Gobbler Grades' : 'Gobbler Plan');
 /** Shown on every page. The site may name Virginia Tech to say what it covers, never to suggest it speaks for the university. */
+/** What the site records, in one place so every page says the same thing. Keep in step with server/app.ts and server/db.ts. */
+export const PRIVACY = 'Your plan stays in your browser. The site counts page views and feature use anonymously: no names, no accounts, no cookies, and no address is stored. Turn on Do Not Track or Global Privacy Control in your browser and nothing is counted.';
 export const DISCLAIMER = 'An independent student project. Not affiliated with, endorsed by, or sponsored by Virginia Tech.';
 
 export function layout(title: string, desc: string, root: string, crumb: string, body: string, site?: Site, tab: Tab = 'grades', extraScript = ''): string {
@@ -146,7 +155,7 @@ export function layout(title: string, desc: string, root: string, crumb: string,
 <div class="shell"><aside class="rail"><a class="brand" href="${root}index.html">${brand(site)}<i>.</i><small>${site ? 'What the grades say, before you register' : 'Your degree, term by term'}</small></a>
 <button type="button" class="find" data-search><span>Search</span><kbd>/</kbd></button>
 <nav class="nav" aria-label="Sections">${nav}<a href="${root}about.html"${cur('about')}>How it works</a></nav>
-<div class="fine">${site ? `Official VT grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. ${DISCLAIMER}` : `Built from the public Virginia Tech catalog. No login. Your plan stays in your browser. ${DISCLAIMER}`}</div></aside>
+<div class="fine">${site ? `Official VT grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. ${DISCLAIMER}` : `Built from the public Virginia Tech catalog. No login. Your plan stays in your browser. ${DISCLAIMER} <a href="${root}about.html#privacy">Privacy</a>.`}</div></aside>
 <main>${crumb ? `<nav class="crumb" aria-label="Breadcrumb">${crumb}</nav>` : ''}
 ${body}
 <footer>${source}</footer></main></div>

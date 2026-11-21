@@ -49,9 +49,33 @@ jobs:
           curl -sI http://localhost:8080/ | grep -qi "content-security-policy"
           docker logs web | tail -5
           docker rm -f web
+      - name: Integration test, site and API together
+        run: |
+          # A random password for this run only.
+          export ADMIN_PASSWORD="$(openssl rand -hex 16)"
+          docker compose up -d --build
+          for i in $(seq 1 30); do curl -fsS http://localhost:8080/api/healthz && break; sleep 1; done
+          # An event goes in through nginx and is accepted.
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST -d '{"t":"view","p":"computer-science"}' http://localhost:8080/api/event)" = "204"
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST -d '{"t":"bogus","p":"x"}' http://localhost:8080/api/event)" = "400"
+          # The dashboard refuses without the password and shows the event with it.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/admin)" = "401"
+          curl -fsS -u "owner:$ADMIN_PASSWORD" http://localhost:8080/admin | grep -q "computer-science"
+          curl -fsS -u "owner:$ADMIN_PASSWORD" http://localhost:8080/admin/data.json | grep -q '"views":1'
+          # The API is not reachable except through nginx.
+          ! curl -s --max-time 2 http://localhost:3000/api/healthz
+          # Counts survive a restart of the API container (the volume works).
+          docker compose restart api
+          for i in $(seq 1 30); do curl -fsS http://localhost:8080/api/healthz && break; sleep 1; done
+          curl -fsS -u "owner:$ADMIN_PASSWORD" http://localhost:8080/admin/data.json | grep -q '"views":1'
+          docker compose logs api | tail -5
+          docker compose down -v
       - name: Publish to GitHub Container Registry
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           docker push "$IMAGE:${{ github.sha }}"
           docker push "$IMAGE:latest"
+          docker build -f Dockerfile.api -t "$IMAGE-api:${{ github.sha }}" -t "$IMAGE-api:latest" .
+          docker push "$IMAGE-api:${{ github.sha }}"
+          docker push "$IMAGE-api:latest"

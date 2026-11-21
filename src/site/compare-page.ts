@@ -76,7 +76,7 @@ col("Doesn't match",'No place for these on the '+b.name+' roadmap.',r.unmatched.
 const rows=D.filter(m=>m!==a).map(m=>({m,r:switchCost(arr(a),arr(m),done)})).sort((x,y)=>x.r.remaining-y.r.remaining);
 rows.slice(0,${RANK_SHOWN}).forEach(({m,r})=>{const bt=el('button');bt.type='button';bt.append(el('b',null,m.name),el('span',null,r.counted+' count · '+r.remaining+' left'));if(m===b)bt.setAttribute('aria-current','true');
 bt.onclick=()=>{T.value=m.slug;draw();out.scrollIntoView({behavior:'smooth',block:'start'})};rank.append(bt)})}
-F.onchange=()=>{if(T.value===F.value)T.value=D.find(m=>m.slug!==F.value).slug;fillDone();draw()};T.onchange=W.onchange=draw;fillDone();draw()})();`;
+F.onchange=()=>{if(T.value===F.value)T.value=D.find(m=>m.slug!==F.value).slug;fillDone();draw()};T.onchange=()=>{gpTrack('compare',T.value);draw()};W.onchange=draw;fillDone();draw()})();`;
 
 export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseInfo>, site?: Site): string {
   const json = JSON.stringify(packCompare(compareData(roadmaps, courses))).replace(/</g, '\\u003c');
