@@ -2,6 +2,8 @@
 #   docker compose up --build        then open http://localhost:8080
 # Dashboard: put ADMIN_PASSWORD=<a long password you choose> in a file named .env next to this one
 # (git-ignored), then open http://localhost:8080/admin. Without it the dashboard stays off.
+# A fixed project name, so containers and the data volume keep their names whatever folder this file sits in.
+name: gobbler-plan
 services:
   web:
     build: .
