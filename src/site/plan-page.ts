@@ -87,10 +87,10 @@ const CAT='https://catalog.vt.edu/course-descriptions/',UDC='${UDC_URL}',RMP='${
 const PALETTE=['#2f6fed','#d6336c','#0f9d6b','#e08a00','#7b4fe0','#d64545','#0a93b8','#6a9f1a','#c2571a','#4b57d6','#b0399a','#2b8a7e'];const hue=c=>{let h=0;for(const ch of c.split(' ')[0])h=(h*31+ch.charCodeAt(0))%PALETTE.length;return PALETTE[h]};
 function draw(){board.textContent='';over.textContent='';const ts=terms(),I=planIssues(D.items,ts.map(t=>t.ids),S.done),nm2=j=>D.items[j].code||D.items[j].label;let doneCr=0,bad=0,firstBad=null;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
 let yrow=null,yname='';
-ts.forEach((t,ti)=>{const yr=t.label.split(' year')[0];if(yr!==yname){yname=yr;const y=el('section','year');y.append(el('h2',null,yr+' year'));yrow=el('div','yrow');y.append(yrow);board.append(y)}
+ts.forEach((t,ti)=>{const yr=t.label.split(' year')[0];if(yr!==yname){yname=yr;const y=el('section','year'),n=board.querySelectorAll('.year').length;y.style.setProperty('--i',String(n));y.append(el('h2',null,'Sheet '+String(n+1).padStart(2,'0')+' \u00b7 '+yr+' year'));yrow=el('div','yrow');y.append(yrow);board.append(y)}
 const card=el('section','term'),list=el('div');card.id='t'+ti;let c=0,gs=0,gw=0,low=0,tb=0;
 t.ids.forEach(id=>{const it=D.items[id],done=S.done.includes(id);c+=it.cr;if(done)doneCr+=it.cr;if(it.g!=null){gs+=it.g*it.cr;gw+=it.cr;if(it.g<D.low&&!done)low++}
-const li=el('div','it'+(done?' done':'')),cb=el('input');li.draggable=true;li.dataset.id=id;if(it.code)li.style.setProperty('--c',hue(it.code));li.onclick=e=>{if(e.target.closest('input,button,a'))return;sel=sel===id?null:id;paint()};li.ondragstart=e=>{e.dataTransfer.setData('text/plain',id);e.dataTransfer.effectAllowed='move'};cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
+const li=el('div','it'+(done?' done':'')),cb=el('input');li.draggable=true;li.dataset.id=id;li.style.setProperty('--i',String(ti));if(it.code)li.style.setProperty('--c',hue(it.code));li.onclick=e=>{if(e.target.closest('input,button,a'))return;sel=sel===id?null:id;paint()};li.ondragstart=e=>{e.dataTransfer.setData('text/plain',id);e.dataTransfer.effectAllowed='move'};cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
 cb.onchange=()=>{snap();S.done=cb.checked?[...S.done,id]:S.done.filter(x=>x!==id);save();draw()};
 const mid=el('div','mid'),nm=el('div','nm');if(it.code){const a=el('a',null,it.code);if(it.h)a.href=root+it.h;else{a.href=CAT+it.code.split(' ')[0].toLowerCase()+'/';a.target='_blank';a.rel='noopener noreferrer';a.title='Catalog description'}nm.append(a,' '+it.label)}else if(it.custom){nm.textContent=it.label+' ';const x=el('button','lnk','remove');x.type='button';x.setAttribute('aria-label','Remove '+it.label);x.onclick=()=>{snap();S.extra=S.extra.filter(e=>e.id!==id);S=clean(S);save();draw()};nm.append(el('span','tag','added by you'),x)}
 else{nm.textContent=(S.names[id]||it.label)+' ';const ed=el('button','lnk',S.names[id]?'change':'name it');ed.type='button';ed.setAttribute('aria-label','Write the course you plan to take for '+it.label);ed.onclick=()=>{const v=prompt('Which course will you take for "'+it.label+'"? Leave empty to clear.',S.names[id]||'');if(v===null)return;snap();if(text(v,60))S.names[id]=text(v,60);else delete S.names[id];save();draw()};nm.append(ed)}
@@ -151,7 +151,9 @@ $('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+term
 $('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.')+(Object.keys(S.names).length?'&n='+encodeURIComponent(Object.keys(S.names).map(k=>k.slice(1)+'~'+S.names[k].replace(/[|]/g,' ')).join('|')):'')+(S.extra.length?'&x='+encodeURIComponent(S.extra.map(e=>e.t+'~'+e.cr+'~'+e.label.replace(/[|]/g,' ')).join('|')):'');gpTrack('share');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
 $('print').onclick=()=>{gpTrack('print');print()};
 $('keep').onclick=()=>{gpTrack('keep');shared=false;save();history.replaceState(null,'',location.pathname);draw()};
-$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S=clean({years:S.years});save();draw()}};draw()})();`;
+$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S=clean({years:S.years});save();draw()}};
+// The staggered entrance plays once, on load. Later redraws (every click) must not replay it.
+document.body.classList.add('boot');setTimeout(()=>document.body.classList.remove('boot'),1500);draw()})();`;
 
 const CATALOG = 'https://catalog.vt.edu/undergraduate/';
 

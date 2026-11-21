@@ -3,7 +3,7 @@
 //      npm run build -- --grades --top 30 (pilot: the 30 most-taken courses)
 // Writes a static site to dist/. UDC has not authorized republishing its grade data, so grades are opt-in.
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
@@ -40,6 +40,9 @@ const write = (path: string, html: string) => { writeFileSync(join(OUT, path), h
 setAssetVersion(createHash('sha256').update([CSS, THEME_CSS, THEME_JS, APP_JS, PLAN_JS, COMPARE_JS, ASK_JS].join('\n')).digest('hex').slice(0, 10));
 write('style.css', CSS + THEME_CSS);
 write('theme.js', THEME_JS);
+// Self-hosted fonts (assets/fonts, open licenses): copied as they are.
+mkdirSync(join(OUT, 'fonts'), { recursive: true });
+for (const f of readdirSync('assets/fonts').filter((x) => x.endsWith('.woff2'))) copyFileSync(join('assets/fonts', f), join(OUT, 'fonts', f));
 write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));

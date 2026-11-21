@@ -9,6 +9,7 @@ COPY package.json ./
 COPY src ./src
 COPY scripts ./scripts
 COPY data ./data
+COPY assets ./assets
 # Public build only. Grade CSVs are kept out by .dockerignore, and --grades is never passed here.
 RUN node scripts/build-site.ts
 
