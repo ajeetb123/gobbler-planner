@@ -69,6 +69,7 @@ console.log(`Degree planner: ${official} official roadmaps, ${roadmaps.length - 
 if (site) {
   const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
   for (const c of site.courses) v[c.spread.verdict]++;
+  console.warn('PRIVATE BUILD: dist/ now contains UDC grade data. UDC has not authorized this use. Do not publish or deploy this folder.');
   console.log(`Built ${site.courses.length} course pages and ${site.profs.length} instructor pages for ${termLabel(site.target)} (data ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)})`);
   console.log(`Covers ${(site.enrollmentShare * 100).toFixed(0)}% of undergrad enrollments. Flagged names: ${site.profs.filter((p) => p.ambiguous).length}`);
   console.log(`Instructor verdicts: matters ${v.matters}, modest ${v.some}, barely ${v.barely}, not enough history ${v.unknown}`);
