@@ -1,4 +1,4 @@
-# Gobbler Plan (repo: vtplan)
+# Gobbler Plan
 
 An unofficial degree planner for Virginia Tech students. Not affiliated with, endorsed by, or sponsored by Virginia Tech.
 

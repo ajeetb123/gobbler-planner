@@ -1,4 +1,4 @@
-# VT course and professor pages: build, backtest, verdict
+# Course and professor grade pages: build, backtest, verdict (private grade engine)
 
 **Verdict:** the engine is sound and it measurably beats what every VT grade site shows today. That alone will not pull students off RateMyProfessors. The data says this works as a second tab students open next to RMP, not as a replacement for it. One unverified blocker could cap it further: whether the public timetable still shows instructor names.
 

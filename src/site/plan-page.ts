@@ -51,7 +51,7 @@ export function planData(r: Roadmap, courses: Map<string, CourseInfo>, site?: Si
  * Fall/Spring term to the lightest until they are within 3 credits. Named courses never move on their own.
  */
 export const PLAN_JS = `(()=>{const planIssues=${planIssues.toString()};
-const D=JSON.parse(document.getElementById('plan-data').textContent),root=document.body.dataset.root,KEY='vtplan:'+D.slug;
+const D=JSON.parse(document.getElementById('plan-data').textContent),root=document.body.dataset.root,KEY='gobblerplan:'+D.slug;
 let S;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch{S={}}
 const P=new URLSearchParams(location.hash.slice(1));let shared=P.has('y');
 if(shared){const ok=x=>D.items['t'+x]?'t'+x:null,p={};(P.get('m')||'').split('.').forEach(x=>{const[a,b]=x.split('_'),id=ok(a);if(id&&/^\\d+$/.test(b))p[id]=+b});

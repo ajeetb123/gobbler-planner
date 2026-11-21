@@ -59,7 +59,7 @@ D.forEach(m=>{m.terms=m.terms.map(x=>({label:x[0],ids:x[1]}));for(const id in m.
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e},by=s=>D.find(m=>m.slug===s);
 for(const s of[F,T]){let g;D.slice().sort((a,b)=>a.college.localeCompare(b.college)||a.name.localeCompare(b.name)).forEach(m=>{if(!g||g.label!==m.college){g=document.createElement('optgroup');g.label=m.college;s.append(g)}g.append(new Option(m.name,m.slug))})}
 const h=new URLSearchParams(location.hash.slice(1));if(by(h.get('from')))F.value=h.get('from');T.value=by(h.get('to'))&&h.get('to')!==F.value?h.get('to'):D.find(m=>m.slug!==F.value).slug;
-const ticks=m=>{try{return((JSON.parse(localStorage.getItem('vtplan:'+m.slug))||{}).done||[]).filter(id=>m.items[id])}catch{return[]}};
+const ticks=m=>{try{return((JSON.parse(localStorage.getItem('gobblerplan:'+m.slug))||{}).done||[]).filter(id=>m.items[id])}catch{return[]}};
 function fillDone(){const m=by(F.value),t=ticks(m);W.textContent='';if(t.length)W.append(new Option('What I ticked in the planner ('+t.length+(t.length>1?' courses)':' course)'),'ticks'));
 W.append(new Option('Nothing yet','0'));m.terms.forEach((x,i)=>W.append(new Option('Everything through '+x.label,String(i+1))));W.value=t.length?'ticks':'2'}
 const doneIds=()=>{const m=by(F.value);return W.value==='ticks'?ticks(m):m.terms.slice(0,+W.value).flatMap(t=>t.ids)};
