@@ -200,5 +200,71 @@ export function pack(r: Roadmap, sl: Array<{ label: string; weight: number }>, c
     weightLeft -= slot.weight;
     terms.push({ label: slot.label, items });
   });
-  return terms;
+  return check ? smooth(terms, sl.map((x) => x.weight), check) : terms;
+}
+
+/** Terms may differ by this many credits (per unit of slot weight) before smooth() stops moving courses. */
+export const SMOOTH_GAP = 3;
+
+/**
+ * Even out a packed plan: the last term takes whatever is left, so it can end up far heavier than the rest
+ * (or a middle term empty). Move one course at a time from the heaviest term to the lightest, placeholders
+ * first, and only when the move adds no prerequisite conflict anywhere in the plan.
+ */
+export function smooth(terms: Term[], weights: number[], check: Record<string, CheckItem>): Term[] {
+  const out = terms.map((t) => ({ label: t.label, items: [...t.items] }));
+  const conflicts = () => Object.values(planIssues(check, out.map((t) => t.items.map((i) => i.id)), [])).reduce((a, v) => a + v.late.length + v.coLate.length, 0);
+  const load = (k: number) => credits(out[k]!.items) / weights[k]!;
+  let now = conflicts();
+  // Repair first: a course in conflict (or the course it is waiting on) may fit in another term. Take any single
+  // move that lowers the number of conflicts without pushing a term past the plan's current heaviest load.
+  for (let pass = 0; pass < 6 && now > 0; pass++) {
+    const issues = planIssues(check, out.map((t) => t.items.map((i) => i.id)), []);
+    const stuck = new Set(Object.entries(issues).flatMap(([id, v]) => (v.late.length || v.coLate.length ? [id, ...v.late, ...v.coLate] : [])));
+    const cap = Math.max(...out.map((_, k) => load(k)));
+    let improved = false;
+    for (const id of stuck) {
+      const from = out.findIndex((t) => t.items.some((i) => i.id === id));
+      const item = out[from]!.items.find((i) => i.id === id)!;
+      let best = -1, bestCount = now;
+      for (let to = 0; to < out.length; to++) {
+        if (to === from || load(to) + item.credits / weights[to]! > cap) continue;
+        out[from]!.items.splice(out[from]!.items.indexOf(item), 1);
+        out[to]!.items.push(item);
+        const c = conflicts();
+        if (c < bestCount) { bestCount = c; best = to; }
+        out[to]!.items.pop();
+        out[from]!.items.push(item);
+      }
+      if (best >= 0) {
+        out[from]!.items.splice(out[from]!.items.indexOf(item), 1);
+        out[best]!.items.push(item);
+        now = bestCount;
+        improved = true;
+      }
+    }
+    if (!improved) break;
+  }
+  for (let step = 0; step < 80; step++) {
+    const order = out.map((_, k) => k).sort((a, b) => load(b) - load(a));
+    const hi = order[0]!, lows = order.slice(1).reverse();
+    let moved = false;
+    for (const lo of lows) {
+      if (load(hi) - load(lo) <= SMOOTH_GAP) break;
+      const candidates = [...out[hi]!.items].filter((i) => i.credits > 0).sort((a, b) => Number(a.code !== undefined) - Number(b.code !== undefined));
+      for (const item of candidates) {
+        // The move must narrow the gap, not just swap which term is heavy.
+        if (load(lo) + item.credits / weights[lo]! >= load(hi)) continue;
+        out[hi]!.items.splice(out[hi]!.items.indexOf(item), 1);
+        out[lo]!.items.push(item);
+        const after = conflicts();
+        if (after <= now) { now = after; moved = true; break; }
+        out[lo]!.items.pop();
+        out[hi]!.items.push(item);
+      }
+      if (moved) break;
+    }
+    if (!moved) break;
+  }
+  return out;
 }

@@ -89,12 +89,12 @@ test('repack with prerequisites: few conflicts left, every course kept, loads st
     for (const y of YEAR_OPTIONS) {
       const terms = repack(r, y, check);
       assert.equal(terms.flatMap((t) => t.items).length, r.terms.flatMap((t) => t.items).length, `${r.slug} ${y}`);
-      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 27, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
+      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 24, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
       conflicts += Object.values(planIssues(check, ids(terms), [])).filter((v) => v.late.length || v.coLate.length).length;
     }
   }
-  // 47 over 640 layouts on Nov 21, 2026, mostly a two-part capstone landing in the last term of a 3-year plan. The page flags them.
-  assert.ok(conflicts <= 47, `conflicts: ${conflicts}`);
+  // 37 over 512 rearranged layouts on Nov 21, 2026 after the repair pass (was 47), mostly a two-part capstone in a 3-year plan. The page flags them.
+  assert.ok(conflicts <= 37, `conflicts: ${conflicts}`);
 });
 
 test('switchCost: same course carries, same-name electives likely carry, each target slot is used once', () => {
@@ -182,8 +182,8 @@ test('every saved requirement list becomes a balanced draft with few conflicts',
     assert.ok(!r.terms.slice(0, 2).some((t) => t.items.some((i) => i.code && /^[A-Z]+ 4/.test(i.code))), q.slug);
     conflicts += Object.values(planIssues(checkItems(r.terms, courses, true), ids(r.terms), [])).filter((v) => v.late.length || v.coLate.length).length;
   }
-  // 13 on Nov 21, 2026 (a two-part course pair landing in one term, mostly). Drafts hide nothing: the page shows them.
-  assert.ok(conflicts <= 13, `conflicts: ${conflicts}`);
+  // 6 on Nov 21, 2026 after the repair pass (was 13). Drafts hide nothing: the page shows them.
+  assert.ok(conflicts <= 6, `conflicts: ${conflicts}`);
 });
 
 test('draft pages say they are drafts; official pages do not', () => {

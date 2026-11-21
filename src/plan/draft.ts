@@ -1,6 +1,6 @@
 // Draft plans for majors whose catalog page lists requirements but no term-by-term roadmap.
 // The requirement list is official; the order is ours: by course level, then moved so prerequisites come first.
-import { parseItems, plainSlots, credits, type PlanItem, type Roadmap, type Term } from './roadmap.ts';
+import { parseItems, plainSlots, credits, smooth, type PlanItem, type Roadmap, type Term } from './roadmap.ts';
 import { checkItems, planIssues, type CourseInfo } from './prereq.ts';
 
 export interface Requirements {
@@ -93,6 +93,8 @@ export function draftRoadmap(req: Requirements, courses: Map<string, CourseInfo>
     }
     placed.push(items);
   }
-  const terms: Term[] = placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items: items.map((i, k) => ({ ...i, id: `t${t}-${k}`, src: t })) }));
+  // Same repair and balancing pass the rearranged layouts get, then final ids by term.
+  const fixed = smooth(placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items })), placed.map(() => 1), check);
+  const terms: Term[] = fixed.map((t, ti) => ({ label: t.label, items: t.items.map((i, k) => ({ ...i, id: `t${ti}-${k}`, src: ti })) }));
   return { slug: req.slug, name: req.name, catalogPath: req.catalogPath, total: req.total, terms, printedSums: terms.map((t) => credits(t.items)), draft: true };
 }

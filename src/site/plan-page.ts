@@ -56,47 +56,55 @@ let S;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch{S={}}
 const P=new URLSearchParams(location.hash.slice(1));let shared=P.has('y');
 if(shared){const ok=x=>D.items['t'+x]?'t'+x:null,p={};(P.get('m')||'').split('.').forEach(x=>{const[a,b]=x.split('_'),id=ok(a);if(id&&/^\\d+$/.test(b))p[id]=+b});
 S={years:P.get('y'),pos:{[P.get('y')]:p},done:(P.get('d')||'').split('.').map(ok).filter(Boolean)}}
-S.years=D.plans[S.years]?S.years:D.base;S.pos=S.pos||{};S.done=S.done||[];
+// Saved or shared state can be stale or hand-edited: keep only what fits this roadmap.
+const clean=s=>{s=s&&typeof s==='object'&&!Array.isArray(s)?s:{};const o={years:D.plans[s.years]?String(s.years):D.base,pos:{},done:Array.isArray(s.done)?[...new Set(s.done.filter(id=>D.items[id]))]:[]};
+if(s.pos&&typeof s.pos==='object')for(const y in D.plans){const p=s.pos[y];if(p&&typeof p==='object'){o.pos[y]={};for(const id in p)if(D.items[id]&&Number.isInteger(p[id])&&p[id]>=0&&p[id]<D.plans[y].length)o.pos[y][id]=p[id]}}return o};
+S=clean(S);const U=[];
+const snap=()=>{U.push(JSON.stringify(S));if(U.length>40)U.shift();$('undo').disabled=false};
 const save=()=>{if(shared)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}};
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const $=id=>document.getElementById(id),board=$('board'),yearsEl=$('years'),over=$('over');
 const cr=ids=>ids.reduce((a,id)=>a+D.items[id].cr,0),short=l=>l.replace(' year, ',' ').replace('First','Y1').replace('Second','Y2').replace('Third','Y3').replace('Fourth','Y4').replace('Fifth','Y5').replace('Spring','Sp').replace('Summer','Su').replace('Fall','F');
 function terms(){const plan=D.plans[S.years],pos=S.pos[S.years]||{},out=plan.map(t=>({label:t.label,ids:[]}));plan.forEach((t,ti)=>t.ids.forEach(id=>{const p=pos[id];out[p!=null&&p<out.length?p:ti].ids.push(id)}));return out}
 function put(id,to){(S.pos[S.years]=S.pos[S.years]||{})[id]=to}
-function move(id,from,d){const to=from+d;if(to<0||to>=D.plans[S.years].length)return;put(id,to);save();draw()}
-function balance(){let moved=0;for(let n=0;n<60;n++){const ts=terms().map((t,i)=>({i,ids:t.ids,c:cr(t.ids),su:t.label.includes('Summer')})).filter(t=>!t.su);
+function move(id,from,d){const to=from+d;if(to<0||to>=D.plans[S.years].length)return;snap();put(id,to);save();draw()}
+function balance(){snap();let moved=0;for(let n=0;n<60;n++){const ts=terms().map((t,i)=>({i,ids:t.ids,c:cr(t.ids),su:t.label.includes('Summer')})).filter(t=>!t.su);
 const hi=ts.reduce((a,b)=>b.c>a.c?b:a),lo=ts.reduce((a,b)=>b.c<a.c?b:a);if(hi.c-lo.c<=3)break;
 const id=hi.ids.find(x=>!D.items[x].code&&!S.done.includes(x)&&D.items[x].cr>0&&D.items[x].cr<hi.c-lo.c);if(!id)break;put(id,lo.i);moved++}save();draw();return moved}
 const CAT='https://catalog.vt.edu/course-descriptions/';
-function draw(){board.textContent='';over.textContent='';const ts=terms(),I=planIssues(D.items,ts.map(t=>t.ids),S.done),nm2=j=>D.items[j].code||D.items[j].label;let doneCr=0,bad=0;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
-ts.forEach((t,ti)=>{const card=el('section','term'),list=el('div');card.id='t'+ti;let c=0,gs=0,gw=0,low=0;
+function draw(){board.textContent='';over.textContent='';const ts=terms(),I=planIssues(D.items,ts.map(t=>t.ids),S.done),nm2=j=>D.items[j].code||D.items[j].label;let doneCr=0,bad=0,firstBad=null;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
+ts.forEach((t,ti)=>{const card=el('section','term'),list=el('div');card.id='t'+ti;let c=0,gs=0,gw=0,low=0,tb=0;
 t.ids.forEach(id=>{const it=D.items[id],done=S.done.includes(id);c+=it.cr;if(done)doneCr+=it.cr;if(it.g!=null){gs+=it.g*it.cr;gw+=it.cr;if(it.g<D.low&&!done)low++}
 const li=el('div','it'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
-cb.onchange=()=>{S.done=cb.checked?[...S.done,id]:S.done.filter(x=>x!==id);save();draw()};
+cb.onchange=()=>{snap();S.done=cb.checked?[...S.done,id]:S.done.filter(x=>x!==id);save();draw()};
 const mid=el('div','mid'),nm=el('div','nm');if(it.code){const a=el('a',null,it.code);if(it.h)a.href=root+it.h;else{a.href=CAT+it.code.split(' ')[0].toLowerCase()+'/';a.target='_blank';a.rel='noopener noreferrer';a.title='Catalog description'}nm.append(a,' '+it.label)}else nm.textContent=it.label;
 mid.append(nm,el('div','mut',it.cr+' cr'+(it.alt.length?' · or '+it.alt.join(', '):'')+(it.ch.length?' · choose one: '+it.ch.join(', '):'')));
 if(it.g!=null)mid.append(el('span','tag','avg GPA '+it.g.toFixed(2)));if(it.v==='matters')mid.append(el('span','tag hot','instructor matters'));
 const v=I[id];if(!done&&v.slack===0){const s=el('span','tag hot',"can't slip");s.title='Later courses chain off this one. Moving it later pushes graduation back.';mid.append(s)}
-if(!done&&v.unlocks.length)mid.append(el('div','mut','Needed for '+v.unlocks.slice(0,4).join(', ')+(v.unlocks.length>4?' and '+(v.unlocks.length-4)+' more':'')));
-if(v.late.length){bad++;mid.append(el('div','flag','Needs '+v.late.map(nm2).join(', ')+' in an earlier term'))}
-if(v.coLate.length){bad++;mid.append(el('div','flag','Take '+v.coLate.map(nm2).join(', ')+' in the same term or earlier'))}
+if(!done&&v.unlocks.length)mid.append(el('div','mut','Needed for '+v.unlocks.slice(0,3).join(', ')+(v.unlocks.length>3?' and '+(v.unlocks.length-3)+' more':'')));
+if(v.late.length){bad++;tb++;mid.append(el('div','flag','Needs '+v.late.map(nm2).join(', ')+' in an earlier term'))}
+if(v.coLate.length){bad++;tb++;mid.append(el('div','flag','Take '+v.coLate.map(nm2).join(', ')+' in the same term or earlier'))}
+if((v.late.length||v.coLate.length)&&!firstBad)firstBad=li;
 const mv=el('div','mv'),l=el('button',null,'\\u2190'),r=el('button',null,'\\u2192');l.setAttribute('aria-label','Move to the term before');r.setAttribute('aria-label','Move to the term after');l.title='Earlier';r.title='Later';
 l.disabled=ti===0;r.disabled=ti===ts.length-1;l.onclick=()=>move(id,ti,-1);r.onclick=()=>move(id,ti,1);mv.append(l,r);li.append(cb,mid,mv);list.append(li)});
 const heavy=c>D.heavy,load=el('div','meter load'),fill=el('i');fill.style.width=Math.min(100,c/max*100)+'%';if(heavy)fill.style.background='var(--acc)';load.append(fill);
 card.append(el('h3',null,t.label),el('div','mut',c+' credits'+(gw?' · typical GPA '+(gs/gw).toFixed(2):'')),load);
 if(heavy)card.append(el('div','flag','Heavy load: '+c+' credits'));if(low>=3)card.append(el('div','flag',low+' courses here average below '+D.low.toFixed(1)));
 if(!t.ids.length)card.append(el('div','mut','Nothing planned here.'));card.append(list);board.append(card);
-const o=el('a',heavy?'hv':t.label.includes('Summer')?'sm':''),b=el('i');o.href='#t'+ti;o.title=t.label+': '+c+' credits';b.style.height=Math.round(c/max*52)+'px';o.append(el('span',null,String(c)),b,el('span',null,short(t.label)));over.append(o)});
-const cf=$('conf');cf.textContent=bad?bad+' prerequisite conflict'+(bad>1?'s':'')+' in this layout. Look for the notes under each course.':'No prerequisite conflicts.';cf.className=bad?'flag':'mut';
-$('shared').hidden=!shared;$('prog').textContent=doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
+const o=el('a',(heavy?'hv':t.label.includes('Summer')?'sm':'')+(tb?' bad':'')),b=el('i');o.href='#t'+ti;o.title=t.label+': '+c+' credits'+(tb?', '+tb+' prerequisite conflict'+(tb>1?'s':''):'');b.style.height=Math.round(c/max*52)+'px';o.append(el('span',null,String(c)),b,el('span',null,short(t.label)));over.append(o)});
+const cf=$('conf');cf.textContent=bad?bad+' prerequisite conflict'+(bad>1?'s':'')+' in this layout. ':'No prerequisite conflicts.';cf.className=bad?'flag':'mut';
+if(firstBad){const go=el('button','lnk','Show the first one');go.type='button';go.onclick=()=>{firstBad.scrollIntoView({behavior:'smooth',block:'center'});firstBad.classList.add('pulse');setTimeout(()=>firstBad.classList.remove('pulse'),1600)};cf.append(go)}
+$('shared').hidden=!shared;$('prog').textContent=doneCr>=D.total&&D.total>0?'All '+D.total+' credits done. Congratulations.':doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
 [...yearsEl.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.y===S.years)));$('note').hidden=S.years===D.base;$('summer').hidden=!(+S.years<4)}
 const say=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
-yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y){S.years=y;save();draw()}});
+yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y&&y!==S.years){snap();S.years=y;save();draw()}});
+$('undo').onclick=()=>{if(!U.length)return;S=clean(JSON.parse(U.pop()));$('undo').disabled=!U.length;save();draw()};
 $('balance').onclick=e=>{const n=balance();say(e.target,n?'Moved '+n+' elective'+(n>1?'s':''):'Already even')};
 $('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+terms().map(t=>t.label+' ('+cr(t.ids)+' cr)\\n'+t.ids.map(id=>'  '+(S.done.includes(id)?'[x] ':'[ ] ')+(D.items[id].code?D.items[id].code+' ':'')+D.items[id].label).join('\\n')).join('\\n');try{await navigator.clipboard.writeText(txt);say(e.target,'Copied')}catch{say(e.target,'Copy blocked')}};
 $('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
+$('print').onclick=()=>print();
 $('keep').onclick=()=>{shared=false;save();history.replaceState(null,'',location.pathname);draw()};
-$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){S={years:S.years,pos:{},done:[]};save();draw()}};draw()})();`;
+$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S={years:S.years,pos:{},done:[]};save();draw()}};draw()})();`;
 
 const CATALOG = 'https://catalog.vt.edu/undergraduate/';
 
@@ -109,12 +117,12 @@ ${r.draft ? `<p class="note warn"><b>Draft plan, not an official roadmap.</b> Th
 <p class="note warn" id="shared" hidden><b>You're viewing a shared plan.</b> Changes you make here are not saved. <button type="button" class="btn" id="keep">Keep as my plan</button></p>
 <div class="ctl"><b>Graduate in</b><div class="seg" id="years" role="group" aria-label="Years to graduate">${YEAR_OPTIONS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === baseYears(r)}">${y} yr</button>`).join('')}</div></div>
 <div class="over" id="over" aria-label="Credits per term"></div><p class="mut">Credits per term. Tap a bar to jump to that term.</p>
-<div class="ctl"><div style="flex:1 1 220px"><span id="prog" class="mut"></span><div class="meter"><i id="bar"></i></div></div><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="share" title="Copy a link that opens this exact plan">Share link</button><button type="button" class="btn" id="copy">Copy as text</button><button type="button" class="btn" id="reset">Start over</button></div>
+<div class="ctl"><div style="flex:1 1 220px"><span id="prog" class="mut"></span><div class="meter"><i id="bar"></i></div></div><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="undo" disabled title="Undo your last change">Undo</button><button type="button" class="btn" id="share" title="Copy a link that opens this exact plan">Share link</button><button type="button" class="btn" id="copy">Copy as text</button><button type="button" class="btn" id="print" title="Print this plan or save it as a PDF">Print</button><button type="button" class="btn" id="reset">Start over</button></div>
 <p id="conf" class="mut" role="status"></p>
 <p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the ${r.draft ? 'draft plan' : '4-year roadmap'} over the length you chose and keeps prerequisites in order where it can. It does not know which term a course is offered. Take it to your advisor before you rely on it.</p>
 <p class="note" id="summer" hidden>Finishing in under 4 years uses summer terms. AP, IB or transfer credit can replace some of them: tick those courses as done.</p>
-<p class="mut">Tick a course when it's done (AP and transfer credit too). Arrows move it a term, and a note appears if the move breaks a prerequisite. "Can't slip" means later courses chain off it with no spare term.${site ? ' "Instructor matters" means grades differ a lot by who teaches it.' : ''} Saved in this browser only.</p>
-${site ? '' : `<p class="mut">Choosing a section? See past grades on ${ext(UDC_URL, "Virginia Tech's grade distribution page")} and instructor reviews on ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}. Course codes open the catalog description.</p>`}
+<details class="help"><summary>How to use this page</summary>
+<ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Arrows</b> move a course one term. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>"Can't slip"</b> means later courses chain off this one with no spare term.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li><b>Share link</b> copies a link to this exact plan. <b>Print</b> gives you a paper or PDF copy for an advising meeting.</li>${site ? '<li><b>"Instructor matters"</b> means grades differ a lot by who teaches it.</li>' : `<li>Course codes open the catalog description. For past grades see ${ext(UDC_URL, "Virginia Tech's grade distribution page")}, and for instructor reviews ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}.</li>`}<li>Your plan is saved in this browser only.</li></ul></details>
 <noscript><p class="note warn">The planner needs JavaScript. The official roadmap is on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <script type="application/json" id="plan-data">${json}</script>`;
@@ -131,7 +139,7 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, 
   const none = byCollege(noRoadmap).map(([college, xs]) => `<p class="mut"><b>${esc(college)}:</b> ${xs.map((x) => `<a href="${CATALOG}${esc(x.catalogPath)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a>`).join(' · ')}</p>`).join('');
   return layout(`${home ? 'Unofficial Virginia Tech degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your Virginia Tech degree from the official roadmap: 3 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
     `<div class="hero"><h1>Your degree, <em>term by term</em>.</h1><p>Start from your major's official roadmap. Choose 3 to 5 years, move courses and see at once if a prerequisite breaks, and send the plan to your advisor as a link. No login.</p></div>
-<h2>Choose a major</h2><p class="mut">${roadmaps.length - drafts} majors and options with an official roadmap in the 2026-2027 catalog${drafts ? `, and ${drafts} marked <i class="tag">draft</i> where the catalog lists requirements only and the term order is ours` : ''}. Press <kbd>/</kbd> to search by name. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
+<h2>Choose a major</h2><input class="sel filter" id="mf" type="search" placeholder="Type to filter, for example: computer, finance, biology" aria-label="Filter majors" autocomplete="off"><p class="mut" id="mfnone" hidden>No major matches that. Try a shorter word.</p><p class="mut">${roadmaps.length - drafts} majors and options with an official roadmap in the 2026-2027 catalog${drafts ? `, and ${drafts} marked <i class="tag">draft</i> where the catalog lists requirements only and the term order is ours` : ''}. Press <kbd>/</kbd> to search by name. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
 ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} catalog programs have no roadmap and could not be turned into a draft. Each link opens its catalog page.</p>${none}` : ''}
 <div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
 <a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
