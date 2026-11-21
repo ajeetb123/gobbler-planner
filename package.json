@@ -10,6 +10,7 @@
     "typecheck": "tsc -p .",
     "backtest": "node bench/grades.backtest.ts",
     "backtest:matters": "node bench/matters.backtest.ts",
+    "eval:ask": "node bench/ask.eval.ts",
     "build": "node scripts/build-site.ts",
     "build:grades": "node scripts/build-site.ts --grades",
     "pilot": "node scripts/build-site.ts --grades --top 30",

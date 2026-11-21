@@ -11,6 +11,8 @@ import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { parsePrereqs } from '../src/plan/prereq.ts';
 import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
+import { buildDocs } from '../src/ask/docs.ts';
+import { ASK_JS, renderAsk } from '../src/site/ask-page.ts';
 import { APP_JS, CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
@@ -44,12 +46,16 @@ for (const f of readdirSync('data/requirements').filter((x) => x.endsWith('.txt'
 const planned = new Set(roadmaps.map((r) => r.catalogPath));
 write('plan.js', PLAN_JS);
 write('compare.js', COMPARE_JS);
+write('ask.js', ASK_JS);
+write('ask.html', renderAsk(site));
+const askDocs = buildDocs(roadmaps, courses);
+write('ask.json', JSON.stringify(askDocs));
 const noRoadmap = parseNoRoadmap(readFileSync('data/no-roadmap.txt', 'utf8')).filter((x) => !planned.has(x.catalogPath));
 write('plan/index.html', renderPlanIndex(roadmaps, site, false, noRoadmap));
 write('plan/compare.html', renderCompare(roadmaps, courses, site));
 for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, courses, site, links));
 // [label, link, kind]: c = course, i = instructor, m = degree plan. The palette groups by kind.
-const search: string[][] = [...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']), ['Switch majors: what carries over', 'plan/compare.html', 'm']];
+const search: string[][] = [...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']), ['Switch majors: what carries over', 'plan/compare.html', 'm'], ['Ask about courses and majors', 'ask.html', 'm']];
 if (site && links) {
   write('index.html', renderIndex(site, links, roadmaps.length));
   write('about.html', renderAbout(site));
