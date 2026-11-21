@@ -16,8 +16,6 @@ Results, method and open risks: [REPORT.md](REPORT.md). Working notes for contri
 
 Not affiliated with Virginia Tech.
 
-New to the code? Start with [docs/LEARN.md](docs/LEARN.md).
-
 ## Run in Docker
 
 ```bash
