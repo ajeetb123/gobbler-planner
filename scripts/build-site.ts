@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
 import { parseNoRoadmap, parseRoadmaps } from '../src/plan/roadmap.ts';
+import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { parsePrereqs } from '../src/plan/prereq.ts';
 import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
@@ -35,9 +36,14 @@ write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));
 const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
+const official = roadmaps.length;
+// Majors with requirements but no catalog roadmap get a draft plan (src/plan/draft.ts), marked as such on the page.
+for (const f of readdirSync('data/requirements').filter((x) => x.endsWith('.txt')).sort())
+  for (const q of parseRequirements(readFileSync(join('data/requirements', f), 'utf8'))) roadmaps.push(draftRoadmap(q, courses));
+const planned = new Set(roadmaps.map((r) => r.catalogPath));
 write('plan.js', PLAN_JS);
 write('compare.js', COMPARE_JS);
-const noRoadmap = parseNoRoadmap(readFileSync('data/no-roadmap.txt', 'utf8'));
+const noRoadmap = parseNoRoadmap(readFileSync('data/no-roadmap.txt', 'utf8')).filter((x) => !planned.has(x.catalogPath));
 write('plan/index.html', renderPlanIndex(roadmaps, site, false, noRoadmap));
 write('plan/compare.html', renderCompare(roadmaps, courses, site));
 for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, courses, site, links));
@@ -59,7 +65,7 @@ write('search.json', JSON.stringify(search));
 
 sizes.sort((a, b) => a - b);
 const kb = (n: number) => (n / 1024).toFixed(1);
-console.log(`Degree planner: ${roadmaps.length} majors and options, ${noRoadmap.length} programs without a catalog roadmap, prerequisites for ${courses.size} courses`);
+console.log(`Degree planner: ${official} official roadmaps, ${roadmaps.length - official} draft plans, ${noRoadmap.length} programs not planned, prerequisites for ${courses.size} courses`);
 if (site) {
   const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
   for (const c of site.courses) v[c.spread.verdict]++;

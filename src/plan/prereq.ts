@@ -143,9 +143,11 @@ export function checkItem(i: { code?: string; alt: string[]; choices: string[] }
  * follow is dropped (CHEM 1035 lists MATH 1225 as a prerequisite, yet the catalog schedules them together:
  * a placement score covers it). That way the official plan never shows a warning.
  */
-export function checkItems(officialTerms: Array<{ items: Array<{ id: string; code?: string; alt: string[]; choices: string[] }> }>, courses: Map<string, CourseInfo>): Record<string, CheckItem> {
+export function checkItems(officialTerms: Array<{ items: Array<{ id: string; code?: string; alt: string[]; choices: string[] }> }>, courses: Map<string, CourseInfo>, keepAll = false): Record<string, CheckItem> {
   const out: Record<string, CheckItem> = {};
   for (const t of officialTerms) for (const i of t.items) out[i.id] = checkItem(i, courses);
+  // A draft's layout is ours, not the catalog's: nothing is excused, every conflict shows.
+  if (keepAll) return out;
   const issues = planIssues(out, officialTerms.map((t) => t.items.map((i) => i.id)), []);
   for (const [id, v] of Object.entries(issues)) {
     if (v.late.length) delete out[id]!.pre;

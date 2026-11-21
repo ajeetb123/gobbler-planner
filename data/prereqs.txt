@@ -1,4 +1,4 @@
-# Prerequisites and corequisites for every course named on a saved roadmap.
+# Prerequisites and corequisites for every course named on a saved roadmap or requirement list.
 # Read from catalog.vt.edu/course-descriptions/<subject>/ (2026-2027 catalog), Nov 21, 2026, one subject page at a time in a browser.
 # Format: CODE | title | prerequisites | corequisites   (text exactly as the catalog prints it)
 AAEC 1005 | Economics of the Food and Fiber System | |
@@ -51,10 +51,13 @@ ACIS 4544 | Applied Accounting Analytics | ACIS 2504 and ACIS 3115 |
 ACIS 4654 | Accounting Analytics | ACIS 2504 and ACIS 3504 and ACIS 3115 |
 ACIS 4714 | Justice for Fraud Victims Project Experience | ACIS 2116 and (ACIS 2504 or BIT 2406) |
 ADV 2034 | Visual Communication Strategies | COMM 1016 or ENGL 1106 or ENGL 1204H |
+ADV 2134 | Introduction to Health Communication | |
 ADV 3004 | Advertising Copywriting and Brand Storytelling | COMM 2024 and MKTG 3504 |
 ADV 3014 | Account Planning and Media Buying | MKTG 3504 |
 ADV 3024 | Ethics and Social Responsibility in Advertising | MKTG 3504 |
 ADV 4304 | Advertising Campaigns | ADV 2034 and ADV 3004 and ADV 3014 |
+ADV 4324 | Health Communication Campaigns | ADV 2134 or PHS 2004 or PR 2044 |
+AFST 1714 | Introduction to African American Studies | |
 AHRM 1014 | Design and Art for Consumers | |
 AHRM 1104 | Introduction to AHRM and Student Resources | |
 AHRM 2014 | Design for Consumers Studio | |
@@ -135,11 +138,101 @@ ARBC 2774 | Arab Culture and Civilization | |
 ARBC 3105 | Advanced Arabic | ARBC 2106 |
 ARBC 3106 | Advanced Arabic | ARBC 3105 |
 ARBC 3124 | Arabic for Oral Proficiency | ARBC 2105 |
+ARBC 3304 | Topics in Modern Arab Cultures | |
+ARBC 3474 | Topics in Arab Cinema | |
 ARBC 3514 | Media Arabic | ARBC 2105 |
 ARBC 3534 | Topics in Arabic for Global Careers | ARBC 2106 |
 ARBC 4154 | Arabic for Personal & Professional Communication | ARBC 3105 |
+ARCH 1015 | Foundation Design Laboratory | |
+ARCH 1016 | Foundation Design Laboratory | |
+ARCH 2015 | Architecture II | ARCH 1016 |
+ARCH 2016 | Architecture II | ARCH 2015 |
+ARCH 2034 | Art of Building | ARCH 1016 | ARCH 2015
+ARCH 3015 | Architecture III | ARCH 2016 | ARCH 3065
+ARCH 3016 | Architecture III | ARCH 3015 | ARCH 3066
+ARCH 3054 | Building Analysis | ARCH 3015 | ARCH 3016, ARCH 3046
+ARCH 3065 | Building Materials and Assemblies | ARCH 2016 | ARCH 3015
+ARCH 3066 | Building Materials and Assemblies | ARCH 3065 | ARCH 3016, ARCH 3054
+ARCH 3115 | Histories of Architecture | |
+ARCH 3116 | Histories of Architecture | |
+ARCH 3304 | Topics in Architecture History & Theory | ARCH 3116 |
+ARCH 3404 | Topics in Building Science and Technology | |
+ARCH 3504 | Topics in Architectural Media and Methods | ARCH 1016 |
+ARCH 3604 | Topics in Architecture and Praxis | ARCH 2015 |
+ARCH 3900 | Bridge Experience | |
+ARCH 3954 | Study Abroad | |
+ARCH 4004 | Architecture IV - Option Lab | ARCH 3016 |
+ARCH 4014 | Architecture IV - Integrative Design | ARCH 3016 and ARCH 3054 |
+ARCH 4034 | Building Cities | | ARCH 4016
+ARCH 4044 | Professional Practice in Architecture | ARCH 3016 |
+ARCH 4055 | Environment and Building Systems | |
+ARCH 4056 | Environment and Building Systems | |
+ARCH 4075 | Building Structures | ESM 3704 |
+ARCH 4076 | Building Structures | ESM 3704 |
+ARCH 4114 | Ideas, Concepts, and Representations of Architecture | ARCH 3015 and ARCH 3116 |
+ARCH 4124 | Advanced Topics in Architecture History & Theory | (ARCH 3204 or ARCH 4114) and ARCH 3304 |
+ARCH 4154 | Advanced Building Structures II | ARCH 4075 and ARCH 4076 |
+ARCH 4224 | Advanced Topics in Building Science and Technology | ARCH 3404 |
+ARCH 4324 | Advanced Topics in Architectural Media and Methods | ARCH 3504 |
+ARCH 4424 | Advanced Topics in Architecture and Praxis | ARCH 4044 |
+ARCH 4514 | Thesis Inquiry | ARCH 4004 and ARCH 4014 | ARCH 4515
+ARCH 4515 | Architecture V | ARCH 4004 and ARCH 4014 | ARCH 4514
+ARCH 4516 | Architecture V | ARCH 4514 and ARCH 4515 | ARCH 4524
+ARCH 4524 | Thesis Documentation | ARCH 4514 and ARCH 4515 | ARCH 4516
+ART 1204 | Principles of 2D Art and Design | |
+ART 1214 | Principles of 3D Art and Design | |
+ART 1304 | Gateway to Art and Design | | ART 1204, ART 1404, ART 1604
+ART 1404 | Principles of Drawing | |
+ART 1504 | Contemporary Art and Practice | |
+ART 1604 | Principles of 4D Art & Design | |
+ART 1614 | Principles of Visual Communication Design | |
+ART 2385 | Survey of the History of Western Art | |
+ART 2386 | Survey of the History of Western Art | |
+ART 2434 | Introduction to Creative Code | ART 1604 |
+ART 2514 | Drawing Concepts | ART 1404 |
+ART 2524 | Introduction To Painting | ART 1204 or ART 1404 or ART 1414 |
+ART 2554 | Introduction To Sculpture | ART 1214 |
+ART 2565 | Typography | |
+ART 2566 | Typography | ART 1614 and ART 2565 |
+ART 2575 | Introduction to Graphic Design | ART 1614 and ART 2565 | ART 1414
+ART 2576 | Introduction to Graphic Design | ART 1614 and ART 2565 and ART 2566 and ART 2575 |
+ART 2604 | Introduction to Creative Technologies | ART 1604 |
+ART 2664 | Introduction to Photography | ART 1204 or ART 1604 |
+ART 2704 | 3D Computer Animation | ART 1604 |
+ART 3024 | History of Global Print Culture | |
+ART 3074 | Egyptian Art and Architecture | |
 ART 3084 | Greek Art and Architecture | |
+ART 3174 | Introduction to Archaeology | |
 ART 3184 | Roman Art and Architecture | |
+ART 3284 | Medieval Art and Architecture | |
+ART 3384 | Renaissance Art and Architecture | |
+ART 3484 | Baroque and Rococo Art and Architecture | |
+ART 3504 | Topics in Digital Art and Design | ART 2604 |
+ART 3565 | Intermediate Graphic Design I and II | ART 1614 and ART 2565 and ART 2566 and ART 2575 and ART 2576 |
+ART 3566 | Intermediate Graphic Design II | ART 1614 and ART 2565 and ART 2566 and ART 2575 and ART 2576 and ART 3565 |
+ART 3584 | Nineteenth Century European Art: Neoclassicism to Post-Impressionism | |
+ART 3604 | Topics in New Media Art | ART 2604 |
+ART 3674 | History of Photography | |
+ART 3684 | African-American Art | |
+ART 3704 | Topics in Computer Animation | ART 2704 |
+ART 3774 | History of Modern Graphic Design | |
+ART 3784 | European and American Art Since 1900 | |
+ART 3854 | Professional Studio Practices | ART 1504 |
+ART 3884 | American Art to 1914 | |
+ART 3900 | Bridge Experience | |
+ART 4184 | Museum Studies: Theory and Practice | |
+ART 4284 | Museum Ethics and Cultural Preservation | |
+ART 4384 | Topics in Art History | |
+ART 4484 | Topics in Art Criticism and Methodology | |
+ART 4575 | Advanced Graphic and Experience Design | ART 1614 and ART 2565 and ART 2566 and ART 2575 and ART 2576 and ART 3565 and ART 3566 |
+ART 4576 | Advanced Graphic and Experience Design | ART 4575 |
+ART 4584 | Advanced Typography | ART 1614 and ART 2565 and ART 2566 and ART 2575 |
+ART 4684 | Topics in Museums and Collections | |
+ART 4804 | New Media Art Theory | ART 2385 and ART 2386 |
+ART 4894 | Senior Studio | |
+ART 4964 | Field Study | |
+ART 4974 | Independent Study | |
+ART 4994 | Undergraduate Research | |
 BC 1114 | Introduction to Building Construction | |
 BC 1124 | Construction Documents and Safety | |
 BC 2004 | Construction Surveying | BC 1124 |
@@ -168,6 +261,7 @@ BCHM 4074 | Career Orientation | | BCHM 4115
 BCHM 4115 | General Biochemistry | (CHEM 2536 or CHEM 2566) and (BCHM 2114 or CHEM 2154) |
 BCHM 4116 | General Biochemistry | BCHM 4115 |
 BCHM 4124 | Laboratory Problems in Biochemistry and Molecular Biology | BCHM 4115 and (CHEM 2114 and CHEM 2124) or (CHEM 3114 and CHEM 3124) | BCHM 4116
+BCHM 4784 | Applications in Molecular Life Science | (BCHM 3114 and BCHM 3124 and BIOL 3774 and BIOL 4774) or (BCHM 4116 and BCHM 4124) |
 BIOL 1004 | Biology Orientation Seminar | |
 BIOL 1105 | Principles of Biology | |
 BIOL 1106 | Principles of Biology | |
@@ -175,14 +269,46 @@ BIOL 1115 | Principles of Biology Laboratory | | BIOL 1105
 BIOL 1116 | Principles of Biology Laboratory | | BIOL 1106
 BIOL 2004 | Genetics | (BIOL 1105 or ISC 2105) and BIOL 1106 and (CHEM 1036 or CHEM 1056 or CHEM 2565 or ISC 2105) or (CHEM 1015 and CHEM 1016) |
 BIOL 2134 | Cell Function and Differentiation | BIOL 2004 |
+BIOL 2214 | Introduction to Computational Biology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
 BIOL 2304 | Plant Biology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
 BIOL 2504 | General Zoology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
 BIOL 2604 | General Microbiology | (BIOL 1105 or ISC 2105) and BIOL 1106 and (CHEM 1036 or CHEM 1056 or CHEM 1056H or ISC 2105) |
 BIOL 2614 | General Microbiology Laboratory | (BIOL 1105 or ISC 2105) and BIOL 1106 and (CHEM 1036 or CHEM 1056 or CHEM 1056H or ISC 2105) | BIOL 2604
 BIOL 2704 | Evolutionary Biology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
 BIOL 2804 | Ecology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
+BIOL 3134 | Human Genetics | BIOL 2134 |
 BIOL 3204 | Plant Taxonomy | (BIOL 1105 or ISC 2105) and BIOL 1106 |
+BIOL 3254 | Medical and Veterinary Entomology | (BIOL 1005 and BIOL 1006) or (BIOL 1105 or (BIOL 1205H and BIOL 1206H) |
+BIOL 3404 | Introductory Animal Physiology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
+BIOL 3454 | Introductory Parasitology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
+BIOL 3764 | Careers in Microbiology | BIOL 2604 |
+BIOL 3774 | Molecular Biology | BIOL 2134 or ALS 3104 |
+BIOL 3824 | Careers in Bioinformatics | BIOL 2004 |
+BIOL 4004 | Freshwater Ecology | BIOL 2804 or BIOL 2804H |
+BIOL 4104 | Developmental Biology | BIOL 2134 |
+BIOL 4114 | Global Change Ecology | BIOL 2804 |
+BIOL 4134 | Evolutionary Genetics | BIOL 2004 and (BIOL 2704 or BIOL 2704H) |
+BIOL 4164 | Environmental Microbiology | BIOL 2604 |
 BIOL 4354 | Aquatic Entomology | (BIOL 1005 and BIOL 1006) and (BIOL 1015 and BIOL 1016) or (BIOL 1105 and BIOL 1106 and BIOL 1115 and BIOL 1116) |
+BIOL 4404 | Ornithology | (BIOL 1105 or ISC 2105) and BIOL 1106 |
+BIOL 4564 | Infectious Disease Ecology | (BIOL 2704 or BIOL 2704H) and (BIOL 2804 or BIOL 2804H) |
+BIOL 4624 | Microbial Genetics | BIOL 2004 and (BIOL 2604 or BIOL 2604H) |
+BIOL 4634 | Microbial Physiology | BIOL 2134 and (BIOL 2604 or BIOL 2604H) and BIOL 2614 |
+BIOL 4644 | Microbial Molecular Genetics and Physiology Laboratory | BIOL 2134 and (BIOL 2604 or BIOL 2604H) and BIOL 2614 |
+BIOL 4664 | Virology | BIOL 2134 and (BIOL 2604 or BIOL 2604H) and BIOL 2614 |
+BIOL 4674 | Pathogenic Bacteriology | BIOL 2134 and (BIOL 2604 or BIOL 2604H) and BIOL 2614 |
+BIOL 4684 | Microbiomes | BIOL 2004 and BIOL 2604 and (BCHM 3114 or BCHM 4115) |
+BIOL 4704 | Immunology | BIOL 2134 |
+BIOL 4714 | Immunology Laboratory | BIOL 2134 | BIOL 4704
+BIOL 4724 | Pathogenic Bacteriology Lab | BIOL 2134 and (BIOL 2604 or BIOL 2604H) and BIOL 2614 | BIOL 4674
+BIOL 4734 | Inflammation Biology | BIOL 2134 |
+BIOL 4814 | Genomics of Infectious Disease | BIOL 2004 and BIOL 2604 |
+BIOL 4824 | Bioinformatics Methods | BIOL 2004 |
+BIOL 4844 | Proteomics and Biological Mass Spectrometry | BIOL 2004 and CHEM 2535 |
+BIOL 4864 | Clinical Biology | BIOL 2134 and (BCHM 3114 or BCHM 4115) |
+BIOL 4874 | Cancer Biology | BIOL 2134 |
+BIOL 4884 | Cell Biology | BIOL 2134 or BCHM 4116 |
+BIOL 4994 | Undergraduate Research | |
 BIT 2104 | Careers in Business Information Technology | |
 BIT 2405 | Introduction to Business Statistics, Analytics, and Modeling | MATH 1025 or MATH 1225 or MATH 1524 or STAT 2004 |
 BIT 2406 | Introduction to Business Statistics, Analytics, and Modeling | MATH 1025 or MATH 1225 or MATH 1524 or ACIS 1504 or STAT 2004 or BIT 2405 |
@@ -208,8 +334,10 @@ BIT 4464 | Advanced Supply Chain Management | BIT 3414 |
 BIT 4474 | Global Operations and Information Technology | BIT 3414 |
 BIT 4484 | Project Management | BIT 3414 |
 BIT 4604 | Data Governance, Privacy and Ethics | BIT 2405 or CMDA 2014 or CS 1114 or CS 1054 or CS 1064 |
+BIT 4624 | Cybersecurity Analytics for Business | BIT 3674 or BIT 4614 or CS 4264 |
 BIT 4644 | Digital Forensics and Incident Response Management | BIT 3674 or BIT 4614 |
 BIT 4654 | Penetration Testing and Ethical Hacking for Business | BIT 3674 or BIT 4614 |
+BMES 2004 | Concussion Perspectives: Medical, Scientific and Societal Perspectives | |
 BMES 2014 | Biomedical Engineering Professional Practice | |
 BMES 2054 | Electrical Principles for Biomedical Engineers | PHYS 2306 | MATH 2214
 BMES 2074 | Computational Methods in Biomedical Engineering | MATH 1226 and (ENGE 1215 or ENGE 1414) | MATH 2114 or MATH 2114H or MATH 2405H
@@ -343,10 +471,32 @@ CHEM 4584 | Bioorganic Chemistry | CHEM 2536 or CHEM 2566 |
 CHEM 4615 | Physical Chemistry for the Life Sciences | ISC 2106H or (CHEM 1036 or CHEM 1056) and (MATH 1026 or MATH 1226) and (PHYS 2205 or PHYS 2305) |
 CHEM 4616 | Physical Chemistry for the Life Sciences | ISC 2106H or (CHEM 1036 or CHEM 1056 or CHEM 1056H) and (MATH 1026 or MATH 1226) and (PHYS 2206 or PHYS 2306) |
 CHEM 4634 | Polymer and Surface Chemistry | CHEM 3615 or CHEM 4615 or CHE 2164 |
+CHN 3124 | Chinese for Oral Proficiency | CHN 2106 |
+CHN 3304 | Chinese Literature in Translation | |
+CHN 3474 | Topics in Chinese Cinema | |
+CINE 2054 | Introduction to Cinema | |
+CINE 2064 | Cinema Production Foundations | |
+CINE 3184 | Cinema Production Topics | CINE 3214 and CINE 3224 |
+CINE 3214 | Fiction Cinema Production | CINE 2064 |
+CINE 3224 | Documentary Cinema Production | CINE 2064 |
+CINE 3534 | Avant-Garde Cinema | |
+CINE 4144 | Topics in Cinema Studies | |
 CLA 2444 | Ancient Greek and Roman Mythology | |
 CLA 2454 | Topics in Ancient Greek and Latin Literature | |
+CMDA 1634 | Discovering Computational Modeling and Data Analytics | |
 CMDA 2005 | Integrated Quantitative Sciences | MATH 1226 | MATH 2114 or MATH 2114H or MATH 2405H
+CMDA 2006 | Integrated Quantitative Sciences | CMDA 2005 and (MATH 2114 or MATH 2114H or MATH 2405H) |
+CMDA 2014 | Data Matter | MATH 1014 or MATH 1025 or MATH 1214 or MATH 1225 or MATH 1524 or MATH 1535 or STAT 2004 |
+CMDA 3605 | Mathematical Modeling: Methods and Tools | (CS 1114 or CS 1064 or MATH 1454) and (MATH 2114 or MATH 2114H or MATH 2405H) and (MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and (MATH 2214 or MATH 2214H or MATH 2406H or CMDA 2006) |
+CMDA 3606 | Mathematical Modeling: Methods and Tools | CMDA 3605 |
+CMDA 3634 | Computer Science Foundations for Computational Modeling & Data Analytics | CS 2114 |
+CMDA 3654 | Introductory Data Analytics and Visualization | (CS 1114 or CS 1044 or CS 1054 or CS 1064) and (MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and (STAT 3006 or STAT 4105 or STAT 4705 or STAT 4714 or CMDA 2006) |
+CMDA 4314 | Big Data Economics | ECON 3254 or ECON 4304 or CMDA 3654 or STAT 3006 |
 CMDA 4604 | Intermediate Topics in Mathematical Modeling | CMDA 3606 or (MATH 3144 and MATH 3214) |
+CMDA 4634 | Scalable Computing for Computational Modeling and Data Analytics | (CMDA 3634 or CS 3634 or CS 4234) and (CMDA 3654 or CS 3654 or STAT 3654) and (CMDA 3605 or CS 3414 or MATH 3414 or MATH 4445) |
+CMDA 4654 | Intermediate Data Analytics and Machine Learning | (STAT 3654 or CMDA 3654 or CS 3654) and (CMDA 2006 or STAT 3104 or STAT 4106 or STAT 4706) and (MATH 2114 or MATH 2114H or MATH 2405H) |
+CMDA 4664 | Computational Intensive Stochastic Modeling | (STAT 4106 or CMDA 3605) and (CS 1114 or CS 1064 or CMDA 2006) |
+CMDA 4864 | Computational Modeling and Data Analytics Capstone Project | CMDA 3605 and (CMDA 3634 or CS 3634) and (CMDA 3654 or CS 3654 or STAT 3654) |
 CMST 2034 | Visual Media | COMM 1016 or ENGL 1106 or ENGL 1204H |
 CMST 2064 | The Tradition of Rhetoric and Societal Change | |
 CMST 3064 | Persuasion | COMM 1014 |
@@ -357,6 +507,7 @@ COMM 1014 | Introduction to Communication | |
 COMM 1015 | Communication Skills | |
 COMM 1016 | Communication Skills | COMM 1015 |
 COMM 2004 | Public Speaking | |
+COMM 2014 | Communication Principles of Teamwork | |
 COMM 2024 | Media Writing | COMM 1016 or ENGL 1106 or ENGL 1204H |
 COMM 2084 | Media and Society | |
 COMM 2094 | Communication and Issues of Diversity | COMM 1016 or ENGL 1106 |
@@ -375,23 +526,48 @@ CONS 4414 | Professionalism in Consumer Affairs | AHRM 2404 |
 CONS 4964 | Field Work/Practicum | |
 CONS 4974 | Independent Study | |
 CONS 4994 | Undergraduate Research | |
+COS 2024 | Science Outreach and Service Learning | |
+CRIM 2504 | Crime and Punishment in American History | |
+CRIM 3124 | Murder in American History | |
+CRIM 3414 | Criminology | |
+CRIM 3434 | Systems of Justice | |
+CRIM 4224 | Victimology | CRIM 3414 |
+CRIM 4374 | Women and Crime | CRIM 3414 |
+CRIM 4424 | Juvenile Delinquency | SOC 3414 or CRIM 3414 |
+CRIM 4454 | Topics in Criminology | CRIM 3414 or SOC 3414 |
+CRIM 4474 | Cyber Criminology | CRIM 3414 or SOC 3414 |
+CRIM 4484 | Hate Crimes | CRIM 3414 |
+CRIM 4504 | Family and Crime | CRIM 3414 |
+CRIM 4754 | Internship | |
+CRIM 4974 | Independent Study | |
+CRIM 4994 | Undergraduate Research | |
 CS 1014 | Introduction to Computational Thinking | |
 CS 1044 | Introduction to Programming in C | |
+CS 1054 | Introduction to Programming in Java | |
 CS 1064 | Introduction to Programming in Python | |
 CS 1114 | Introduction to Software Design | | MATH 1225
 CS 1944 | Computer Science First Year Seminar | CS 1114 or CS 2064 or ECE 2514 |
+CS 2064 | Intermediate Programming in Python | CS 1064 |
 CS 2104 | Introduction to Problem Solving in Computer Science | CS 1114 or CS 1064 or ECE 2514 |
 CS 2114 | Software Design and Data Structures | CS 1114 or CS 2064 |
+CS 2164 | Foundations of Contemporary Security Environments | |
 CS 2505 | Introduction to Computer Organization | CS 2114 |
 CS 2506 | Introduction to Computer Organization | (CS 2114 or ECE 3514) and (CS 2505 or ECE 2564) and (MATH 2534 or MATH 3034) |
 CS 3114 | Data Structures and Algorithms | (CS 2114 or ECE 3514) and (CS 2505 or ECE 2564) and (MATH 2534 or MATH 3034) |
 CS 3214 | Computer Systems | (CS 2506 and CS 2114) or (ECE 2564 and ECE 3574) |
 CS 3304 | Comparative Languages | CS 3114 |
 CS 3604 | Professionalism in Computing | CS 1944 and (CS 2114 or ECE 3514) and (COMM 2004 or COMM 2014) |
+CS 3714 | Mobile Software Development | CS 2114 or ECE 3514 |
+CS 3754 | Cloud Software Development | CS 2114 or ECE 3514 |
+CS 3824 | Introduction to Computational Biology and Bioinformatics | CS 3114 |
 CS 4104 | Data and Algorithm Analysis | CS 3114 and (MATH 3034 or MATH 3134) |
 CS 4114 | Introduction to Formal Languages and Automata Theory | MATH 3134 or MATH 3034 |
 CS 4124 | Theory of Computation | MATH 3134 or MATH 3034 |
+CS 4134 | Quantum Computation and Information Processing | MATH 2114 or MATH 2114H |
+CS 4164 | Future of Security: Integrative Solutions for Complex Security Systems | PSCI 2164 or BIT 2164 or CS 2164 |
 CS 4264 | Principles of Computer Security | CS 3214 or (ECE 3504 and ECE 3574) |
+CS 4604 | Introduction to Data Base Management Systems | CS 3114 |
+CS 4824 | Machine Learning | (ECE 3514 or CS 2114) and (STAT 3704 or STAT 4105 or STAT 4604 or STAT 4705 or STAT 4714 or CMDA 2006) |
 CS 4944 | Seminar | CS 3604 |
 CSES 2224 | Foundations of Precision Agriculture | |
 CSES 2244 | Agriculture, Global Food Security and Health | |
@@ -464,25 +640,135 @@ ECE 4634 | Digital Communications | ECE 3614 |
 ECE 4664 | Analog and Digital Communications Laboratory | ECE 3614 | ECE 4634
 ECE 4805 | Senior Design Project | ECE 2214 and ECE 2564 and ECE 2714 and ECE 2804 and (ECE 3004 or ECE 3504) and (ECE 3105 or ECE 3514) and (ECE 3106 or ECE 3134 or ECE 3204 or ECE 3214 or ECE 3304 or ECE 3544 or ECE 3564 or ECE 3574 or ECE 3614 or ECE 3704 or ECE 4205 or ECE 4234 or ECE 4254 or ECE 4424 or ECE 4524 or ECE 4540 or ECE 4580 or ECE 4704) |
 ECE 4806 | Senior Design Project | ECE 4805 |
+ECON 1004 | First Year Experience Seminar | |
+ECON 1104 | Economics of Gender | |
+ECON 1204 | Economics of Race | |
+ECON 1214 | Economic History of Diversity and Inclusion | |
 ECON 2005 | Principles of Economics | |
 ECON 2006 | Principles of Economics | ECON 2005 |
+ECON 3004 | Contemporary Economic Issues | (ECON 2005 or ECON 2025H) and (ECON 2006 or ECON 2026H) |
+ECON 3024 | Economic Justice | (ECON 2005 or ECON 2025H) and (ECON 2006 or ECON 2026H) |
 ECON 3034 | Economics of Poverty and Discrimination | ECON 2005 |
+ECON 3054 | Introduction to Forecasting | ECON 3254 or ECON 4304 |
+ECON 3104 | Microeconomic Theory | ECON 2005 and (MATH 1226 or MATH 1026) |
+ECON 3134 | Choice and Behavior | ECON 2005 or BDS 2005 |
+ECON 3154 | Managerial Economics | ECON 2006 or BDS 2006 |
+ECON 3174 | Sports Economics | ECON 2005 |
+ECON 3204 | Macroeconomic Theory | ECON 2006 and ECON 3104 |
+ECON 3214 | Money and Banking | (ECON 2005 or ECON 2025H) and ECON 2006 |
 ECON 3254 | Applied Econometrics | STAT 3005 or STAT 3604 or STAT 3615 or STAT 4604 or STAT 4705 or STAT 4714 or CMDA 2006 or BIT 2406 |
+ECON 3314 | Middle East Economics | ECON 2006 |
+ECON 3884 | Topics in Philosophy, Politics, and Economics | |
+ECON 4014 | Environmental Economics | ECON 2005 or ECON 2025H |
+ECON 4044 | Public Economics | ECON 3104 |
+ECON 4054 | Public Finance | ECON 3104 |
+ECON 4074 | Labor Economics | (ECON 2005 or ECON 2025H) and (ECON 3254 or ECON 4304) |
+ECON 4084 | Industry Structure | ECON 3104 or ECON 3154 |
+ECON 4124 | Growth and Development | ECON 2006 and (ECON 2025H or ECON 3104) |
+ECON 4135 | International Economics | ECON 3104 |
+ECON 4136 | International Economics | ECON 3204 |
 ECON 4214 | Economics of Health Care | ECON 2005 or ECON 2025H |
 ECON 4304 | Introduction to Econometric Methods | ECON 3254 or STAT 3005 or STAT 4604 or STAT 4705 or STAT 4714 or CMDA 2006 |
+ECON 4314 | Big Data Economics | ECON 3254 or ECON 4304 or CMDA 3654 or STAT 3006 |
+ECON 4424 | The Theory of Games and Economic Behavior | ECON 3104 |
+ECON 4434 | Experimental Economics | ECON 3104 and (BIT 2406 or MSCI 2406 or STAT 2004 or STAT 3005) |
+ECON 4514 | Applied Analysis of Banking and Financial Markets | ECON 3254 or ECON 4304 |
+ECON 4614 | R Programming in Economics | ECON 2005 and (ECON 3254 or ECON 4304) |
+EDCI 1004 | Introduction to Teacher Education and Licensure | |
 EDCI 2004 | Exploring the Teaching Profession- Field Studies in Education | EDCI 1004 |
+EDCI 2464 | Foundations of Social Studies Education | |
 EDCI 2574 | Social Foundations of Education | |
+EDCI 3074 | Elementary Curriculum: Methods in Teaching | | EDCI 3964
 EDCI 3144 | Education of Exceptional Learners | |
+EDCI 3234 | Foundations of Reading Instruction (PK-6) | |
+EDCI 3244 | Curriculum and Instruction in Elementary Mathematics, PK-3 | |
+EDCI 3254 | Elementary Methods in Science | |
+EDCI 3334 | Teaching Language Arts in the Elementary Classroom | |
+EDCI 3354 | STEM in Elementary Schools | EDCI 3254 |
+EDCI 3464 | Elementary Social Studies Teaching Methods | |
+EDCI 3964 | Field Study | |
+EDCI 4074 | Culturally Responsive Teaching in the Elementary Classroom | | EDCI 4964
+EDCI 4244 | Curriculum and Instruction in Middle School Mathematics (4-8) | |
+EDCI 4274 | Curriculum and Instruction in Middle School Mathematics | |
+EDCI 4724 | Secondary School Teaching Methods I | | 3964, or EDCT 3964, or EDTE 6964
+EDCI 4734 | Adolescent Literacy and Reading | |
+EDCI 4744 | Secondary School Teaching Methods II | EDCI 4724 | 3964 or EDTE 3964
+EDCI 4964 | Field Study | |
+EDCT 2604 | Introduction to Career and Technical Education | |
+EDCT 4624 | Managing a Career and Technical Education Program | |
+EDCT 4884 | Youth Program Management | |
 EDEP 2374 | Educational Psychology for PK-12 Teachers | |
+EDEP 3474 | Principles and Practices in PK-12 Assessment | |
+EDTE 1004 | Introduction to Integrative STEM Education | |
+EDTE 1014 | Teaching Technology, Engineering, and Design | EDTE 1004 or ENGE 1215 or ENGE 1414 |
+EDTE 2005 | Engineering Technologies | EDTE 1014 |
+EDTE 2006 | Engineering Technologies | EDTE 2005 |
+EDTE 2204 | Emerging Issues in Technology and Engineering | EDTE 2005 |
+EDTE 3204 | Robotics Education | EDTE 2006 and CS 1014 and CS 1064 |
+EDTE 4204 | Capstone in Technology and Engineering Education | EDTE 2204 and EDTE 3204 |
 ENGE 1215 | Foundations of Engineering | |
 ENGE 1216 | Foundations of Engineering | ENGE 1215 |
 ENGE 3900 | Bridge Experience | |
+ENGL 1004 | Books, Libraries, Archives | |
 ENGL 1105 | First-Year Writing | |
 ENGL 1106 | First-Year Writing | ENGL 1105 |
+ENGL 1514 | Language and Society | |
+ENGL 2434 | Legends of King Arthur | ENGL 1106 or COMM 1016 |
+ENGL 2534 | American Literary History | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 2544 | British Literary History | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 2604 | Introduction to Critical Reading | ENGL 1106 or COMM 1016 |
+ENGL 2634 | Writing and Social Justice | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 2644 | Introduction to African-American Literature | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 2664 | Being Human: Literature and Human Experience | ENGL 1106 or COMM 1016 |
+ENGL 2744 | Introduction to Creative Writing | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 2804 | Contemporary Native American Literatures | ENGL 1106 or ENGL H1204 or COMM 1016 |
+ENGL 2814 | Writing for Podcasts | ENGL 1106 or COMM 1016 |
 ENGL 2844 | Introduction to Technical and Scientific Communication | ENGL 1106 or COMM 1016 |
+ENGL 3024 | Religion and Literature | |
+ENGL 3134 | Gender and Linguistics | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3144 | Language and Ethnicity in the United States | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3154 | Literature, Medicine, and Culture | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3204 | Medieval Literature | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3214 | Renaissance Literature | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3315 | Playwriting | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3324 | Acts of Interpretation | ENGL 2604 |
+ENGL 3364 | Topics in Literature by Women | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3424 | Topics in Russian Literature in English | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3434 | The Works of Vladimir Nabokov | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3474 | Rhetoric for Professional Writers | ENGL 1106 or COMM 1016 |
+ENGL 3514 | Ethnic Literature for Children | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3524 | Literature for Children | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3534 | Literature and the Environment | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3544 | Literature and Cinema | |
+ENGL 3624 | Appalachian Literature | ENGL 1106 or COMM 1016 |
+ENGL 3644 | The Postcolonial Novel | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3654 | Ethnic American Literature | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 3684 | Literature and the Law | |
+ENGL 3704 | Creative Writing: Fiction | ENGL 2744 |
+ENGL 3714 | Creative Writing: Poetry | ENGL 2744 |
+ENGL 3724 | Creative Writing: Creative Non-fiction | ENGL 2744 |
+ENGL 3734 | Community Writing | ENGL 2744 |
 ENGL 3754 | Advanced Writing and Research | ENGL 1106 or COMM 1016 |
 ENGL 3764 | Technical Writing | ENGL 1106 or COMM 1016 |
 ENGL 3774 | Business Writing | ENGL 1106 or COMM 1016 |
+ENGL 3784 | Screenwriting | ENGL 2744 |
+ENGL 3804 | Technical Editing and Style | ENGL 1106 or COMM 1016 |
+ENGL 3834 | Intercultural Issues in Professional Writing | ENGL 1106 or COMM 1016 |
+ENGL 3844 | Writing and Digital Media | ENGL 1106 or COMM 1016 |
+ENGL 3900 | Bridge Experience | |
+ENGL 4054 | History of the English Language | |
+ENGL 4114 | Chaucer | (ENGL 1106 or ENGL 1204H) or COMM 1016 |
+ENGL 4164 | Studies in Shakespeare | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 4204 | Hybrid Forms | ENGL 3704 or ENGL 3714 or ENGL 3724 |
+ENGL 4214 | Milton | |
+ENGL 4504 | Modern Poetry | |
+ENGL 4514 | Contemporary Poetry | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 4664 | Contemporary Fiction | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 4684 | Special Topics in Literature | ENGL 1106 or ENGL 1204H or COMM 1016 |
+ENGL 4704 | Advanced Creative Writing: Fiction | ENGL 3704 |
+ENGL 4714 | Advanced Creative Writing: Poetry | ENGL 3714 |
+ENGL 4724 | Creative Writing: Fiction for Young People | ENGL 3704 |
+ENGL 4784 | Senior Seminar | ENGL 1106 |
 ENGR 3124 | Introduction to Green Engineering | |
 ENGR 4134 | Environmental Life Cycle Assessment | ENGR 3124 |
 ENSC 1015 | Foundations of Environmental Science | |
@@ -501,8 +787,11 @@ ENT 4484 | Freshwater Biomonitoring | (BIOL 2804) and (BIOL 4004 or BIOL 4354 or
 ESM 2104 | Statics | MATH 1226 | PHYS 2305 AND (MATH 2204 or MATH 2204H or MATH 2406H)
 ESM 2204 | Mechanics of Deformable Bodies | (ESM 2104 or ESM 2114 or AOE 2014) and (MATH 2204 or MATH 2204H or MATH 2406H) |
 ESM 2304 | Dynamics | (ESM 2104 or AOE 2014) and (MATH 2204 or MATH 2204H or MATH 2406H) | MATH 2214
+ESM 3704 | Basic Principles of Structures | |
+FIN 2114 | Investments and Financial Literacy | |
 FIN 2164 | Survey of Finance and Career Planning | |
 FIN 3054 | Legal and Ethical Environment of Business | |
+FIN 3074 | Legal, Ethical, and Financing Issues for Entrepreneurs | |
 FIN 3104 | Introduction to Finance | ACIS 2115 and ECON 2005 and (BIT 2405 or ACIS 2504 or REAL 2034 or STAT 2004 or STAT 3005 or STAT 3604 or STAT 3615 or STAT 4604 or STAT 4705 or ISE 2024) |
 FIN 3114 | Python/SQL for Data Analytics and Finance | FIN 3104 |
 FIN 3124 | Financial Planning for Professionals | FIN 3104 |
@@ -513,6 +802,7 @@ FIN 3204 | Risk and Insurance | |
 FIN 3254 | Credit Risk Analysis | FIN 3134 and FIN 3144 and FIN 3154 |
 FIN 3414 | Quantitative Methods for Finance | FIN 3144 and STAT 3005 and STAT 3006 and STAT 3104 and MATH 1225 and MATH 1226 and MATH 2114 |
 FIN 4004 | Wills, Trusts, and Estates | FIN 3054 or FIN 3074 |
+FIN 4014 | Cyberlaw and Policy | |
 FIN 4104 | Retirement Planning | (FIN 3124 or ACIS 3314) and FIN 3134 |
 FIN 4114 | Financial Planning Technology and Modeling | FIN 3124 and FIN 3144 |
 FIN 4124 | Client Relationship Management | FIN 3124 |
@@ -534,6 +824,8 @@ FIW 3514 | Fisheries Techniques | FIW 2114 and STAT 3615 |
 FIW 4214 | Wildlife Field Techniques | FIW 4414 and STAT 3615 |
 FIW 4314 | Conservation of Biological Diversity | FIW 4414 and FIW 4434 |
 FIW 4324 | Genetics of Natural and Managed Populations | BIOL 1105 and BIOL 1106 and (STAT 3005 or STAT 3615 or FREC 3214) |
+FIW 4334 | Mammalogy | BIOL 2704 or BIOL 2704H |
+FIW 4344 | Herpetology | BIOL 2704 or BIOL 2704H |
 FIW 4414 | Population Dynamics and Estimation | FIW 2114 |
 FIW 4424 | Ichthyology | |
 FIW 4434 | Wildlife Habitat Ecology and Management | FIW 2114 |
@@ -564,14 +856,21 @@ FMD 4274 | International Sourcing of Apparel Products | FMD 3104 |
 FMD 4964 | Field Work/Practicum | |
 FMD 4974 | Independent Study | |
 FMD 4994 | Undergraduate Research | |
+FR 1105 | Elementary French | |
+FR 1106 | Elementary French | FR 1105 |
+FR 2105 | Intermediate French | FR 1106 |
 FR 3105 | Composition, Conversation and Grammar | FR 2106 or FR 2164 |
 FR 3106 | Composition, Conversation and Grammar | |
 FR 3124 | French for Oral Proficiency | |
 FR 3304 | Introduction to French Literature | |
+FR 3954 | Study Abroad | |
 FREC 1024 | Introduction to Environmental Conservation and Society | |
 FREC 1044 | Introduction to Environmental Data Science | |
 FREC 1064 | Discovering Forest Resources and Environmental Management | |
 FREC 2004 | Forest Ecosystems | |
+FREC 2114 | Ecology of Appalachian Forests | |
+FREC 2124 | Forests, Society & Climate | |
+FREC 2134 | Plants and Greenspaces in Urban Communities | |
 FREC 2214 | Introduction to Land and Field Measurements | MATH 1025 or MATH 1225 or MATH 1524 | FREC 2324
 FREC 2254 | Arboriculture Field Skills | |
 FREC 2314 | Forest Biology and Dendrology | BIOL 1106 or BIOL 1014 |
@@ -582,6 +881,7 @@ FREC 2554 | Leadership for Global Sustainability | |
 FREC 2614 | Human-Environment Systems | |
 FREC 3014 | Forest Health and Ecosystem Resilience | FREC 2314 or BIOL 2304 or HORT 2304 |
 FREC 3044 | Environmental Data Science | FREC 1044 or CMDA 3654 or CS 3654 or STAT 3654 |
+FREC 3104 | Principles of Watershed Hydrology | MATH 1026 or MATH 1226 or STAT 3005 or STAT 3604 or STAT 3615 |
 FREC 3214 | Forest Biometrics | FREC 2214 and (MATH 1026 or MATH 1226) | FREC 3224
 FREC 3224 | Forest Biometrics Laboratory | FREC 2214 and FREC 2414 |
 FREC 3314 | Forest Ecology and Silvics | (FREC 2314 or FOR 2314) and (FREC 2214 or FOR 2214) |
@@ -599,6 +899,7 @@ FREC 4004 | Professional Skills in Natural Resources | |
 FREC 4014 | Natural Resources Economics | ECON 2005 or AAEC 1005 |
 FREC 4044 | Environmental Data Science Capstone | FREC 3004 or FREC 3044 |
 FREC 4114 | Information Technologies for Natural Resource Management | |
+FREC 4174 | Climate Change and the International Policy Framework | |
 FREC 4214 | Forest Photogrammetry and Spatial Data Processing | |
 FREC 4254 | Urban and Community Forestry Practicum | | FREC 4454
 FREC 4334 | Principles and Practice of Agroforestry | |
@@ -607,6 +908,7 @@ FREC 4374 | Forested Wetlands | FREC 4354 or CSES 3114 or ENSC 3114 or GEOS 3614
 FREC 4434 | Natural Resource Policy | |
 FREC 4444 | Integrated Forest Management Practicum | |
 FREC 4454 | Principles of Urban and Community Forestry | |
+FREC 4464 | Water Resources Policy and Economics | AAEC 1005 or ECON 2005 |
 FREC 4514 | Forest and Tree Pest Management | FREC 3364 or FREC 3324 or HORT 3325 or HORT 3326 |
 FREC 4714 | Harvesting Systems Evaluation | FREC 3714 |
 FST 2004 | Exploring Food Science Careers | |
@@ -626,32 +928,181 @@ FST 4324 | Food Processing and Engineering II | FST 3324 |
 FST 4504 | Food Chemistry | BCHM 2024 |
 FST 4524 | Food Safety and Quality Assurance | FST 3604 and FST 4304 |
 FST 4534 | Food Chemistry Lab | | FST 4504
+GEOG 1004 | Introduction to Human Geography | |
+GEOG 1014 | World Regions | |
+GEOG 1024 | Survey of Geography | |
+GEOG 1084 | Digital Planet | |
+GEOG 1104 | Introduction to Environmental Geography | |
+GEOG 1115 | Seeking Sustainability | |
+GEOG 1116 | Seeking Sustainability | GEOG 1115 or NR 1115 |
+GEOG 1504 | Survey of Meteorology | |
+GEOG 1514 | Introduction to Meteorology | |
 GEOG 1524 | Introduction to Earths Climate | |
+GEOG 2004 | Water, Environment, and Society | |
+GEOG 2014 | Health and Place: Introduction to Health Geography | |
+GEOG 2034 | Geography of Global Conflict | |
+GEOG 2054 | Introduction to World Politics | |
+GEOG 2064 | The Global Economy and World Politics | |
 GEOG 2084 | Principles of Geographic Information Systems | |
+GEOG 2104 | Introduction to Environmental Security | |
+GEOG 2114 | Introduction to Coastal Regions | |
+GEOG 2134 | Geography of the Global Economy | |
+GEOG 2224 | Geography of Europe | |
+GEOG 2244 | Sustainable Urbanization | |
+GEOG 2314 | Maps and Mapping | |
+GEOG 2505 | Weather Analysis I | |
+GEOG 2506 | Weather Analysis II | GEOG 2505 |
+GEOG 2964 | Field Study | |
+GEOG 3104 | Environmental Justice, Resources and Development | |
+GEOG 3214 | Africa Together | |
+GEOG 3224 | Geography of Appalachia | GEOG 1004 or GEOG 1104 or GEOG 1014 or APS 1704 or HUM 1704 |
+GEOG 3244 | The U.S. City | |
+GEOG 3274 | Polar Environments | |
+GEOG 3304 | Geomorphology | GEOG 1104 or GEOS 1004 or GEOS 2104 |
+GEOG 3314 | Cartography | |
+GEOG 3504 | Severe Weather | GEOG 2505 |
+GEOG 3515 | Dynamic Meteorology | GEOG 2506 and MATH 2214 and PHYS 2306 |
+GEOG 3516 | Dynamic Meteorology | GEOG 3515 |
+GEOG 3534 | Atmospheric Remote Sensing | GEOG 2506 |
+GEOG 4044 | Biogeography | GEOG 1104 or BIOL 2804 |
+GEOG 4054 | Geography of Wine | |
+GEOG 4074 | Medical Geography of Infectious Diseases | |
 GEOG 4084 | Modeling with Geographic Information Systems | GEOG 2084 |
 GEOG 4134 | Interdisciplinary Issues and Ethics in Water Resources | |
+GEOG 4204 | Geography of Resources | |
+GEOG 4254 | R Programming for Geospatial Applications | GEOG 4084 |
+GEOG 4284 | Human Dimensions of Coastal Social-Ecological Systems | |
+GEOG 4304 | Geospatial Analysis of Mobility | GEOG 2084 |
+GEOG 4314 | Spatial Analysis in Geographic Information Systems | GEOG 2084 |
+GEOG 4334 | Geospatial Information Technology for Land Change Modeling | GEOG 4084 or GEOS 4084 |
 GEOG 4354 | Introduction to Remote Sensing | |
+GEOG 4374 | Remote Sensing and Phenology | GEOG 4354 |
+GEOG 4394 | Introduction to Web Mapping | GEOG 2084 |
+GEOG 4404 | Geovisualization | GEOG 2084 and GEOG 3314 |
+GEOG 4414 | Climate Change and Societal Impacts | |
+GEOG 4424 | Geospatial Data Science | GEOG 2084 |
+GEOG 4504 | Synoptic Meteorology | GEOG 3504 and MATH 1226 |
+GEOG 4524 | Physical Meteorology | GEOG 3515 |
+GEOG 4574 | Climate Data Analysis and Programming | GEOG 2505 |
+GEOG 4964 | Field Study | |
+GEOG 4994 | Undergraduate Research | |
 GEOS 1004 | Earth Science: Our Past, Present, and Future | |
 GEOS 1014 | Evolution of the Earth-Life System | |
 GEOS 1024 | Earth Resources, Society, and Environment | |
+GEOS 1034 | Earths Natural Hazards | |
 GEOS 1104 | Introduction to Earth Sciences Laboratory | |
 GEOS 1124 | Earth Resources, Society and Environment Laboratory | |
+GEOS 2004 | Geosciences Career and Professional Development | |
+GEOS 2024 | Earth's Dynamic Systems | |
 GEOS 2104 | Elements of Geology for Engineering | |
+GEOS 2444 | Geoscience Field Observations | GEOS 1004 or GEOS 2024 or GEOS 2104 |
+GEOS 3014 | Environmental Geosciences | |
+GEOS 3024 | Computational Methods in the Geosciences | MATH 1225 or MATH 1025 |
 GEOS 3034 | Oceanography | |
+GEOS 3104 | Elementary Geophysics | (GEOS 1004 or GEOS 2024 or GEOS 2104) and (MATH 1026 or MATH 1226) and (PHYS 2205 or PHYS 2305) | PHYS 2206 or PHYS 2306
+GEOS 3204 | Sedimentology-Stratigraphy | GEOS 1004 or GEOS 2024 or GEOS 2104 |
+GEOS 3304 | Geomorphology | GEOG 1104 or GEOS 1004 or GEOS 2104 or GEOS 2024 |
 GEOS 3404 | Elements of Structural Geology | GEOS 1004 or GEOS 2024 or GEOS 2104 |
+GEOS 3504 | Mineralogy | | CHEM 1035 or CHEM 1055 or (ISC 1106 and ISC 1116)
+GEOS 3604 | Paleontology | (GEOS 1004 and GEOS 1014) or GEOS 2024 |
+GEOS 3614 | Soils | CHEM 1036 |
+GEOS 3624 | Soils Laboratory | | GEOS 3614
+GEOS 3634 | Natural History Collections and Curation | GEOS 2024 or (GEOS 1004 and GEOS 1014) or (GEOS 2104 and GEOS 1014) or (BIOL 1105 and BIOL 1106) |
+GEOS 3704 | Igneous and Metamorphic Rocks | (GEOS 1004 or GEOS 2104 or GEOS 2024) and GEOS 3504 |
+GEOS 4024 | Senior Seminar | (GEOS 2024 or GEOS 2104 or GEOS 1004) and GEOS 2004 and GEOS 2444 and GEOS 3204 and GEOS 3404 and GEOS 3504 |
+GEOS 4034 | Data Science in the Geosciences | CS 1064 or GEOS 3024 or CS 1044 |
+GEOS 4084 | Modeling with Geographic Information Systems | GEOG 2084 |
+GEOS 4124 | Seismic Stratigraphy | GEOS 3104 and GEOS 3204 |
+GEOS 4154 | Earthquake Seismology | MATH 2204 or MATH 2204H and MATH 2214 and PHYS 2305 and GEOS 3104 |
+GEOS 4164 | Potential Field Methods in Exploration Geophysics | (MATH 2204 or MATH 2204H) and MATH 2214 and PHYS 2306 and GEOS 3104 |
+GEOS 4174 | Exploration Seismology | MATH 2204 or MATH 2204H and MATH 2214 and PHYS 2305 and GEOS 3104 |
+GEOS 4184 | Geodesy in the Earth Sciences | GEOS 1004 or GEOS 1024 or GEOS 1034 or GEOS 2024 or GEOS 2104 |
+GEOS 4234 | Vertebrate Evolution | GEOS 1014 or BIOL 2704 or GEOS 2024 |
+GEOS 4244 | Morphology of the Vertebrates | (GEOS 1014 or GEOS 2024 or GEOS 1054) or (BIOL 1105 and BIOL 1106) |
+GEOS 4254 | Integrative Earth System History | GEOS 2024 or (GEOS 1004 and GEOS 1014) or (GEOS 2104 and GEOS 1014) |
+GEOS 4314 | Coastal Hazards | GEOS 1004 or GEOS 2024 or GEOS 2104 |
 GEOS 4354 | Introduction to Remote Sensing | |
+GEOS 4404 | Advanced Structural Geology | GEOS 3404 |
 GEOS 4624 | Mineral Deposits | GEOS 1004 or GEOS 2104 or GEOS 2024 |
+GEOS 4634 | Environmental Geochemistry | (MATH 1225 or MATH 1025) and (CHEM 1035 or CHEM 1055) or (ISC 1106 and ISC 1116) |
+GEOS 4714 | Volcanoes and Volcanic Processes | GEOS 1004 or GEOS 2024 or GEOS 2104 |
 GEOS 4804 | Groundwater Hydrology | (MATH 1226 or MATH 1026) and (PHYS 2205 or PHYS 2305) |
 GEOS 4824 | Engineering Geology | (GEOS 1004 or GEOS 2024 or GEOS 2104) and (PHYS 2305 or PHYS 2205) and (CHEM 1035 or CHEM 1015) and (MATH 1225 or MATH 1025) |
+GEOS 4924 | Tectonics | (MATH 1025 or MATH 1225) and (PHYS 2205 or PHYS 2305) |
+GEOS 4944 | Study Abroad Topics in Geosciences | GEOS 2024 or GEOS 2104 or (GEOS 1004 and GEOS 1104) |
+GEOS 4954 | Study Abroad | |
+GEOS 4964 | Field Study | |
+GEOS 4994 | Undergraduate Research | |
+GER 1105 | Elementary German | |
+GER 1106 | Elementary German | GER 1105 |
+GER 2105 | Intermediate German | GER 1106 or GER 1114 |
 GER 3105 | Grammar, Composition and Conversation | GER 2106 or GER 2114 |
 GER 3106 | Grammar, Composition and Conversation | GER 3105 |
 GER 3204 | Culture of the German-Speaking Countries | GER 3104 or GER 3105 or GER 3106 |
 GER 3214 | German in a Globalized World | |
+GER 3474 | Topics in German Cinema | |
 GER 4154 | Topics in German for Professional and Personal Communication | GER 3106 |
 GER 4334 | Special Topics in German Life, Literature, and Language | (GER 3105 and GER 3106) and (GER 3204 or GER 3305 or GER 3306) |
 HD 1004 | Childhood and Adolescence | |
+HD 1014 | Introduction to Human Development & Family Science First Year Experience | |
+HD 1134 | Introduction to Disability Studies | |
+HD 1434 | Introduction to Human Services | |
 HD 2004 | Adulthood and Aging | |
+HD 2014 | Integrative Practices for Health, Wellbeing, and Resilience | |
+HD 2304 | Family Relationships | |
+HD 2314 | Human Sexuality | |
+HD 2434 | Skills in Human Services | HD 1004 and HD 1434 or HD 2335 |
+HD 3014 | Research Methods in Human Development | HD 2004 and HD 2304 and (SOC 2104 or STAT 2004 or STAT 3005 or STAT 3604 or STAT 3615) |
+HD 3024 | Community Analytics | |
+HD 3114 | Issues in Aging | |
+HD 3214 | Infancy and Early Childhood | HD 1004 |
+HD 3224 | Middle Childhood and Adolescence | HD 1004 |
+HD 3234 | Lifespan Community Services | HD 1004 and HD 2304 and HD 2004 |
+HD 3254 | Curriculum in Early Childhood | HD 1004 and HD 3214 |
+HD 3434 | Advanced Helping Skills | (HD 1434 or HD 2335) and (HD 2434 or HD 2336) |
+HD 3900 | Bridge Experience | |
+HD 4324 | Family Challenges and Change | HD 2304 |
+HD 4334 | Addiction, Recovery, and Family Systems | HD 2304 |
+HD 4714 | Senior Capstone Seminar | |
+HD 4964 | Field Study | HD 1004 and HD 2004 and (HD 2335 or HD 1434) and (HD 2336 or HD 2434) |
+HIST 1004 | Introduction to History | |
 HIST 1024 | Ancient History | |
+HIST 1025 | Introduction to European History | |
+HIST 1115 | History of the United States | |
+HIST 1116 | History of the United States | |
+HIST 1215 | Intro to World History | |
+HIST 1216 | Intro to World History | |
+HIST 1234 | Colonial Latin America | |
+HIST 2166 | History of France | |
+HIST 2275 | African-American History | |
+HIST 2345 | History of the Middle East | |
+HIST 2346 | History of the Middle East | |
+HIST 2355 | History of China | |
+HIST 2364 | History of Japan | |
+HIST 2374 | Gods and Kings in Premodern India | |
+HIST 2384 | Gandhi in the Making of Modern India | |
+HIST 2394 | Tofu to Tikka: Food in Asian History | |
+HIST 2484 | Modern Germany | |
+HIST 2604 | Introduction to Data in Social Context | |
+HIST 2624 | Topics in the History of Data in Social Context | |
+HIST 2715 | History of Technology | |
+HIST 2724 | Introduction to Displacement Studies | |
+HIST 3004 | Colonial America | |
+HIST 3014 | The American Revolution | |
+HIST 3224 | History of Virginia | |
+HIST 3554 | Age of Globalization | |
+HIST 3624 | Health and Illness in African History | |
+HIST 3714 | War and Medicine | |
+HIST 3724 | History of Disease, Medicine, and Health | |
+HIST 3754 | Public History | |
+HIST 3764 | Oral History: Methods and Practices | |
+HIST 3774 | Digital History | |
+HIST 3814 | Historical Methods | |
+HIST 3914 | Critical Reading and Analysis in History | |
+HIST 4014 | History Lab: Creative Technologies, Hidden Histories, Informal Learning | |
+HIST 4914 | History Research Seminar | (HIST 3814 and HIST 3914) or HIST 3904 |
+HIST 4994 | Undergraduate Research | |
+HIST 4994H | Undergraduate Research | |
 HNFE 1004 | Foods, Nutrition And Exercise | |
 HNFE 1114 | Orientation to HNFE | |
 HNFE 2004 | Professional Dietetics | | HNFE 2014
@@ -680,6 +1131,7 @@ HNFE 4964 | Field Study | |
 HNFE 4974 | Independent Study | |
 HNFE 4994 | Undergraduate Research | |
 HNFE 4994H | Undergraduate Research | |
+HORT 2164 | Floral Design | |
 HORT 2224 | Horticulture Science and Industry | |
 HORT 2234 | Environmental Factors in Horticulture | |
 HORT 2244 | Plant Propagation | |
@@ -693,6 +1145,7 @@ HORT 4344 | Production of Food Crops in Controlled Environment Agriculture | HOR
 HORT 4614 | Ornamental Plant Production and Marketing | HORT 2234 and HORT 2244 and HORT 4324 and AAEC 2434 |
 HTM 1414 | Introduction to Hospitality and Tourism Management | |
 HTM 2104 | Careers in Hospitality and Tourism | |
+HTM 2314 | Introduction to International Business | |
 HTM 2434 | Hospitality Sales | |
 HTM 2464 | Designing the Service Experience | |
 HTM 3414 | Chef Lab: Culinary Operations Management | |
@@ -705,8 +1158,75 @@ HTM 4454 | Hospitality Revenue Management | HTM 3444 |
 HTM 4464 | Human Resources Management in the Hospitality Industry | MGT 3304 or MGT 3404 |
 HTM 4474 | Hospitality & Tourism Law | |
 HTM 4964 | Field Study in HTM | (HTM 3414 and HTM 3524) or (HTM 3414 and HTM 3444) or (HTM 3524 and HTM 3444) or (HTM 3414 and HTM 3424) or (HTM 3424 and HTM 3444) |
+IDS 2015 | Industrial Design Laboratory II | ARCH 1016 |
+IDS 2016 | Industrial Design Laboratory II | IDS 2015 |
+IDS 2034 | Design Visualization | ARCH 1016 |
+IDS 2044 | Human Factors | ARCH 1016 |
+IDS 2114 | History of Industrial Design | |
+IDS 2124 | History of Modern Industrial Designers | |
+IDS 2304 | Computer Aided Industrial Design | ARCH 1016 |
+IDS 3015 | Industrial Design Laboratory III | IDS 2016 |
+IDS 3016 | Industrial Design Laboratory III | IDS 3015 |
+IDS 3124 | Materials and Processes | |
+IDS 3204 | Topics in Professional Development | |
+IDS 3224 | Topics in Design Competencies | |
+IDS 3234 | Topics in Design Theory | |
+IDS 3514 | Design Research | IDS 2016 |
+IDS 3900 | Bridge Experience | |
+IDS 4015 | Industrial Design Laboratory IV | IDS 3016 |
+IDS 4016 | Industrial Design Laboratory IV | IDS 4015 |
+IDS 4044 | Professional Practice and Entrepreneurship | IDS 2015 |
+IS 1004 | Nations and Nationalities | |
+IS 1024 | Comp Gov & Politics | |
+IS 1034 | Introduction to International Studies and Political Science | |
+IS 2004 | Research and Writing in International Studies | |
+IS 2034 | Geography of Global Conflict | |
 IS 2054 | Introduction to World Politics | |
 IS 2064 | The Global Economy and World Politics | |
+IS 2084 | The Evolution of World Order | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 2104 | Europe Country Analysis | |
+IS 2114 | Transatlantic Political Frameworks | IS 1114 or PSCI 1114 |
+IS 2224 | Geography of Europe | |
+IS 3034 | The CIA: Its Capabilities in Todays Geo-Political World | |
+IS 3044 | The Politics of Internet Governance | PSCI 2054 or IS 2054 or GEOG 2054 |
+IS 3054 | The Dark Web and Threat Analytics | |
+IS 3104 | Security Studies: Theories and Concepts | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3114 | Global Security | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3115 | Selected World Problems | |
+IS 3116 | Selected World Problems | |
+IS 3125 | Intelligence and National Security | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3126 | Intelligence and National Security | IS 3125 or PSCI 3125 |
+IS 3134 | Global Conflict and War | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3144 | Global Governance and Public Policy | (IS 2054 or PSCI 2054 or GEOG 2054) or (IS 2064 or PSCI 2064 or GEOG 2064) |
+IS 3154 | Topics in Global Public Policies | (IS 2054 or PSCI 2054 or GEOG 2054) or (IS 2064 or PSCI 2064 or GEOG 2064) |
+IS 3164 | Global Trade: Structures and Policies | IS 2064 or PSCI 2064 or GEOG 2064 |
+IS 3174 | Monetary Foundations of the World Economy | IS 2064 or PSCI 2064 or GEOG 2064 |
+IS 3175 | Global Development | (IS 2054 or PSCI 2054 or GEOG 2054) or (IS 2064 or PSCI 2064 or GEOG 2064) |
+IS 3176 | Global Development | (IS 2054 or PSCI 2054 or GEOG 2054) or (IS 2064 or PSCI 2064 or GEOG 2064) |
+IS 3184 | Human Security | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3344 | Global Environmental Issues: Interdisciplinary Perspectives | |
+IS 3374 | The Politics of Energy | |
+IS 3384 | Politics of Global and Comparative Migration | PSCI 1024 or IS 1024 or PSCI 2054 or IS 2054 or GEOG 2054 or PSCI 2064 or IS 2064 or GEOG 2064 or PSCI 2084 or IS 2084 |
+IS 3394 | Comparative Politics of Immigrant Inclusion | PSCI 1024 or IS 1024 or PSCI 2054 or IS 2054 or GEOG 2054 or PSCI 2064 or IS 2064 or GEOG 2064 or PSCI 2084 or IS 2084 |
+IS 3554 | Comparative Political Economy | PSCI 1014 or PSCI 1014H or PSCI 1024 or PSCI 1024H or IS 1024 or IS 1024H |
+IS 3615 | International Relations | IS 2054 or PSCI 2054 or GEOG 2054 or PSCI 2064 or IS 2064 or GEOG 2064 |
+IS 3616 | International Relations | PSCI 2054 or IS 2054 or GEOG 2054 or PSCI 2064 or IS 2064 or GEOG 2064 |
+IS 3624 | Foreign Policy and Diplomacy | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 3734 | National Security | PSCI 2054 or IS 2054 or GEOG 2054 |
+IS 4004 | Seminar in International Studies | |
+IS 4014 | International Development | |
+IS 4024 | Seminar in Diplomacy and Security | IS 2054 or PSCI 2054 or GEOG 2054 |
+IS 4034 | Topics in Diplomacy Lab | |
+IS 4044 | International Communication | |
+IS 4054 | Seminar in Global Political Economy | IS 2064 or PSCI 2064 or GEOG 2064 |
+IS 4064 | Seminar in Global Development | IS 2064 or PSCI 2064 or GEOG 2064 |
+IS 4074 | The Politics of Cybersecurity | PSCI 3044 or IS 3044 |
+IS 4614 | Senior Seminar in International Relations | PSCI 3615 or PSCI 3616 or IS 3615 or IS 3616 or PSCI 3625 or PSCI 3626 or PSCI 3734 or IS 3626 or IS 3734 |
+IS 4734 | Theories and Practices of International Conflict Management | PSCI 3616 or IS 3616 |
+IS 4736 | Topics in Multilateral Diplomacy Workshop | |
+IS 4744 | Intelligence Analysis Workshop | IS 2054 or PSCI 2054 or GEOG 2054 |
+ISC 1005 | Integrated Scientific Reasoning | |
+ISC 1006 | Integrated Scientific Reasoning | |
 ISE 2004 | Introduction to Industrial and Systems Engineering | |
 ISE 2014 | Engineering Economy | |
 ISE 2024 | Probability Foundations for Industrial and Systems Engineers | MATH 2204 or MATH 2204H |
@@ -724,7 +1244,28 @@ ISE 4005 | Project Management and Systems Design | ISE 2034 and ISE 2214 and ISE
 ISE 4006 | Project Management and Systems Design | ISE 4005 |
 ISE 4204 | Production Planning and Inventory Control | ISE 2404 and ISE 3414 and STAT 4706 |
 ISE 4404 | Statistical Quality Control | ISE 3414 and STAT 4706 |
+ITAL 1105 | Elementary Italian | |
+ITAL 1106 | Elementary Italian | ITAL 1105 |
+ITAL 2105 | Intermediate Italian | ITAL 1106 |
 ITDS 1114 | Design Appreciation | |
+ITDS 1224 | Introduction to Interior Design | |
+ITDS 2044 | Interior Design I | ARCH 1016 |
+ITDS 2054 | Interior Design II | ITDS 2044 |
+ITDS 2134 | Materials and Methods in Interior Design | |
+ITDS 3044 | Interior Design III | ITDS 2054 |
+ITDS 3054 | Interior Design IV | ITDS 3044 |
+ITDS 3114 | Sustainable Design and Biophilia | |
+ITDS 3125 | History of Interiors | |
+ITDS 3126 | History of Interiors | |
+ITDS 3175 | Building Systems for Interior Design | ITDS 2044 |
+ITDS 3176 | Building Systems for Interior Design | ITDS 2044 and ITDS 3175 |
+ITDS 3184 | Construction Documents for Interior Design | |
+ITDS 3954 | Study Abroad-Interior Design | |
+ITDS 4044 | Interior Design V | ITDS 3054 |
+ITDS 4054 | Interior Design VI | ITDS 4044 and ITDS 4224 |
+ITDS 4224 | Design Research for Interiors | | ITDS 4044
+ITDS 4554 | Contemporary Interior Design Practice | ITDS 3126 |
+ITDS 4964 | Field Study | |
 JMC 2034 | Visual News Reporting | COMM 1016 or ENGL 1106 or ENGL 1204H |
 JMC 2074 | Introduction to Sports Media | |
 JMC 3154 | Multimedia Reporting | COMM 2024 and (COMM 2034 or JMC 2034) |
@@ -736,6 +1277,26 @@ JMC 4334 | Communication Ethics | |
 JMC 4814 | Digital Newsroom: Online | JMC 3174 |
 JMC 4824 | Digital Newsroom: Broadcast | JMC 3174 |
 JMC 4834 | Sportscenter | JMC 3314 and (JMC 4274 or JMC 3174) and COMM 2024 |
+JPN 3125 | Japanese for Oral Proficiency | JPN 2106 |
+JPN 3126 | Japanese for Oral Proficiency | JPN 3125 |
+LAR 1014 | Landscape Architecture Foundation Design Laboratory | ARCH 1015 |
+LAR 1254 | Environment and Natural Systems | |
+LAR 1264 | Seeing, Understanding and Representing Landscape and the Built Environment | |
+LAR 2025 | Landscape Architecture Design Studio Place, Process and People | LAR 1014 | LAR 2164
+LAR 2026 | Landscape Architecture Design Studio Place, Process and People | LAR 2025 | LAR 3154
+LAR 2154 | Landscape Architecture History | |
+LAR 2164 | Landform Function and Aesthetics | LAR 1264 |
+LAR 3044 | Land Analysis and Site Planning | |
+LAR 3154 | Watershed Sensitive Site Design and Construction | LAR 2164 |
+LAR 3164 | Design in Detail: Materials, Methods and Assembly | LAR 2164 |
+LAR 3264 | People Community and Place | |
+LAR 4014 | Design and Construction Documentation | LAR 2164 and LAR 3154 and LAR 3164 |
+LAR 4034 | Evolution of the American Landscape | |
+LAR 4084 | Landscape Design and Planning Studio | LAR 4014 |
+LAR 4094 | Senior Project | LAR 4014 and LAR 4084 |
+LAR 4154 | Design Studies of the Built Environment | |
+LAR 4244 | Professional Practice in Landscape Architecture | |
+LAR 4254 | Theories of Landscape Architecture | |
 LAT 1106 | Elementary Latin | |
 LAT 3004 | Readings in Latin Literature | |
 LDRS 1414 | Citizen Leadership | |
@@ -753,9 +1314,18 @@ MATH 1225 | Calculus of a Single Variable | MATH 1214 |
 MATH 1226 | Calculus of a Single Variable | MATH 1225 |
 MATH 1454 | Introduction to Programming for Mathematical Problem-Solving | | MATH 1225
 MATH 1524 | Business Calculus | |
+MATH 1535 | Geometry and Mathematics of Design | |
+MATH 1536 | Geometry and Mathematics of Design | |
+MATH 1614 | Numbers and Operations for Teachers | |
+MATH 1624 | Geometry for Teachers | MATH 1614 |
 MATH 2114 | Introduction to Linear Algebra | MATH 1225 or MATH 1226 |
+MATH 2114H | Introduction to Linear Algebra | MATH 1225 or MATH 1226 |
 MATH 2204 | Introduction to Multivariable Calculus | MATH 1226 |
+MATH 2204H | Introduction to Multivariable Calculus | MATH 1226 |
 MATH 2214 | Introduction to Differential Equations | (MATH 2114 or MATH 2114H or MATH 2405H) and MATH 1226 |
+MATH 2214H | Introduction to Differential Equations | (MATH 1114 or MATH 2114 or MATH 2114H or MATH 2405H or ISC 2105) and MATH 1226 |
+MATH 2405H | Mathematics in a Computational Context | MATH 1226 |
+MATH 2406H | Mathematics in a Computational Context | MATH 2405H |
 MATH 2534 | Introduction to Discrete Mathematics | CS 1114 or ECE 1574 or ECE 1004 or CS 2064 |
 MATH 2644 | Mathematics Tutoring | MATH 1226 |
 MATH 3034 | Introduction to Proofs | MATH 2114 or MATH 2114H or MATH 2405H |
@@ -765,6 +1335,8 @@ MATH 3144 | Linear Algebra I | (MATH 3034 or MATH 2534) and (MATH 2114 or MATH 2
 MATH 3214 | Vector Calculus | MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
 MATH 3224 | Advanced Calculus | (MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and MATH 3034 |
 MATH 4044 | History of Mathematics | MATH 3034 |
+MATH 4175 | Cryptography | MATH 3034 or CMDA 3605 or MATH 3134 or MATH 3144 |
+MATH 4176 | Cryptography | MATH 4175 or CMDA 3606 or MATH 3034 or MATH 3134 or MATH 3144 |
 MATH 4334 | College Geometry | MATH 3034 |
 MATH 4404 | Applied Numerical Methods | MATH 4564 and (ESM 2074 or AOE 2074) |
 MATH 4414 | Issues in Scientific Computing | (MATH 2214 or MATH 2214H or MATH 2406H or CMDA 2006) and MATH 3214 and (CS 1114 or CS 1064 or CS 1054 or CS 1044 or MATH 1454) |
@@ -789,6 +1361,7 @@ ME 3624 | Mechanical Design | ME 2004 and ESM 2204 and (MATH 2214 or MATH 2214H 
 ME 4005 | Mechanical Engineering Lab | (STAT 3704 or STAT 4604 or STAT 4705 or STAT 4714) and ME 3524 and ECE 2054 | ME 3534
 ME 4015 | Engineering Design and Project | ME 3024 and ME 3524 and ME 3534 and ME 3624 and ME 4005 and (ME 3304 or MSE 2034) and ME 3414 and ME 2134 |
 ME 4016 | Engineering Design and Project | ME 4015 |
+MGT 1104 | Foundations of Business | |
 MGT 2064 | Foundations of Entrepreneurship | |
 MGT 2104 | Careers in Management | |
 MGT 2114 | Principles of Project Management | MGT 1064 or MGT 1104 or BUS 1004 |
@@ -814,6 +1387,7 @@ MGT 4334 | Ethical Leadership and Corporate Social Responsibility | |
 MGT 4344 | Productivity and Quality Leadership | MGT 3304 or MGT 3404 and MGT 3324 and MGT 3604 and BIT 3414 |
 MGT 4354 | Leadership: Advances in Skills and Concepts | MGT 2354 or MGT 3304 or MGT 3404 |
 MGT 4414 | Strategic Compensation, Benefits, and Rewards | MGT 3334 or MGT 3344 or MGT 3424 |
+MINE 2114 | Energy and Raw Materials: Geopolitics and Sustainable Development | |
 MINE 2504 | Introduction to Mining Engineering | |
 MINE 2534 | Mine Surveying and Mapping | MATH 1226 |
 MINE 2544 | Leadership for Responsible Mining | ENGL 1105 | MINE 2504
@@ -836,6 +1410,7 @@ MINE 4654 | Mine Power Systems and Automation | MATH 2214 |
 MINE 4664 | Resource Engineering Leadership Seminar | |
 MKTG 2104 | Careers in Marketing | |
 MKTG 3104 | Marketing Management | |
+MKTG 3104H | Marketing Management | |
 MKTG 3164 | Introduction to Digital Marketing Strategy | |
 MKTG 3504 | Advertising | MKTG 3104 or MKTG 3104H |
 MKTG 4054 | Sales Technology | MKTG 3104 |
@@ -849,6 +1424,7 @@ MKTG 4304 | Marketing Communications | (MKTG 3104 or MKTG 3104H) and (MKTG 4204 
 MKTG 4454 | Sales Force Management | (MKTG 3104 or MKTG 3104H) and MKTG 4554 |
 MKTG 4554 | Principles of Professional Selling | |
 MKTG 4604 | Retail Management | MKTG 3104 or MKTG 3104H |
+MKTG 4704 | International Marketing | |
 MKTG 4754 | Strategic Marketing | (MKTG 3104 or MKTG 3104H) and MKTG 4154 and (MKTG 4204 or MKTG 4204H) |
 MKTG 4774 | Advanced Professional Selling | (MKTG 3104 or MKTG 3104H) and MKTG 4554 |
 MSE 2034 | Elements of Materials Engineering | |
@@ -871,7 +1447,16 @@ MSE 4085 | Senior Capstone Recitation | MSE 3884 | 4075 or 4095H for 4085; 4076 
 MSE 4086 | Senior Capstone Recitation | MSE 4085 | 4075 or 4095H for 4085; 4076 or 4096H for 4086. (2H,2C) for 4085. (1H,1C) for 4086.
 MSE 4424 | Materials Laboratory II | MSE 2044 or MSE 2034 |
 MSE 4644 | Materials Optimization Through Designed Experiments | MSE 3314 or MSE 4424 |
+MTRG 2964 | Field Study | |
+MTRG 3524 | Meteorology Field Methods | GEOG 2506 and GEOG 3504 |
+MTRG 3954 | Study Abroad | |
+MTRG 4584 | Topics in Applied Meteorology | GEOG 1514 |
+MTRG 4964 | Field Study | |
+MTRG 4994 | Undergraduate Research | |
 MUS 1004 | School of Performing Arts First Year Experience | |
+MUS 1005 | Theory Fundamentals | |
+MUS 1006 | Theory Fundamentals | MUS 1005 |
+MUS 1104 | Music Appreciation | |
 MUS 2025 | European-American Music Theory | |
 MUS 2026 | European-American Music Theory | MUS 2025 |
 MUS 2045 | Sightsinging Laboratory | |
@@ -881,47 +1466,214 @@ MUS 2055 | Audio Technology For Music | |
 MUS 2056 | Audio Technology For Music | MUS 2055 |
 MUS 2065 | Music Composition | |
 MUS 2066 | Music Composition | MUS 2065 |
+MUS 2115 | Survey of Western Music | |
+MUS 2116 | Survey of Western Music | |
+MUS 2214 | Class Applied Piano | |
+MUS 2224 | Class Applied Voice | |
+MUS 2234 | Class Applied Strings | |
+MUS 2264 | Class Applied Percussion | |
+MUS 2314 | Woodwind Techniques I - Flute, Clarinet, Saxophone | |
+MUS 2324 | Woodwind Techniques II - Oboe and Bassoon | |
+MUS 2334 | High Brass Techniques | |
+MUS 2344 | Low Brass Techniques | |
+MUS 2364 | Introduction to Music Education | |
+MUS 2514 | Individual Applied Voice | |
+MUS 2515 | Vocal Diction | |
+MUS 2516 | Vocal Diction | |
+MUS 2524 | Individual Applied Keyboard | |
+MUS 2534 | Individual Applied Violin | |
+MUS 2544 | Individual Applied Viola | |
+MUS 2554 | Individual Applied Cello | |
+MUS 2564 | Individual Applied Bass | |
+MUS 2574 | Individual Applied Flute | |
+MUS 2584 | Individual Applied Oboe | |
+MUS 2594 | Individual Applied Clarinet | |
+MUS 2604 | Introduction to Arts Marketing | |
+MUS 2614 | Individual Applied Saxophone | |
+MUS 2624 | Individual Applied Bassoon | |
+MUS 2634 | Individual Applied Horn | |
+MUS 2694 | Individual Applied Guitar | |
 MUS 2734 | Individual Applied Composition | |
 MUS 2754 | Individual Applied Recording | MUS 2055 |
+MUS 2774 | Individual Applied Harp | |
+MUS 2815 | Jazz Improvisation | |
 MUS 3024 | Counterpoint | MUS 3026 and MUS 3025 |
 MUS 3025 | European-American Music Analysis | MUS 2026 |
 MUS 3026 | European-American Music Analysis | MUS 2026 |
+MUS 3034 | Form and Analysis in the Common-practice Period | MUS 3026 and MUS 3025 |
 MUS 3035 | Advanced Class Piano | |
 MUS 3036 | Advanced Class Piano | MUS 3035 |
+MUS 3044 | Orchestration & Analysis | MUS 3026 and MUS 3025 |
 MUS 3045 | Advanced Ear Training | MUS 2046 and MUS 2026 |
 MUS 3046 | Advanced Ear Training | MUS 3045 |
+MUS 3054 | Introduction to Vocal/choral Arranging | MUS 3025 and MUS 3026 |
 MUS 3055 | Music and Media Production | MUS 2055 and MUS 2056 |
 MUS 3056 | Music and Media Production | MUS 3055 |
 MUS 3064 | Digital Sound Manipulation | |
 MUS 3065 | Computer Music and Multimedia Design | |
 MUS 3066 | Computer Music and Multimedia Design | |
+MUS 3074 | Topics in Music Analysis | MUS 3026 and MUS 3025 |
+MUS 3114 | Symphonic Literature | MUS 3025 and MUS 3026 and MUS 3174 |
+MUS 3124 | 20th Century Music Literature | MUS 3025 and MUS 3026 and MUS 3174 |
+MUS 3134 | Vocal Music Literature | MUS 3025 and MUS 3026 and MUS 3174 |
+MUS 3144 | Early Music Literature | MUS 3025 and MUS 3026 and MUS 3174 |
 MUS 3164 | History of Electronic Music | |
 MUS 3174 | Music as Global Culture | |
+MUS 3184 | Histories of Music I: Music in the European and American Traditions | MUS 3174 |
 MUS 3194 | Histories of Music II: Music in the 20th and 21st Centuries | MUS 3174 |
+MUS 3214 | Teaching Music in the Elementary School | | MUS 4964
+MUS 3225 | Conducting | MUS 3025 and MUS 3026 |
+MUS 3226 | Conducting | MUS 3225 |
+MUS 3244 | Vocal Pedagogy | |
 MUS 3314 | Instrumental Ensemble Music | |
 MUS 3414 | Choral Ensemble Music | |
 MUS 3900 | Bridge Experience | |
 MUS 4055 | Music Technology Senior Seminar | MUS 3056 |
 MUS 4056 | Music Technology Senior Seminar | MUS 3056 |
+MUS 4174 | Topics in Musicology | MUS 3174 |
+MUS 4204 | Secondary General and Choral Music Education Methods | MUS 3214 |
+MUS 4214 | Instrumental Methods: Elementary | MUS 2364 |
+MUS 4224 | Instrumental Methods: Secondary | MUS 2364 |
+MUS 4234 | Topics in Music Education | MUS 2364 |
+MUS 4514 | Advanced Individual Applied Voice | MUS 2514 |
+MUS 4524 | Advanced Individual Applied Keyboard | MUS 2524 |
+MUS 4534 | Advanced Individual Applied Violin | MUS 2534 |
+MUS 4544 | Advanced Individual Applied Viola | MUS 2544 |
+MUS 4554 | Advanced Individual Applied Cello | MUS 2554 |
+MUS 4564 | Advanced Individual Applied Bass | MUS 2564 |
+MUS 4574 | Advanced Individual Applied Flute | MUS 2574 |
+MUS 4584 | Advanced Individual Applied Oboe | MUS 2584 |
+MUS 4594 | Advanced Individual Applied Clarinet | MUS 2594 |
+MUS 4614 | Advanced Individual Applied Saxophone | MUS 2614 |
+MUS 4624 | Advanced Individual Applied Bassoon | MUS 2624 |
+MUS 4634 | Advanced Individual Applied Horn | MUS 2634 |
 MUS 4734 | Advanced Individual Applied Composition | MUS 2734 |
 MUS 4754 | Advanced Individual Applied Recording | MUS 2754 |
 MUS 4764 | Advanced Individual Applied Electroacoustics | MUS 3064 and MUS 3066 |
+MUS 4964 | Field Study | |
+NANO 1014 | Introduction to Nanoscience: From Atoms to Applications | |
+NANO 1024 | Nanoscience: From Principles to Technology | NANO 1014 or NANO 1015 |
+NANO 2114 | Nanoscience Research Seminar | NANO 1016 or NANO 1024 |
+NANO 2314 | Applied Quantitative Methods: From Quantum to the Macroscale | (ISC 1106 or ISC 1106H) or (MATH 1026 or MATH 1226) and (CHEM 1035 or CHEM 1055) and (PHYS 2205 or PHYS 2305) |
+NANO 2334 | Applied Quantum Nanoscience: From Quantization to Innovation | (NANO 1016 or NANO 1024) and (NANO 2314 or NANO 2984E) and (CHEM 1036 or CHEM 1056 or ISC 1106 or ISC 1106H) | PHYS 2206 or PHYS 2306 or ISC 2105
+NANO 2814 | NanoCareers | |
+NANO 3015 | Nanoscale Synthesis, Fabrication, and Characterization | CHEM 2514 or CHEM 2535 or CHEM 2565 |
+NANO 3016 | Nanoscale Synthesis, Fabrication, and Characterization | NANO 3015 and (CHEM 2514 or CHEM 2535 or CHEM 2565) |
+NANO 3114 | Professional Dissemination of Nanoscience Research | NANO 2114 |
+NANO 3124 | Nanoscience and the Environment | (NANO 1016 or NANO 1024) and (BIOL 1105 or ISC 1106 or ISC 1106H) and (CHEM 1036 or CHEM 1056 or ISC 2106H) |
+NANO 4124 | Advanced Nanomaterials and Devices | NANO 2024 or NANO 2324 or NANO 2334 or CHEM 3616 or PHYS 3324 |
+NANO 4324 | Introduction to Nanomedicine | NANO 3015 and (BIOL 1105 or ISC 1106 or ISC 1106H) |
+NANO 4334 | Advanced Nanomedicine | NANO 4324 |
+NANO 4354 | Advanced Nanomedicine Laboratory | NANO 4324 | NANO 4334
+NANO 4994 | Undergraduate Research | |
+NDIG 1104 | Introduction to American Indian Studies | |
+NDIG 3684 | Indigenous Peoples and World Politics | |
+NEUR 1004 | Neuroscience Orientation Seminar | |
+NEUR 2025 | Introduction to Neuroscience | |
+NEUR 2026 | Introduction to Neuroscience | NEUR 2025 |
+NEUR 2074 | Bench to Bedside: How Science Becomes Medicine | (BIOL 1105 or BIOL 1014) and ENGL 1106 |
+NEUR 2364 | Mind Altering Substances from Nature | |
+NEUR 2464 | Neuroscience and Society | |
+NEUR 3044 | Cellular and Molecular Neuroscience | NEUR 2025 and (CHEM 1036 or CHEM 1056 or CHEM 2565 or ISC 2105) |
+NEUR 3054 | Brain-Body Interactions in Health and Disease | NEUR 2026 |
+NEUR 3074 | Evolutionary Neuroscience | NEUR 2026 |
+NEUR 3084 | Cognitive Neuroscience | NEUR 2026 |
+NEUR 3144 | Mechanisms of Learning and Memory | NEUR 2026 and NEUR 3044 |
+NEUR 3234 | The Artificial Brain | NEUR 2026 and (MATH 1026 or MATH 1226) |
+NEUR 3594 | Neurobiology of Psychiatric Disorders | NEUR 2026 |
+NEUR 3604 | Neurobiochemistry | NEUR 2025 |
+NEUR 3704 | Human Anatomy and Physiology with Neuroendocrine Focus | NEUR 2026 and NEUR 2036 |
+NEUR 3774 | Neuroendocrinology and Endocrine Disorders | BIOL 1106 |
+NEUR 3844 | Computational Neuroscience and Neural Engineering | MATH 1226 |
+NEUR 3914 | Neuroscience of Drug Addiction | NEUR 2025 and NEUR 2026 |
+NEUR 3944 | War and the Brain | NEUR 2026 |
+NEUR 4034 | Diseases of the Nervous System | NEUR 2026 and NEUR 3044 |
+NEUR 4044 | Neuroscience Senior Seminar | NEUR 3044 and NEUR 3084 |
+NEUR 4054 | Developmental Neuroscience | NEUR 3044 |
+NEUR 4064 | Neuropharmacology | BIOL 1105 or ISC 1106H |
+NEUR 4314 | Genetics in Neuroscience | NEUR 3044 |
+NEUR 4454 | Neuroeconomics | NEUR 2026 or ECON 3104 |
+NEUR 4514 | Neuroimmunology in Health and Disease | NEUR 3044 |
+NEUR 4594 | Clinical Neuroscience in Practice | NEUR 4034 |
+NEUR 4814 | Nutritional Neuroscience | NEUR 2026 or ALS 2304 |
 NR 1234 | First Year Experience In Natural Resources and Environment | |
 NR 2234 | 1st Semester Experience-Transfer Students in Natural Resources and Environment | |
 NR 4004 | Professional Skills in Natural Resources | |
 NR 4014 | Natural Resources Economics | ECON 2005 or AAEC 1005 |
 PHIL 1204 | Knowledge and Reality | |
 PHIL 1304 | Morality and Justice | |
+PHIL 2115 | Ancient Through Medieval Philosophy | |
+PHIL 2116 | Ancient Through Medieval Philosophy | |
+PHIL 2125 | History of Modern Philosophy | |
+PHIL 2126 | History of Modern Philosophy | |
 PHIL 2304 | Global Ethics | |
+PHIL 2314 | Philosophy of Sex, Gender, and Race | |
+PHIL 3314 | Ethical Theory | |
+PHIL 3324 | Biomedical Ethics | |
+PHIL 3334 | Ethical Perspectives on Artificial Intelligence | |
+PHIL 3414 | Aesthetics | |
+PHIL 3505 | Modern Logic and Its Development | |
+PHIL 4204 | Philosophy of Mind | |
+PHIL 4214 | Metaphysics | |
+PHIL 4224 | Epistemology | |
+PHIL 4304 | Political Philosophy | |
+PHIL 4604 | Philosophy of Biology | |
+PHIL 4614 | Philosophy of Science | |
+PHS 1004 | BSPH Essentials | |
+PHS 1514 | Personal Health | |
 PHS 2004 | Introduction to Public Health | |
 PHS 3014 | Introduction to Environmental Health | |
+PHS 3074 | Public Health Professional and Practicum Prep | PHS 2004 |
+PHS 3534 | Drug Education | |
+PHS 3634 | Epidemiologic Concepts of Health and Disease | STAT 2004 or STAT 3005 or STAT 3604 or STAT 3615 |
+PHS 3654 | Rural Health | PHS 2004 |
+PHS 4014 | Public Health Program Planning and Evaluation | PHS 2004 and HNFE 2664 |
+PHS 4044 | Public Health Policy and Administration | |
 PHS 4054 | Concepts in One Health | PHS 3014 and PHS 3634 |
+PHS 4064 | Modeling Infectious Diseases | MATH 1014 or MATH 1025 or MATH 1225 or MATH 1524 |
+PHS 4074 | Practicum in Public Health | PHS 3074 and PHS 2004 and PHS 3014 and PHS 3634 |
+PHS 4174 | Capstone in Public Health | PHS 2004 and PHS 3014 and PHS 3634 and PHS 3074 |
+PHYS 1055 | Introduction to Astronomy | |
+PHYS 1155 | Astronomy Laboratory | | PHYS 1055
 PHYS 2205 | General Physics | MATH 1025 or MATH 1026 or MATH 1225 or MATH 1524 |
 PHYS 2206 | General Physics | (PHYS 2305 or PHYS 2205) and (MATH 1025 or MATH 1026 or MATH 1225 or MATH 1524) |
 PHYS 2215 | General Physics Laboratory | | PHYS 2205
 PHYS 2216 | General Physics Laboratory | PHYS 2215 or PHYS 2305 | PHYS 2206
 PHYS 2305 | Foundations of Physics | MATH 1225 | MATH 1226
 PHYS 2306 | Foundations of Physics | MATH 1226 and PHYS 2305 |
+PHYS 2325 | Seminar for Physics Majors | | PHYS 2305
+PHYS 2504 | Math Methods in Physics | PHYS 2305 | 2306, (MATH 2214 or 2214H) and (MATH 2224 or 2204 or 2204H).
+PHYS 3154 | Observational Astrophysics | PHYS 1156 |
+PHYS 3254 | Enriched Physics Outreach | | PHYS 2306
+PHYS 3314 | Intermediate Laboratory | |
+PHYS 3324 | Modern Physics | PHYS 2306 | MATH 2214 or MATH 2214H.
+PHYS 3355 | Intermediate Mechanics | (PHYS 2305 and PHYS 2306 and PHYS 2504 and MATH 2204 and MATH 2214) or (PHYS 2305 and PHYS 2306 and PHYS 2504 and MATH 2204 and MATH 2214H) or (PHYS 2305 and PHYS 2306 and PHYS 2504 and MATH 2204H and MATH 2214) or (PHYS 2305 and PHYS 2306 and PHYS 2504 and MATH 2204H and MATH 2214H) or (PHYS 2305 and PHYS 2306 and PHYS 2504 and MATH 2406H) |
+PHYS 3405 | Intermediate Electricity and Magnetism | (MATH 2214 or MATH 2214H) and PHYS 2305 and PHYS 2306 and PHYS 2504 |
+PHYS 3406 | Intermediate Electricity and Magnetism | PHYS 3405 |
+PHYS 3655 | Introduction to Astrophysics | PHYS 2306 |
+PHYS 3656 | Introduction to Astrophysics | PHYS 2306 |
+PHYS 3704 | Thermal Physics | PHYS 2306 and PHYS 3324 | 2504, (MATH 2214 or 2214H).
+PHYS 4224 | Physics Teaching and Learning | PHYS 2306 |
+PHYS 4254 | Quantum Information Technologies | MATH 2114 or MATH 2114H |
+PHYS 4264 | Quantum Optics and Qubit Processors | PHYS 4455 |
+PHYS 4315 | Modern Experimental Physics | PHYS 3314 |
+PHYS 4316 | Modern Experimental Physics | PHYS 3314 |
+PHYS 4455 | Introduction to Quantum Mechanics | PHYS 3355 | PHYS 3406
+PHYS 4456 | Introduction to Quantum Mechanics | PHYS 4455 |
+PHYS 4514 | Introduction to Nuclear Physics | PHYS 3324 |
+PHYS 4524 | Intro Particle Physics | PHYS 3324 |
+PHYS 4534 | Quantitative Analysis of Physics Experiments | PHYS 2504 and PHYS 3324 and CS 1064 |
+PHYS 4554 | Introduction to Solid State Physics | | PHYS 4456
+PHYS 4564 | Polymer Physics | PHYS 2306 |
+PHYS 4574 | Nanotechnology | PHYS 2205 and PHYS 2206 or PHYS 2305 and PHYS 2306 |
+PHYS 4614 | Optics | PHYS 2306 and (MATH 2214 or MATH 2214H) and (MATH 2224 or MATH 2204 or MATH 2204H) |
+PHYS 4634 | Modern Classical Physics | PHYS 3355 and PHYS 3405 |
+PHYS 4654 | Modern Cosmology | PHYS 3656 |
+PHYS 4664 | Astroparticle Physics | PHYS 3655 or PHYS 3656 |
+PHYS 4674 | Introduction to General Relativity | (MATH 2214 or MATH 2214H) and PHYS 3355 |
+PHYS 4714 | Introduction to Biophysics | PHYS 2206 or PHYS 2306 or ISC 2106H |
+PHYS 4764 | Computational Physics | PHYS 2306 and (CS 1064 or CS 1114 or ECE 2514 or AOE 2074) |
+PHYS 4774 | Intro to Physics of Galaxies | PHYS 3656 |
 PM 2664 | Introduction to Property Management | |
 PM 3634 | Managing Affordable and Specialized Housing | |
 PM 3674 | Property Management Operations | |
@@ -932,7 +1684,10 @@ PM 4684 | Leasing Commercial Properties | |
 PM 4694 | Contemporary Issues in Property Management | PM 4964 or PM 4644 |
 PM 4744 | Housing Challenges and Policies in the United States | |
 PM 4964 | Field Work/Practicum | |
+PPE 1004 | Introduction to Philosophy, Politics, and Economics | |
 PPE 2894 | PPE Gateway Course | |
+PPE 3884 | Topics in Philosophy, Politics, and Economics | |
+PPE 4884 | PPE Capstone Course | PPE 2894 or PHIL 2894 or PSCI 2894 or ECON 2894 |
 PPWS 2104 | Plants, Genes, and People | BIOL 1005 or BIOL 1105 |
 PPWS 4104 | Plant Pathology | (BIOL 1005 or BIOL 1105) and (BIOL 1006 or BIOL 1106) |
 PPWS 4604 | Biological Invasions | BIOL 1105 and BIOL 1106 |
@@ -948,9 +1703,32 @@ PSCI 2014 | Introduction to Political Theory | |
 PSCI 2024 | Research Methods in Political Science | (PSCI 1014 or PSCI 1014H) and (PSCI 1024 or PSCI 1024H or IS 1024 or IS 1024H) |
 PSCI 2054 | Introduction to World Politics | |
 PSCI 2064 | The Global Economy and World Politics | |
+PSCI 3015 | Political Theory | PSCI 2014 |
+PSCI 3016 | Political Theory | PSCI 2014 |
+PSCI 4514 | Senior Seminar in Comparative Politics | PSCI 3515 or PSCI 3516 or PSCI 3524 or PSCI 3554 or PSCI 3564 or PSCI 3514 or PSCI 3534 or PSCI 3544 or PSCI 3574 or PSCI 3584 |
+PSCI 4724 | Senior Seminar in Political Theory | PSCI 3015 or PHIL 3015 or PSCI 3016 or PHIL 3016 or PSCI 3754 or PSCI 3764 or PSCI 3774 or UAP 3774 |
 PSYC 1004 | Introductory Psychology | |
+PSYC 1024 | Pathways Through and Beyond the Psychology Major | |
+PSYC 1094 | Principles of Psychological Research | PSYC 1004 or PSYC 2004 |
+PSYC 1524 | Language and the Mind | |
 PSYC 2034 | Developmental Psychology | PSYC 1004 |
+PSYC 2044 | Psychology of Learning | PSYC 1004 |
+PSYC 2064 | Introduction to Neuroscience of Behavior | PSYC 1004 |
+PSYC 2074 | Animal Behavior | |
 PSYC 2084 | Social Psychology | PSYC 1004 |
+PSYC 2124 | Introduction to I-O Psychology | PSYC 1004 and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 3024 | Human Behaviors and Natural Environments | PSYC 1004 |
+PSYC 3054 | Health Psychology | PSYC 2004 or PSYC 1004 |
+PSYC 4034 | Special Topics in Developmental Psychology | PSYC 1004 and PSYC 2034 and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 4044 | Advanced Learning | PSYC 1004 and PSYC 2044 and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 4064 | Physiological Psychology | PSYC 1004 and (PSYC 2064 or NEUR 2025) and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 4074 | Sensation and Perception | PSYC 1004 and (PSYC 2064 or NEUR 2025) and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 4084 | Advanced Social Psychology | PSYC 1004 and (PSYC 1094 or HD 3014 or SOC 3204) and PSYC 2084 |
+PSYC 4094 | Theory of Psychological Measurement | PSYC 1004 and (PSYC 1094 or HD 3014 or SOC 3204) and (STAT 2004 or STAT 3005 or STAT 3604 or STAT 3615 or BIT 2405) |
+PSYC 4114 | Cognitive Psychology | PSYC 1004 and PSYC 2044 and (PSYC 1094 or HD 3014 or SOC 3204) |
+PSYC 4134 | Language Development | PSYC 1004 or PSYC 2004 |
+PSYC 4154 | Bilingual Development and Cognition | PSYC 1004 or PSYC 1524 or ENGL 1524 or ENGL 1504 or HD 1004 or SPAN 3494 |
+PSYC 4364 | Senior Seminar | |
 REAL 1014 | Careers in Real Estate | |
 REAL 2034 | Real Estate Data Analysis | UAP 2004 or REAL 2004 or CEE 2834 |
 REAL 3024 | Applied Real Estate Development | (REAL 2004 or UAP 2004) and (REAL 2034 or BIT 2405) and (ECON 2005 or AAEC 1005) |
@@ -982,6 +1760,7 @@ RUS 2106 | Intermediate Russian | RUS 1106 |
 RUS 3105 | Grammar, Composition and Conversation | RUS 2106 |
 RUS 3106 | Grammar, Composition and Conversation | RUS 2106 |
 RUS 3124 | Russian for Oral Proficiency | RUS 3105 or RUS 3106 or RUS 3114 |
+RUS 3304 | Survey of Nineteenth-Century Russian Literature in Translation | ENGL 1106 or ENGL 1204H |
 RUS 4204 | Topics in Russian Culture and Civilization | RUS 3106 |
 SBIO 1004 | Explorations in Sustainable Systems Science | |
 SBIO 1024 | Systems Thinking in a Bioeconomy | |
@@ -991,12 +1770,14 @@ SBIO 2104 | Principles of Packaging | |
 SBIO 2124 | Structure and Properties of Sustainable Biomaterials | BIOL 1105 and CHEM 1035 |
 SBIO 2504 | Circular Economy Analytics for Sustainable Systems | MATH 1014 or MATH 1025 or MATH 1225 or MATH 1524 or MATH 1535 or MATH 1525 |
 SBIO 2514 | Applied Industrial Ecology | |
+SBIO 2784 | Global Forest Sustainability | |
 SBIO 3004 | Sustainable Nature-Based Enterprises | |
 SBIO 3124 | Paper and Paperboard Packaging | SBIO 2104 | SBIO 2004
 SBIO 3224 | Packaging Distribution Systems | SBIO 2104 |
 SBIO 3244 | Packaging Machinery and Production Systems | SBIO 2104 |
 SBIO 3284 | Packaging Polymers and Production | SBIO 2104 |
 SBIO 3314 | Mechanics of Sustainable Biomaterials and Packaging | PHYS 2205 or PHYS 2305 |
+SBIO 3324 | Green Building Systems | |
 SBIO 3454 | Society, Sustainability Biomaterials and Energy | |
 SBIO 3464 | Sustainable Operations Management | STAT 2004 or STAT 3615 or STAT 3005 or STAT 3604 |
 SBIO 3524 | Manufacture of Sustainable Biomaterials for Structures | SBIO 2124 |
@@ -1010,6 +1791,12 @@ SBIO 4724 | Sustainable Systems Science Capstone | |
 SBIO 4994 | Undergraduate Research | |
 SOC 1004 | Introductory Sociology | |
 SOC 2004 | Social Problems | |
+SOC 2104 | Quantitative Approaches to Community Research | |
+SOC 2404 | Deviant Behavior | |
+SOC 3004 | Social Inequality | SOC 1004 |
+SOC 3104 | Sociological Theory | SOC 1004 |
+SOC 3204 | Social Research Methods | SOC 1004 |
+SOC 4194 | Senior Seminar | SOC 3104 and SOC 3204 |
 SPAN 3105 | Grammar, Composition and Conversation | |
 SPAN 3106 | Grammar, Composition and Conversation | |
 SPAN 3124 | Spanish for Oral Proficiency | SPAN 3105 and SPAN 3106 |
@@ -1029,19 +1816,78 @@ SPIA 3900 | Bridge Experience | |
 SPIA 4454 | Future of Cities | |
 SPIA 4464 | Data and the Art of Policy-Making and Planning | |
 STAT 2004 | Introductory Statistics | |
+STAT 2094 | Basic R for Statistics | |
+STAT 2274 | Basic Python For Statistics | |
 STAT 3005 | Statistical Methods | MATH 1225 |
 STAT 3006 | Statistical Methods | STAT 3005 or STAT 4705 or CMDA 2005 or STAT 3615 |
+STAT 3094 | SAS Programming | STAT 3006 or CMDA 2006 or STAT 3616 |
 STAT 3104 | Probability and Distributions | (MATH 1226 or MATH 1026) and (STAT 3005 or STAT 3615 or STAT 4705 or CMDA 2005) |
+STAT 3204 | Data Visualization | (STAT 2004 or STAT 3005 or STAT 3604 or STAT 3615 or STAT 4705 or STAT 4706 or STAT 4714 or CMDA 2005) and (COMM 1016 or ENGL 1105) |
+STAT 3274 | Introduction to Sports Analytics Research | CMDA 2006 or STAT 3006 or STAT 3616 |
+STAT 3504 | Nonparametric Statistics | STAT 3006 or STAT 3616 or STAT 4106 or STAT 4604 or STAT 4706 or CMDA 2006 |
 STAT 3604 | Statistics for Social Science | MATH 1014 or MATH 1025 or MATH 1214 or MATH 1225 or MATH 1524 |
 STAT 3615 | Biological Statistics | MATH 1225 or MATH 1025 or MATH 1524 or ISC 1105 |
 STAT 3616 | Biological Statistics | STAT 3615 or STAT 3005 |
+STAT 3654 | Introductory Data Analytics and Visualization | (CS 1114 or CS 1044 or CS 1054 or CS 1064) and (MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and (STAT 3006 or STAT 4105 or STAT 4705 or STAT 4714 or CMDA 2006) |
 STAT 3704 | Statistics for Engineering Applications | MATH 2224 or MATH 2224H or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
+STAT 4004 | Methods of Statistical Computing | (MATH 2114 and STAT 3006 and STAT 3104) or CMDA 2006 |
+STAT 4024 | Communication in Statistical Collaborations | STAT 4214 and STAT 4204 |
+STAT 4094 | Advanced R for Statistics | STAT 2094 or STAT 3006 or CMDA 2006 |
 STAT 4105 | Theoretical Statistics | (MATH 2204 or MATH 2204H or CMDA 2005 or MATH 2406H) and (STAT 3104 or CMDA 2006) |
+STAT 4106 | Theoretical Statistics | STAT 4105 |
+STAT 4204 | Experimental Designs | STAT 3006 or STAT 3616 or STAT 4106 or STAT 4706 or STAT 5605 or STAT 5615 or CMDA 2006 |
 STAT 4214 | Methods of Regression Analysis | STAT 3006 or STAT 3616 or STAT 4106 or STAT 4706 or STAT 5606 or STAT 5616 or CMDA 2006 |
+STAT 4274 | Sports Analytics Statistical Research | (STAT 4214 or CMDA 4654 or CS 4654 or STAT 4654) and (STAT 3274 or CMDA 3274) |
+STAT 4364 | Introduction to Statistical Genomics | (MATH 2224 or MATH 2224H or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and (STAT 3104 or STAT 4105 or STAT 4705 or CMDA 2006) and (STAT 3006 or STAT 3616 or STAT 4706 or CMDA 2006) |
+STAT 4444 | Applied Bayesian Statistics | (MATH 2224 or MATH 2224H or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) and (STAT 3104 or STAT 4105 or STAT 4705 or CMDA 2006) and (STAT 3006 or STAT 3616 or STAT 4706 or CMDA 2006) |
+STAT 4504 | Applied Multivariate Analysis | STAT 3006 or STAT 4706 or CMDA 2006 or STAT 3616 |
+STAT 4514 | Introduction to Categorical Data Analysis | STAT 3006 or STAT 3616 or STAT 4106 or STAT 4706 or CMDA 2006 |
+STAT 4534 | Applied Statistical Time Series Analysis | STAT 3006 or STAT 4706 or STAT 4714 or STAT 3616 or BIT 2406 or CMDA 2006 |
+STAT 4584 | Advanced Calculus for Statistics | (MATH 1114 or MATH 2114 or MATH 2114H or MATH 2405H) and (MATH 1225) and (MATH 1226) and (MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005) |
 STAT 4604 | Statistical Methods for Engineers | MATH 1226 |
+STAT 4654 | Intermediate Data Analytics and Machine Learning | (STAT 3654 or CMDA 3654 or CS 3654) and (CMDA 2006 or STAT 3104 or STAT 4106 or STAT 4706) and (MATH 2114 or MATH 2114H or MATH 2405H) |
+STAT 4664 | Computational Intensive Stochastic Modeling | (STAT 4106 or CMDA 3605) and (CS 1114 or CS 1064 or CMDA 2006) |
 STAT 4705 | Probability and Statistics for Engineers | MATH 2224 or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
 STAT 4706 | Probability and Statistics for Engineers | STAT 4705 or STAT 4105 or ISE 2024 |
 STAT 4714 | Probability and Statistics for Electrical Engineers | MATH 2224 or MATH 2204 or MATH 2204H or MATH 2406H or CMDA 2005 |
+STAT 4734 | Statistical Methods for Digital Twins | STAT 4214 or CMDA 3654 |
+STAT 4744 | Deep Learning | (STAT 3104 or CMDA 2006) and (STAT 4214 or CMDA 4654 or STAT 4654 or CS 4654) |
+STL 2304 | Foundations of Science, Technology and Law | ENGL 1106 or ENGL 1204H or COMM 1016 |
+STL 4304 | Intellectual Property Law | STL 2304 |
+STL 4314 | Current Topics in Science, Technology and Law | STL 2304 or STL 4304 or STL 4324 |
+STL 4324 | Global Aspects of Intellectual Property Law | |
+STS 1504 | Introduction to Science, Technology, and Society | |
+STS 2254 | Innovation in Context | |
+STS 2454 | Science, Technology, and Environment | |
+STS 2604 | Introduction to Data in Social Context | |
+STS 2664 | Technology Ethics | |
+SYSB 3035 | Genomics and Bioinformatics | BIOL 2004 |
+SYSB 3036 | Genomics and Bioinformatics | SYSB 3035 |
+SYSB 3115 | Network Dynamics and Cell Physiology | SYSB 2034 |
+SYSB 3116 | Network Dynamics and Cell Physiology | SYSB 3115 |
+TA 2014 | Introduction to Theatre | |
+TA 2104 | Fundamentals of Theatre and Production | |
+TA 2114 | Script Analysis | |
+TA 2134 | Acting Lab | |
+TA 2144 | Foundations of Movement and Voice | TA 2134 or TA 2024 |
+TA 2164 | Production Design Lab | |
+TA 2174 | Costume Design Lab | |
+TA 2224 | Intermediate Performance Intensive | TA 2134 or TA 2024 |
+TA 2404 | Creative Collaboration | |
+TA 2414 | Stage and Lighting Technology | |
+TA 2424 | Fundamentals of Directing | |
+TA 3014 | Production Lab | |
+TA 3104 | Sound Technology Topics | |
+TA 3105 | History of Theatre and Cinema | TA 2114 |
+TA 3106 | History of Theatre and Cinema | TA 2114 |
+TA 3114 | Scenography Topics | TA 2164 |
+TA 3124 | Costume Design and Technology Topics | |
+TA 3134 | Lighting Topics | TA 2414 |
+TA 3144 | Theatre Technology Topics | TA 2414 |
+TA 3154 | Acting Topics | TA 2134 or TA 2024 |
+TA 3164 | Voice and Speech Topics | TA 2134 or TA 2024 |
+TA 3174 | Movement Topics | TA 2134 or TA 2024 |
+TA 3604 | Arts Management | |
 UAP 1004 | Introduction to Career & Professional Development in Public Service | |
 UAP 1024 | Leadership, Service, and Public Problem Solving | |
 UAP 2004 | Principles of Real Estate | |
@@ -1063,3 +1909,4 @@ WATR 3754 | Watersheds and Water Quality Monitoring | (BIOL 1106 or BIOL 1006) a
 WATR 4244 | Hydroinformatics | FREC 3104 or WATR 3104 or FREC 1044 |
 WATR 4464 | Water Resources Policy and Economics | AAEC 1005 or ECON 2005 |
 WATR 4614 | Watershed Assessment, Management, and Policy | |
+WGS 1824 | Introduction to Womens and Gender Studies | |

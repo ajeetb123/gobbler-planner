@@ -29,11 +29,13 @@ export interface Roadmap {
   terms: Term[];
   /** Per-term credit sums as printed in the catalog, for checking the transcription. */
   printedSums: number[];
+  /** True when the catalog has no roadmap and the term order is ours (see draft.ts). */
+  draft?: boolean;
 }
 
 const CODE = /^([A-Z]{2,4}) (\d{4})\b/;
 
-function parseItems(text: string, src: number): PlanItem[] {
+export function parseItems(text: string, src: number): PlanItem[] {
   const items: PlanItem[] = [];
   // Names contain commas and brackets ("Elective (Pathways Concept 2, 3, or 7) (3)"), so an item
   // ends only at "(credits), ". Empty credits "()" mark a choice for the slot before it.
@@ -112,7 +114,7 @@ export const credits = (items: PlanItem[]) => items.reduce((a, i) => a + i.credi
 const subject = (i: PlanItem) => i.code?.split(' ')[0];
 
 export const YEAR_OPTIONS = [3, 3.5, 4, 4.5, 5] as const;
-const ORDINAL = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'];
+const ORDINAL = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh'];
 
 /** A summer term is planned at half the credits of a Fall or Spring term. */
 export const SUMMER_WEIGHT = 0.5;
@@ -139,8 +141,18 @@ export function slots(years: number): Array<{ label: string; weight: number }> {
  * still end with conflicts: the planner page flags those.
  */
 export function repack(r: Roadmap, years: number, check?: Record<string, CheckItem>): Term[] {
-  if (years === 4) return r.terms;
-  const sl = slots(years);
+  if (years === baseYears(r)) return r.terms;
+  return pack(r, slots(years), check);
+}
+
+/** Years the roadmap's own layout takes: 4 for every official roadmap, 5 for the 160-credit architecture draft. */
+export const baseYears = (r: Roadmap) => r.terms.filter((t) => !t.label.includes('Summer')).length / 2;
+
+/** Fall and Spring slots only, for laying out a draft. */
+export const plainSlots = (n: number) => Array.from({ length: n }, (_, k) => ({ label: `${ORDINAL[Math.floor(k / 2)]} year, ${k % 2 === 0 ? 'Fall' : 'Spring'}`, weight: 1 }));
+
+/** The packing behind repack: spread r's courses over the given slots, in r's order. */
+export function pack(r: Roadmap, sl: Array<{ label: string; weight: number }>, check?: Record<string, CheckItem>): Term[] {
   const queue = r.terms.flatMap((t) => t.items);
   const terms: Term[] = [];
   // depth = how many later terms the courses that chain off this one still need (from the official layout).
