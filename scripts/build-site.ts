@@ -22,6 +22,7 @@ const OUT = 'dist';
 const grades = process.argv.includes('--grades');
 if (top !== undefined && !grades) throw new Error('--top only applies with --grades');
 const files = readdirSync('data').filter((f) => f.endsWith('.csv')).sort().map((f) => join('data', f));
+if (grades && files.length === 0) throw new Error('--grades needs UDC grade CSVs in data/. They are not in this repository (see data/SOURCE.md).');
 const site = grades ? buildSite(loadUdc(files), { top }) : undefined;
 const tModel = performance.now();
 

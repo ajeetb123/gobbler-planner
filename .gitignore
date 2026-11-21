@@ -1,2 +1,4 @@
 node_modules
 dist
+# UDC grade exports: UDC has not authorized this use. Never commit them.
+data/*.csv
