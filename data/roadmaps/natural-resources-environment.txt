@@ -1,0 +1,212 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## fish-conservation-bs-freshwater-fisheries-conservation | Fish Conservation Major with Freshwater Fisheries Conservation Option | natural-resources-environment/fish-wildlife-conservation/fish-conservation-bs-freshwater-fisheries-conservation/
+First Year
+ Fall: ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), NR 1234 or NR 2234 (2), Pathway 6a (3), sum 15
+ Spring: ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), FIW 2114 (3), Pathways Concept 2 Ethics course (3), Select one of the following: (), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), BIOL 2704 (3), BIOL 2804 (3), STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: CHEM 1036 (3), CHEM 1046 (1), FIW 4424 (4), STAT 3616 (3), Pathways Concept 3 (3), Select one of the following: (), sum 14
+Third Year
+ Fall: FIW 4414 (3), FIW 3514 (3), Legal Foundations Restricted Elective (3), Select one of the following: (), Pathway 1a (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: FIW 4614 (3), FIW 4324 or BIOL 2004 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Physical Science Restricted Elective (3), Select one of the following: (), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Experiential Learning (department approval required) (1), sum 16
+Fourth Year
+ Fall: FIW 4464 (3), Geographic Information Systems (GIS) Restricted Elective (3), Select one of the following: (), Aquatic Ecology Restricted Elective (4), Select one of the following: (),  or FIW 4484 or ENT 4484 (),  or ENT 4354 or BIOL 4354 (), Writing Restricted Elective (3), Select one of the following: (), sum 13
+ Spring: FIW 4714 (4), GEOS 3034 (3), Aquatic Ecology Restricted Elective (4), Select one of the following: (),  or FIW 4484 or ENT 4484 (),  or ENT 4354 or BIOL 4354 (), Select free electives to total 120 credits (4), sum 15
+TOTAL 120
+
+## fish-conservation-bs-human-dimensions | Fish Conservation Major with Human Dimensions Option | natural-resources-environment/fish-wildlife-conservation/fish-conservation-bs-human-dimensions/
+First Year
+ Fall: ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), NR 1234 or NR 2234 (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1225 (3), FIW 2114 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), BIOL 2704 (3), BIOL 2804 (3), STAT 3604 or STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: CHEM 1036 (3), CHEM 1046 (1), FIW 4424 (4), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 3. Select one from the following list: (3), sum 14
+Third Year
+ Fall: FIW 4414 (3), FIW 3514 (3), FIW 4464 (3), Human Dimensions Social Sciences Restricted Elective (Select one from the approved list) (3), Pathways 1A. Select one from the following list: (3), sum 15
+ Spring: FIW 4614 (3), Legal Foundations Restricted Elective. Select one from the following list: (3), Human Dimensions Ethics & Humanities Restricted Elective (Select one from the approved list) (3), Human Dimensions Tourism, Recreation, & Management Restricted Elective (Select one from the approved list) (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Experiential Learning (Departmental Approval Required) (1), Select one of the following: (), sum 16
+Fourth Year
+ Fall: Human Dimensions Stakeholder Engagement & Conflict Resolution Restricted Elective (Select one from approved list) (3), Human Dimensions Education, Outreach, & Interpretation Restricted Elective (Select one from approved list) (3), Geographic Information Systems (GIS) Restricted Elective (3), Select one of the following: (), Elective Courses (3), sum 12
+ Spring: FIW 4714 (4), GEOS 3034 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Select free electives to total 120 credits (3), sum 13
+TOTAL 117
+
+## fish-conservation-bs-marine-fisheries-conservation | Fish Conservation Major with Marine Fisheries Conservation Option | natural-resources-environment/fish-wildlife-conservation/fish-conservation-bs-marine-fisheries-conservation/
+First Year
+ Fall: ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), NR 1234 or NR 2234 (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), FIW 2114 (3), Pathways Concept 2 Ethics: Choose one from the following list: (3), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), BIOL 2704 (3), BIOL 2804 (3), STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: CHEM 1036 (3), CHEM 1046 (1), FIW 4424 (4), GEOS 3034 (3), STAT 3616 (3), sum 14
+Third Year
+ Fall: FIW 3514 (3), FIW 4414 (3), FIW 4464 (3), Pathways 1A. Select one from the following list: (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: FIW 4614 (3), FIW 4624 (3), Geographic Information Systems (GIS) Restricted Elective (3), Select one of the following: (),  or GEOG 4354 or GEOS 4354 (), Writing Restricted Elective: Select one from the following list: (3), Experiential Learning (Departmental approval is required) (1), Pathways concept 3: Select one from the following list: (3), sum 16
+Fourth Year
+ Fall: Approved marine science courses at an approved coastal institution (10), Select free electives to total 120 credits (2), sum 12
+ Spring: FIW 4714 (4), FIW 4324 or BIOL 2004 (3), Legal Foundations Restricted Elective (Select one from the following list): (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 16
+TOTAL 120
+
+## wildlife-conservation-bs | Wildlife Conservation Major | natural-resources-environment/fish-wildlife-conservation/wildlife-conservation-bs/
+First Year
+ Fall: ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), NR 1234 or NR 2234 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), FIW 2114 (3), Pathways Concept 2 Ethics: Select one from the following list: (3), sum 16
+Second Year
+ Fall: FIW 2324 (3), CHEM 1035 (3), CHEM 1045 (1), STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: FIW 2314 (3), CHEM 1036 (3), CHEM 1046 (1), FREC 2324 (1), BIOL 2704 (3), Pathways 1A: Select one from the following list: (3), sum 14
+Third Year
+ Fall: FIW 4414 (3), Ecology Restricted Elective: Select one from the following list: (3), Geographic Information Systems (GIS) Restricted Elective: Select one from the following list: (3),  or GEOG 4354 or GEOS 4354 (), Legal Foundations Restricted Elective: Select one from the following list: (3), Pathways Concept 3: Select one from the following list: (3), sum 15
+ Spring: FIW 4434 (3), FIW 4474 (1), FIW 4214 (3), FIW 4324 or BIOL 2004 (3), Vertebrate Biology Restricted Elective: Select one from the following list: (4), Experiential Learning (Departmental approval is required) (1), sum 15
+Fourth Year
+ Fall: FIW 4464 (3), Additional Vertebrate Biology Restricted Elective (Select one from the following list): (4),  or BIOL 4354 or ENT 4354 (), Pathways Concept 3 - Reasoning in the Social Sciences (3), Writing Restricted Elective (Select one from the following list): (3), Select free electives to total 120 credits (2), sum 15
+ Spring: FIW 4314 (4), Select one of the following: (3), Physical Science Restricted Elective: Select one from the following list: (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 13
+TOTAL 120
+
+## wildlife-conservation-bs-human-dimensions | Wildlife Conservation Major with Human Dimensions Option | natural-resources-environment/fish-wildlife-conservation/wildlife-conservation-bs-human-dimensions/
+First Year
+ Fall: ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), NR 1234 or NR 2234 (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), FIW 2114 (3), Pathways 2 Ethics. Select one from the following: (3), sum 16
+Second Year
+ Fall: FIW 2324 (3), CHEM 1035 (3), CHEM 1045 (1), STAT 3604 or STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: FIW 2314 (3), CHEM 1036 (3), CHEM 1046 (1), BIOL 2704 (3), FREC 2324 (1), Pathways 1A Speaking course. Select one from the following list: (3), sum 14
+Third Year
+ Fall: FIW 4414 (3), FIW 4464 (3), Legal Foundations Restricted Elective. Select one from the following list: (3), Human Dimensions Social Sciences Restricted Elective (Select one from the approved list) (3), Pathways 3. Select one from the following list: (3), sum 15
+ Spring: FIW 4434 (3), FIW 4214 (3), Vertebrate Biology Restricted Elective (4), Human Dimensions Tourism, Recreation, & Management Restricted Elective (Select one from the approved list) (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+Fourth Year
+ Fall: Writing Restricted Elective. Select one from the following list: (3), Human Dimensions Stakeholder Engage. & Conflict Res. Restricted Elective (Select one from the approved list) (3), Human Dimensions Ethics & Humanities Restricted Elective (Select one from the approved list) (3), Experiential Learning (Departmental approval is required) (1), Elective Courses (3), sum 13
+ Spring: FIW 4314 (4), Select one of the following: (3), Human Dimensions Education, Outreach, & Interpretation Restricted Elective (Select one from the approved list) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Select free electives to total 120 credits (2), sum 15
+TOTAL 120
+
+## environmental-conservation-society-bs | Environmental Conservation & Society Major | natural-resources-environment/forest-resources-environmental-conservation/environmental-conservation-society-bs/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), FREC 1024 (3), Pathway 5f Course (3), ECS Major Approved Pathways Concept 3 - Reasoning in the Social Sciences Course (Select from approved list) (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), FREC/LAR/NR 2554 (3), MATH 1025 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States Course (3), sum 15
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), FIW 2114 (3), Restricted Elective (Choose from major electives. Example: Environmental Science) (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), sum 15
+ Spring: FREC 2004 or FREC 3314 (3), FREC 2614 (3), AAEC 1005 or ECON 2005 (3), Restricted Elective (Choose from major electives. Example: Business) (3), Pathway 6a Course (3), sum 15
+Third Year
+ Fall: FREC/NR 4004 (1), FREC 3544 (3), STAT 3604 or STAT 3615 (3), Restricted Elective (Choose from major electives. Example: Human Dimensions) (3), Track Requirement Course (See chosen track for required and elective courses) (3), Free Elective (3), sum 16
+ Spring: FREC 3524 (3), FREC 3774 (3), Restricted Elective (Choose from major electives. Example: Human Dimensions) (3), Restricted Elective (Choose from major electives. Example: Environmental Science) (3), Pathway 6d Course (3), sum 15
+Fourth Year
+ Fall: FREC/NR 4014 (3), FREC 4114 (3), Track Requirement Course (See chosen track for required and elective courses) (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: FREC 4434 (3), FIW 4464 (3), Track Requirement Course (See chosen track for required and elective courses) (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 121
+
+## environmental-data-science-bs | Environmental Data Science Major | natural-resources-environment/forest-resources-environmental-conservation/environmental-data-science-bs/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), FREC 1044 (3), Pathways Core Concept (example: Pathways 2 Course) (3), sum 16
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), CS 1064 or CS 1114 or CS 1044 (3), Free Electives (3), sum 16
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), STAT 3615 (3), Pathways Core Concept (example: Pathways 2 Course) (3), Pathways Core Concept (example: Pathways 3 Course) (3), sum 15
+ Spring: FREC 2004 (3), FREC 2614 (3), AAEC 1005 or ECON 2005 (3), Pathways Core Concept (example: Pathways 7 Course) (3), STAT 3616 (3), sum 15
+Third Year
+ Fall: FREC 4114 (3), FREC 4004 (1), Advanced Data Science Skills Requirement - See approved list (3), Free Electives (3), Free Electives (3), sum 13
+ Spring: FREC 3044 (3), FREC 4214 (3), Applications Requirement - See approved list (3), Pathways Core Concept (example: Pathways Concept 6D Course) (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: FREC 4014 (3), Pathways Core Concept (example: Pathways Concept 1A Course) (3), BIT 3524 (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: FREC 4434 (3), FREC 4044 (3), Applications Requirement - See approved list (3), Pathways Core Concept (example: Pathways Concept 6A Course) (3), Free Electives (3), sum 15
+TOTAL 120
+
+## environmental-resources-management-bs | Environmental Resources Management Major | natural-resources-environment/forest-resources-environmental-conservation/environmental-resources-management-bs/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), MATH 1025 or MATH 1225 (3), Pathway 2 Course (3), Pathway 6a Course (3), sum 16
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), CHEM 1035 (3), CHEM 1045 (1), sum 14
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), AAEC 1005 or ECON 2005 (3), FIW 2114 (3), FREC 2554 (3), sum 15
+ Spring: FREC 2414 (2), FREC 2614 (3), GEOS 1024 or GEOS 1004 (3), GEOS 1124 or GEOS 1104 (1), FREC 2004 or FREC 3314 (3), Restricted Electives (Example: Global Environmental Issues) (3), sum 15
+Third Year
+ Fall: FREC/WATR/AAEC 4464 (3), FREC/HORT 3354 or FREC 4334 (3), STAT 3615 (3), Restricted Electives (Example: Law) (3), Restricted Electives (Example: Urban Environments) (3), sum 15
+ Spring: FREC 3014 (3), ENSC 3134 (3), FREC 3364 (3), Pathway 1a Course (3), Restricted Electives (Example: Public Relations) (3), sum 15
+Fourth Year
+ Fall: FREC/NR 4014 (3), FREC 4374 (3), FREC 4354 (3), FREC 4114 (3), FREC/NR 4004 (1), Free Electives (2), sum 15
+ Spring: FREC 4434 (3), FREC 4214 or GEOG 4354 (3), Restricted Electives (Example: Water) (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## forest-operations-and-business | Forestry Major with Forest Operations and Business Option | natural-resources-environment/forest-resources-environmental-conservation/forest-operations-and-business/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), MATH 1025 or MATH 1226 (3), AAEC 1005 or ECON 2005 (3), Pathway 6a Course (3), Free Electives (Suggested: FREC 1064 Discovering Forest Resources and Environmental Management (1), sum 16
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), sum 15
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), FREC 2514 (3), FIW 2114 (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), sum 15
+ Spring: FREC 2414 (2), FREC 2614 (3), ENSC 3134 (3), ACIS 1004 or ACIS 2115 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States Course (3), sum 14
+Third Year
+ Fall: FREC 3314 (3), FREC 3714 (3), FREC/NR 4004 (1), Business Restricted Elective (see approved list) (3), Business Restricted Elective (see approved list) (3), Free Electives (3), sum 16
+ Spring: FREC 3324 (4), FREC 4714 (3), FREC 3214 (3), FREC 3224 (1), FREC 3734 (3), sum 14
+Fourth Year
+ Fall: FREC 4114 (3), FREC 4514 (3), FREC/NR 4014 (3), Business Restricted Elective (see approved list) (3), Free Electives (3), sum 15
+ Spring: FREC 4434 (3), FREC 4444 (3), FREC 4214 (3), FREC 3724 (3), Business Restricted Elective (see approved list) (3), sum 15
+TOTAL 120
+
+## forest-resources-management | Forestry Major with Forest Resources Management Option | natural-resources-environment/forest-resources-environmental-conservation/forest-resources-management/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), Pathway 6a Course (3), Free Electives (Suggested: FREC 1064 Discovering Forest Resources and Environmental Management) (1), sum 16
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), CHEM 1035 (3), sum 15
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), FREC 2514 (3), FIW 2114 (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), sum 15
+ Spring: FREC 2414 (2), ENSC 3134 (3), FREC 2614 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States Course (3), Free Electives (3), sum 14
+Third Year
+ Fall: FREC 3314 (3), FREC 3714 (3), FREC/HORT 3354 or FREC 3544 (3), FREC/NR 4004 (1), ACIS 1004 or ACIS 2115 (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), sum 16
+ Spring: FREC 3324 (4), FREC 3724 (3), FREC 3734 (3), FREC 3214 (3), FREC 3224 (1), sum 14
+Fourth Year
+ Fall: FREC/NR 4014 (3), FREC 4114 (3), FREC 4354 (3), FREC 4514 (3), Free Electives (3), sum 15
+ Spring: FREC 4434 (3), FREC 4444 (3), FREC 4214 (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## urban-and-community-forestry | Forestry Major with Urban and Community Forestry Option | natural-resources-environment/forest-resources-environmental-conservation/urban-and-community-forestry/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), BIOL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), Pathway 6a Course (3), Free Electives (Suggested: FREC 1064 Discovering Forest Resources and Environmental Management) (1), sum 16
+ Spring: COMM 1016 or ENGL 1106 (3), BIOL 1106 (3), MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), FREC 2254 (1), sum 16
+Second Year
+ Fall: FREC 2214 (3), FREC 2314 (2), FREC 2324 (1), FREC 2514 (3), CHEM 1035 (3), Free Electives (3), sum 15
+ Spring: FIW 2114 (3), FREC 2614 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States Course (3), FREC 3364 (3), Policy, Planning, & Public Relations Restricted Elective (3), sum 15
+Third Year
+ Fall: FREC 3314 (3), FREC 3354 (3), FREC 3454 (1), FREC/NR 4004 (1), HORT 3325 or HORT 3326 (3), Applied Plant & Environmental Sciences Restricted Elective (3), sum 14
+ Spring: FREC 3214 (3), ENSC 3134 (3), FREC 4434 (3), Applied Plant & Environmental Sciences Restricted Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities Course (3), Free Electives (1), sum 16
+Fourth Year
+ Fall: FREC/NR 4014 (3), FREC 4114 (3), FREC 4514 (3), Policy, Planning, & Public Relations Restricted Elective (3), Free Electives (3), sum 15
+ Spring: FREC 4214 (3), FREC 3724 (3), FREC 4454 (3), FREC 4254 (1), Free Electives (3), sum 13
+TOTAL 120
+
+## water-resources-policy-management-bs | Water: Resources, Policy, and Management Major | natural-resources-environment/forest-resources-environmental-conservation/water-resources-policy-management-bs/
+First Year
+ Fall: Pathway 1f Course (3), WATR 2004 (3), GEOG 1524 (3), MATH 1025 or MATH 1225 (3), Pathway 6a Course (3), sum 15
+ Spring: Pathway 1f Course (3), BIOL 1106 (3), BIOL 1116 (1), MATH 1026 or MATH 1226 (3), AAEC 1005 or ECON 2005 (3), sum 13
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), Water Restricted Elective Course (3), Pathway 3 Course (3), Pathway 7 Course (3), Pathway 2 Course (3), sum 16
+ Spring: PHYS 2205 (3), PHYS 2215 (1), Pathway 2 Course (3), Water Restricted Elective Course (3), Water Policy Specialization Course (3), Geospatial Technology Course (3), sum 16
+Third Year
+ Fall: WATR 3104 (3), WATR 4464 (3), ENSC 3604 (3), Water Law and Planning Course (3), Water Science Specialization Course (3), sum 15
+ Spring: STAT 3615 (3), ENGL 2844 or ENGL 3764 (3), Water Science Specialization Course (3), Water Policy Course (3), Water Policy Specialization Course (3), sum 15
+Fourth Year
+ Fall: WATR 3754 (3), GEOG 4134 (3), Water Science Course (3), Water Policy Specialization Course (3), Free Electives (3), sum 15
+ Spring: WATR 4614 (2), WATR 4244 (3), Water Science Specialization Course (3), Pathway 6d Course (3), Free Electives (4), sum 15
+TOTAL 120
+
+## packaging-systems-design-bs | Packaging Systems and Design Major | natural-resources-environment/sustainable-biomaterials/packaging-systems-design-bs/
+First Year
+ Fall: SBIO 2104 or SBIO 2004 (3), BIOL 1105 (3), BIOL 1115 (1), COMM 1015 or ENGL 1105 (3), MATH 1025 (3), Pathway 6a (3), sum 16
+ Spring: SBIO 2004 or SBIO 2104 (3), COMM 1016 or ENGL 1106 (3), ECON 2005 (3), MATH 1026 (3), Pathway 2 (3), sum 15
+Second Year
+ Fall: SBIO 2504 (3), CHEM 1035 (3), CHEM 1045 (1), ECON 2006 (3), Specialized Packaging Topic Restricted Elective (3), Pathway 6d (3), sum 16
+ Spring: SBIO 3124 (3), SBIO 3244 (3), CHEM 1036 (3), PHYS 2205 (3), Additional Specialized Packaging Topic Restricted Elective (3), sum 15
+Third Year
+ Fall: SBIO 3224 (3), SBIO 3284 (3), STAT 3615 or STAT 3604 (3), Pathway 2 (3), Experiential Learning Requirement (3),  or SBIO 3994 or SBIO 4994 (), Study Abroad (), sum 15
+ Spring: SBIO 3314 (4), SBIO 3464 (3), CHEM 2514 (3), Free Electives (3), Free Electives (3), sum 16
+Fourth Year
+ Fall: SBIO 4024 (3), SBIO 4214 (3), ENGL 3764 (3), Pathway 7 (3), Free Electives (3), sum 15
+ Spring: SBIO 4054 (3), SBIO 4164 (3), SBIO 4224 (3), Free Electives (3), sum 12
+TOTAL 120
+
+## sustainable-systems-science-major | Sustainable Systems Science Major | natural-resources-environment/sustainable-biomaterials/sustainable-systems-science-major/
+First Year
+ Fall: SBIO 1004 (1), SBIO 1024 (3), BIOL 1105 (3), COMM 1015 (3), MATH 1025 (3), Pathway 6a (3), sum 16
+ Spring: SBIO 1114 (3), CHEM 1035 (3), CHEM 1045 (1), COMM 1016 (3), MATH 1026 (3), Pathway 6d (3), sum 16
+Second Year
+ Fall: SBIO 2124 (3), SBIO 2514 (3), ECON 2005 (3), FREC 2554 (3), Restricted Elective (Choose from Approved List) (3), sum 15
+ Spring: SBIO 3454 (3), ECON 2006 (3), FREC 2614 (3), PPE 2894 (3), Restricted Elective (Choose from Approved List) (3), sum 15
+Third Year
+ Fall: SBIO 2504 (3), ENGR 3124 (3), STAT 3615 (3), Restricted Elective (Choose from Approved List) (3), Free Elective or Pathway 7 if not double counted with another Pathway concept (3), sum 15
+ Spring: SBIO 3004 (3), ENGR 4134 (3), STAT 3616 (3), Free Elective (3), Experiential Learning Requirement (Choose from Approved List) (3), sum 15
+Fourth Year
+ Fall: SBIO 3524 (3), Pathway 1a (3), Free Elective (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: SBIO 4164 (3), SBIO 4724 (3), Free Elective (3), Free Elective (3), Free Elective (1), sum 13
+TOTAL 120

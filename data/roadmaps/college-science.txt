@@ -1,0 +1,182 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## biological-sciences-bs | Biological Sciences Major | college-science/biological-sciences/biological-sciences-bs/
+First Year
+ Fall: BIOL 1004 (1), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 15
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 (3), sum 14
+Second Year
+ Fall: BIOL 2004 (3), BIOL 2304 or BIOL 2504 or BIOL 2604 (3), BIOL 2804 (3), CHEM 2535 (3), CHEM 2545 (1), Critical Thinking in the Humanities (Pathways Concept 2) (3), sum 16
+ Spring: BIOL 2134 (3), BIOL 2704 (3), CHEM 2536 (3), CHEM 2546 (1), STAT 3615 (3), Reasoning in the Social Sciences (Pathways Concept 3) (3), sum 16
+Third Year
+ Fall: BIOL Elective with Lab (4), Free Elective (3), PHYS 2205 (3), PHYS 2215 (1), Critical Thinking in the Humanities (Pathways Concept 2) (3), Advanced Discourse (Pathways Concept 1a) (3), sum 17
+ Spring: BIOL Elective (3), Free Elective (3), PHYS 2206 (3), PHYS 2216 (1), Reasoning in the Social Sciences (Pathways Concept 3) (3), Critique and Practice in Design (Pathways Concept 6d) (3), sum 16
+Fourth Year
+ Fall: BIOL Elective with Lab (3), BIOL Elective (3), Critical Analysis of Identity and Equity in the U.S. (Pathways Concept 7) (3), Free Elective (3), Free Elective (2), sum 14
+ Spring: BIOL Elective with Lab (3), BIOL Elective (3), Critique and Practice in the Arts (Pathways Concept 6a) (3), Free Elective (3), sum 12
+TOTAL 120
+
+## biological-sciences-bs-biology-education | Biological Sciences Major with Science Education Option | college-science/biological-sciences/biological-sciences-bs-biology-education/
+First Year
+ Fall: BIOL 1004 (1), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 15
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 (3), sum 14
+Second Year
+ Fall: BIOL 2004 (3), BIOL 2604 (3), BIOL 2614 (1), CHEM 2535 (3), CHEM 2545 (1), Critical Thinking in the Humanities (Pathways Concept 2) (3), sum 14
+ Spring: BIOL 2134 (3), CHEM 2536 (3), CHEM 2546 (1), STAT 3615 (3), Critical Thinking in the Humanities (Pathways Concept 2) (3), Reasoning in the Social Sciences (Pathways Concept 3) (3), sum 16
+Third Year
+ Fall: BIOL 2304 (3), BIOL 2704 (3), GEOS 1014 (3), PHYS 2205 (3), PHYS 2215 (1), Critique and Practice in Design (Pathways Concept 6d) (3), sum 16
+ Spring: BIOL 2504 (3), BIOL 2804 (3), PHYS 2206 (3), PHYS 2216 (1), Reasoning in the Social Sciences (Pathways Concept 3) (3), Critique and Practice in the Arts (Pathways Concept 6a) (3), sum 16
+Fourth Year
+ Fall: BIOL Elective & Lab (4), BMSP 2135 (3), Critical Analysis of Identity and Equity in the U.S. (Pathways Concept 7) (3), Free Elective (3), Free Elective (3), sum 16
+ Spring: BIOL Elective & Lab (4), Advanced Discourse (Pathways Concept 1a) (3), Free Elective (3), Free Elective (3), sum 13
+TOTAL 120
+
+## biological-sciences-bs-biomedical | Biological Sciences Major with Biomedical Option | college-science/biological-sciences/biological-sciences-bs-biomedical/
+First Year
+ Fall: BIOL 1004 (1), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 15
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 (3), sum 14
+Second Year
+ Fall: BIOL 2004 (3), BIOL 2604 (3), BIOL 2614 (1), CHEM 2535 (3), CHEM 2545 (1), Critical Thinking in the Humanities (Pathways Concept 2) (3), sum 14
+ Spring: BIOL 2134 (3), CHEM 2536 (3), CHEM 2546 (1), STAT 3615 (3), Critical Thinking in the Humanities (Pathways Concept 2) (3), Reasoning in the Social Sciences (Pathways Concept 3) (3), sum 16
+Third Year
+ Fall: BIOL 2704 (3), Biomedical Elective (3), PHYS 2205 (3), PHYS 2215 (1), Critique and Practice in Design (Pathways Concept 6d) (3), Advanced Discourse (Pathways Concept 1a) (3), sum 16
+ Spring: BIOL 2804 (3), Biomedical Elective (3), PHYS 2206 (3), PHYS 2216 (1), Reasoning in the Social Sciences (Pathways Concept 3) (3), Critique and Practice in the Arts (Pathways Concept 6a) (3), sum 16
+Fourth Year
+ Fall: Biomedical Elective (3), Biomedical Elective & Lab (4), Critical Analysis of Identity and Equity in the U.S. (Pathways Concept 7) (3), Free Elective (3), Free Elective (3), sum 16
+ Spring: Biomedical Elective (3), Biomedical Elective & Lab (4), Free Elective (3), Free Elective (3), sum 13
+TOTAL 120
+
+## biological-sciences-bs-ecology-evolution-behavior | Biological Sciences Major with Ecology, Evolution, and Behavior Option | college-science/biological-sciences/biological-sciences-bs-ecology-evolution-behavior/
+First Year
+ Fall: BIOL 1004 (1), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 15
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 (3), sum 14
+Second Year
+ Fall: BIOL 2004 (3), BIOL 2804 (3), CHEM 2535 (3), CHEM 2545 (1), Critical Thinking in the Humanities (Pathways Concept 2) (3), Reasoning in the Social Sciences (Pathways Concept 3) (3), sum 16
+ Spring: BIOL 2304 or BIOL 2504 or BIOL 2604 (3), BIOL 2704 (3), CHEM 2536 (3), CHEM 2546 (1), STAT 3615 (3), Critical Thinking in the Humanities (Pathways Concept 2) (3), sum 16
+Third Year
+ Fall: BIOL 2134 (3), EEB Elective (3), PHYS 2205 (3), PHYS 2215 (1), Reasoning in the Social Sciences (Pathways Concept 3) (3), Critique and Practice in Design (Pathways Concept 6d) (3), sum 16
+ Spring: EEB Elective (3), PHYS 2206 (3), PHYS 2216 (1), Critique and Practice in the Arts (Pathways Concept 6a) (3), Advanced Discourse (Pathways Concept 1a) (3), sum 13
+Fourth Year
+ Fall: EEB Elective & Lab (4), EEB Elective (3), Critical Analysis of Identity and Equity in the U.S. (Pathways Concept 7) (3), Free Elective (3), Free Elective (3), sum 16
+ Spring: EEB Elective & Lab (4), EEB Elective & Lab (4), Free Elective (3), Free Elective (3), sum 14
+TOTAL 120
+
+## chemistry-ba | Chemistry Major (B.A.) | college-science/chemistry/chemistry-ba/
+First Year
+ Fall: CHEM 1004 (1), CHEM 1055 (4), CHEM 1065 (1), MATH 1025 (3), ENGL 1105 (3), Pathways Concept 3 - Reasoning in the Social Sciences (PSYC 1004 suggested for Pre-Health) (3), sum 15
+ Spring: CHEM 2565 (4), MATH 1026 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), ENGL 1106 (3), sum 16
+Second Year
+ Fall: CHEM 1056 (4), CHEM 1066 (1), CHEM 2566 (3), CHEM 2545 (1), PHYS 2205 (3), PHYS 2215 (1), sum 13
+ Spring: CHEM 2154 (4), CHEM 2164 (1), CHEM 4014 (1), CHEM 2546 (1), CHEM 2424 (3), PHYS 2206 (3), PHYS 2216 (1), sum 14
+Third Year
+ Fall: CHEM 4615 (3), CHEM 3004 (1), CHEM 3900 (0), Select one of the following: (Statistics Elective) (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathway 1a (3), Free Electives (3), sum 16
+ Spring: CHEM 4616 (3), CHEM 3625 (1), Pathways Concept 3 - Reasoning in the Social Sciences (SOC 1004 suggested for Pre-Health) (3), Select one of the following: (Quantitative Elective) (3), Free Electives (6), sum 16
+Fourth Year
+ Fall: Restricted Electives (CHEM, BCHM, or CHE 3XXX or 4XXX) (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (8), sum 14
+ Spring: Restricted Electives (CHEM, BCHM, or CHE 3XXX or 4XXX) (3), CHEM 4034 (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (8), sum 16
+TOTAL 120
+
+## chemistry-bs | Chemistry Major (B.S.) | college-science/chemistry/chemistry-bs/
+First Year
+ Fall: CHEM 1004 (1), CHEM 1055 (4), CHEM 1065 (1), MATH 1225 (4), ENGL 1105 (3), Pathways Concept 3 - Reasoning in the Social Sciences (PSYC 1004 recommended for Pre-Health) (3), sum 16
+ Spring: CHEM 2565 (4), CHEM 2555 (2), MATH 1226 (4), ENGL 1106 (3), MATH 2114 (3), sum 16
+Second Year
+ Fall: CHEM 1056 (4), CHEM 1066 (1), CHEM 2566 (3), CHEM 2556 (2), MATH 2204 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: CHEM 2154 (4), CHEM 2164 (1), CHEM 4014 (1), CHEM 2424 (3), PHYS 2305 (4), Select one of the following: (Statistics Elective) (3), sum 16
+Third Year
+ Fall: CHEM 3615 (3), CHEM 4584 (3), PHYS 2306 (4), CHEM 3004 (1), CHEM 3900 (0), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 14
+ Spring: CHEM 3616 (3), CHEM 3625 (1), CHEM 4114 (3), #Quantitative Elective. Select one of the following 3-credit courses. (3), Pathways Concept 3 - Reasoning in the Social Sciences (SOC 1004 is recommended for Pre-Health) (3), sum 13
+Fourth Year
+ Fall: CHEM 3626 (1), Select one of the following: (Polymer Elective. Note that CHEM 4424 and CHEM 4634 are Spring courses only.) (3), CHEM 4404 (3), CHEM 4124 (1), Pathway 1a (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 14
+ Spring: CHEM 4414 (2), Restricted Electives (CHEM or BCHM or CHE 4XXX) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (4), sum 15
+TOTAL 120
+
+## medicinal-chemistry-bs | Medicinal Chemistry Major | college-science/chemistry/medicinal-chemistry-bs/
+First Year
+ Fall: CHEM 1004 (1), CHEM 1055 (4), CHEM 1065 (1), MATH 1225 (4), BIOL 1105 (3), BIOL 1115 (1), ENGL 1105 (3), sum 17
+ Spring: CHEM 2565 (4), CHEM 2555 (2), MATH 1226 (4), BIOL 1106 (3), BIOL 1116 (1), ENGL 1106 (3), sum 17
+Second Year
+ Fall: CHEM 1056 (4), CHEM 1066 (1), CHEM 2566 (3), CHEM 2556 (2), PHYS 2205 (3), PHYS 2215 (1), Pathways Concept 3 - Reasoning in the Social Sciences (PSYC 1004 recommended for Pre-Health) (3), sum 17
+ Spring: CHEM 2154 (4), CHEM 2164 (1), CHEM 4014 (1), PHYS 2206 (3), PHYS 2216 (1), Select one of the following: (3), sum 13
+Third Year
+ Fall: CHEM 4615 (3), CHEM 4584 (3), CHEM 3004 (1), CHEM 3900 (0), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 13
+ Spring: CHEM 4616 (3), Select one of the following: (Statistics Elective) (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 3 - Reasoning in the Social Sciences (SOC 1004 recommended for Pre-Health) (3), Pathway 1a (3), sum 15
+Fourth Year
+ Fall: Select one of the following: (Advanced Elective. Note that CHEM 4524 and CHEM 4444 are Fall Courses, whereas CHEM 4514, CHEM 4554, and CHEM 4424 are Spring courses) (3), Free-Electives (8), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 14
+ Spring: CHEM 4544 (2), Select one of the following: (Advanced Electives. Note that CHEM 4524 and CHEM 4444 are Fall courses, whereas CHEM 4514, CHEM 4554, and CHEM 4424 are Spring courses.) (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (6), sum 14
+TOTAL 120
+
+## polymer-chemistry-bs | Polymer Chemistry Major | college-science/chemistry/polymer-chemistry-bs/
+First Year
+ Fall: CHEM 1004 (1), CHEM 1055 (4), CHEM 1065 (1), MATH 1225 (4), ENGL 1105 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: CHEM 2565 (4), CHEM 2555 (2), MATH 1226 (4), ENGL 1106 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1056 (4), CHEM 1066 (1), CHEM 2566 (3), CHEM 2556 (2), MATH 2204 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: CHEM 2154 (4), CHEM 2164 (1), CHEM 4014 (1), PHYS 2305 (4), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 13
+Third Year
+ Fall: CHEM 3615 (3), CHEM 4534 (3), CHEM 3004 (1), PHYS 2306 (4), CHEM 3900 (0), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (3), sum 17
+ Spring: CHEM 3625 (1), Select one of the following: (Statistics Elective) (3), Free Electives (6), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 13
+Fourth Year
+ Fall: Restricted Electives (Three total; CHEM 4524 is a Fall course only; CHEM 4424 and CHEM 4634 are Spring courses only) (6), Pathway 1a (3), Free Electives (6), sum 15
+ Spring: CHEM 4074 (2), Restricted Electives (Three total; CHEM 4524 is a Fall course only; CHEM 4424 and CHEM 4634 are Spring courses only.) (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (6), sum 14
+TOTAL 120
+
+## mathematics-bs | Mathematics Major | college-science/mathematics/mathematics-bs/
+First Year
+ Fall: MATH 1225 (4), MATH 1004 (1), MATH 1454 (3), ENGL 1105 (3), Pathway 2 (3), Pathway 3 (3), sum 17
+ Spring: MATH 1226 (4), MATH 1044 (2), ENGL 1106 (3), Pathway 2 (3), Pathway 7 (3), sum 15
+Second Year
+ Fall: MATH 2114 (3), MATH 2204 (3), Pathway 3 (3), Pathway 4 (3), Pathway 6a (3), sum 15
+ Spring: MATH 2214 (3), MATH 3034 (3), Pathway 4 (3), Pathway 6d (3), Free Elective (3), sum 15
+Third Year
+ Fall: MATH 3124 (3), MATH 3214 (3), Interdisciplinary Application of Mathematics Course (3), Pathway 1a (3), Free Elective (3), sum 15
+ Spring: MATH 3144 (3), MATH 3224 (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: MATH 4XXX (3), MATH 4XXX (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: MATH 4XXX (3), MATH 4XXX (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (1), sum 13
+TOTAL 120
+
+## mathematics-bs-applied-computational-mathematics | Mathematics Major with Applied Computational Mathematics Option | college-science/mathematics/mathematics-bs-applied-computational-mathematics/
+First Year
+ Fall: MATH 1225 (4), MATH 1004 (1), MATH 1454 (3), ENGL 1105 (3), Pathway 2 (3), Pathway 3 (3), sum 17
+ Spring: MATH 1226 (4), MATH 1044 (2), ENGL 1106 (3), Pathway 2 (3), Pathway 7 (3), sum 15
+Second Year
+ Fall: MATH 2114 (3), MATH 2204 (3), Pathway 3 (3), Pathway 4 (3), Free Elective (3), sum 15
+ Spring: MATH 2214 (3), MATH 3034 (3), Pathway 4 (3), Pathway 6a (3), Pathway 6d (3), sum 15
+Third Year
+ Fall: MATH 3144 (3), MATH 3214 (3), MATH 4445 (3), Interdisciplinary Application of Mathematics Course (3), Pathway 1a (3), sum 15
+ Spring: MATH 3224 (3), MATH 4446 (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: MATH 3124 (3), MATH 4425 or CMDA 4604 (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: MATH 4426 or MATH 4414 or MATH 4454 (3), Interdisciplinary Application of Mathematics Course (3), Free Elective (3), Free Elective (3), Free Elective (1), sum 13
+TOTAL 120
+
+## mathematics-bs-applied-discrete-mathematics | Mathematics Major with Applied Discrete Mathematics Option | college-science/mathematics/mathematics-bs-applied-discrete-mathematics/
+First Year
+ Fall: MATH 1225 (4), MATH 1004 (1), CS 1114 (3), ENGL 1105 (3), Pathway 2 (3), Pathway 3 (3), sum 17
+ Spring: MATH 1226 (4), MATH 1044 (2), CS 2114 (3), ENGL 1106 (3), Pathway 7 (3), sum 15
+Second Year
+ Fall: MATH 2114 (3), MATH 2204 (3), CS 2505 (3), Pathway 3 (3), Pathway 4 (3), sum 15
+ Spring: MATH 2214 (3), MATH 3034 (3), CS 3114 (3), Pathway 2 (3), Pathway 4 (3), sum 15
+Third Year
+ Fall: MATH 3124 (3), MATH 3214 (3), MATH 3134 (3), STAT 4705 or STAT 4714 or STAT 4105 (3), Free Elective (3), sum 15
+ Spring: MATH 3144 (3), MATH 3224 (3), CS 4104 or CS 4114 or CS 4124 (3), Free Elective (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: MATH 4XXX (3), MATH 4XXX (3), Pathway 1a (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: MATH 4XXX (3), MATH 4XXX (3), Pathway 6a (3), Free Elective (3), Free Elective (1), sum 13
+TOTAL 120
+
+## mathematics-bs-mathematics-education-masters-track | Mathematics Major with Mathematics Education (Master's Track) Option | college-science/mathematics/mathematics-bs-mathematics-education-masters-track/
+First Year
+ Fall: MATH 1225 (4), MATH 1004 (1), MATH 1454 (3), ENGL 1105 (3), Pathway 2 (3), sum 14
+ Spring: MATH 1226 (4), MATH 1044 (2), ENGL 1106 (3), Pathway 3 (3), Pathway 7 (3), sum 15
+Second Year
+ Fall: MATH 2114 (3), MATH 2204 (3), MATH 2644 (1), Pathway 2 (3), Pathway 4 (3), Pathway 6a (3), sum 16
+ Spring: MATH 2214 (3), MATH 3034 (3), Pathway 4 (3), Pathway 6d (3), Free Elective (3), sum 15
+Third Year
+ Fall: MATH 3124 (3), MATH 3214 (3), EDCI 2004 (3), Pathway 1a (3), Free Elective (3), sum 15
+ Spring: MATH 3144 (3), MATH 3224 (3), EDCI 2574 (3), STAT 3005 or STAT 3604 (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: MATH 4044 (3), MATH 4625 (3), EDEP 2374 (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: MATH 4334 (3), MATH 4626 (3), EDCI 3144 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 120

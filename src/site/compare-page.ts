@@ -1,6 +1,6 @@
 // "Switch majors" page: pick two majors and what you've finished, see what carries over.
 // Ships every roadmap as JSON plus switchCost's source; all work happens in the browser.
-import type { Roadmap } from '../plan/roadmap.ts';
+import { collegeOf, type Roadmap } from '../plan/roadmap.ts';
 import { checkItem, type CourseInfo } from '../plan/prereq.ts';
 import { switchCost } from '../plan/switch.ts';
 import { brand, layout } from './render.ts';
@@ -9,8 +9,12 @@ import type { Site } from './model.ts';
 /** Terms are estimated at this many credits each when turning credits left into terms left. */
 export const TERM_CREDITS = 16;
 
+/** The ranking under the comparison shows this many closest majors. */
+export const RANK_SHOWN = 12;
+
 export interface CompareMajor {
   slug: string;
+  college: string;
   name: string;
   total: number;
   terms: Array<{ label: string; ids: string[] }>;
@@ -19,7 +23,7 @@ export interface CompareMajor {
 
 export function compareData(roadmaps: Roadmap[], courses: Map<string, CourseInfo>): CompareMajor[] {
   return [...roadmaps].sort((a, b) => a.name.localeCompare(b.name)).map((r) => ({
-    slug: r.slug, name: r.name, total: r.total,
+    slug: r.slug, college: collegeOf(r.catalogPath), name: r.name, total: r.total,
     terms: r.terms.map((t) => ({ label: t.label, ids: t.items.map((i) => i.id) })),
     items: Object.fromEntries(r.terms.flatMap((t) => t.items).map((i) => [i.id, {
       code: i.code, label: i.code ? (courses.get(i.code)?.title ?? i.label.replace(i.code, '').trim()) : i.label, cr: i.credits, cs: checkItem(i, courses).cs,
@@ -28,14 +32,32 @@ export function compareData(roadmaps: Roadmap[], courses: Map<string, CourseInfo
 }
 
 /**
+ * Smaller form for the page: course titles are stored once (128 roadmaps repeat the same courses), and an item is
+ * [credits, codes, label] with label null when it is just the title of its first code. COMPARE_JS undoes this on load.
+ */
+export function packCompare(majors: CompareMajor[]) {
+  const t: Record<string, string> = {};
+  for (const m of majors) for (const i of Object.values(m.items)) if (i.code && t[i.code] === undefined) t[i.code] = i.label;
+  return {
+    t,
+    m: majors.map((m) => ({
+      ...m,
+      terms: m.terms.map((x) => [x.label, x.ids]),
+      items: Object.fromEntries(Object.entries(m.items).map(([id, i]) => [id, [i.cr, i.cs, i.code && t[i.code] === i.label ? null : i.label]])),
+    })),
+  };
+}
+
+/**
  * "Finished so far" is either the courses ticked in the planner for the first major (read from the same
  * localStorage key the planner writes) or every course through a chosen term of its official roadmap.
  * #from=slug&to=slug preselects majors (the planner links here with #from).
  */
 export const COMPARE_JS = `(()=>{const switchCost=${switchCost.toString()};
-const D=JSON.parse(document.getElementById('cmp-data').textContent),PER=${TERM_CREDITS},$=id=>document.getElementById(id),F=$('from'),T=$('to'),W=$('done'),out=$('out'),rank=$('rank');
+const P=JSON.parse(document.getElementById('cmp-data').textContent),D=P.m,PER=${TERM_CREDITS},$=id=>document.getElementById(id),F=$('from'),T=$('to'),W=$('done'),out=$('out'),rank=$('rank');
+D.forEach(m=>{m.terms=m.terms.map(x=>({label:x[0],ids:x[1]}));for(const id in m.items){const a=m.items[id];m.items[id]={cr:a[0],cs:a[1],code:a[2]==null?a[1][0]:undefined,label:a[2]==null?P.t[a[1][0]]:a[2]}}});
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e},by=s=>D.find(m=>m.slug===s);
-D.forEach(m=>{F.append(new Option(m.name,m.slug));T.append(new Option(m.name,m.slug))});
+for(const s of[F,T]){let g;D.slice().sort((a,b)=>a.college.localeCompare(b.college)||a.name.localeCompare(b.name)).forEach(m=>{if(!g||g.label!==m.college){g=document.createElement('optgroup');g.label=m.college;s.append(g)}g.append(new Option(m.name,m.slug))})}
 const h=new URLSearchParams(location.hash.slice(1));if(by(h.get('from')))F.value=h.get('from');T.value=by(h.get('to'))&&h.get('to')!==F.value?h.get('to'):D.find(m=>m.slug!==F.value).slug;
 const ticks=m=>{try{return((JSON.parse(localStorage.getItem('vtplan:'+m.slug))||{}).done||[]).filter(id=>m.items[id])}catch{return[]}};
 function fillDone(){const m=by(F.value),t=ticks(m);W.textContent='';if(t.length)W.append(new Option('What I ticked in the planner ('+t.length+(t.length>1?' courses)':' course)'),'ticks'));
@@ -52,12 +74,12 @@ const cols=el('div','cols');cols.append(col('Carries over','The same course is o
 col('Likely carries','Same elective slot on both roadmaps, or room in free electives.',[...r.likely.map(([x])=>nm(a,x)+' ('+a.items[x].cr+')'),...r.free.map(x=>nm(a,x)+' ('+a.items[x].cr+') as a free elective')]),
 col("Doesn't match",'No place for these on the '+b.name+' roadmap.',r.unmatched.map(x=>nm(a,x)+' ('+a.items[x].cr+')')));out.append(lede,cols);
 const rows=D.filter(m=>m!==a).map(m=>({m,r:switchCost(arr(a),arr(m),done)})).sort((x,y)=>x.r.remaining-y.r.remaining);
-rows.forEach(({m,r})=>{const bt=el('button');bt.type='button';bt.append(el('b',null,m.name),el('span',null,r.counted+' count · '+r.remaining+' left'));if(m===b)bt.setAttribute('aria-current','true');
+rows.slice(0,${RANK_SHOWN}).forEach(({m,r})=>{const bt=el('button');bt.type='button';bt.append(el('b',null,m.name),el('span',null,r.counted+' count · '+r.remaining+' left'));if(m===b)bt.setAttribute('aria-current','true');
 bt.onclick=()=>{T.value=m.slug;draw();out.scrollIntoView({behavior:'smooth',block:'start'})};rank.append(bt)})}
 F.onchange=()=>{if(T.value===F.value)T.value=D.find(m=>m.slug!==F.value).slug;fillDone();draw()};T.onchange=W.onchange=draw;fillDone();draw()})();`;
 
 export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseInfo>, site?: Site): string {
-  const json = JSON.stringify(compareData(roadmaps, courses)).replace(/</g, '\\u003c');
+  const json = JSON.stringify(packCompare(compareData(roadmaps, courses))).replace(/</g, '\\u003c');
   return layout(`Switch majors · ${brand(site)}`, 'See what carries over when you switch between Virginia Tech majors, and how many credits are left.', '../',
     `<a href="index.html">Degree planner</a>`,
     `<h1>What if I switch majors?</h1><p class="sub">Pick where you are, where you'd go, and what you've finished.</p>
@@ -65,7 +87,7 @@ export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseIn
 <div class="ctl"><label>Finished so far <select class="sel" id="done"></select></label></div>
 <noscript><p class="note warn">This page needs JavaScript.</p></noscript>
 <div id="out" aria-live="polite"></div>
-<h2>Where your credits go furthest</h2><p class="mut">Every other major, fewest credits left first. Tap one to compare.</p><div class="majors" id="rank"></div>
+<h2>Where your credits go furthest</h2><p class="mut">The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.</p><div class="majors" id="rank"></div>
 <p class="note">An estimate from the two official roadmaps: same course first, then elective slots with the same name, then free electives. The department you're moving into decides what really counts, and changing majors can have its own requirements. Ask an advisor before you act on this.</p>
 <script type="application/json" id="cmp-data">${json}</script>`, site, 'switch', `<script src="../compare.js" defer></script>`);
 }

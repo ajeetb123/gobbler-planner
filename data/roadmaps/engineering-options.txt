@@ -1,0 +1,212 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## biological-systems-engineering-bs-biotech-bioprocess-engineering | Biological Systems Engineering Major with Biotechnology & Bioprocess Engineering Option | college-engineering/biological-systems-engineering/biological-systems-engineering-bs-biotech-bioprocess-engineering/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 16
+ Spring: CHEM 1036 (3), ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), sum 16
+Second Year
+ Fall: BSE 2004 (3), BIOL 1105 (3), ESM 2104 (3), MATH 2204 (3), MATH 2114 (3), sum 15
+ Spring: BSE 2504 (3), BSE 3144 (2), BIOL 1106 (3), CHEM 2535 or CHEM 2565 (3), MATH 2214 (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 17
+Third Year
+ Fall: BSE 3154 (3), BSE 4014 (2), BIOL 2604 (3), CHEM 2536 or CHEM 2566 (3), PHYS 2306 (4), sum 15
+ Spring: BSE 3504 (3), BSE 3524 (3), BSE 3534 (3), BCHM 3114 (3), ISE 2014 (2), ISE 3034 (3), ENGE 3900 (0), sum 17
+Fourth Year
+ Fall: BSE 4125 (2), BSE 4524 or BSE 5524 (3), BSE 4534 (1), STAT 3704 (2), BSE Elective (3), BioE Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 17
+ Spring: BSE 4126 (3), BSE Elective (3), BSE Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 15
+TOTAL 128
+
+## ecological-engineering-option | Biological Systems Engineering Major with Ecological Engineering Option | college-engineering/biological-systems-engineering/ecological-engineering-option/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 16
+ Spring: CHEM 1036 (3), ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), sum 16
+Second Year
+ Fall: BSE 2004 (3), BIOL 1105 (3), ESM 2104 (3), ISE 2014 (2), MATH 2114 (3), MATH 2204 (3), sum 17
+ Spring: BSE 2304 (3), BSE 2504 (3), BIOL 1106 (3), ENSC 3134 (3), MATH 2214 (3), sum 15
+Third Year
+ Fall: BSE 3154 (3), BSE 3324 (3), BIOL 2804 (3), PHYS 2306 (4), CHEM Elective (3), sum 16
+ Spring: BSE 3144 (2), BSE 3334 (3), BSE 3504 (3), BSE 4344 or BSE 5344 (3), BIOL 2604 (3), ISE 3034 (3), ENGE 3900 (0), sum 17
+Fourth Year
+ Fall: BSE 4125 (2), BSE 4324 or BSE 5324 (3), ENGR 3124 (3), SBIO 1024 (3), STAT 3704 (2), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 16
+ Spring: BSE 4126 (3), ENGR 4134 (3), EcoE Elective (3), Pathways Core Concept 2, 3, 6a, or 7 (3), Pathways Core Concept 2, 3, 6a, or 7 (3), sum 15
+TOTAL 128
+
+## bs-environmental-engineering-option | Civil Engineering Major with Environmental Engineering Option | college-engineering/civil-environmental-engineering/bs-environmental-engineering-option/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1225 (4), ENGE 1215 (2), Pathways (3), sum 16
+ Spring: ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), ENGE 1216 (2), Pathways (3), sum 16
+Second Year
+ Fall: ESM 2104 (3), MATH 2114 (3), MATH 2204 (3), CEE 2834 (3), CEE 2804 (3), sum 15
+ Spring: ESM 2204 (3), GEOS 2104 (3), CEE 3804 (3), MATH 2214 (3), CEE 2814 (4), sum 16
+Third Year
+ Fall: CEE 3304 (4), ISE 2014 (2), CEE Fundamental Elective (3), CEE Fundamental Elective + Lab (4), Pathways (3), ENGE 3900 (0), sum 16
+ Spring: CEE 3814 (3), CEE Fundamental Elective + Lab (4), CEE Fundamental Elective (3), CEE Fundamental Elective (3), CEE 4804 (3), sum 16
+Fourth Year
+ Fall: CEE Fundamental Elective (3), CEE Advanced Elective-Design Project from Environmental Engineering or Water Resources Engineering (3), CEE Advanced Elective from Water Resources Engineering (3), Technical Elective (3), Restricted Electives (3), Pathways (3), sum 18
+ Spring: CEE Advanced Elective from Environmental Engineering (3), CEE Advanced Elective in an area other than Environmental Engineering and Water Resources Engineering (3), Technical Elective (3), Restricted Elective (3), Pathways (3), sum 15
+TOTAL 128
+
+## construction-safety-leadership-option | Constructioning Engineering and Management Major with Construction Safety Leadership Option | college-engineering/construction-engineering-management/construction-safety-leadership-option/
+First Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathway 2 (3), sum 16
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: CEM 2104 (3), CEM 2404 (1), ESM 2104 (3), GEOS 2104 (3), MATH 2204 (3), MATH 2214 (3), sum 16
+ Spring: BC 2114 (3), CEM 2824 (3), CEM 2714 (3), ESM 2204 (3), STAT 3704 (2), sum 14
+Third Year
+ Fall: BC 3114 (3), CEM 3084 (3), CEE 3404 (3), CEE 3684 (3), CEE 3784 (1), CEE 4074 (3), ENGE 3900 (0), sum 16
+ Spring: CEE 3514 (3), CEE 3714 (1), CEM 3134 (3), CEM 3714 (3), CEM 3024 (3), ECON 2005 (3), sum 16
+Fourth Year
+ Fall: CEM 3164 (3), CEM 4445 (3), CEM 4714 (3), Advanced Course (3), Pathways 2, 7 (3), sum 15
+ Spring: CEM 4024 (3), CEM 4446 (3), CEM 4724 (3), ECON 2006 (3), Pathways 6a (3), sum 15
+TOTAL 124
+
+## computer-engineering-bs-chip-scale-integration-option | Computer Engineering Major with Chip-Scale Integration Option | college-engineering/electrical-computer-engineering/computer-engineering-bs-chip-scale-integration-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6A (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3514 (3), ECE 3544 (4), STAT 4714 (3), Free Elective (2), sum 15
+ Spring: ECE 3004 (3), ECE 3074 (1), ECE 3574 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6a (3), sum 13
+Fourth Year
+ Fall: ECE 4540 (3), ECE 4805 (3), MATH 2534 or MATH 3034 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ECE 4514 (4), ECE 4806 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 16
+TOTAL 120
+
+## computer-engineering-bs-controls-robotics-autonomy-option | Computer Engineering Major with Controls, Robotics & Autonomy Option | college-engineering/electrical-computer-engineering/computer-engineering-bs-controls-robotics-autonomy-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), PHYS 2305 (4), MATH 2114 (3), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), PHYS 2306 (4), MATH 2214 (3), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6A (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3504 (3), ECE 3514 (3), MATH 2534 or MATH 3034 (3), STAT 4714 (3), sum 15
+ Spring: ECE 3574 (3), ECE 3704 (3), Major Elective (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), sum 15
+Fourth Year
+ Fall: ECE 4805 (3), Major Elective (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ECE 4806 (3), Major Elective (3), Secondary Focus Elective (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), Free Elective (2), ENGE 3900 (0), sum 14
+TOTAL 120
+
+## computer-engineering-bs-machine-learning-option | Computer Engineering Major with Machine Learning Option | college-engineering/electrical-computer-engineering/computer-engineering-bs-machine-learning-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ENGL 1106 (3), ENGE 1216 (2), MATH 1226 (4), PHYS 2305 (4), MATH 2114 (3), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6A (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3504 (3), ECE 3514 (3), STAT 4714 (3), Pathways 2 or 3 or 6a (3), sum 15
+ Spring: ECE 3574 (3), ECE 4524 (4), MATH 2534 or MATH 3034 (3), Secondary Focus Elective (3), Free Elective (1), sum 14
+Fourth Year
+ Fall: ECE 4525 or ECE 4580 (3), ECE 4554 (3), ECE 4805 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ECE 4424 (3), ECE 4806 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## computer-engineering-bs-networking-cybersecurity-option | Computer Engineering Major with Networking & Cybersecurity Option | college-engineering/electrical-computer-engineering/computer-engineering-bs-networking-cybersecurity-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ENGL 1106 (3), ENGE 1216 (2), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6A (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3504 (3), ECE 3514 (3), STAT 4714 (3), Pathways 2 or 3 or 6a (3), sum 15
+ Spring: ECE 3574 (3), ECE 3564 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), Free Elective (2), sum 14
+Fourth Year
+ Fall: ECE 4805 (3), ECE 4564 (3), MATH 2534 or MATH 3034 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ECE 4806 (3), ECE 4560 (3), CS 4264 (3), Secondary Focus Elective (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## computer-engineering-bs-software-systems-option | Computer Engineering Major with Software Systems Option | college-engineering/electrical-computer-engineering/computer-engineering-bs-software-systems-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ENGL 1106 (3), ENGE 1216 (2), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2804 (2), MATH 2204 (3), Pathways 2 or 3 or 6A (3), sum 14
+Third Year
+ Fall: ECE 2714 (3), ECE 3504 (3), ECE 3514 (3), STAT 4714 (3), Pathways 2 or 3 or 6a (3), sum 15
+ Spring: ECE 3574 (3), ECE 4524 (4), MATH 2534 or MATH 3034 (3), Secondary Focus Elective (3), Free Elective (1), sum 14
+Fourth Year
+ Fall: ECE 4525 or ECE 4574 (3), ECE 4805 (3), CS 3214 (3), Secondary Focus Elective (3), Pathways 2 or 3 or 6A (3), sum 15
+ Spring: ECE 4550 (3), ECE 4806 (3), Secondary Focus Elective (3), Pathway 2 or 3 or 6a (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## electrical-engineering-bachelor-science-energy-power-electronic-systems-option | Electrical Engineering Major with Energy & Power Electronics Systems Option | college-engineering/electrical-computer-engineering/electrical-engineering-bachelor-science-energy-power-electronic-systems-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3204 (3), ECE 3274 (1), ECE 3304 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 13
+Fourth Year
+ Fall: ECE 3704 (3), ECE 4334 (3), ECE 4805 (3), Math Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ECE 4224 (3), ECE 4806 (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## electrical-engineering-bs-applied-electromagnetics-option | Electrical Engineering Major with Applied Electromagnetics Option | college-engineering/electrical-computer-engineering/electrical-engineering-bs-applied-electromagnetics-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGL 1106 (3), ENGE 1216 (2), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3106 (3), ECE 3614 (3), Major Elective (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+Fourth Year
+ Fall: ECE 4805 (3), Select one of the following: (3), Math Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States or Free Elective (if Pathways 7 double counted) (3), sum 15
+ Spring: ECE 4806 (3), Major Elective (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Free Elective (1), ENGE 3900 (0), sum 13
+TOTAL 120
+
+## electrical-engineering-bs-controls-robotics-autonomy-option | Electrical Engineering Major with Controls, Robotics & Autonomy Option | college-engineering/electrical-computer-engineering/electrical-engineering-bs-controls-robotics-autonomy-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3514 (3), ECE 3704 (3), ECE 3714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+Fourth Year
+ Fall: ECE 4805 (3), Major Elective (3), Math Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Free Elective (1), sum 13
+ Spring: ECE 4806 (3), Major Elective (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## electrical-engineering-bs-micro-nanosystems-option | Electrical Engineering Major with Micro/Nano Systems Option | college-engineering/electrical-computer-engineering/electrical-engineering-bs-micro-nanosystems-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3204 (3), ECE 3214 (3), ECE 3274 (1), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 13
+Fourth Year
+ Fall: ECE 3614 (3), ECE 4805 (3), Major Elective (3), Math Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ECE 4806 (3), Major Elective (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Pathways 7 or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120
+
+## electrical-engineering-bs-wireless-communications-signal-processing-option | Electrical Engineering Major with Wireless Communications and Signal Processing Option | college-engineering/electrical-computer-engineering/electrical-engineering-bs-wireless-communications-signal-processing-option/
+First Year
+ Fall: ECE 1004 (3), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
+Second Year
+ Fall: ECE 2024 (3), ECE 2514 (3), ECE 2544 (3), MATH 2214 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2564 (3), ECE 2714 (3), ECE 2804 (2), MATH 2204 (3), sum 14
+Third Year
+ Fall: ECE 3004 (3), ECE 3074 (1), ECE 3105 (3), STAT 4714 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: ECE 3614 (3), ECE 3564 (3), ECE 3704 (3), Secondary Focus Elective (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+Fourth Year
+ Fall: ECE 4624 (3), ECE 4664 (1), ECE 4805 (3), Math Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 13
+ Spring: ECE 4634 (3), ECE 4806 (3), Secondary Focus Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (Arts) (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States or Free Elective (if Pathways 7 double counted) (3), ENGE 3900 (0), sum 15
+TOTAL 120

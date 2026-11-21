@@ -1,0 +1,425 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## agribusiness-bs-agribusiness-management | Agribusiness Major with Agribusiness Management Option | agriculture-life-sciences/agricultural-applied-economics/agribusiness-bs-agribusiness-management/
+First Year
+ Fall: ENGL 1105 (3), AAEC 1005 or ECON 2005 (3), MATH 1025 or MATH 1225 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), ALS 1234 (1), sum 16
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), AAEC 3900 (0), sum 15
+Second Year
+ Fall: COMM 2004 or ALCE 3634 (3), AAEC 2434 (3), ACIS 2115 (3), AAEC 3015 (1), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: AAEC 3454 (3), AAEC 3004 (3), Area of Specialization (3), Restricted Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: STAT 3615 or STAT 3005 or BIT 2405 (3), AAEC 3504 (3), Restricted Electives (3), Area of Specialization (3), Free Electives (3), sum 15
+ Spring: AAEC 3014 or STAT 3006 or STAT 3616 or BIT 2406 (3), AAEC 4504 or AAEC 4804 or AAEC 4484 or GEOG 4084 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), AAEC 3604 (3), Area of Specialization (3), sum 15
+Fourth Year
+ Fall: AAEC 4424 (3), AAEC 4514 (3), Restricted Electives (3), Area of Specialization (3), Area of Specialization (3), sum 15
+ Spring: AAEC 3024 (3), ENGL 3774 or ENGL 3764 or ALCE 3624 or ENGL 3754 (3), Area of Specialization (3), Free Electives (3), Free Electives (1), sum 13
+TOTAL 120
+
+## agribusiness-bs-veterinary-business-management | Agribusiness Major with Veterinary Business Management Option | agriculture-life-sciences/agricultural-applied-economics/agribusiness-bs-veterinary-business-management/
+First Year
+ Fall: ENGL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ALS 1234 (1), sum 18
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), AAEC 3900 (0), sum 17
+Second Year
+ Fall: AAEC 2434 (3), PHYS 2205 (3), PHYS 2215 (1), CHEM 2535 (3), CHEM 2545 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 14
+ Spring: AAEC 3454 (3), CHEM 2536 (3), CHEM 2546 (1), PHYS 2206 (3), PHYS 2216 (1), BCHM 2024 or BCHM 3114 or BCHM 4115 (3), sum 14
+Third Year
+ Fall: STAT 3615 or STAT 3005 or BIT 2405 (3), AAEC 3504 (3), ACIS 2115 (3), COMM 2004 or ALCE 3624 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: AAEC 3014 or STAT 3616 or STAT 3006 or BIT 2406 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), AAEC 3604 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), HNFE 2204 (3), sum 15
+Fourth Year
+ Fall: AAEC 4424 (3), ENGL 3774 or ENGL 3764 or ALCE 3634 or ENGL 3754 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (2), BIOL 2604 (3), BIOL 2614 (1), sum 15
+ Spring: AAEC 3024 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (3), Free Electives (3), sum 12
+TOTAL 120
+
+## applied-economic-management-bs-community-economic-development | Community Economic Development Major | agriculture-life-sciences/agricultural-applied-economics/applied-economic-management-bs-community-economic-development/
+First Year
+ Fall: ENGL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), ALS 1234 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 16
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), AAEC 3900 (0), sum 15
+Second Year
+ Fall: COMM 2004 or ALCE 3634 (3), AAEC 2434 (3), ACIS 2115 (3), AAEC 3015 (1), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: AAEC 3324 (3), AAEC 3004 (3), Area of Specialization (3), Area of Specialization (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: STAT 3615 or STAT 3005 or BIT 2405 (3), AAEC 3204 or AAEC 4314 or ECON 3034 (3), Restricted Electives (3), AAEC 3604 or AAEC 3314 (3), Area of Specialization (3), sum 15
+ Spring: AAEC 3014 or STAT 3006 or STAT 3616 or BIT 2406 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), Restricted Electives (3), Area of Specialization (3), AAEC 4504 or GEOG 4084 or STAT 4214 or AAEC 4804 or AAEC 4484 or BSE 4344 (3), sum 15
+Fourth Year
+ Fall: AAEC 4324 (3), Restricted Electives (3), ENGL 3774 or ENGL 3764 or ENGL 3754 or ALCE 3624 (3), Area of Specialization (6), sum 15
+ Spring: AAEC 3204 or AAEC 4314 or ECON 3034 (3), AAEC 3024 (3), Free Electives (7), sum 13
+TOTAL 120
+
+## applied-economic-management-bs-environmental-economics-management-policy | Environmental Economics, Management, and Policy Major | agriculture-life-sciences/agricultural-applied-economics/applied-economic-management-bs-environmental-economics-management-policy/
+First Year
+ Fall: ENGL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), ALS 1234 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 16
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), AAEC 3900 (0), sum 15
+Second Year
+ Fall: AAEC 2434 (3), ACIS 2115 (3), COMM 2004 (3), ENSC 1015 (3), AAEC 3015 (1), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: AAEC 3004 (3), AAEC 3324 (3), Area of Specialization** (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: STAT 3615 or STAT 3005 or BIT 2405 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), AAEC Restricted Elective* (3), Area of Specialization** (3), ENGL 3774 or ENGL 3764 or ENGL 3754 (3), sum 15
+ Spring: AAEC 3014 or STAT 3006 or STAT 3616 or BIT 2406 (3), AAEC Restricted Elective* (3), Area of Specialization** (3), AAEC 3314 (3), AAEC 4504 or AAEC 4804 or GEOG 4084 or ALS 4614 or BSE 4344 (2), sum 14
+Fourth Year
+ Fall: AAEC 4324 (3), Area of Specialization** (6), AAEC Restricted Elective* (3), Free Electives (3), sum 15
+ Spring: AAEC 4314 (3), AAEC 3024 (3), Area of Specialization** (3), Free Electives (5), sum 14
+TOTAL 120
+
+## applied-economic-management-bs-food-health-systems-economics | Food and Health Systems Economics Major | agriculture-life-sciences/agricultural-applied-economics/applied-economic-management-bs-food-health-systems-economics/
+First Year
+ Fall: ENGL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), ALS 1234 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 16
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), AAEC 3900 (0), sum 15
+Second Year
+ Fall: COMM 2004 (3), AAEC 2434 (3), ACIS 2115 (3), AAEC 3015 (1), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: APSC 1454 (3), AAEC 3004 (3), Area of Specialization* (3), FST 2014 (2), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 14
+Third Year
+ Fall: STAT 3615 or BIT 2405 (3), AAEC 3504 (3), HNFE 1004 (3), PHS 2004 (3), Area of Specialization* (3), sum 15
+ Spring: AAEC 3014 or STAT 3006 or STAT 3616 or BIT 2406 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), AAEC 4504 (3), SPES 2244 (3), Area of Specialization (3), sum 15
+Fourth Year
+ Fall: APSC/DASC 3134 or CSES 2244 or FST 2244 or HNFE 2544 or FST 2544 or PHS 3014 (3), AAEC 4404 or AAEC 4414 or PHS 4054 (3), ENGL 3774 or ENGL 3764 or ENGL 3754 (3), ECON 4214 (3), Area of Specialization (3), sum 15
+ Spring: AAEC 4814 (3), AAEC 3024 (3), AAEC 3314 or AAEC 3604 or AAEC 3454 or ACIS 1504 (3), Area of Specialization (5), sum 14
+TOTAL 120
+
+## applied-economic-management-bs-international-trade-development | International Trade and Development Major | agriculture-life-sciences/agricultural-applied-economics/applied-economic-management-bs-international-trade-development/
+First Year
+ Fall: ENGL 1105 (3), MATH 1025 or MATH 1225 (3), AAEC 1005 or ECON 2005 (3), ALS 1234 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 16
+ Spring: ENGL 1106 (3), AAEC 2014 or MATH 1026 or MATH 1226 (3), AAEC 1006 or ECON 2006 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), AAEC 3900 (0), sum 15
+Second Year
+ Fall: COMM 2004 or ALCE 3634 (3), AAEC 2434 (3), ACIS 2115 (3), IS 2054 (3), AAEC 3015 (1), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: AAEC 3324 (3), AAEC 3004 (3), Area of Specialization (3), IS 2064 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: STAT 3615 or STAT 3005 or BIT 2405 (3), Area of Specialization (3), AAEC 3204 (3), Restricted Electives (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 15
+ Spring: AAEC 3014 or STAT 3006 or STAT 3616 or BIT 2406 (3), AAEC 3424 or FIN 3104 or ACIS 2116 (3), Area of Specialization (3), AAEC Restricted Elective (3), AAEC 4504 or AAEC 4804 or GEOG 4084 or ECON 3254 or ECON 4304 or BSE 4344 or AAEC 4484 (3), sum 15
+Fourth Year
+ Fall: AAEC 4324 (3), ENGL 3774 or ALCE 3624 or ENGL 3764 or ENGL 3754 (3), AAEC Restricted Elective (3), Area of Specialization (6), sum 15
+ Spring: AAEC 3024 (3), Area of Specialization (3), Free Electives (7), sum 13
+TOTAL 120
+
+## agricultural-extension-education | Agricultural and Extension Education Major | agriculture-life-sciences/agricultural-leadership-community-education/agricultural-extension-education/
+First Year
+ Fall: ALS 1234 (1), AAEC 1005 (3), ENGL 1105 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 13
+ Spring: AAEC 1006 (3), ALCE 3004 (3), ENGL 1106 (3), MATH 1014 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 15
+Second Year
+ Fall: ALCE 2414 (3), Area of Specialization Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Restricted Electives (3), STAT 2004 (3), sum 15
+ Spring: ALCE 3634 (3), Area of Specialization Course (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), ALCE 2964 (3), Restricted Electives (3), sum 15
+Third Year
+ Fall: ALCE 2484 (3), ALCE 3014 (3), ALCE 4234 (3), Area of Specialization Course (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 15
+ Spring: ALCE 2094 (1), ALCE 3624 (3), ALCE 4024 (2), ALCE 4064 (3), Area of Specialization Course (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Fourth Year
+ Fall: ALCE 4034 (3), ALCE 4044 (3), ALCE 4884 (3), Area of Specialization Course (3), Restricted Electives (3), sum 15
+ Spring: ALCE 4244 (3), ALCE 4754 (3), EDCI 3144 (3), Area of Specialization Course (3), Free Electives (5), sum 17
+TOTAL 120
+
+## community-leadership-development | Community Leadership and Development Major | agriculture-life-sciences/agricultural-leadership-community-education/community-leadership-development/
+First Year
+ Fall: ALS 1234 (1), AAEC 1005 (3), ENGL 1105 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), LDRS 1414 (3), sum 13
+ Spring: AAEC 1006 (3), ALCE 3004 (3), ENGL 1106 (3), MATH 1014 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), sum 15
+Second Year
+ Fall: ALCE 2414 (3), Area of Specialization Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), ALS 2204 (3), STAT 2004 (3), sum 15
+ Spring: ALCE 3634 (3), Area of Specialization Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Restricted Electives (3), sum 15
+Third Year
+ Fall: ALCE 4014 (3), ALCE 3014 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), LDRS 2014 or ALCE 4054 or LDRS 4754 or LDRS 4994 (3), Restricted Electives (3), sum 15
+ Spring: ALCE 3624 (3), LDRS 2014 (3), Area of Specialization Course (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Restricted Electives (3), sum 15
+Fourth Year
+ Fall: ALCE 4304 (3), LDRS 3104 (3), Area of Specialization Course (3), Restricted Electives (3), Free Electives (3), sum 15
+ Spring: LDRS 3304 (3), Area of Specialization Course (3), Area of Specialization Course (3), Restricted Electives (3), Free Electives (5), sum 17
+TOTAL 120
+
+## life-sciences-communication | Life Sciences Communication Major | agriculture-life-sciences/agricultural-leadership-community-education/life-sciences-communication/
+First Year
+ Fall: ALS 1234 (1), LDRS 1414 (3), AAEC 1005 (3), ENGL 1105 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (4), sum 14
+ Spring: AAEC 1006 (3), ALCE 3004 (3), ENGL 1106 (3), COMM 1014 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (4), sum 16
+Second Year
+ Fall: COMM 2024 (3), ALCE/AINS 2414 (3), MATH 1014 (3), ALCE 3634 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ALCE 3624 (3), ALCE 3844 (3), COMM 2124 (3), STAT 2004 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: ALCE 4014 (3), ALCE 3814 (3), ALCE 3854 (3), Area of Specialization (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ALCE 4814 (3), COMM 4024 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Area of Specialization (6), sum 15
+Fourth Year
+ Fall: ALCE 4044 (3), ALCE 4824 (3), ALCE 3900 (0), Pathway 5a (3), Area of Specialization (3), Controlled Elective (3), sum 15
+ Spring: ALCE 4834 (3), Area of Specialization (6), Free Electives (6), sum 15
+TOTAL 120
+
+## animal-poultry-sciences-behavior-welfare-option | Animal and Poultry Sciences Major with Behavior and Welfare Option | agriculture-life-sciences/animal-sciences/animal-poultry-sciences-behavior-welfare-option/
+First Year
+ Fall: ENGL 1105 (3), MATH 1014 or MATH 1025 or MATH 1225 (3), APSC 1454 (3), APSC 1464 (1), BIOL 1105 (3), BIOL 1115 (1), APSC 1504 (1), sum 15
+ Spring: ENGL 1106 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), STAT 2004 (3), BIOL 1106 (3), BIOL 1116 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), AAEC 1005 or ECON 2005 (3), ALS 2504 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Restricted Electives (3), sum 16
+ Spring: CHEM 1036 (3), CHEM 1046 (1), Economics Requirement: AAEC 1006 or ECON 2006 or AAEC 2104 or AAEC 2434 (3), APSC 2004 (1), ALS 2304 (4), APSC 2574 (3), sum 15
+Third Year
+ Fall: ALS 3104 (3), Restricted Electives (3), Restricted Electives (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ALS 3204 (3), APSC 3334 (3), Restricted Electives (3), Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Fourth Year
+ Fall: Animal Science/Management Course (3), APSC 4004 (3), Experiential Learning Requirement (1), Free Electives or Restricted Elective (3), Free Electives or Restricted Elective (3), sum 13
+ Spring: Species Requirement Course (3), ALS 4574 (3), Animal Science/Management Course (3), Free Electives or Restricted Elective (3), Free Electives or Restricted Elective (3), sum 15
+TOTAL 120
+
+## animal-poultry-sciences-bs-science | Animal and Poultry Sciences Major | agriculture-life-sciences/animal-sciences/animal-poultry-sciences-bs-science/
+First Year
+ Fall: ENGL 1105 (3), MATH 1014 or MATH 1025 or MATH 1225 (3), APSC 1454 (3), APSC 1464 (1), BIOL 1105 (3), BIOL 1115 (1), APSC 1504 (1), sum 15
+ Spring: ENGL 1106 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), STAT 2004 (3), BIOL 1106 (3), BIOL 1116 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), AAEC 1005 or ECON 2005 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Restricted Electives (1), Restricted Electives (3), sum 14
+ Spring: CHEM 1036 (3), CHEM 1046 (1), Economics Requirement: AAEC 1006 or ECON 2006 or AAEC 2104 or AAEC 2434 (3), APSC 2004 (1), Pathways Concept 2 - Critical Thinking in the Humanities or APSC Restricted Elective (3), ALS 2304 (4), sum 15
+Third Year
+ Fall: Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Restricted Electives (3), Animal Science/Management Course (3), ALS 3104 (3), Restricted Electives (3), sum 15
+ Spring: Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives or Restricted Elective (3), Animal Science Management Course (3), ALS 3204 (3), sum 15
+Fourth Year
+ Fall: Species Requirement Course (3), APSC 4004 (3), Animal Science/Management Course (3), Restricted Electives (6), Experiential Learning Requirement (1), sum 16
+ Spring: Animal Science/Management Course (3), Restricted Electives (6), Free Electives (5), sum 14
+TOTAL 120
+
+## animal-poultry-sciences-prevet-option | Animal and Poultry Sciences Major with Prevet Option | agriculture-life-sciences/animal-sciences/animal-poultry-sciences-prevet-option/
+First Year
+ Fall: ENGL 1105 (3), MATH 1014 or MATH 1025 or MATH 1225 (3), APSC 1454 (3), APSC 1464 (1), BIOL 1105 (3), BIOL 1115 (1), APSC 1504 (1), sum 15
+ Spring: ENGL 1106 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), STAT 2004 (3), BIOL 1106 (3), BIOL 1116 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1035 (3), CHEM 1045 (1), AAEC 1005 or ECON 2005 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Restricted Electives (3), sum 13
+ Spring: CHEM 1036 (3), CHEM 1046 (1), Economics Requirement: AAEC 1006 or ECON 2006 or AAEC 2104 or AAEC 2434 (3), APSC 2004 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), ALS 2304 (4), sum 15
+Third Year
+ Fall: Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Restricted Electives (3), Restricted Electives (3), ALS 3104 (3), CHEM 2514 or CHEM 2535 (3), sum 15
+ Spring: Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Animal Science Management Course (3), APSC 3434 or BIOL 2604 (3), ALS 3204 (3), sum 15
+Fourth Year
+ Fall: Restricted Electives (3), BCHM 2024 or BCHM 3114 (3), Species Requirement Course (3), Experiential Learning Requirement (1), Free Electives (6), sum 16
+ Spring: Animal Science/Management Course (3), APSC 4004 (3), Animal Science/Management Course (3), Free Electives (6), sum 15
+TOTAL 120
+
+## dairy-science-bs-dairy-business-management | Dairy Science Major with Dairy Business Management Option | agriculture-life-sciences/animal-sciences/dairy-science-bs-dairy-business-management/
+First Year
+ Fall: MATH 1014 or MATH 1025 or MATH 1225 (3), ENGL 1105 (3), BIOL 1105 (3), BIOL 1115 (1), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), DASC 1574 (1), DASC 1464 (1), sum 15
+ Spring: ENGL 1106 (3), STAT 2004 (3), BIOL 1106 (3), BIOL 1116 (1), DASC 2474 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Second Year
+ Fall: CHEM 1015 or CHEM 1035 (3), AAEC 1005 or ECON 2005 (3), DASC 2664 (1), ALS 3104 (3), Pathway 6d (3), Free Elective (3), sum 16
+ Spring: CHEM 1016 or CHEM 1036 (3), AAEC 1006 or ECON 2006 (3), ALS 2304 (4), Restricted Electives (3), Free Electives (2), sum 15
+Third Year
+ Fall: DASC 3474 (3), ALS 3304 (3), Option Business Requirement (3), Dairy Elective (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 15
+ Spring: ALS 3204 (3), DASC 4475 (3), Option Business Requirement (3), Restricted Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Fourth Year
+ Fall: DASC 4664 (1), DASC 4476 (3), Option Business Requirement (3), Dairy Elective (3), Free Electives (3), Restricted Electives (3), sum 16
+ Spring: DASC 4374 (3), Restricted Electives (3), DASC 3134 or DASC 3274 or DASC 4174 (3), Pathway 1a (3), sum 12
+TOTAL 120
+
+## dairy-science-bs-science-prevet | Dairy Science Major with Science/Prevet Option | agriculture-life-sciences/animal-sciences/dairy-science-bs-science-prevet/
+First Year
+ Fall: ENGL 1105 (3), DASC 1464 (1), DASC 1574 (1), MATH 1014 or MATH 1025 or MATH 1225 (3), BIOL 1105 (3), BIOL 1115 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ENGL 1106 (3), STAT 2004 or STAT 3005 or STAT 3615 (3), BIOL 1106 (3), BIOL 1116 (1), Dairy Science Elective (3), Pathways Concept 6 - Critique and Practice in Design and the Arts A or D (3), sum 16
+Second Year
+ Fall: CHEM 1015 or CHEM 1035 (3), CHEM 1025 or CHEM 1045 (1), AAEC 1005 or ECON 2005 (3), DASC 2664 (1), Dairy Science Elective (3), ALS 3104 (3), sum 14
+ Spring: CHEM 1016 or CHEM 1036 (3), CHEM 1026 or CHEM 1046 (1), AAEC 1006 or ECON 2006 (3), DASC 2474 (3), ALS 2304 (4), sum 14
+Third Year
+ Fall: CHEM 2535 (3), CHEM 2545 (1), BIOL 2604 (3), BIOL 2614 (2), DASC 3474 (3), ALS 3304 (3), sum 15
+ Spring: ALS 3204 (3), DASC 4374 (3), Dairy Elective (3), Option Science/Pre-Vet Requirement Course (3), Pathway 2 (3), sum 15
+Fourth Year
+ Fall: BCHM 2024 (3), OptionScience/Pre-Vet Course Requirement or Free Elective (3), DASC 4664 (1), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (4), sum 14
+ Spring: Pathway 1a (3), OptionScience/Pre-Vet Course Requirement (3), Free Electives (5), Pathway 6a or D (3), OptionScience/Pre-Vet Course Requirement (3), sum 17
+TOTAL 120
+
+## dairy-science-dual-emphasis | Dairy Science Major with Dual Emphasis Option | agriculture-life-sciences/animal-sciences/dairy-science-dual-emphasis/
+First Year
+ Fall: ENGL 1105 (3), DASC 1464 (1), DASC 1574 (1), MATH 1014 or MATH 1025 or MATH 1225 (3), BIOL 1105 (3), BIOL 1115 (1), Dairy Elective (3), sum 15
+ Spring: ENGL 1106 (3), STAT 2004 (3), BIOL 1106 (3), BIOL 1116 (1), DASC 2474 (3), Dairy Elective (1), sum 14
+Second Year
+ Fall: CHEM 1015 or CHEM 1035 (3), AAEC 1005 or ECON 2005 (3), DASC 2664 (1), ALS 3104 (3), Pathway 6d (3), Course for Chosen Minor (3), sum 16
+ Spring: CHEM 1016 or CHEM 1036 (3), AAEC 1006 or ECON 2006 (3), ALS 2304 (4), Course for Chosen Minor (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+Third Year
+ Fall: DASC 3474 (3), ALS 3304 (3), Course for Chosen Minor (3), Dairy Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: ALS 3204 (3), DASC 4374 (3), Course for Chosen Minor (3), Restricted Electives (2), Free Electives (3), sum 14
+Fourth Year
+ Fall: DASC 4664 (1), Course for Chosen Minor (3), Restricted Electives (2), Free Electives (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathways Concept 1 - Discourse A (3), sum 15
+ Spring: Course for Chosen Minor (3), Restricted Electives (4), Free Electives (5), Pathways Concept 6 - Critique and Practice in Design and the Arts A or D (3), sum 15
+TOTAL 120
+
+## biochemistry-bs | Biochemistry Major | agriculture-life-sciences/biochemistry/biochemistry-bs/
+First Year
+ Fall: BCHM 1014 (1), BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 15
+ Spring: BCHM 1024 (1), BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 (3), sum 15
+Second Year
+ Fall: BCHM 4074 (1), CHEM 2535 (3), CHEM 2545 (1), PHYS 2205 (3), PHYS 2215 (1), STAT 3615 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: BCHM 2354 (3), BCHM 2364 (1), CHEM 2536 (3), CHEM 2546 (1), PHYS 2206 (3), PHYS 2216 (1), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: BCHM 4115 (4), BIOL 2004 (3), BIOL 2604 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Free Electives (2), sum 15
+ Spring: BCHM 4116 (3), BCHM 4124 (6), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Fourth Year
+ Fall: Major Electives (3), Restricted Electives (3), Pathways Concept 1 - Discourse (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (3), sum 15
+ Spring: Restricted Electives (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (9), sum 15
+TOTAL 120
+
+## food-science-technology-bs-food-business | Food Science and Technology Major with Food Business Option | agriculture-life-sciences/food-science-technology/food-science-technology-bs-food-business/
+First Year
+ Fall: ALS 1234 (1), BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1524 (4), sum 15
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ECON 2005 or AAEC 1006 (3), ENGL 1106 (3), FST 2004 (1), FST 2014 (2), sum 16
+Second Year
+ Fall: BIT 2405 (3), BIOL 2604 (3), BIOL 2614 (2), CHEM 2514 (3), ECON 2006 or AAEC 1005 (3), sum 14
+ Spring: ACIS 2115 (3), BCHM 2024 (3), BIT 2406 (3), Restricted Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: ACIS 2116 (3), FST 3324 (3), FST 4504 (3), FST 4534 (1), MGT 3304 or AAEC 3454 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 16
+ Spring: BIT 3414 (3), FIN 3104 or AAEC 3424 (3), FST 3514 (4), FST 3604 (3), FST 3614 (1), sum 14
+ Summer: FST 3900 (0), sum 0
+Fourth Year
+ Fall: ENGL 3764 (3), FST 4004 (1), FST 4314 (1), MKTG 3104 or AAEC 3504 (3), Restricted Electives (1), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (3), sum 15
+ Spring: FST 4014 (3), FST 4524 (3), Restricted Electives (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (3), sum 15
+TOTAL 120
+
+## food-science-technology-bs-food-health | Food Science and Technology Major with Food and Health Option | agriculture-life-sciences/food-science-technology/food-science-technology-bs-food-health/
+First Year
+ Fall: ALS 1234 (1), BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), FST 2004 (1), FST 2014 (2), MATH 1026 (3), sum 16
+Second Year
+ Fall: BIOL 2604 (3), BIOL 2614 (2), CHEM 2535 or CHEM 2514 (3), HNFE 1004 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 14
+ Spring: BCHM 2024 (3), CHEM 2536 (3), or Restricted Electives (3 credits) (), HNFE 2014 (3), STAT 3615 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: FST 3324 (3), FST 4504 (3), FST 4534 (1), PHYS 2205 (3), Restricted Electives (2), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: FST 3514 (4), FST 3604 (3), FST 3614 (1), PHYS 2206 (3), Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 17
+ Summer: FST 3900 (0), sum 0
+Fourth Year
+ Fall: ENGL 3764 (3), FST 4004 (1), FST 4314 (1), Restricted Electives (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Free Electives (3), sum 14
+ Spring: FST 4014 (3), FST 4524 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Restricted Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## food-science-technology-bs-science-concentration | Food Science and Technology Major with Science Option | agriculture-life-sciences/food-science-technology/food-science-technology-bs-science-concentration/
+First Year
+ Fall: ALS 1234 (1), BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 (3), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), FST 2004 (1), FST 2014 (2), MATH 1026 (3), sum 16
+Second Year
+ Fall: BIOL 2604 (3), BIOL 2614 (2), CHEM 2535 (3), CHEM 2545 (1), HNFE 1004 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: BCHM 2024 (3), CHEM 2536 (3), STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: FST 3324 (3), FST 4504 (3), FST 4534 (1), PHYS 2205 (3), Restricted Electives (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: FST 3024 (3), FST 3514 (4), FST 3604 (3), FST 3614 (1), Restricted Electives (1), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+ Summer: FST 3900 (0), sum 0
+Fourth Year
+ Fall: ENGL 3764 (3), FST 4004 (1), FST 4314 (1), Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (3), sum 14
+ Spring: FST 4014 (3), FST 4324 (3), FST 4524 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (3), sum 15
+TOTAL 120
+
+## human-nutrition-foods-exercise-bs-dietetics | Nutrition and Dietetics Major | agriculture-life-sciences/human-nutrition-foods-exercise/human-nutrition-foods-exercise-bs-dietetics/
+First Year
+ Fall: BIOL 1105 (3), BIOL 1115 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), HNFE 1114 (1), MATH 1025 (3), sum 15
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), HNFE 1004 (3), Pathways course (3), sum 17
+Second Year
+ Fall: BMSP 2135 (3), CHEM 2514 or CHEM 2535 (3), FST 2014 (2), HNFE 2014 or HNFE 2014H (3), HNFE 2484 (1), PSYC 1004 (3), sum 15
+ Spring: BMSP 2136 (3), BCHM 2024 (3), HNFE 2004 (1), HNFE 3024 (2), PSYC 2084 or HNFE 2664 or PSYC 2034 or SOC 1004 (3), Pathways course (3), sum 15
+Third Year
+ Fall: HNFE 3114 (4), HNFE 4604 (3), HNFE 2804 (3), HNFE 4644 (3), MGT 3304 (3), sum 16
+ Spring: HNFE 3224 (3), HNFE 4704 (3), COMM 2004 or ALCE 3634 (3), STAT 3615 (3), HNFE 3034 (2), sum 14
+Fourth Year
+ Fall: HNFE 4125 (3), HNFE 4624 (3), BIOL 2604 (3), BIOL 2614 (1), Pathways course (3), sum 13
+ Spring: HNFE 4126 (3), AAEC 4814 (3), Pathways course (3), Pathways course (3), Free Electives (3), sum 15
+TOTAL 120
+
+## human-nutrition-foods-exercise-bs-science-food-nutrition-exercise | Exercise and Health Sciences Major | agriculture-life-sciences/human-nutrition-foods-exercise/human-nutrition-foods-exercise-bs-science-food-nutrition-exercise/
+First Year
+ Fall: BIOL 1105 (3), BIOL 1115 (1), ENGL 1105 (3), HNFE 1004 (3), HNFE 1114 (1), MATH 1025 (3), sum 14
+ Spring: BIOL 1106 (3), BIOL 1116 (1), CHEM 1035 (3), CHEM 1045 (1), ENGL 1106 (3), HNFE Elective Group C (2), Pathways course (3), sum 16
+Second Year
+ Fall: BMSP 2135 (3), BMSP 2145 (1), CHEM 1036 (3), HNFE 2484 (1), HNFE 4974 or HNFE 4964 or HNFE 3954 or HNFE 4954 or HNFE 4994 or HNFE 4994H (1), HNFE Electives Group C (3), Pathways course or free elective (3), sum 15
+ Spring: BMSP 2136 (3), BMSP 2146 (1), CHEM 1046 (1), HNFE 2014 or HNFE 2014H (3), HNFE 4964 or HNFE 4974 or HNFE 4994 or HNFE 4994H or HNFE 3954 or HNFE 4954 (1), PSYC 1004 (3), Pathways course or free elective (3), sum 15
+Third Year
+ Fall: CHEM 2514 or CHEM 2535 (3), COMM 2004 or ALCE 3634 (3), HNFE 2804 (3), HNFE Electives Group C (3), Pathways course or free elective (3), sum 15
+ Spring: BCHM 2024 (3), HNFE 3804 (3), HNFE Electives Group B Science Foundations (4), HNFE Electives Group C (3), Pathways course (3), sum 16
+Fourth Year
+ Fall: HNFE Elective Group C 4000-level (3), HNFE 3034 (2), HNFE 4604 (3), Pathways course or free elective (3), Free elective (3), sum 14
+ Spring: HNFE Elective Group C 4000-level (3), STAT 3615 (3), HNFE 4704 or HNFE 4804 (3), Pathways course (3), Free elective (3), sum 15
+TOTAL 120
+
+## crop-soil-sciences | Crop and Soil Sciences Major | agriculture-life-sciences/school-plant-environmental-sciences/crop-soil-sciences/
+First Year
+ Fall: BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1014 or MATH 1025 (3), SPES 1004 or ALS 1234 (1), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), SPES 2014 (1), sum 14
+Second Year
+ Fall: AAEC 1005 or ECON 2005 (3), ENSC 1015 or ENSC 1016 (3), CSES 2444 (3), CSES 3114 (3), CSES 3124 (1), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 16
+ Spring: AAEC 2434 (3), BIOL 2304 (3), PPWS 2104 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Restricted Elective or Approved Minor Course (3), sum 15
+Third Year
+ Fall: ALCE 3624 or ALCE 3634 (3), CSES 4214 (3), Restricted Elective or Approved Minor Course (3), Restrocted Elective or Approved Minor Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: CSES 4144 (3), ENT 4254 (3), Restricted Elective or Approved Minor Course (3), Pathways Concept 1 - Discourse (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 3900 (0), sum 15
+Fourth Year
+ Fall: Restricted Elective or Approved Minor (3), Restricted Elective or Approved Mionor (3), Free Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 15
+ Spring: PPWS 4104 (4), Free Electives (3), Free Electives (3), Free Electives (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), SPES 4014 (1), sum 16
+TOTAL 120
+
+## ecological-restoration-bs | Ecological Restoration Major | agriculture-life-sciences/school-plant-environmental-sciences/ecological-restoration-bs/
+First Year
+ Fall: BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 or MATH 1226 (3), SPES 1004 or ALS 1234 (1), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), GEOS 1004 or GEOS 2104 (3), MATH 1026 or MATH 1226 (3), SPES 2014 (1), sum 17
+Second Year
+ Fall: AAEC 1005 or ECON 2005 (3), BIOL 2804 (3), CSES 3114 (3), CSES 3124 (1), ENSC 3644 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+ Spring: BIOL 2304 (3), GEOG 2084 or GEOG 4354 or FREC 4114 (3), STAT 3615 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 15
+Third Year
+ Fall: ENSC 3604 (3), Ecology Restricted Elective (3), Plant and Soil Science Restricted Elective (3), Pathways Concept 1 - Discourse (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: ENSC 4244 (3), BIOL 3204 (3), Ecology Restrictive Elective (3), Plant and Soils Science Restricted Elective (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 3900 (0), sum 15
+Fourth Year
+ Fall: PPWS 4604 (3), Ecology Restricted Elective (3), Restricted Electives (3), Restricted Electives (3), Pathway 7 (3), sum 15
+ Spring: ENSC 4774 (3), Restricted Electives (3), Restricted Electives (3), Human Dimension Restricted Elective (3), SPES 4014 (1), sum 13
+TOTAL 120
+
+## environmental-horticulture-bs | Environmental Horticulture Major | agriculture-life-sciences/school-plant-environmental-sciences/environmental-horticulture-bs/
+First Year
+ Fall: BIOL 1105 (3), ENGL 1105 (3), ENSC 1015 or ENSC 1016 (3), HORT 2224 (2), MATH 1014 or MATH 1025 (3), SPES 1004 or ALS 1234 (1), sum 15
+ Spring: BIOL 1106 (3), ENGL 1106 (3), HORT 2244 (3), HORT 2234 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), SPES 2014 (1), sum 16
+Second Year
+ Fall: AAEC 1005 (3), HORT 2304 (3), CHEM 1035 (3), Pathways Concept 1 - Discourse (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 15
+ Spring: AAEC 2434 (3), CHEM 1036 (3), PPWS 2104 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: AAEC 3454 (3), ALCE 3624 or ALCE 3634 (3), HORT 3324 (3), Restricted Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: ENSC 3134 (3), ENT 4224 (3), HORT 3326 (3), Restricted Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 3900 (0), sum 15
+Fourth Year
+ Fall: HORT 4334 (3), Restricted Electives (3), Restricted Electives (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), sum 15
+ Spring: HORT 4614 or HORT 4344 (3), PPWS 4104 (4), Free Electives (6), SPES 4014 (1), sum 14
+TOTAL 120
+
+## environmental-science-bs | Environmental Science Major | agriculture-life-sciences/school-plant-environmental-sciences/environmental-science-bs/
+First Year
+ Fall: BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 or MATH 1225 (3), SPES 1004 or ALS 1234 (1), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), GEOS 1004 or GEOS 2104 (3), MATH 1026 or MATH 1226 (3), SPES 2014 (1), sum 17
+Second Year
+ Fall: AAEC 1005 or ECON 2005 (3), CHEM 2114 (3), CHEM 2124 (1), CSES 3114 (3), CSES 3124 (1), ENSC 3604 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 17
+ Spring: AAEC 1006 or ECON 2006 (3), CHEM 2514 (3), STAT 3615 (3), Major Specific Course (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: CSES 4854 (3), ENGL 3764 (3), GEOG 2084 or GEOS 4354 or FREC 4114 (3), Major Specific Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: PHYS 2205 (3), Major Specific Course (3), Technical Electives (3), Technical Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 3900 (0), sum 15
+Fourth Year
+ Fall: ENSC 3634 (3), GEOS 4804 (3), Technical Electives (3), Technical Electives (3), SPES 4014 (1), sum 13
+ Spring: ENSC 4414 (2), ENSC 4734 (3), Major Specific Course (3), Technical Electives (3), Pathway 7 (3), sum 14
+TOTAL 120
+
+## integrated-agriculture-technologies | Integrated Agriculture Technologies Major | agriculture-life-sciences/school-plant-environmental-sciences/integrated-agriculture-technologies/
+First Year
+ Fall: BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 or MATH 1225 (3), SPES 1004 or ALS 1234 (1), sum 14
+ Spring: BIOL 1106 (3), CHEM 1046 (1), CHEM 1036 (3), CS 1014 (3), ENGL 1106 (3), SPES 2014 (1), sum 14
+Second Year
+ Fall: CSES 2224 (3), ENSC 1015 or ENSC 1016 (3), Pathways Concept 1 - Discourse (3), HORT 2234 or CSES 2444 or CSES 2564 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: AAEC 1005 or ECON 2005 (3), GEOG 2084 (3), HORT 2304 (3), PPWS 2104 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 15
+Third Year
+ Fall: ALCE 3634 or ALCE 3624 (3), CSES 3114 (3), CSES 3124 (1), CSES 4234 (3), CSES 4224 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), sum 16
+ Spring: PPWS 4104 (4), Restricted Elective or Approved Minor Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), Free Electives (3), SPES 3900 (0), sum 16
+Fourth Year
+ Fall: CSES 4524 (3), CSES 4534 (3), Restricted Elective or Approved Minor Course (3), Restrictred Elective or Approved Minor Course (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 4014 (1), sum 16
+ Spring: Restricted Elective or Approved Minor Course (3), Restricted Elective or Approved Minor Course (3), Restricted Elective or Approved Minor Course (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (2), sum 14
+TOTAL 120
+
+## landscape-design-turfgrass-science | Landscape Design and Turfgrass Science Major | agriculture-life-sciences/school-plant-environmental-sciences/landscape-design-turfgrass-science/
+First Year
+ Fall: BIOL 1105 (3), ENGL 1105 (3), ENSC 1015 or ENSC 1016 (3), HORT 2224 (2), MATH 1014 or MATH 1025 (3), SPES 1004 or ALS 1234 (1), sum 15
+ Spring: BIOL 1106 (3), ENGL 1106 (3), HORT 2244 (3), HORT 2234 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), SPES 2014 (1), sum 16
+Second Year
+ Fall: AAEC 1005 (3), CHEM 1035 (3), CSES 2564 (3), HORT 2304 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: AAEC 2434 (3), CHEM 1036 (3), PPWS 2104 (3), Pathways Concept 1 - Discourse (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+Third Year
+ Fall: AAEC 3454 (3), CSES 3114 (3), CSES 3124 (1), Concentration Requirement or Restrictive Elective (3), Concentration Requirement or Restrictive Elective (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 16
+ Spring: ALCE 3624 or ALCE 3634 (3), ENT 4254 (3), PPWS 4104 (4), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), SPES 3900 (0), sum 16
+Fourth Year
+ Fall: Track Requirement or Restrictive Elective (3), Concentration Requirement or Restrictive Elective (3), Concentration Requirement or Restrictive Elective (3), Free Electives (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+ Spring: Concentration Requirement or Restrictive Elective (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Free Electives (5), SPES 4014 (1), sum 12
+TOTAL 120
+
+## plant-science | Plant Science Major | agriculture-life-sciences/school-plant-environmental-sciences/plant-science/
+First Year
+ Fall: BIOL 1105 (3), CHEM 1035 (3), CHEM 1045 (1), ENGL 1105 (3), MATH 1025 or MATH 1225 (3), SPES 1004 or ALS 1234 (1), sum 14
+ Spring: BIOL 1106 (3), CHEM 1036 (3), CHEM 1046 (1), ENGL 1106 (3), MATH 1026 or MATH 1226 (3), SPES 2014 (1), sum 14
+Second Year
+ Fall: CHEM 2535 (3), CHEM 2545 (1), ENSC 1015 or ENSC 1016 (3), HORT 2224 or CSES 2444 (2), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 12
+ Spring: CHEM 2536 (3), CHEM 2546 (1), HORT 2304 (3), PPWS 2104 (3), STAT 3615 (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 16
+Third Year
+ Fall: AAEC 1005 or ECON 2005 (3), BCHM 3114 or BCHM 4115 (3), Restricted Electives (3), Restricted Electives (3), Pathways Concept 1 - Discourse (3), sum 15
+ Spring: ALCE 3624 or ALCE 3634 (3), CSES 4144 (3), PPWS 4104 (4), Restricted Electives (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), SPES 3900 (0), sum 16
+Fourth Year
+ Fall: Restricted Electives (3), Restricted Electives (3), Restricted Electives (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), sum 15
+ Spring: CSES 4344 (3), Free Electives (11), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), SPES 4014 (1), sum 18
+TOTAL 120

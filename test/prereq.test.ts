@@ -1,13 +1,18 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { credits, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
+import { readdirSync } from 'node:fs';
+import { byCollege, credits, parseNoRoadmap, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
 import { checkItems, parseExpr, parsePrereqs, planIssues } from '../src/plan/prereq.ts';
 import { switchCost, type SwitchItem } from '../src/plan/switch.ts';
 import { compareData, COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
 import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 
-const real = parseRoadmaps(readFileSync('data/roadmaps/engineering.txt', 'utf8'));
+const texts = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort().map((f) => readFileSync(`data/roadmaps/${f}`, 'utf8'));
+// Every saved roadmap, all colleges.
+const real = texts.flatMap((t) => parseRoadmaps(t));
+/** On a roadmap but absent from the catalog's undergraduate course descriptions (Nov 21, 2026): no prerequisite data. */
+const NOT_IN_CATALOG = ['AINS 2414', 'BSE 5344', 'BSE 5524', 'ENT 4224', 'NR 2554'];
 const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
 const cs = real.find((r) => r.slug === 'computer-science')!;
 const ids = (terms: Array<{ items: Array<{ id: string }> }>) => terms.map((t) => t.items.map((i) => i.id));
@@ -25,9 +30,26 @@ test('parseExpr: "and" binds tighter than "or", commas mean and, free text is re
 });
 
 test('prerequisite file covers every course on a roadmap, and every prerequisite line parses', () => {
-  const text = readFileSync('data/roadmaps/engineering.txt', 'utf8');
-  for (const code of new Set(text.match(/[A-Z]{2,4} \d{4}/g))) assert.ok(courses.has(code), code);
+  const missing = [...new Set(texts.join('\n').match(/[A-Z]{2,4} \d{4}H?/g))].filter((code) => !courses.has(code)).sort();
+  assert.deepEqual(missing, NOT_IN_CATALOG);
   for (const c of courses.values()) if (c.preText) assert.ok(c.pre, `${c.code}: ${c.preText}`);
+});
+
+test('every saved roadmap: unique slug, term sums and total match what the catalog prints, known college', () => {
+  assert.equal(real.length, 128);
+  assert.equal(new Set(real.map((r) => r.slug)).size, real.length);
+  for (const r of real) {
+    assert.ok(r.terms.length >= 8, r.slug);
+    r.terms.forEach((t, i) => assert.equal(credits(t.items), r.printedSums[i], `${r.slug} ${t.label}`));
+    assert.equal(credits(r.terms.flatMap((t) => t.items)), r.total, r.slug);
+  }
+  const groups = byCollege(real);
+  assert.ok(!groups.some(([c]) => c === 'Other'));
+  assert.equal(groups.length, 7);
+  const none = parseNoRoadmap(readFileSync('data/no-roadmap.txt', 'utf8'));
+  assert.equal(none.length, 88);
+  const have = new Set(real.map((r) => r.catalogPath));
+  for (const x of none) assert.ok(!have.has(x.catalogPath), x.name);
 });
 
 test('official roadmaps show no prerequisite conflicts', () => {
@@ -63,12 +85,12 @@ test('repack with prerequisites: few conflicts left, every course kept, loads st
     for (const y of YEAR_OPTIONS) {
       const terms = repack(r, y, check);
       assert.equal(terms.flatMap((t) => t.items).length, r.terms.flatMap((t) => t.items).length, `${r.slug} ${y}`);
-      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 26, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
+      assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 27, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
       conflicts += Object.values(planIssues(check, ids(terms), [])).filter((v) => v.late.length || v.coLate.length).length;
     }
   }
-  // 15 on Nov 21, 2026, mostly a two-part capstone landing in the last term of a 3-year plan. The page flags them.
-  assert.ok(conflicts <= 15, `conflicts: ${conflicts}`);
+  // 47 over 640 layouts on Nov 21, 2026, mostly a two-part capstone landing in the last term of a 3-year plan. The page flags them.
+  assert.ok(conflicts <= 47, `conflicts: ${conflicts}`);
 });
 
 test('switchCost: same course carries, same-name electives likely carry, each target slot is used once', () => {

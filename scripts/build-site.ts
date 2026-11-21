@@ -6,7 +6,7 @@ import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'nod
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
-import { parseRoadmaps } from '../src/plan/roadmap.ts';
+import { parseNoRoadmap, parseRoadmaps } from '../src/plan/roadmap.ts';
 import { parsePrereqs } from '../src/plan/prereq.ts';
 import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
@@ -37,7 +37,8 @@ const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).
 const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
 write('plan.js', PLAN_JS);
 write('compare.js', COMPARE_JS);
-write('plan/index.html', renderPlanIndex(roadmaps, site));
+const noRoadmap = parseNoRoadmap(readFileSync('data/no-roadmap.txt', 'utf8'));
+write('plan/index.html', renderPlanIndex(roadmaps, site, false, noRoadmap));
 write('plan/compare.html', renderCompare(roadmaps, courses, site));
 for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, courses, site, links));
 // [label, link, kind]: c = course, i = instructor, m = degree plan. The palette groups by kind.
@@ -51,14 +52,14 @@ if (site && links) {
   search.unshift(...site.courses.map((c) => [`${c.course} ${c.title}`, `course/${links.course.get(c.course)}.html`, 'c']),
     ...site.profs.map((p) => [`${p.name} (${p.subject})`, `prof/${links.prof.get(p.key)}.html`, 'i']));
 } else {
-  write('index.html', renderPlanIndex(roadmaps, undefined, true));
+  write('index.html', renderPlanIndex(roadmaps, undefined, true, noRoadmap));
   write('about.html', renderPlanAbout());
 }
 write('search.json', JSON.stringify(search));
 
 sizes.sort((a, b) => a - b);
 const kb = (n: number) => (n / 1024).toFixed(1);
-console.log(`Degree planner: ${roadmaps.length} majors, prerequisites for ${courses.size} courses`);
+console.log(`Degree planner: ${roadmaps.length} majors and options, ${noRoadmap.length} programs without a catalog roadmap, prerequisites for ${courses.size} courses`);
 if (site) {
   const v = { barely: 0, some: 0, matters: 0, unknown: 0 };
   for (const c of site.courses) v[c.spread.verdict]++;

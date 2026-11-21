@@ -1,6 +1,6 @@
 // Degree planner pages. The page ships the roadmap as JSON; PLAN_JS draws the board and keeps
 // the student's changes in their own browser (localStorage). Nothing is sent anywhere.
-import { credits, repack, YEAR_OPTIONS, type Roadmap } from '../plan/roadmap.ts';
+import { byCollege, collegeOf, credits, repack, YEAR_OPTIONS, type Roadmap } from '../plan/roadmap.ts';
 import { checkItems, planIssues, type CourseInfo, type Expr } from '../plan/prereq.ts';
 import { brand, esc, layout, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
 import type { Site } from './model.ts';
@@ -102,7 +102,7 @@ export function renderPlan(r: Roadmap, courses: Map<string, CourseInfo>, site?: 
   // "</" inside JSON would end the script tag early.
   const json = JSON.stringify(planData(r, courses, site, links)).replace(/</g, '\\u003c');
   const ext = (href: string, text: string) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`;
-  const body = `<h1>${esc(r.name)}</h1><p class="sub">Degree plan · ${r.total} credits · from the ${ext(`${CATALOG}${esc(r.catalogPath)}#roadmaptext`, 'official 2026-2027 roadmap')} · <a href="compare.html#from=${esc(r.slug)}">What if I switch majors?</a></p>
+  const body = `<h1>${esc(r.name)}</h1><p class="sub">${esc(collegeOf(r.catalogPath))} · ${r.total} credits · from the ${ext(`${CATALOG}${esc(r.catalogPath)}#roadmaptext`, 'official 2026-2027 roadmap')} · <a href="compare.html#from=${esc(r.slug)}">What if I switch majors?</a></p>
 <p class="note warn" id="shared" hidden><b>You're viewing a shared plan.</b> Changes you make here are not saved. <button type="button" class="btn" id="keep">Keep as my plan</button></p>
 <div class="ctl"><b>Graduate in</b><div class="seg" id="years" role="group" aria-label="Years to graduate">${YEAR_OPTIONS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === 4}">${y} yr</button>`).join('')}</div></div>
 <div class="over" id="over" aria-label="Credits per term"></div><p class="mut">Credits per term. Tap a bar to jump to that term.</p>
@@ -120,13 +120,15 @@ ${site ? '' : `<p class="mut">Choosing a section? See past grades on ${ext(UDC_U
 }
 
 /** Planner landing page. `home` renders it as the site's front page (planner-only build), so links gain a "plan/" prefix. */
-export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false): string {
-  const sorted = [...roadmaps].sort((a, b) => a.name.localeCompare(b.name));
+export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, noRoadmap: Array<{ name: string; catalogPath: string }> = []): string {
   const pre = home ? 'plan/' : '';
+  const groups = byCollege(roadmaps);
+  const majors = groups.map(([college, rs]) => `<h3 class="col" id="${esc(college.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(college)} <span class="mut">${rs.length}</span></h3><div class="majors">${rs.map((r) => `<a href="${pre}${esc(r.slug)}.html"><b>${esc(r.name)}</b><span>${r.total} credits →</span></a>`).join('')}</div>`).join('');
+  const none = byCollege(noRoadmap).map(([college, xs]) => `<p class="mut"><b>${esc(college)}:</b> ${xs.map((x) => `<a href="${CATALOG}${esc(x.catalogPath)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a>`).join(' · ')}</p>`).join('');
   return layout(`${home ? 'Virginia Tech degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your Virginia Tech degree from the official roadmap: 3 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
     `<div class="hero"><h1>Your degree, <em>term by term</em>.</h1><p>Start from your major's official roadmap. Choose 3 to 5 years, move courses and see at once if a prerequisite breaks, and send the plan to your advisor as a link. No login.</p></div>
-<h2>Choose a major</h2><div class="majors">${sorted.map((r) => `<a href="${pre}${esc(r.slug)}.html"><b>${esc(r.name)}</b><span>${r.total} credits →</span></a>`).join('')}</div>
-<p class="mut">${sorted.length} College of Engineering majors so far, read from the 2026-2027 catalog. Other colleges and minors are not added yet.</p>
+<h2>Choose a major</h2><p class="mut">${roadmaps.length} majors and options with an official roadmap in the 2026-2027 catalog. Press <kbd>/</kbd> to search by name. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
+${none ? `<h2>No official roadmap</h2><p class="mut">The catalog lists requirements for these ${noRoadmap.length} programs but no term-by-term roadmap, so there is nothing official to plan from yet. Each link opens its catalog page.</p>${none}` : ''}
 <div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
 <a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
 }
@@ -134,7 +136,7 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false):
 export function renderPlanAbout(): string {
   return layout(`How it works · ${brand()}`, 'Where the Virginia Tech degree planner gets its data and what it checks.', '', '',
     `<h1>How it works</h1><p class="sub">What the planner knows, what it checks, and where it stops.</p>
-<h2>Roadmaps</h2><p>Each major's plan is the official 8-semester roadmap from the 2026-2027 Virginia Tech catalog. The 4-year view is that roadmap unchanged. Every term's credits are checked against the totals the catalog prints.</p>
+<h2>Roadmaps</h2><p>Each major's plan is the official 8-semester roadmap from the 2026-2027 Virginia Tech catalog. Majors whose catalog page has no roadmap are listed on the planner page with a link to the catalog instead. The 4-year view is that roadmap unchanged. Every term's credits are checked against the totals the catalog prints.</p>
 <h2>3 to 5 years</h2><p>Other lengths spread the same courses over more or fewer terms. Plans under 4 years use summer terms at half load. A course waits until its prerequisites sit in an earlier term, and corequisites move together. The planner does not know which term a course is offered.</p>
 <h2>Prerequisite checks</h2><p>Prerequisites and corequisites are read from each course's catalog description. Move a course ahead of something it needs and a note appears under it. Three limits: a requirement only placement scores or off-roadmap courses can meet is not checked; a requirement the official roadmap itself does not follow is not checked; and a few corequisites the catalog writes in free text are skipped.</p>
 <h2>"Can't slip"</h2><p>A course gets this tag when later courses chain off it and there is no spare term left: moving it one term later pushes the end of the chain past your last term.</p>

@@ -1,0 +1,272 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## advertising-ba | Advertising Major | liberal-arts-human-sciences/communication/advertising-ba/
+First Year
+ Fall: COMM 1004 (1), COMM 1015 (3), Pathway 2 (3), Pathway 3 (3), Pathway 4 (3), Pathway 5f (3), sum 16
+ Spring: COMM 1014 (3), COMM 1016 (3), Pathway 4 (3), Pathway 5f (3), Pathway 6a (3), sum 15
+Second Year
+ Fall: COMM 2024 (3), COMM 2124 (3), COMM 2084 (3), Pathway 5a (3), Pathway 1a (3), sum 15
+ Spring: ADV 2034 (3), COMM 2094 (3), Pathway 2 (3), Pathway 3 (3), Pathway 6d (3), sum 15
+Third Year
+ Fall: MKTG 3104 (3), Restricted Electives (3), Pathway 7 (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: MKTG 3504 (3), Restricted Electives (3), Restricted Electives (3), Free Electives (3), Free Electives (3), COMM 3900 (0), sum 15
+Fourth Year
+ Fall: COMM 4024 (3), ADV 3004 (3), ADV 3014 (3), MKTG 4204 (3), Free Electives (3), sum 15
+ Spring: ADV 3024 (3), ADV 4304 or MKTG 4304 (3), Free Electives (3), Free Electives (3), Free Electives (2), sum 14
+TOTAL 120
+
+## communication-ba | Communication Major | liberal-arts-human-sciences/communication/communication-ba/
+First Year
+ Fall: COMM 1004 (1), COMM 1015 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), sum 16
+ Spring: COMM 1014 (3), COMM 1016 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Second Year
+ Fall: COMM 2024 (3), COMM 2084 (3), COMM 2094 (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), Restricted Electives (3), sum 15
+ Spring: CMST 2064 (3), COMM 2124 (3), CMST 2034 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), Pathways Concept 6 - Critique and Practice in Design and the Arts (3), sum 15
+Third Year
+ Fall: CMST 3064 (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), Pathway 1a (3), Restricted Electives (3), Free Electives (3), sum 15
+ Spring: CMST 3214 (3), COMM 3900 (0), Pathways Concept 2 - Critical Thinking in the Humanities (3), Restricted Electives (3), Restricted Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: COMM 4024 (3), Restricted Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: CMST 4714 (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (2), sum 14
+TOTAL 120
+
+## multimedia-journalism-ba | Multimedia Journalism Major | liberal-arts-human-sciences/communication/multimedia-journalism-ba/
+First Year
+ Fall: COMM 1004 (1), COMM 1015 (3), Pathway 2 (3), Pathway 3 (3), Pathway 4 (3), Pathway 5f (3), sum 16
+ Spring: COMM 1014 (3), COMM 1016 (3), Pathway 4 (3), Pathway 5f (3), Pathway 6a (3), sum 15
+Second Year
+ Fall: COMM 2024 (3), COMM 2084 (3), COMM 2094 (3), Pathway 1a (3), Pathway 5a (3), sum 15
+ Spring: COMM 2124 (3), JMC 2034 (3), Pathway 2 (3), Pathway 3 (3), Pathway 6d (3), sum 15
+Third Year
+ Fall: JMC 3154 (3), JMC 3284 or JMC 3344 (3), Restricted Electives (3), Pathway 7 (3), Free Electives (3), sum 15
+ Spring: JMC 3174 (3), JMC 4334 (3), Restricted Electives (3), Free Electives (3), Free Electives (3), COMM 3900 (0), sum 15
+Fourth Year
+ Fall: COMM 4024 (3), Restricted Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: JMC 4814 or JMC 4824 (3), Restricted Electives (3), Free Electives (3), Free Electives (3), Free Electives (2), sum 14
+TOTAL 120
+
+## public-relations-ba | Public Relations Major | liberal-arts-human-sciences/communication/public-relations-ba/
+First Year
+ Fall: COMM 1004 (1), COMM 1015 (3), Pathway 2 (3), Pathway 3 (3), Pathway 4 (3), Pathway 5f (3), sum 16
+ Spring: COMM 1014 (3), COMM 1016 (3), Pathway 4 (3), Pathway 5f (3), Pathway 6a (3), sum 15
+Second Year
+ Fall: COMM 2024 (3), COMM 2084 (3), PR 2044 (3), Pathway 5a (3), Pathway 7 (3), sum 15
+ Spring: COMM 2094 (3), COMM 2124 (3), PR 3144 (3), Pathway 3 (3), Pathway 1a (3), sum 15
+Third Year
+ Fall: PR 3014 (3), ADV 2034 (3), Restricted Electives (3), Pathway 2 (3), Pathway 6d (3), sum 15
+ Spring: COMM 3900 (0), Restricted Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: COMM 4024 (3), PR 4304 (3), Restricted Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PR 4414 (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (2), sum 14
+TOTAL 120
+
+## sports-media-analytics-ba | Sports Media and Analytics Major | liberal-arts-human-sciences/communication/sports-media-analytics-ba/
+First Year
+ Fall: COMM 1004 (1), COMM 1015 (3), Pathway 2 (3), Pathway 3 (3), Pathway 4 (3), Pathway 5f (3), sum 16
+ Spring: COMM 1014 (3), COMM 1016 (3), Pathway 4 (3), Pathway 5f (3), Pathway 6a (3), sum 15
+Second Year
+ Fall: COMM 2024 (3), COMM 2124 (3), COMM 2084 (3), Pathway 1a (3), Pathway 5a (3), sum 15
+ Spring: COMM 2094 (3), JMC 2034 (3), Pathway 2 (3), Pathway 3 (3), Pathway 6d (3), sum 15
+Third Year
+ Fall: JMC 2074 (3), JMC 3154 (3), Pathway 7 (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: JMC 3314 (3), JMC 3174 (3), COMM 3900 (0), Restricted Electives (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: JMC 3344 or JMC 3284 (3), JMC 4334 (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: JMC 4834 (3), COMM 4024 (3), Free Electives (3), Free Electives (3), Free Electives (2), sum 14
+TOTAL 120
+
+## arabic-ba | Arabic Major | liberal-arts-human-sciences/modern-classical-languages-literatures/arabic-ba/
+First Year
+ Fall: RLCL 1004 (3), Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: ARBC 2774 (3), Pathway 1f - Discourse-Foundational (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Free Electives (3), sum 15
+Second Year
+ Fall: ARBC 2105 (3), Select one of the following: (3), Pathway 6a - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 1a - Discourse-Advanced/Applied (3), sum 15
+ Spring: ARBC 2106 (3), ARBC 3124 (3), Pathway 6d - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (if not already completed) (3), sum 15
+Third Year
+ Fall: ARBC 3105 (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: ARBC 3106 or ARBC 3534 (3), Select one of the following: (3), Pathway 5a (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: ARBC 3514 (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: ARBC 4154 (3), Select one of the following: (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## classical-studies-ba | Classical Studies Major | liberal-arts-human-sciences/modern-classical-languages-literatures/classical-studies-ba/
+First Year
+ Fall: RLCL 1004 (3), HIST 1024 (3), LAT 1106 (3), Pathway 1f - Discourse-Foundational (3), Pathway 6a (3), sum 15
+ Spring: CLA 2444 (3), Major Requirements (3), ART 3084 or ART 3184 (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), sum 15
+Second Year
+ Fall: Major Requirements (3), Major Requirements (3), Free Electives (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), sum 15
+ Spring: Major Requirements (3), Major Requirements (3), Free Electives (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), sum 15
+Third Year
+ Fall: LAT 3004 (3), CLA 2454 (3), Pathway 5a - Quantitative and Computational Thinking-Advanced/Applied (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 4 - Reasoning in the Natural Sciences (3), sum 15
+ Spring: Major Requirements (3), Free Electives (3), Pathway 1a - Discourse-Advanced/Applied (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 4 - Reasoning in the Natural Sciences (3), sum 15
+Fourth Year
+ Fall: Pathway 6d - Critique and Practice in Design and Arts (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## french-ba | French Major | liberal-arts-human-sciences/modern-classical-languages-literatures/french-ba/
+First Year
+ Fall: RLCL 1004 (3), Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), sum 15
+Second Year
+ Fall: FR 3105 (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Pathway 6a - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 1a - Discourse-Advanced/Applied (3), sum 15
+ Spring: FR 3106 (3), FR 3304 (3), Pathway 5a - Quantitative and Computational Thinking-Advanced/Applied (3), Pathway 6d - Critique and Practice in Design and Arts (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (if not already completed) (3), sum 15
+Third Year
+ Fall: Major Requirements (3), Major Requirements (3), Pathway 4 - Reasoning in the Natural Sciences (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Major Requirements (3), Major Requirements (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: Major Requirements (3), Select one of the following: (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Select one of the following: (3), FR 3124 (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## german-ba | German Major | liberal-arts-human-sciences/modern-classical-languages-literatures/german-ba/
+First Year
+ Fall: RLCL 1004 (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 1f (3), Free Electives (3), sum 15
+ Spring: Free Electives (3), Pathway 4 - Reasoning in Natural Sciences (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 1f (3), sum 15
+Second Year
+ Fall: GER 3105 (3), Select one of the following: (3), Pathway 6a - Critique and Practice in Design and the Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 5a - Quantitative and Computational Thinking-Advanced/Applied (3), sum 15
+ Spring: GER 3106 (3), Select one of the following: (3), Pathway 6d - Critique and Practice in Design and the Arts (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (if not already completed) (3), Free Electives (3), sum 15
+Third Year
+ Fall: Select one of the following: (3), Pathway 1a - Discourse-Advanced (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Select one of the following: (3), GER 3204 (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: GER 4154 (3), Select one of the following: (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: GER 4334 (3), GER 3214 (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## russian-ba | Russian Major | liberal-arts-human-sciences/modern-classical-languages-literatures/russian-ba/
+First Year
+ Fall: RLCL 1004 (3), Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), sum 15
+Second Year
+ Fall: RUS 2105 (3), Select one of the following: (3), Pathway 5f - Quantitative and Computational Thinking- Foundational (3), Pathway 6a - Critique and Practice in Design and Arts (3), Pathway 1a - Discourse-Advanced/Applied (3), sum 15
+ Spring: RUS 2106 (3), Pathway 5a - Quantitative and Computational Thinking-Advanced/Applied (3), Pathway 6a - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (if not already completed) (3), sum 15
+Third Year
+ Fall: RUS 3105 (3), Select one of the following: (3), Pathway 4 - Reasoning in the Natural Sciences (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: RUS 3106 (3), Select one of the following: (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: RUS 3124 (3), RUS 4204 (3), Select one of the following: (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Select one of the following: (3), Free Electives (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## spanish-ba | Spanish Major | liberal-arts-human-sciences/modern-classical-languages-literatures/spanish-ba/
+First Year
+ Fall: RLCL 1004 (3), Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), sum 15
+ Spring: Free Electives (3), Pathway 1f - Discourse-Foundational (3), Pathway 2 - Critical Thinking in the Humanities (3), Pathway 3 - Reasoning in the Social Sciences (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), sum 15
+Second Year
+ Fall: SPAN 3105 (3), Pathway 5f - Quantitative and Computational Thinking-Foundational (3), Pathway 6a - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 1a - Discourse-Advanced/Applied (3), sum 15
+ Spring: SPAN 3106 (3), Pathway 1a - Quantitative and Computational Thinking-Advanced/Applied (3), Pathway 6d - Critique and Practice in Design and Arts (3), Pathway 4 - Reasoning in the Natural Sciences (3), Pathway 7 - Critical Analysis of Identity and Equity in the United States (if not already completed) (3), sum 15
+Third Year
+ Fall: SPAN 3304 (3), Major Requirements (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: Major Requirements (3), Major Requirements (3), Major Requirements (3), Free Electives (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: SPAN 4205 (3), Major Requirements (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: SPAN 3124 (3), SPAN 4206 (3), Free Electives (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## applied-public-policy-studies | Political Science Major with Applied Public Policy Studies Option | liberal-arts-human-sciences/political-science/applied-public-policy-studies/
+First Year
+ Fall: PSCI 1034 (3), PSCI 1014 (3), ENGL 1105 (3), Pathway 4 (3), Pathway 5f (3), sum 15
+ Spring: PSCI 1024 (3), ENGL 1106 (3), Pathway 5f (3), Pathway 4 (3), Free Electives (3), sum 15
+Second Year
+ Fall: PSCI 2014 (3), PSCI 2024 (3), Pathway 2 (3), Pathway 1a (3), Free Electives (3), sum 15
+ Spring: PSCI 2054 or PSCI 2064 (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+Third Year
+ Fall: PSCI Applied Public Policy Studies Course (Choose any course from the approved list) (3), Aplied Public Policy Studies Related Field Course (Choose any course from the approved list) (3), Pathway 6a (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PSCI Applied Public Policy Studies Course (Choose any course from the approved list) (3), Applied Public Policy Studies Related Field Course (Choose any course from the approved list) (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 5a (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: Applied Public Policy Studies Related Field Course (Choose any course from the approved list) (3), PSCI 3XXX/4XXX (3), PSCI 3XXX/4XXX (3), Pathway 6d (3), Free Electives (3), sum 15
+ Spring: PSCI Advanced Theory and Practice (Choose any course from the approved list) (3), PSCI 3XXX/4XXX (3), Applied Public Policy Studies Related Field Course (Choose any course from the approved list) (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## political-science-ba | Political Science Major | liberal-arts-human-sciences/political-science/political-science-ba/
+First Year
+ Fall: PSCI 1034 (3), PSCI 1014 (3), ENGL 1105 (3), Pathway 4 (3), Pathway 5f (3), sum 15
+ Spring: PSCI 1024 (3), ENGL 1106 (3), Pathway 4 (3), Pathway 5f (3), Free Electives (3), sum 15
+Second Year
+ Fall: PSCI 2014 (3), PSCI 2024 (3), Pathway 1a (3), Pathway 2 (3), Free Electives (3), sum 15
+ Spring: PSCI 2054 or PSCI 2064 (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+Third Year
+ Fall: PSCI 1XXX/2XXX/3XXX (3), Related Field 3/4XXX (3), Pathway 6a (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PSCI 3XXX/4XXX (3), PSCI 3XXX/4XXX (3), Related Field 3/4XXX (3), Pathway 5a (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: PSCI 3XXX/4XXX (3), PSCI 3XXX/4XXX (3), Related Field 3/4XXX (3), Pathway 6d (3), Free Electives (3), sum 15
+ Spring: PSCI 3XXX/4XXX (3), PSCI Advanced Theory and Practice (3), Related Field 3/4XXX (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## political-science-ba-legal-studies | Political Science Major with Legal Studies Option | liberal-arts-human-sciences/political-science/political-science-ba-legal-studies/
+First Year
+ Fall: PSCI 1034 (3), PSCI 1014 (3), ENGL 1105 (3), Pathway 5f (3), Pathway 4 (3), sum 15
+ Spring: PSCI 1024 (3), ENGL 1106 (3), Pathway 5f (3), Pathway 4 (3), Free Electives (3), sum 15
+Second Year
+ Fall: PSCI 2014 (3), PSCI 2024 (3), PHIL 1204 (3), Pathway 1a (3), Free Electives (3), sum 15
+ Spring: PSCI 2054 or PSCI 2064 (3), PSCI 1XXX/2XXX/3XXX (3), PHIL 1304 (3), Free Electives (3), Free Electives (3), sum 15
+Third Year
+ Fall: PSCI Legal Studies Course (3), Legal Studies Related Field Course (3), Pathway 6a (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PSCI Legal Studies Course (3), Legal Studies Related Field Course (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 5a (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: PSCI 3XXX/4XXX (3), PSCI 3XXX/4XXX (3), Legal Studies Related Field Course (3), Pathway 6d (3), Free Electives (3), sum 15
+ Spring: PSCI 3XXX/4XXX (3), PSCI Advanced Theory and Practice (3), Legal Studies Related Field Course (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## political-science-ba-national-security-studies | Political Science Major with National Security Studies Option | liberal-arts-human-sciences/political-science/political-science-ba-national-security-studies/
+First Year
+ Fall: PSCI 1034 (3), PSCI 1014 (3), ENGL 1105 (3), Pathway 4 (3), Pathway 5f (3), sum 15
+ Spring: PSCI 1024 (3), ENGL 1106 (3), Pathway 4 (3), Pathway 5f (3), Free Electives (3), sum 15
+Second Year
+ Fall: PSCI 2014 (3), PSCI 2024 (3), Pathway 1a (3), Pathway 2 (3), Free Electives (3), sum 15
+ Spring: PSCI 2054 (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+Third Year
+ Fall: PSCI National Security Studies Course (3), National Security Studies Related Field (3), Pathway 6a (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PSCI 1XXX/2XXX/3XXX (3), PSCI National Security Studies Course (3), National Security Studies Related Field (3), Pathway 6d (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: PSCI National Security Studies Course (3), PSCI 3XXX/4XXX (3), National Security Studies Related Field (3), Pathway 5a (3), Free Electives (3), sum 15
+ Spring: PSCI 3XXX/4XXX (3), PSCI Advanced Theory and Practice (3), National Security Studies Related Field (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## political-science-ba-social-political-justice | Political Science Major with Social and Political Justice Option | liberal-arts-human-sciences/political-science/political-science-ba-social-political-justice/
+First Year
+ Fall: PSCI 1034 (3), PSCI 1014 (3), ENGL 1105 (3), Pathway 4 (3), Pathway 5f (3), sum 15
+ Spring: PSCI 1024 (3), ENGL 1106 (3), Pathway 5f (3), Pathway 4 (3), Free Electives (3), sum 15
+Second Year
+ Fall: PSCI 2014 (3), PSCI 2024 (3), Pathway 1a (3), Pathway 2 (3), Free Electives (3), sum 15
+ Spring: PSCI 2054 or PSCI 2064 (3), PSCI 1XXX/2XXX/3XXX (3), Pathway 2 (3), Free Electives (3), Free Electives (3), sum 15
+Third Year
+ Fall: PSCI SPJ Course (3), PSCI 1XXX/2XXX/3XXX (3), SPJ RF Course (3), Free Electives (3), Free Electives (3), sum 15
+ Spring: PSCI SPJ Course (3), PSCI 3XXX/4XXX (3), SPJ RF Course (3), Pathway 6d (3), Free Electives (3), sum 15
+Fourth Year
+ Fall: PSCI SPJ Course (3), PSCI 3XXX/4XXX (3), SPJ RF Course (3), Pathway 5a (3), Free Electives (3), sum 15
+ Spring: PSCI Advanced Theory and Practice (3), SPJ RF Course (3), Pathway 6a (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## environmental-policy-planning-ba | Environmental Policy and Planning Major | liberal-arts-human-sciences/school-public-international-affairs/environmental-policy-planning-ba/
+First Year
+ Fall: ENGL 1105 (3), UAP 1024 (3), ENSC 1015 (3), PSCI 1014 (3), PHIL 1304 or PHIL 2304 (3), UAP 1004 (1), sum 16
+ Spring: ENGL 1106 (3), ENSC 1016 (3), MATH 1014 (3), Pathway 2 (Student choice) (3), Pathway 6a (Student choice) (3), sum 15
+Second Year
+ Fall: ECON 2005 or AAEC 1005 (3), SPIA 2554 (3), UAP 3354 (3), UAP 3014 (3), Pathway 5f (Student choice) (3), sum 15
+ Spring: STAT 3604 (3), UAP 3744 (3), EPP Major Elective (3), Pathway 5a (Student choice) (3), Free Electives (3), sum 15
+Third Year
+ Fall: UAP 4344 (3), UAP 4374 (3), UAP 3024 (3), Pathway 6d (Student choice) (3), Free Elective (3), sum 15
+ Spring: SPIA 3554 (3), UAP 4754 (3), UAP 3224 (3), Pathway 1a (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: UAP 4354 (3), UAP 4004 (1), EPP Major Elective (3), Free Elective (3), Free Elective (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), SPIA 3900 (0), sum 16
+ Spring: UAP 4914 (3), UH 4514 (1), EPP Major Elective (3), Free Elective (3), Free Elective (3), sum 13
+TOTAL 120
+
+## urban-planning-major | Urban Planning Major | liberal-arts-human-sciences/school-public-international-affairs/urban-planning-major/
+First Year
+ Fall: ENGL 1105 (3), UAP 1024 (3), MATH 1014 (3), PSCI 1014 (3), PHIL 1304 or PHIL 2304 (3), UAP 1004 (1), sum 16
+ Spring: ENGL 1106 (3), SPIA 2244 (3), Pathway 4 (Student choice) (3), Pathway 2 (Student choice) (3), Free Elective (3), sum 15
+Second Year
+ Fall: ECON 2005 or AAEC 1005 (3), SPIA 2554 (3), SPIA 2004 (3), UP Major Elective (3), Pathway 4 (Student choice) (3), sum 15
+ Spring: STAT 3604 (3), UAP 3744 (3), Pathway 1a (Student choice) (3), Pathway 6a (3), Free Electives (3), sum 15
+Third Year
+ Fall: UAP 3024 (3), SPIA 4454 (3), Pathway 6d (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: SPIA 3554 (3), SPIA 4464 (3), UAP 4754 (3), UAP 3224 (3), Free Elective (3), sum 15
+Fourth Year
+ Fall: UAP 4004 (1), UP Major Elective (3), Free Elective (3), Free Elective (3), Free Elective (3), Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), SPIA 3900 (0), sum 16
+ Spring: UAP 4914 (3), UH 4514 (1), UP Major Elective (3), Free Elective (3), Free Elective (3), sum 13
+TOTAL 120

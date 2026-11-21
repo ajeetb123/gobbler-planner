@@ -1,0 +1,302 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## accounting--business-analysis | Accounting & Business Analysis Major | pamplin-college-business/accounting-information-systems/accounting--business-analysis/
+First Year
+ Fall: ACIS 1504 (3), BUS 1004 (3), ENGL 1105 or COMM 1015 (3), Pathway 2 (see options below) (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: ACIS 1104 (1), ACIS 2115 (3), BUS 1204 (3), ENGL 1106 or COMM 1016 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ACIS 2504 (3), BUS 2004 (3), MKTG 3104 (3), ECON 2006 (3), sum 15
+ Spring: ACIS 3115 (3), ACIS 3504 (3), BIT 2406 (3), FIN 3104 (3), MGT 3404 (3), sum 15
+Third Year
+ Fall: ACIS 3116 (3), ACIS 3314 (3), ACIS 4414 (3), BUS 3004 (3), BUS 3900 (0), Select three credits in Pathway 6a (3), sum 15
+ Spring: ACIS 4214 (3), ACIS 4544 (3), ACIS 3714 or ACIS 3754 or ACIS 4714 (3), FIN 3054 (3), Pathway 1a (see options below) or Free Elective (if ACIS 4714 taken) (3), sum 15
+Fourth Year
+ Fall: ACIS 4444 (3), ACIS 4654 (3), Accounting Specialization (see options below) (3), BUS 4004 (3), Select three credits in Pathway 7 (3), Free Elective (1), sum 16
+ Spring: ACIS 4454 (3), Accounting Specialization (see options below) (3), Select three credits in Pathway 2 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 122
+
+## accounting-and-information-systems | Accounting and Information Systems Major | pamplin-college-business/accounting-information-systems/accounting-and-information-systems/
+First Year
+ Fall: ACIS 1504 (3), BUS 1004 (3), ENGL 1105 or COMM 1015 (3), Pathway 2 (see options below) (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: ACIS 1104 (1), ACIS 2115 (3), BUS 1204 (3), ENGL 1106 or COMM 1016 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ACIS 2504 (3), BUS 2004 (3), MKTG 3104 (3), ECON 2006 (3), sum 15
+ Spring: ACIS 3115 (3), ACIS 3504 (3), BIT 2406 (3), FIN 3104 (3), MGT 3404 (3), sum 15
+Third Year
+ Fall: ACIS 4214 (3), ACIS Elective (see options below) (3), ACIS Elective (see options below) (3), BUS 3004 (3), BUS 3900 (0), Select three credits in Pathway 6a (3), sum 15
+ Spring: ACIS 4544 (3), ACIS 3714 or ACIS 3754 or ACIS 4714 (3), ACIS Elective (see options below) (3), FIN 3054 (3), Pathway 1a (see options below) or Free Elective (if ACIS 4714 taken) (3), sum 15
+Fourth Year
+ Fall: ACIS 4654 (3), ACIS Elective (see options below) (3), ACIS Elective (see options below) (3), BUS 4004 (3), Select three credits in Pathway 7 (3), Free Elective (1), sum 16
+ Spring: ACIS 4444 (3), ACIS Elective (see options below) (3), Select three credits in Pathway 2 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 122
+
+## business-information-technology-bs-computer-based-decision-support-systems | Business Information Technology Major with Computer Based Decision Support Systems Option | pamplin-college-business/business-information-technology/business-information-technology-bs-computer-based-decision-support-systems/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), MATH 1025 or MATH 1225 (3), BUS 1004 (3), Select three credits in Pathway 6a (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), BIT 2405 (3), BUS 1204 (3), ACIS 2115 (3), ECON 2005 (3), BIT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), CS 1064 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: Select three credits in Pathway 4 (3), BIT 3414 (3), BIT 3424 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: BIT 3434 (3), BIT 3554 (3), BIT 3514 (3), BIT 3524 (3), FIN 3104 (3), BUS 3754 (1), sum 16
+ Spring: BIT 3474 (3), BIT 3444 (3), BIT 4484 (3), BIT DSS Elective (see options below) (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: BIT 4444 (3), MKTG 3104 (3), BIT 4604 (3), BUS 4004 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 7 (3), sum 18
+ Spring: BIT DSS Elective (see options below) (3), BIT 4454 (3), BIT 4474 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 125
+
+## business-information-technology-bs-cybersecurity-management-analytics | Cybersecurity Management and Analytics Major | pamplin-college-business/business-information-technology/business-information-technology-bs-cybersecurity-management-analytics/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), MATH 1025 or MATH 1225 (3), BUS 1004 (3), Select three credits in Pathway 6a (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), BIT 2405 (3), BUS 1204 (3), ACIS 2115 (3), ECON 2005 (3), BIT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), BIT 2554 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: CS 1064 or BIT 3424 (3), BIT 3414 (3), BIT 3554 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: BIT 3474 (3), BIT 3444 (3), MKTG 3104 (3), BIT 3434 (3), Select three credits in Pathway 4 (3), BUS 3754 (1), sum 16
+ Spring: BIT 3664 (3), BIT 3524 (3), BIT 3484 (3), BIT 4484 (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: BIT 4604 (3), BIT 3674 (3), CMA Elective (see options below) (3), BUS 4004 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 7 (3), sum 18
+ Spring: CMA Elective (see options below) (3), BIT 4644 (3), BIT 4654 (3), FIN 3104 (3), BIT 4474 (3), sum 15
+TOTAL 125
+
+## business-information-technology-bs-operations-supply-chain-management | Business Information Technology Major with Operations and Supply Chain Management Option | pamplin-college-business/business-information-technology/business-information-technology-bs-operations-supply-chain-management/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), MATH 1025 or MATH 1225 (3), BUS 1004 (3), Select three credits in Pathway 6a (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), BIT 2405 (3), BUS 1204 (3), ACIS 2115 (3), ECON 2005 (3), BIT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), CS 1064 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: Select three credits in Pathway 4 (3), BIT 3414 (3), BIT 3424 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: BIT 3434 (3), BIT 4464 (3), FIN 3104 (3), BIT 3524 (3), BUS 3754 (1), BIT OSM Elective (see options below) (3), sum 16
+ Spring: BIT 3464 (3), BIT 4434 (3), BIT 4424 (3), BIT 4484 (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: BIT 3454 (3), MKTG 3104 (3), BIT 3444 (3), BUS 4004 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 7 (3), sum 18
+ Spring: BIT OSM Elective (see options below) (3), BIT 4474 (3), BIT 4604 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 125
+
+## finance-bs-corporate-financial-management | Finance Major with Corporate Financial Management Option | pamplin-college-business/finance-insurance-business-law/finance-bs-corporate-financial-management/
+First Year
+ Fall: MATH 1025 or MATH 1225 (3), COMM 1015 or ENGL 1105 (3), BUS 1004 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), FIN 2164 (1), sum 16
+ Spring: MATH 1026 or MATH 1226 (3), COMM 1016 or ENGL 1106 (3), BUS 1204 (3), ACIS 2115 (3), BIT 2405 (3), sum 15
+Second Year
+ Fall: BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 4 (3), FIN 3104 (3), ACIS 2116 (3), sum 15
+ Spring: FIN 3134 (3), Select three credits in Pathway 6a (3), MGT 3404 (3), BUS 2004 (3), FIN 3114 (3), sum 15
+Third Year
+ Fall: FIN 3144 (3), FIN 3154 (3), ACIS 3115 or ACIS 4194 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 2 (3), BUS 3754 (1), sum 16
+ Spring: FIN 4244 (3), FIN 3254 (3), FIN 4214 (3), BUS 3004 (3), BUS 3900 (0), FIN 3054 (3), sum 15
+Fourth Year
+ Fall: FIN 4234 (3), FIN 4264 (3), Free Elective (3), BUS 4004 (3), Free Elective (3), Free Elective (1), sum 16
+ Spring: BIT 3414 (3), Select three credits in Pathway 2 (3), MKTG 3104 (3), FIN 4144 (3), Select three credits in Pathway 7 (3), Free Elective (1), sum 16
+TOTAL 124
+
+## finance-bs-financial-accounting | Finance Major with Financial Accounting Option | pamplin-college-business/finance-insurance-business-law/finance-bs-financial-accounting/
+First Year
+ Fall: MATH 1025 or MATH 1225 (3), COMM 1015 or ENGL 1105 (3), BUS 1004 (3), ECON 2005 (3), Select three credits in Pathway 2 (3), FIN 2164 (1), sum 16
+ Spring: MATH 1026 or MATH 1226 (3), COMM 1016 or ENGL 1106 (3), BUS 1204 (3), ACIS 2115 (3), BIT 2405 (3), sum 15
+Second Year
+ Fall: BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 2 (3), FIN 3104 (3), ACIS 2116 (3), sum 15
+ Spring: FIN 3134 (3), Select three credits in Pathway 4 (3), MGT 3404 (3), BUS 2004 (3), Select three credits in Pathway 6a (3), sum 15
+Third Year
+ Fall: FIN 3144 (3), FIN 3154 (3), ACIS 3115 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 4 (3), BUS 3754 (1), sum 16
+ Spring: FIN 4144 (3), FIN 4234 (3), FIN 4214 (3), BUS 3004 (3), BUS 3900 (0), Free Elective (3), sum 15
+Fourth Year
+ Fall: FIN 3054 (3), MKTG 3104 (3), ACIS Elective (see options below) (3), BUS 4004 (3), FFAC Elective (see options below) (3), Free Elective (1), sum 16
+ Spring: BIT 3414 (3), FFAC Elective (see options below) (3), ACIS Elective (see options below) (3), Select three credits in Pathway 7 (3), Free Elective (3), Free Elective (1), sum 16
+TOTAL 124
+
+## finance-bs-fintech-big-data-analytics | FinTech and Big Data Analytics Major | pamplin-college-business/finance-insurance-business-law/finance-bs-fintech-big-data-analytics/
+First Year
+ Fall: CS 1064 (3), COMM 1015 or ENGL 1105 (3), ECON 2005 (3), MATH 1225 (4), BUS 1004 (3), FIN 2164 (1), sum 17
+ Spring: ACIS 2115 (3), STAT 3005 (3), BUS 1204 (3), MATH 1226 (4), COMM 1016 or ENGL 1106 (3), sum 16
+Second Year
+ Fall: ACIS 2116 (3), BIT 2406 (3), ECON 2006 (3), FIN 3104 (3), STAT 3006 (3), sum 15
+ Spring: BUS 2004 (3), FIN 3134 (3), MGT 3404 (3), MATH 2114 (3), STAT 3104 (3), sum 15
+Third Year
+ Fall: ECON 3254 (3), FIN 3114 (3), Select three credits in Pathway 2 / Pathway 7 (3), FIN 3144 (3), FIN 3054 (3), BUS 3754 (1), sum 16
+ Spring: BIT 3484 (3), FIN 3414 (3), MKTG 3104 (3), FIN 3154 (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: FIN 4234 (3), BUS 4004 (3), FIN 4414 (3), Select three credits in Pathway 2 (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: FIN 4214 (3), FIN 4144 (3), BIT 3414 (3), Select three credits in Pathway 6a (3), Select three credits in Pathway 4 (3), sum 15
+TOTAL 124
+
+## finance-bs-investment-management-chartered-financial-analyst | Finance Major with Investment Management and Chartered Financial Analyst Option | pamplin-college-business/finance-insurance-business-law/finance-bs-investment-management-chartered-financial-analyst/
+First Year
+ Fall: MATH 1025 or MATH 1225 (3), COMM 1015 or ENGL 1105 (3), BUS 1004 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), FIN 2164 (1), sum 16
+ Spring: MATH 1026 or MATH 1226 (3), COMM 1016 or ENGL 1106 (3), BUS 1204 (3), ACIS 2115 (3), BIT 2405 (3), sum 15
+Second Year
+ Fall: Select three credits in Pathway 2 (3), ECON 2006 (3), BIT 2406 (3), FIN 3104 (3), ACIS 2116 (3), sum 15
+ Spring: FIN 3134 (3), Select three credits in Pathway 4 (3), MGT 3404 (3), BUS 2004 (3), Select three credits in Pathway 6a (3), Free Elective (1), sum 16
+Third Year
+ Fall: FIN 3144 (3), FIN 3154 (3), ACIS 3115 or ACIS 4194 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 2 (3), BUS 3754 (1), sum 16
+ Spring: FIN 3114 (3), FIN 4214 (3), FIN 4224 (3), BUS 3004 (3), BUS 3900 (0), Free Elective (3), sum 15
+Fourth Year
+ Fall: FIN 4264 (3), FIN 4274 (3), FIN 3054 (3), BUS 4004 (3), FIN 4234 (3), Free Elective (1), sum 16
+ Spring: MKTG 3104 (3), FIN 4154 or FIN 4244 (3), BIT 3414 (3), Select three credits in Pathway 7 (3), FIN 4144 (3), sum 15
+TOTAL 124
+
+## financial-planning-wealth-management | Financial Planning and Wealth Management Major | pamplin-college-business/finance-insurance-business-law/financial-planning-wealth-management/
+First Year
+ Fall: MATH 1025 or MATH 1225 (3), COMM 1015 or ENGL 1105 (3), BUS 1004 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), FIN 2164 (1), sum 16
+ Spring: MATH 1026 or MATH 1226 (3), COMM 1016 or ENGL 1106 (3), BUS 1204 (3), ACIS 2115 (3), BIT 2405 (3), sum 15
+Second Year
+ Fall: BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 4 (3), FIN 3104 (3), ACIS 2116 (3), sum 15
+ Spring: FIN 3134 (3), Select three credits in Pathway 6a (3), FIN 3124 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: FIN 3144 (3), FIN 3154 (3), FIN 3204 (3), ACIS 3115 or ACIS 4194 (3), Select three credits in Pathway 2 (3), BUS 3754 (1), sum 16
+ Spring: FIN 4124 (3), ACIS 4344 (3), MKTG 3104 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), BUS 3900 (0), BUS 3004 (3), sum 15
+Fourth Year
+ Fall: FIN 4104 (3), FIN 4114 (3), FIN 3054 (3), BUS 4004 (3), CFPF Elective (see options below) (3), Free Elective (1), sum 16
+ Spring: Select three credits in Pathway 2 (3), FIN 4134 (3), FIN 4004 (3), FIN 4144 (3), Select three credits in Pathway 7 (3), Free Elective (1), sum 16
+TOTAL 124
+
+## private-credit-commercial-banking | Finance Major with Private Credit and Commercial Banking Major Option | pamplin-college-business/finance-insurance-business-law/private-credit-commercial-banking/
+First Year
+ Fall: MATH 1025 or MATH 1225 (3), COMM 1015 or ENGL 1105 (3), BUS 1004 (3), ECON 2005 (3), Select three credits in Pathway 4 (3), FIN 2164 (1), sum 16
+ Spring: MATH 1026 or MATH 1226 (3), COMM 1016 or ENGL 1106 (3), BUS 1204 (3), ACIS 2115 (3), BIT 2405 (3), sum 15
+Second Year
+ Fall: BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 2 (3), FIN 3104 (3), ACIS 2116 (3), sum 15
+ Spring: FIN 3134 (3), Select three credits in Pathway 4 (3), MGT 3404 (3), BUS 2004 (3), Select three credits in Pathway 6a (3), Free Elective (1), sum 16
+Third Year
+ Fall: FIN 3144 (3), FIN 3154 (3), ACIS 3115 or ACIS 4194 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Select three credits in Pathway 2 (3), BUS 3754 (1), sum 16
+ Spring: FIN 4214 (3), FIN 3254 (3), FIN 4254 (3), BUS 3004 (3), BUS 3900 (0), MKTG 3104 (3), sum 15
+Fourth Year
+ Fall: FIN 4224 (3), FIN 4144 (3), FIN 3054 (3), BUS 4004 (3), FIN 4234 (3), Free Elective (1), sum 16
+ Spring: Free Elective (3), BIT 3414 (3), FPCB Elective (see options below) (3), Select three credits in Pathway 7 (3), Free Elective (3), sum 15
+TOTAL 124
+
+## event-experience-management | Event & Experience Management Major | pamplin-college-business/hospitality-tourism-management/event-experience-management/
+First Year
+ Fall: HTM 1414 (3), ENGL 1105 or COMM 1015 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), BUS 1004 (3), sum 15
+ Spring: HTM 2104 (1), ACIS 2115 (3), ENGL 1106 or COMM 1016 (3), BIT 2405 (3), ECON 2005 (3), BUS 1204 (3), sum 16
+Second Year
+ Fall: HTM 2464 (3), ACIS 2116 (3), BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: HTM 3424 (3), HTM 2434 (3), MGT 2064 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: HTM 3444 (3), HTM 3524 (3), FIN 3104 (3), MKTG 3104 (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: HTM 3414 (4), HTM Elective (see options below) (3), EEMG Elective (see options below) (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), BUS 3004 (3), BUS 3900 (0), sum 16
+Fourth Year
+ Fall: Global Marketplace (see options below) (3), HTM 4464 (3), HTM 4964 (3), HTM Elective (see options below) (3), BUS 4004 (3), sum 15
+ Spring: HTM 4434 (3), HTM 4474 (3), Free Elective (3), ITDS 1114 (3), Select three credits in Pathway 2 (3), sum 15
+TOTAL 122
+
+## hospitality-tourism-management-bs | Hospitality and Tourism Management Major | pamplin-college-business/hospitality-tourism-management/hospitality-tourism-management-bs/
+First Year
+ Fall: HTM 1414 (3), ENGL 1105 or COMM 1015 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), BUS 1004 (3), sum 15
+ Spring: HTM 2104 (1), ACIS 2115 (3), ENGL 1106 or COMM 1016 (3), BIT 2405 (3), ECON 2005 (3), BUS 1204 (3), sum 16
+Second Year
+ Fall: HTM 2464 (3), ACIS 2116 (3), BIT 2406 (3), ECON 2006 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: HTM 3424 (3), HTM 3524 (3), MGT 2064 (3), MGT 3404 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: HTM 3414 (4), HTM Elective (see options below) (3), FIN 3104 (3), MKTG 3104 (3), Select three credits in Pathway 2 (3), sum 16
+ Spring: HTM 3444 (3), HTM Elective (see options below) (3), Global Marketplace (see options below) (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: HTM 4414 (3), HTM 4464 (3), HTM 4964 (3), HTM Elective (see options below) (3), BUS 4004 (3), sum 15
+ Spring: HTM 4454 (3), HTM 4474 (3), Select three credits in Pathway 7 (3), ITDS 1114 (3), Select three credits in Pathway 4 (3), sum 15
+TOTAL 122
+
+## human-resource-management | Human Resource Management Major | pamplin-college-business/management/human-resource-management/
+First Year
+ Fall: ENGL 1105 or COMM 1015 (3), ACIS 1504 (3), BUS 1004 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: ENGL 1106 or COMM 1016 (3), BIT 2405 or STAT 2004 (3), BUS 1204 (3), ACIS 2115 (3), ECON 2005 (3), MGT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), Select three credits in Pathway 4 (3), MGT 3344 (3), sum 15
+ Spring: MGT 3404 (3), MGT 3604 (3), MGT 2114 (3), MGT 2504 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: MKTG 3104 (3), Select three credits in Pathway 6a (3), BIT 3414 (3), MGT 3324 (3), MGT 2064 (3), BUS 3900 (0), sum 15
+ Spring: HTM/MGT 2314 (3), FIN 3104 (3), MGT 3414 (3), BUS 3004 (3), MGT 3424 (3), sum 15
+Fourth Year
+ Fall: MGT 4334 (3), BUS 4004 (3), BUS 3754 (1), Select three credits in Pathway 4 (3), Free Elective (3), Free Elective (3), sum 16
+ Spring: MGT 4344 (3), MGT 4414 (3), Select three credits in Pathway 2 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 122
+
+## management | Management Major | pamplin-college-business/management/management/
+First Year
+ Fall: ACIS 1504 (3), ENGL 1105 or COMM 1015 (3), BUS 1004 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: ACIS 2115 (3), ECON 2005 (3), ENGL 1106 or COMM 1016 (3), BIT 2405 or STAT 2004 (3), BUS 1204 (3), MGT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), BIT 2406 (3), MGT 3404 (3), ECON 2006 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: MGT 2114 (3), HTM/MGT 2314 (3), MGT 2064 (3), MGT 2614 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: BIT 3414 (3), Select three credits in Pathway 6a (3), FIN 3104 (3), MGT 3324 (3), MGT 4334 (3), BUS 3900 (0), sum 15
+ Spring: MGT 2504 (3), MGT 3334 (3), MGT 3604 (3), BUS 3754 (1), BUS 3004 (3), MGT Elective (see options below) (3), sum 16
+Fourth Year
+ Fall: BUS 4004 (3), Select three credits in Pathway 2 (3), MGT Elective (see options below) (3), MGT Elective (see options below) (3), MKTG 3104 (3), sum 15
+ Spring: MGT 4344 (3), MGT 4354 (3), Select three credits in Pathway 4 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 122
+
+## management-bs-entrepreneurship-innovation-technology-management | Entrepreneurship, Innovation & Technology Management Major | pamplin-college-business/management/management-bs-entrepreneurship-innovation-technology-management/
+First Year
+ Fall: ACIS 1504 (3), MATH 1025 or MATH 1225 (3), BUS 1004 (3), ENGL 1105 or COMM 1015 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: ACIS 2115 (3), ECON 2005 (3), BUS 1204 (3), ENGL 1106 or COMM 1016 (3), BIT 2405 or STAT 2004 (3), MGT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), MGT 3404 (3), MGT 2064 (3), sum 15
+ Spring: MGT 3324 (3), BUS 2004 (3), MGT 2114 (3), MGT 2504 (3), Select three credits in Pathway 4 (3), sum 15
+Third Year
+ Fall: MGT 3064 (3), MGT 4334 (3), BIT 3414 (3), Select three credits in Pathway 2 (3), FIN 3104 (3), BUS 3900 (0), sum 15
+ Spring: MGT 3074 (3), MGT 3604 (3), MKTG 3104 (3), Free Elective (3), BUS 3004 (3), sum 15
+Fourth Year
+ Fall: MGT 4064 (3), Select three credits in Pathway 6a (3), MGT 3084 (3), BUS 3754 (1), BUS 4004 (3), Free Elective (3), sum 16
+ Spring: Free Elective (3), MGT 3094 (3), Select three credits in Pathway 4 (3), Free Elective (3), Free Elective (3), sum 15
+TOTAL 122
+
+## management-consulting-analytics | Management Consulting and Analytics Major | pamplin-college-business/management/management-consulting-analytics/
+First Year
+ Fall: ENGL 1105 or COMM 1015 (3), ACIS 1504 (3), BUS 1004 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), sum 15
+ Spring: ENGL 1106 or COMM 1016 (3), BIT 2405 or STAT 2004 (3), BUS 1204 (3), ACIS 2115 (3), ECON 2005 (3), MGT 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), HTM/MGT 2314 (3), Select three credits in Pathway 2 (3), sum 15
+ Spring: MGT 2504 (3), MGT 2614 (3), MGT 2114 (3), MGT 2064 (3), BUS 2004 (3), sum 15
+Third Year
+ Fall: MGT 3604 (3), MGT 3324 (3), BUS 3900 (0), BIT 3414 (3), Select three credits in Pathway 4 (3), MGT 3404 (3), sum 15
+ Spring: MCA Elective (see options below) (3), MGT 3614 (3), MKTG 3104 (3), FIN 3104 (3), BUS 3004 (3), sum 15
+Fourth Year
+ Fall: MGT 4334 (3), MGT 4084 (3), Free Elective (3), BUS 4004 (3), BUS 3754 (1), Select three credits in Pathway 2 (3), sum 16
+ Spring: MGT 4344 (3), MCA Elective (see options below) (3), Free Elective (3), Select three credits in Pathway 6a (3), Free Elective (3), sum 15
+TOTAL 122
+
+## marketing-management-bs | Marketing Management Major | pamplin-college-business/marketing/marketing-management-bs/
+First Year
+ Fall: BUS 1004 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), COMM 1015 or ENGL 1105 (3), Select three credits in Pathway 6a (3), sum 15
+ Spring: BUS 1204 (3), BIT 2405 (3), ECON 2005 (3), COMM 1016 or ENGL 1106 (3), ACIS 2115 (3), MKTG 2104 (1), sum 16
+Second Year
+ Fall: Select three credits in Pathway 2 (3), ECON 2006 (3), BIT 2406 (3), ACIS 2116 (3), MGT 3404 (3), Free Elective (3), sum 18
+ Spring: BUS 2004 (3), FIN 3104 (3), MKTG 3164 (3), MKTG 3104 (3), MKTG 4554 (3), sum 15
+Third Year
+ Fall: Select three credits in Pathway 4 (3), MKTG 4204 (3), MKTG 4154 (3), MKTG 4114 (3), BUS 3754 (1), Select three credits in Pathway 2 (3), sum 16
+ Spring: BUS 3004 (3), Service/Resilience (see options below) (3), MKTG 4164 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), MKTG 4264 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: BUS 4004 (3), MKTG 4174 (3), MKTG 4304 (3), Ethics/Law (see options below) (3), MKTG MIX Elective (see options below) (3), sum 15
+ Spring: MKTG 4754 (3), Global Marketplace (see options below) (3), MKTG MIX Elective (see options below) (3), MKTG Elective (see options below) (3), Select three credits in Pathway 7 (3), sum 15
+TOTAL 125
+
+## professional-sales-marketing | Professional Sales in Marketing Major | pamplin-college-business/marketing/professional-sales-marketing/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), MATH 1025 or MATH 1225 (3), Select three credits in Pathway 4 (3), BUS 1004 (3), Select three credits in Pathway 6a (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), BIT 2405 (3), ECON 2005 (3), BUS 1204 (3), ACIS 2115 (3), MKTG 2104 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), BIT 2406 (3), Select three credits in Pathway 2 (3), MGT 3404 (3), Free Elective (3), sum 18
+ Spring: MKTG 3104 (3), FIN 3104 (3), MKTG 3164 (3), BUS 2004 (3), Select three credits in Pathway 2 (3), sum 15
+Third Year
+ Fall: MKTG 4554 (3), MKTG 4204 (3), MKTG 4154 (3), Global Marketplace (see options below) (3), Select three credits in Pathway 4 (3), BUS 3754 (1), sum 16
+ Spring: MKTG 4264 (3), MKTG 4604 (3), MKTG 4774 (3), PSLM Elective (see options below) (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: MKTG 4114 (3), PSLM Elective (see options below) (3), MKTG 4454 (3), MKTG 4054 (3), BUS 4004 (3), sum 15
+ Spring: MKTG 4754 (3), PSLM Elective (see options below) (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), Ethics/Law (see options below) (3), Select three credits in Pathway 7 (3), sum 15
+TOTAL 125
+
+## real-estate-major | Real Estate Major | pamplin-college-business/real-estate/real-estate-major/
+First Year
+ Fall: COMM 1015 or ENGL 1105 (3), MATH 1025 or MATH 1225 or STAT 2004 (3), Select three credits in Pathway 4 (3), BUS 1004 (3), REAL/UAP 2004 (3), sum 15
+ Spring: COMM 1016 or ENGL 1106 (3), Select three credits in Pathway 6a (3), ECON 2005 (3), BUS 1204 (3), ACIS 2115 (3), REAL 1014 (1), sum 16
+Second Year
+ Fall: ACIS 2116 (3), ECON 2006 (3), PM 2664 (3), Select three credits in Pathway 2 (3), REAL 2034 (3), sum 15
+ Spring: BIT 2406 (3), FIN 3104 (3), MGT 3404 (3), BUS 2004 (3), REAL Elective (see options below) (3), sum 15
+Third Year
+ Fall: REAL Elective (see options below) (3), REAL 3024 (3), REAL 3034 (3), MKTG 3104 (3), Select three credits in Pathway 4 (3), BUS 3754 (1), sum 16
+ Spring: REAL Elective (see options below) (3), Select three credits in Pathway 2 (3), REAL 3044 (3), ENGL 2844 or ENGL 3764 or ENGL 3774 (3), BUS 3004 (3), BUS 3900 (0), sum 15
+Fourth Year
+ Fall: REAL Elective (see options below) (3), REAL 4754 (3), BUS 4004 (3), REAL Elective (see options below) (3), Select three credits in Pathway 7 (3), sum 15
+ Spring: REAL 4024 or REAL 4044 (3), REAL Elective (see options below) (3), REAL 4074 (3), Free Elective (3), Free Elective (1), sum 13
+TOTAL 120

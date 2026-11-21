@@ -79,6 +79,35 @@ export function parseRoadmaps(text: string): Roadmap[] {
 
 import { planIssues, type CheckItem } from './prereq.ts';
 
+/** First segment of a catalog path -> college name as shown on the site. */
+export const COLLEGES: Record<string, string> = {
+  'agriculture-life-sciences': 'Agriculture and Life Sciences',
+  'architecture-arts-design': 'Architecture, Arts, and Design',
+  'college-engineering': 'Engineering',
+  'college-science': 'Science',
+  'liberal-arts-human-sciences': 'Liberal Arts and Human Sciences',
+  'natural-resources-environment': 'Natural Resources and Environment',
+  'pamplin-college-business': 'Pamplin College of Business',
+  'veterinary-medicine': 'Veterinary Medicine',
+};
+export const collegeOf = (catalogPath: string) => COLLEGES[catalogPath.split('/')[0]!] ?? 'Other';
+
+/** Group things that carry a catalog path by college, colleges and members in alphabetical order. */
+export function byCollege<T extends { name: string; catalogPath: string }>(xs: T[]): Array<[string, T[]]> {
+  const m = new Map<string, T[]>();
+  for (const x of [...xs].sort((a, b) => a.name.localeCompare(b.name))) m.set(collegeOf(x.catalogPath), [...(m.get(collegeOf(x.catalogPath)) ?? []), x]);
+  return [...m].sort((a, b) => a[0].localeCompare(b[0]));
+}
+
+/** data/no-roadmap.txt: programs the catalog gives no term-by-term roadmap for. */
+export function parseNoRoadmap(text: string): Array<{ name: string; catalogPath: string }> {
+  return text.split('\n').filter((l) => l && !l.startsWith('#')).map((l) => {
+    const [name, catalogPath] = l.split('|').map((s) => s.trim());
+    if (!name || !catalogPath) throw new Error(`Bad no-roadmap line: ${l}`);
+    return { name, catalogPath };
+  });
+}
+
 export const credits = (items: PlanItem[]) => items.reduce((a, i) => a + i.credits, 0);
 const subject = (i: PlanItem) => i.code?.split(' ')[0];
 

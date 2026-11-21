@@ -1,0 +1,113 @@
+# Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
+# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+
+## consumer-studies | Consumer Studies Major | architecture-arts-design/apparel-housing-resource-management/consumer-studies/
+First Year
+ Fall: ENGL 1105 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), HD 1004 (3), MATH 1014 or MATH 1025 or MATH 1524 (3), AHRM 1104 (1), AHRM 2404 (3), sum 16
+ Spring: ENGL 1106 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), CONS 2304 (3), AHRM 1014 (3), HD 2004 (3), sum 15
+Second Year
+ Fall: ECON 2005 or AAEC 1005 (3), COMM 2004 (3), CONS 3504 (3), Controlled Elective (3), AHRM 2954 (2), sum 14
+ Spring: ECON 2006 or AAEC 1006 (3), ENGL 3764 or ENGL 3774 (3), CONS 3404 (3), Controlled Elective (3), Controlled Elective (3), sum 15
+Third Year
+ Fall: Pathways Concept 2 - Critical Thinking in the Humanities (3), STAT 3604 (3), CONS 4314 (3), MGT 3304 (3), Free Elective (3), sum 15
+ Spring: Pathways Concept 2 - Critical Thinking in the Humanities (3), MKTG 3104 (3), Controlled Elective (3), CONS 4304 (3), Controlled Elective (3), sum 15
+ Summer: CONS 4964 or CONS 4974 or CONS 4994 (3), CONS 3900 (0), sum 3
+Fourth Year
+ Fall: Pathways Concept 6 - Critique and Practice in Design and the Arts (3), ACIS 1004 (3), CONS 4404 (3), Free Elective (3), AHRM 4954 (1), sum 13
+ Spring: Pathways Concept 7 - Critical Analysis of Identity and Equity in the United States (3), CONS 4324 (3), CONS 4414 (3), Free Elective (3), Free Elective (2), sum 14
+TOTAL 120
+
+## fashion-merchandising-design | Fashion Merchandising and Design Major | architecture-arts-design/apparel-housing-resource-management/fashion-merchandising-design/
+First Year
+ Fall: Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), ENGL 1105 (3),  or SOC 1004 or PSYC 1004 (), AHRM 1104 (1), FMD 1204 (3), FMD 1224 (3), sum 16
+ Spring: Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 5 - Quantitative and Computational Thinking (3),  or ACIS 1004 or CS 1014 or STAT 2004 (), ENGL 1106 (3), AHRM 2404 (3), AHRM 1014 (3), sum 15
+Second Year
+ Fall: Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), AHRM 2954 (2), FMD 2224 (3), FMD 2204 (3), FMD 2214 (1), sum 15
+ Spring: Pathways Concept 2 - Critical Thinking in the Humanities (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), ECON 2005 or AAEC 1005 (3), FMD 2264 (3), MGT 3304 (3), sum 15
+Third Year
+ Fall: ECON 2006 or AAEC 1006 (3), FMD 3104 (3), FMD 3024 (3), FMD 3224 (3), Free Electives (3), sum 15
+ Spring: Pathways Concept 5 - Quantitative and Computational Thinking (advanced) (3), MKTG 3104 (3), #FMD CONT-ELEC (3), FMD 3954 or FMD 4034 or FMD 4974 or FMD 4994 or FMD 4244 or FMD 4964 (3), FMD 3900 (0), FMD 3204 (3), sum 15
+Fourth Year
+ Fall: FMD 4224 (3), FMD 4234 (3), Free Electives (3), Free Electives (3), #non-FMD CONT-ELEC (suggest AHRM 4954) (1), #FMD CONT-ELEC (3), sum 16
+ Spring: FMD 4274 (3), Pathways Concept 1 - Discourse (advanced) (3), FMD 4264 (3), Free Electives (1), #FMD CONT-ELEC (3), sum 13
+TOTAL 120
+
+## property-management | Property Management Major | architecture-arts-design/apparel-housing-resource-management/property-management/
+First Year
+ Fall: ENGL 1105 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), ACIS 1004 (3), AHRM 1104 (1), SOC 1004 or SOC 2004 or PSYC 1004 or HD 1004 (3), PM 2664 (3), sum 16
+ Spring: ENGL 1106 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), AHRM 2404 (3), AHRM 1014 (3), sum 15
+Second Year
+ Fall: ECON 2005 or AAEC 1005 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), RED 2614 (3), PM 3674 (3), AHRM 2954 (2), sum 14
+ Spring: ECON 2006 or AAEC 1006 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), RED 2644 (3), Free Elective (3), ACIS 1504 (3), sum 15
+Third Year
+ Fall: Pathways Concept 1 - Discourse (Advanced) (3), PM 3684 (3), PM 3634 (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: MKTG 3104 (3), PM 4684 (3), PM Controlled Elective (3), PM Controlled Elective (3), sum 12
+ Summer: PM 4964 (3), PM 3900 (0), sum 3
+Fourth Year
+ Fall: RED 1604 (3), PM 4644 (3), Pathways Concept 5 - Quantitative and Computational Thinking (Advanced) (3), PM 4744 (3), PM Controlled Elective (3), AHRM 4954 (1), sum 16
+ Spring: PM 4694 (3), RED 4604 (3), PM Controlled Elective (3), Free Elective (3), Free Elective (2), sum 14
+TOTAL 120
+
+## residential-environments-design | Residential Environments and Design Major | architecture-arts-design/apparel-housing-resource-management/residential-environments-design/
+First Year
+ Fall: ENGL 1105 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), Pathways Concept 5 - Quantitative and Computational Thinking (3), RED 1604 (3), AHRM 1014 (3), AHRM 1104 (1), sum 16
+ Spring: ENGL 1106 (3), Pathways Concept 4 - Reasoning in the Natural Sciences (3), ACIS 1004 (3), AHRM 2404 (3), RED 2644 (3), sum 15
+Second Year
+ Fall: ECON 2005 or AAEC 1005 (3), Pathways Concept 3 - Reasoning in the Social Sciences (3), AHRM 2014 (3), RED 2624 (3), RED 2614 (3), AHRM 2954 (2), sum 17
+ Spring: ECON 2006 or AAEC 1006 (3), Pathways Concept 2 - Critical Thinking in the Humanities (3), RED Controlled Elective (3), RED 2654 (3), RED 2234 (3), sum 15
+Third Year
+ Fall: Pathways Concept 5 - Quantitative and Computational Thinking (Advanced) (3), RED 3644 (3), RED Controlled Elective (3), Free Elective (3), Free Elective (3), sum 15
+ Spring: RED 3624 (3), RED 3674 (3), RED Controlled Elective (3), Pathways Concept 1 - Discourse (Advanced) (3), sum 12
+ Summer: RED 4964 (3), RED 3900 (0), sum 3
+Fourth Year
+ Fall: RED 4224 (3), RED 4624 (3), RED 4664 (3), Free Elective (3), AHRM 4954 (1), sum 13
+ Spring: RED 4604 (3), RED 4654 (3), MKTG 3104 (3), Free Elective (3), Free Elective (2), sum 14
+TOTAL 120
+
+## music-ba-composition-liberal-arts | Music Major with Composition Liberal Arts Option | architecture-arts-design/music/music-ba-composition-liberal-arts/
+First Year
+ Fall: MUS 1004 (1), MUS 2025 (3), MUS 2045 (1), MUS 2065 (2), MUS 3314 or MUS 3414 (1), Pathways Course (3), Free Electives (3), sum 14
+ Spring: MUS 2026 (3), MUS 2046 (1), MUS 2066 (2), MUS 3314 or MUS 3414 (1), Pathways Course (3), Free Electives (3), sum 13
+Second Year
+ Fall: MUS 3025 (3), MUS 3035 (1), MUS 3045 (1), MUS 2734 (2), MUS 3314 or MUS 3414 (1), Pathways Course (3), Free Electives (3), sum 14
+ Spring: MUS 3026 (3), MUS 3036 (1), MUS 3046 (1), MUS 3174 (3), MUS 2734 (2), MUS 3314 or MUS 3414 (1), Pathways Course (3), sum 14
+Third Year
+ Fall: Advanced Music Theory (Select from MUS 3024, 3034, 3044, 3054, 3074) (3), MUS 3164 (3), MUS 4734 (2), Pathways Course (3), Free Electives (3), Free Electives (3), sum 17
+ Spring: Advanced Music Theory (Select from MUS 3024, 3034, 3044, 3054, 3074) (3), MUS 3194 (3), MUS 4734 (2), Pathways course (3), Free Electives (3), Free Electives (3), sum 17
+ Summer: MUS 3900 (0), sum 0
+Fourth Year
+ Fall: MUS 3065 (3), MUS 3064 (3), Pathways Course (3), Pathways Course (3), Free Electives (3), Free Electives (1), sum 16
+ Spring: MUS 3066 (3), Pathways Course (3), Pathways Course (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
+
+## music-ba-music-engineering-technology-electrical-engineering-emphasis | Music Major with Music Engineering Technology (Electrical Engineering Emphasis) Option | architecture-arts-design/music/music-ba-music-engineering-technology-electrical-engineering-emphasis/
+First Year
+ Fall: ECE 1004 (3), MUS 2025 (3), MUS 2045 (1), MATH 1225 (4), Pathways course (3), sum 14
+ Spring: MATH 2114 (3), MUS 2026 (3), MUS 2046 (1), MUS 2054 (2), PHYS 2305 (4), MATH 1226 (4), sum 17
+Second Year
+ Fall: ECE 2024 (3), ECE 2544 (3), MATH 2214 (3), MUS 2055 (3), PHYS 2306 (4), sum 16
+ Spring: ECE 2214 (3), ECE 2714 (3), MUS 2056 (3), MUS 3174 (3), Pathways course (3), sum 15
+Third Year
+ Fall: MUS 3025 (3), MUS 3035 (1), MUS 3045 (1), MUS 3055 (3), MUS 3065 (3), Pathways course (3), sum 14
+ Spring: ECE 3204 (3), MUS 3026 (3), MUS 3036 (1), MUS 3046 (1), MUS 3056 (3), MUS 3066 (3), Free Electives (1), sum 15
+ Summer: sum 0
+Fourth Year
+ Fall: ECE 4205 (3), MUS 4055 (1), MUS 4764 (1), MUS 3194 (3), Pathways course (3), Pathways course (3), Free Electives (1), sum 15
+ Spring: ECE 4254 (3), MUS 4056 (1), MUS 4764 (1), MUS 3164 (3), Pathways course (3), Pathways course (3), sum 14
+TOTAL 120
+
+## music-ba-music-production | Music Major with Music Production Option | architecture-arts-design/music/music-ba-music-production/
+First Year
+ Fall: MUS 2025 (3), MUS 2045 (1), MUS 2065 (2), Pathways Course (3), Pathways Course (3), Free Electives (3), sum 15
+ Spring: MUS 2026 (3), MUS 2046 (1), MUS 2054 (2), MUS 2066 (2), Pathways Course (3), Free Electives (3), sum 14
+Second Year
+ Fall: MUS 3025 (3), MUS 3035 (1), MUS 3045 (1), MUS 2055 (3), Pathways Course (3), Pathways Course (3), sum 14
+ Spring: MUS 3026 (3), MUS 3036 (1), MUS 3046 (1), MUS 2056 (3), MUS 3174 (3), Pathways Course (3), Pathways Course (3), sum 17
+Third Year
+ Fall: Advanced Music Theory (Select from MUS 3024, 3034, 3044, 3054, 3074) (3), MUS 3164 (3), MUS 3055 (3), MUS 3064 (3), Free Electives (3), sum 15
+ Spring: MUS 3056 (3), MUS 2754 (1), MUS 3194 (3), Pathways Course (3), Free Electives (3), Free Electives (3), sum 16
+ Summer: MUS 3900 (0), sum 0
+Fourth Year
+ Fall: MUS 4055 (1), MUS 4754 (1), Pathways Course (3), Pathways Course (3), Free Electives (3), Free Electives (3), sum 14
+ Spring: MUS 4056 (1), MUS 4754 (2), Pathways Course (3), Pathways Course (3), Free Electives (3), Free Electives (3), sum 15
+TOTAL 120
