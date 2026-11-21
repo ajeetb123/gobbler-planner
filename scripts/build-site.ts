@@ -2,6 +2,7 @@
 //      npm run build -- --grades          (private build: adds grade pages from every CSV in data/)
 //      npm run build -- --grades --top 30 (pilot: the 30 most-taken courses)
 // Writes a static site to dist/. UDC has not authorized republishing its grade data, so grades are opt-in.
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
@@ -12,8 +13,9 @@ import { parsePrereqs } from '../src/plan/prereq.ts';
 import { PLAN_JS, renderNotFound, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
 import { buildDocs } from '../src/ask/docs.ts';
+import { THEME_CSS, THEME_JS } from '../src/site/theme.ts';
 import { ASK_JS, renderAsk } from '../src/site/ask-page.ts';
-import { APP_JS, CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, slugs } from '../src/site/render.ts';
+import { APP_JS, CSS, renderAbout, renderCourse, renderIndex, renderProf, renderSubject, setAssetVersion, slugs } from '../src/site/render.ts';
 
 const t0 = performance.now();
 const topArg = process.argv.indexOf('--top');
@@ -34,7 +36,10 @@ for (const d of site ? ['course', 'prof', 'subject', 'plan'] : ['plan']) mkdirSy
 const sizes: number[] = [];
 const write = (path: string, html: string) => { writeFileSync(join(OUT, path), html); if (path.endsWith('.html')) sizes.push(Buffer.byteLength(html)); };
 
-write('style.css', CSS);
+// Version the assets by content, before any page is rendered (see setAssetVersion in render.ts).
+setAssetVersion(createHash('sha256').update([CSS, THEME_CSS, THEME_JS, APP_JS, PLAN_JS, COMPARE_JS, ASK_JS].join('\n')).digest('hex').slice(0, 10));
+write('style.css', CSS + THEME_CSS);
+write('theme.js', THEME_JS);
 write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));

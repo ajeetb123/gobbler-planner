@@ -112,6 +112,7 @@ const page=((location.pathname.split('/').pop()||'index.html').replace(/\\.html$
 const quiet=navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
 window.gpTrack=(t,v)=>{if(quiet||!navigator.sendBeacon)return;try{navigator.sendBeacon(root+'api/event',new Blob([JSON.stringify({t,p:page,v:v==null?'':String(v).slice(0,120)})],{type:'text/plain'}))}catch{}};
 gpTrack('view');
+const tb=document.getElementById('theme');if(tb)tb.onclick=()=>{const el=document.documentElement,next=(el.dataset.theme||'dark')==='dark'?'light':'dark';el.dataset.theme=next;try{localStorage.setItem('gobblerplan:theme',next)}catch{}};
 const open=()=>{if(!dlg.open){dlg.showModal();q.value='';r.textContent='';q.focus()}};
 document.querySelectorAll('[data-search]').forEach(b=>b.addEventListener('click',open));
 document.addEventListener('keydown',e=>{const t=e.target.tagName;if((e.key==='/'&&t!=='INPUT'&&t!=='TEXTAREA')||((e.metaKey||e.ctrlKey)&&e.key==='k')){e.preventDefault();open()}});
@@ -133,6 +134,14 @@ if(picks.length<2){bar.textContent=picks.length?'Now pick a second one to compar
 let[a,b2]=picks.map(p=>({n:p.dataset.n,g:+p.dataset.g,s:+p.dataset.s}));if(b2.g>a.g)[a,b2]=[b2,a];const gap=a.g-b2.g,t=Math.round(phi(gap/Math.hypot(a.s,b2.s))*10);
 bar.textContent=t<=5||gap<.005?'Too close to call. A section under '+a.n+' and one under '+b2.n+' are expected to land about the same.':'A section under '+a.n+' would average higher than one under '+b2.n+(t>=10?' more than 9':' about '+t)+' times in 10. Expected gap: '+gap.toFixed(2)+' GPA.'}))})();`;
 
+/**
+ * Cache busting. Stylesheets and scripts are cached by browsers for a long time, so every page links them as
+ * "style.css?v=<version>". The build sets the version to a hash of the assets' contents: when they change, the
+ * address changes, and nobody is left with a new page and an old stylesheet.
+ */
+let assetVersion = 'dev';
+export const setAssetVersion = (v: string) => { assetVersion = v; };
+
 type Tab = 'grades' | 'plan' | 'switch' | 'ask' | 'about';
 
 /** VT's own grade distribution page and the RateMyProfessors school page: the planner-only build links out to both. */
@@ -152,17 +161,16 @@ export function layout(title: string, desc: string, root: string, crumb: string,
     ? `Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. ${DISCLAIMER} Not affiliated with RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.`
     : `Roadmaps and prerequisites come from the Virginia Tech 2026-2027 Academic Catalog. This is a planning aid, not a degree audit: confirm your plan with your advisor and the university's own planning tools. ${DISCLAIMER} <a href="${root}about.html">How it works</a>.`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)}</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c2230'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23f0935c'%3EG%3C/text%3E%3C/svg%3E"><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"></head><body data-root="${root}">
-<div class="shell"><aside class="rail"><a class="brand" href="${root}index.html">${brand(site)}<i>.</i><small>${site ? 'What the grades say, before you register' : 'Your degree, term by term'}</small></a>
-<button type="button" class="find" data-search><span>Search</span><kbd>/</kbd></button>
-<nav class="nav" aria-label="Sections">${nav}<a href="${root}about.html"${cur('about')}>How it works</a></nav>
-<div class="fine">${site ? `Official VT grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. ${DISCLAIMER}` : `Built from the public Virginia Tech catalog. No login. Your plan stays in your browser. ${DISCLAIMER} <a href="${root}about.html#privacy">Privacy</a>.`}</div></aside>
-<main>${crumb ? `<nav class="crumb" aria-label="Breadcrumb">${crumb}</nav>` : ''}
+<title>${esc(title)}</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c2230'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23f0935c'%3EG%3C/text%3E%3C/svg%3E"><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"><script src="${root}theme.js"></script></head><body data-root="${root}">
+<header class="top"><a class="brand" href="${root}index.html"><span class="logo">G</span>${brand(site)}</a>
+<nav class="nav" aria-label="Sections">${nav}<a href="${root}about.html"${cur('about')}>How it works</a></nav><span class="grow"></span>
+<button type="button" class="find" data-search><span>Search</span><kbd>/</kbd></button><button type="button" class="icon" id="theme" aria-label="Switch between dark and light" title="Dark or light">\u25D0</button></header>
+<main${tab === 'plan' && extraScript ? ' class="wide"' : ''}>${crumb ? `<nav class="crumb" aria-label="Breadcrumb">${crumb}</nav>` : ''}
 ${body}
-<footer>${source}</footer></main></div>
+<footer>${site ? `Official grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. ` : ''}${source} <a href="${root}about.html#privacy">Privacy</a>.</footer></main>
 <nav class="tabs" aria-label="Sections">${nav}<button type="button" data-search>Search</button></nav>
 <dialog id="pal" aria-label="Search"><input id="q" type="search" placeholder="${site ? 'Course, last name or major' : 'Search a major'}" autocomplete="off" aria-label="Search"><ul id="r"></ul><div class="hint">↑ ↓ to move · Enter to open · Esc to close</div></dialog>
-<script src="${root}app.js" defer></script>${extraScript}</body></html>`;
+<script src="${root}app.js" defer></script>${extraScript}</body></html>`.replace(/((?:href|src)="[^"]*\.(?:css|js))"/g, `$1?v=${assetVersion}"`);
 }
 
 const num = (n: number) => Math.round(n).toLocaleString('en-US');
