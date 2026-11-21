@@ -136,7 +136,13 @@ test('planner-only build: no grade pages linked, links out to UDC and RMP, scrip
   assert.equal(data.items[idOf('CS 2114')].label, 'Software Design and Data Structures');
   assert.deepEqual(data.items[idOf('CS 2505')].pre, 'CS 2114');
   assert.ok(renderPlanIndex(real, undefined, true).includes('href="plan/computer-science.html"'));
-  assert.ok(renderPlanAbout().includes('HokieGPS'));
+  // Naming: the site calls itself Gobbler Plan, names Virginia Tech only to describe what it covers, and carries the disclaimer.
+  for (const page of [html, renderPlanAbout(), renderPlanIndex(real, undefined, true), renderCompare(real, courses)]) {
+    const text = page.replace(/<script type="application\/json".*?<\/script>/gs, '').replace(/<[^>]+>/g, ' ');
+    assert.ok(text.includes('Gobbler Plan'));
+    assert.ok(text.includes('Not affiliated with, endorsed by, or sponsored by Virginia Tech'));
+    assert.ok(!/\bVT\b|Hokie/.test(text), /.{30}(\bVT\b|Hokie).{30}/.exec(text)?.[0]);
+  }
   assert.ok(renderCompare(real, courses).includes('id="cmp-data"'));
   for (const js of [PLAN_JS, COMPARE_JS]) assert.doesNotThrow(() => new Function(js));
 });

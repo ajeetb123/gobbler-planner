@@ -2,7 +2,7 @@
 // the student's changes in their own browser (localStorage). Nothing is sent anywhere.
 import { baseYears, byCollege, collegeOf, credits, repack, YEAR_OPTIONS, type Roadmap } from '../plan/roadmap.ts';
 import { checkItems, planIssues, type CourseInfo, type Expr } from '../plan/prereq.ts';
-import { brand, esc, layout, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
+import { brand, DISCLAIMER, esc, layout, RMP_SCHOOL_URL, UDC_URL, type Links } from './render.ts';
 import type { Site } from './model.ts';
 
 /** A term above this many credits gets a "heavy load" flag. */
@@ -114,7 +114,7 @@ ${r.draft ? `<p class="note warn"><b>Draft plan, not an official roadmap.</b> Th
 <p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the ${r.draft ? 'draft plan' : '4-year roadmap'} over the length you chose and keeps prerequisites in order where it can. It does not know which term a course is offered. Take it to your advisor before you rely on it.</p>
 <p class="note" id="summer" hidden>Finishing in under 4 years uses summer terms. AP, IB or transfer credit can replace some of them: tick those courses as done.</p>
 <p class="mut">Tick a course when it's done (AP and transfer credit too). Arrows move it a term, and a note appears if the move breaks a prerequisite. "Can't slip" means later courses chain off it with no spare term.${site ? ' "Instructor matters" means grades differ a lot by who teaches it.' : ''} Saved in this browser only.</p>
-${site ? '' : `<p class="mut">Choosing a section? See past grades on ${ext(UDC_URL, "VT's grade distribution page")} and instructor reviews on ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}. Course codes open the catalog description.</p>`}
+${site ? '' : `<p class="mut">Choosing a section? See past grades on ${ext(UDC_URL, "Virginia Tech's grade distribution page")} and instructor reviews on ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}. Course codes open the catalog description.</p>`}
 <noscript><p class="note warn">The planner needs JavaScript. The official roadmap is on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <script type="application/json" id="plan-data">${json}</script>`;
@@ -129,7 +129,7 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, 
   const majors = groups.map(([college, rs]) => `<h3 class="col" id="${esc(college.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(college)} <span class="mut">${rs.length}</span></h3><div class="majors">${rs.map((r) => `<a href="${pre}${esc(r.slug)}.html"><b>${esc(r.name)}</b><span>${r.draft ? '<i class="tag">draft</i> ' : ''}${r.total} credits →</span></a>`).join('')}</div>`).join('');
   const drafts = roadmaps.filter((r) => r.draft).length;
   const none = byCollege(noRoadmap).map(([college, xs]) => `<p class="mut"><b>${esc(college)}:</b> ${xs.map((x) => `<a href="${CATALOG}${esc(x.catalogPath)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a>`).join(' · ')}</p>`).join('');
-  return layout(`${home ? 'Virginia Tech degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your Virginia Tech degree from the official roadmap: 3 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
+  return layout(`${home ? 'Unofficial Virginia Tech degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your Virginia Tech degree from the official roadmap: 3 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
     `<div class="hero"><h1>Your degree, <em>term by term</em>.</h1><p>Start from your major's official roadmap. Choose 3 to 5 years, move courses and see at once if a prerequisite breaks, and send the plan to your advisor as a link. No login.</p></div>
 <h2>Choose a major</h2><p class="mut">${roadmaps.length - drafts} majors and options with an official roadmap in the 2026-2027 catalog${drafts ? `, and ${drafts} marked <i class="tag">draft</i> where the catalog lists requirements only and the term order is ours` : ''}. Press <kbd>/</kbd> to search by name. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
 ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} catalog programs have no roadmap and could not be turned into a draft. Each link opens its catalog page.</p>${none}` : ''}
@@ -147,5 +147,6 @@ export function renderPlanAbout(): string {
 <h2>"Can't slip"</h2><p>A course gets this tag when later courses chain off it and there is no spare term left: moving it one term later pushes the end of the chain past your last term.</p>
 <h2>Switching majors</h2><p>The comparison matches what you've finished against the other major's roadmap: same course first, then elective slots with the same name, then free electives. It is an estimate from the two roadmaps. The department you're moving into decides what really counts.</p>
 <h2>Sharing and privacy</h2><p>Your plan is saved in your browser only. "Share link" puts the plan in the link itself, so nothing is uploaded. Opening someone's link never overwrites your own plan unless you choose to keep it.</p>
-<h2>What this is not</h2><p>It is not a degree audit and it does not know your record. Use HokieGPS and your advisor for the official check. For past grades, use ${`<a href="${UDC_URL}" target="_blank" rel="noopener noreferrer">VT's grade distribution page ↗</a>`}.</p>`, undefined, 'about');
+<h2>What this is not</h2><p>It is not a degree audit and it does not know your record. Use the university's own degree audit and your advisor for the official check. For past grades, use ${`<a href="${UDC_URL}" target="_blank" rel="noopener noreferrer">Virginia Tech's grade distribution page ↗</a>`}.</p>
+<h2>Who runs this</h2><p>${DISCLAIMER} The name, the design and the planning logic are ours. Roadmaps, requirements and prerequisites are facts taken from the university's public 2026-2027 catalog, and every plan links back to its catalog page. The site is free, has no ads, and collects nothing about you.</p>`, undefined, 'about');
 }
