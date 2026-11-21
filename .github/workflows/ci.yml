@@ -1,0 +1,55 @@
+# On every push and pull request: typecheck, run tests, build the site, build the Docker image and smoke-test it.
+# On main only: publish the image to GitHub Container Registry (ghcr.io), tagged with the commit and "latest".
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+
+  image:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t "$IMAGE:${{ github.sha }}" -t "$IMAGE:latest" .
+      - name: Smoke test the container
+        run: |
+          docker run -d --name web -p 8080:8080 "$IMAGE:${{ github.sha }}"
+          for i in $(seq 1 20); do curl -fsS http://localhost:8080/healthz && break; sleep 1; done
+          curl -fsS http://localhost:8080/ | grep -q "Gobbler Plan"
+          curl -fsS http://localhost:8080/plan/computer-science.html | grep -q "Not affiliated with, endorsed by, or sponsored by Virginia Tech"
+          curl -fsS -o /dev/null http://localhost:8080/plan.js
+          # The image must never carry grade data or grade pages.
+          test "$(docker exec web sh -c 'ls /usr/share/nginx/html | grep -c -E "^(course|prof|subject)$"')" = "0"
+          curl -sI http://localhost:8080/ | grep -qi "content-security-policy"
+          docker logs web | tail -5
+          docker rm -f web
+      - name: Publish to GitHub Container Registry
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker push "$IMAGE:${{ github.sha }}"
+          docker push "$IMAGE:latest"

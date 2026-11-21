@@ -1,0 +1,9 @@
+# Keep the image small and make sure grade data can never be baked into it.
+.git
+.github
+node_modules
+dist
+bench
+test
+data/*.csv
+*.md

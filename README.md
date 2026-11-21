@@ -15,3 +15,12 @@ npm run build:grades  # private build that adds the grade pages
 Results, method and open risks: [REPORT.md](REPORT.md). Working notes for contributors: [skills.md](skills.md).
 
 Not affiliated with Virginia Tech.
+
+## Run in Docker
+
+```bash
+docker build -t gobbler-plan .
+docker run --rm -p 8080:8080 gobbler-plan   # http://localhost:8080
+```
+
+The image is built in two stages (Node builds the static pages, nginx serves them as a non-root user) and has a `/healthz` endpoint. Every push runs the tests, builds the image and smoke-tests the running container in GitHub Actions; pushes to `main` publish it to GitHub Container Registry.
