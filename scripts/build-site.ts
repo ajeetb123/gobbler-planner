@@ -9,7 +9,7 @@ import { buildSite, termLabel } from '../src/site/model.ts';
 import { parseNoRoadmap, parseRoadmaps } from '../src/plan/roadmap.ts';
 import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { parsePrereqs } from '../src/plan/prereq.ts';
-import { PLAN_JS, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
+import { PLAN_JS, renderNotFound, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
 import { buildDocs } from '../src/ask/docs.ts';
 import { ASK_JS, renderAsk } from '../src/site/ask-page.ts';
@@ -67,6 +67,8 @@ if (site && links) {
 } else {
   write('index.html', renderPlanIndex(roadmaps, undefined, true, noRoadmap));
   write('about.html', renderPlanAbout());
+  write('404.html', renderNotFound());
+  write('robots.txt', 'User-agent: *\nDisallow: /admin\nDisallow: /api/\n');
 }
 write('search.json', JSON.stringify(search));
 

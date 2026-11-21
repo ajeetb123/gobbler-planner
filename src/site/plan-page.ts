@@ -54,10 +54,19 @@ export const PLAN_JS = `(()=>{const planIssues=${planIssues.toString()};
 const D=JSON.parse(document.getElementById('plan-data').textContent),root=document.body.dataset.root,KEY='gobblerplan:'+D.slug;
 let S;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch{S={}}
 const P=new URLSearchParams(location.hash.slice(1));let shared=P.has('y');
-if(shared){const ok=x=>D.items['t'+x]?'t'+x:null,p={};(P.get('m')||'').split('.').forEach(x=>{const[a,b]=x.split('_'),id=ok(a);if(id&&/^\\d+$/.test(b))p[id]=+b});
-S={years:P.get('y'),pos:{[P.get('y')]:p},done:(P.get('d')||'').split('.').map(ok).filter(Boolean)}}
+// A shared link carries: y (years), d (done ids), m (id_term moves), n (id~name for named elective slots), x (term~credits~name for added courses).
+// Roadmap ids travel without their leading "t" ("0-3"); added courses are plain numbers ("2" = x2). clean() below validates all of it.
+if(shared){const full=x=>/^\\d+-\\d+$/.test(x)?'t'+x:'x'+x,p={},names={};(P.get('m')||'').split('.').forEach(x=>{const[a,b]=x.split('_');if(a&&/^\\d+$/.test(b))p[full(a)]=+b});
+(P.get('n')||'').split('|').forEach(x=>{const i=x.indexOf('~');if(i>0)names[full(x.slice(0,i))]=x.slice(i+1)});
+S={years:P.get('y'),pos:{[P.get('y')]:p},done:(P.get('d')||'').split('.').filter(Boolean).map(full),names,extra:(P.get('x')||'').split('|').filter(Boolean).map((x,i)=>{const[t,c,...l]=x.split('~');return{id:'x'+i,t:+t,cr:+c,label:l.join('~')}})}}
 // Saved or shared state can be stale or hand-edited: keep only what fits this roadmap.
-const clean=s=>{s=s&&typeof s==='object'&&!Array.isArray(s)?s:{};const o={years:D.plans[s.years]?String(s.years):D.base,pos:{},done:Array.isArray(s.done)?[...new Set(s.done.filter(id=>D.items[id]))]:[]};
+// Courses the student added themselves live in S.extra and are merged into the roadmap data here, so the rest of the page treats them like any other course.
+const MAX_EXTRA=12,text=(v,n)=>typeof v==='string'?v.replace(/\\s+/g,' ').trim().slice(0,n):'';
+function merge(extra){for(const id in D.items)if(D.items[id].custom)delete D.items[id];for(const y in D.plans)D.plans[y].forEach(t=>{t.ids=t.ids.filter(id=>!id.startsWith('x'))});
+extra.forEach(e=>{D.items[e.id]={label:e.label,cr:e.cr,alt:[],ch:[],cs:[],custom:true};for(const y in D.plans)D.plans[y][Math.min(e.t,D.plans[y].length-1)].ids.push(e.id)})}
+const clean=s=>{s=s&&typeof s==='object'&&!Array.isArray(s)?s:{};const seen={},extra=(Array.isArray(s.extra)?s.extra:[]).filter(e=>e&&typeof e==='object'&&/^x\\d{1,3}$/.test(e.id)&&!seen[e.id]&&(seen[e.id]=1)&&text(e.label,60)&&Number.isInteger(e.cr)&&e.cr>=0&&e.cr<=9&&Number.isInteger(e.t)&&e.t>=0&&e.t<20).slice(0,MAX_EXTRA).map(e=>({id:e.id,label:text(e.label,60),cr:e.cr,t:e.t}));
+merge(extra);const names={};if(s.names&&typeof s.names==='object')for(const id in s.names)if(D.items[id]&&!D.items[id].code&&!D.items[id].custom&&text(s.names[id],60))names[id]=text(s.names[id],60);
+const o={years:D.plans[s.years]?String(s.years):D.base,pos:{},done:Array.isArray(s.done)?[...new Set(s.done.filter(id=>D.items[id]))]:[],names,extra};
 if(s.pos&&typeof s.pos==='object')for(const y in D.plans){const p=s.pos[y];if(p&&typeof p==='object'){o.pos[y]={};for(const id in p)if(D.items[id]&&Number.isInteger(p[id])&&p[id]>=0&&p[id]<D.plans[y].length)o.pos[y][id]=p[id]}}return o};
 S=clean(S);const U=[];
 const snap=()=>{U.push(JSON.stringify(S));if(U.length>40)U.shift();$('undo').disabled=false};
@@ -70,15 +79,16 @@ function put(id,to){(S.pos[S.years]=S.pos[S.years]||{})[id]=to}
 function move(id,from,d){const to=from+d;if(to<0||to>=D.plans[S.years].length)return;snap();put(id,to);save();draw()}
 function balance(){snap();let moved=0;for(let n=0;n<60;n++){const ts=terms().map((t,i)=>({i,ids:t.ids,c:cr(t.ids),su:t.label.includes('Summer')})).filter(t=>!t.su);
 const hi=ts.reduce((a,b)=>b.c>a.c?b:a),lo=ts.reduce((a,b)=>b.c<a.c?b:a);if(hi.c-lo.c<=3)break;
-const id=hi.ids.find(x=>!D.items[x].code&&!S.done.includes(x)&&D.items[x].cr>0&&D.items[x].cr<hi.c-lo.c);if(!id)break;put(id,lo.i);moved++}save();draw();return moved}
+const id=hi.ids.find(x=>!D.items[x].code&&!D.items[x].custom&&!S.names[x]&&!S.done.includes(x)&&D.items[x].cr>0&&D.items[x].cr<hi.c-lo.c);if(!id)break;put(id,lo.i);moved++}save();draw();return moved}
 const CAT='https://catalog.vt.edu/course-descriptions/';
 function draw(){board.textContent='';over.textContent='';const ts=terms(),I=planIssues(D.items,ts.map(t=>t.ids),S.done),nm2=j=>D.items[j].code||D.items[j].label;let doneCr=0,bad=0,firstBad=null;const max=Math.max(D.heavy,...ts.map(t=>cr(t.ids)));
 ts.forEach((t,ti)=>{const card=el('section','term'),list=el('div');card.id='t'+ti;let c=0,gs=0,gw=0,low=0,tb=0;
 t.ids.forEach(id=>{const it=D.items[id],done=S.done.includes(id);c+=it.cr;if(done)doneCr+=it.cr;if(it.g!=null){gs+=it.g*it.cr;gw+=it.cr;if(it.g<D.low&&!done)low++}
-const li=el('div','it'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
+const li=el('div','it'+(done?' done':'')),cb=el('input');li.draggable=true;li.ondragstart=e=>{e.dataTransfer.setData('text/plain',id);e.dataTransfer.effectAllowed='move'};cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label','Done: '+(it.code||it.label));
 cb.onchange=()=>{snap();S.done=cb.checked?[...S.done,id]:S.done.filter(x=>x!==id);save();draw()};
-const mid=el('div','mid'),nm=el('div','nm');if(it.code){const a=el('a',null,it.code);if(it.h)a.href=root+it.h;else{a.href=CAT+it.code.split(' ')[0].toLowerCase()+'/';a.target='_blank';a.rel='noopener noreferrer';a.title='Catalog description'}nm.append(a,' '+it.label)}else nm.textContent=it.label;
-mid.append(nm,el('div','mut',it.cr+' cr'+(it.alt.length?' · or '+it.alt.join(', '):'')+(it.ch.length?' · choose one: '+it.ch.join(', '):'')));
+const mid=el('div','mid'),nm=el('div','nm');if(it.code){const a=el('a',null,it.code);if(it.h)a.href=root+it.h;else{a.href=CAT+it.code.split(' ')[0].toLowerCase()+'/';a.target='_blank';a.rel='noopener noreferrer';a.title='Catalog description'}nm.append(a,' '+it.label)}else if(it.custom){nm.textContent=it.label+' ';const x=el('button','lnk','remove');x.type='button';x.setAttribute('aria-label','Remove '+it.label);x.onclick=()=>{snap();S.extra=S.extra.filter(e=>e.id!==id);S=clean(S);save();draw()};nm.append(el('span','tag','added by you'),x)}
+else{nm.textContent=(S.names[id]||it.label)+' ';const ed=el('button','lnk',S.names[id]?'change':'name it');ed.type='button';ed.setAttribute('aria-label','Write the course you plan to take for '+it.label);ed.onclick=()=>{const v=prompt('Which course will you take for "'+it.label+'"? Leave empty to clear.',S.names[id]||'');if(v===null)return;snap();if(text(v,60))S.names[id]=text(v,60);else delete S.names[id];save();draw()};nm.append(ed)}
+mid.append(nm,el('div','mut',it.cr+' cr'+(S.names[id]?' \u00b7 fills: '+it.label:'')+(it.alt.length?' · or '+it.alt.join(', '):'')+(it.ch.length?' · choose one: '+it.ch.join(', '):'')));
 if(it.g!=null)mid.append(el('span','tag','avg GPA '+it.g.toFixed(2)));if(it.v==='matters')mid.append(el('span','tag hot','instructor matters'));
 const v=I[id];if(!done&&v.slack===0){const s=el('span','tag hot',"can't slip");s.title='Later courses chain off this one. Moving it later pushes graduation back.';mid.append(s)}
 if(!done&&v.unlocks.length)mid.append(el('div','mut','Needed for '+v.unlocks.slice(0,3).join(', ')+(v.unlocks.length>3?' and '+(v.unlocks.length-3)+' more':'')));
@@ -90,21 +100,25 @@ l.disabled=ti===0;r.disabled=ti===ts.length-1;l.onclick=()=>move(id,ti,-1);r.onc
 const heavy=c>D.heavy,load=el('div','meter load'),fill=el('i');fill.style.width=Math.min(100,c/max*100)+'%';if(heavy)fill.style.background='var(--acc)';load.append(fill);
 card.append(el('h3',null,t.label),el('div','mut',c+' credits'+(gw?' · typical GPA '+(gs/gw).toFixed(2):'')),load);
 if(heavy)card.append(el('div','flag','Heavy load: '+c+' credits'));if(low>=3)card.append(el('div','flag',low+' courses here average below '+D.low.toFixed(1)));
-if(!t.ids.length)card.append(el('div','mut','Nothing planned here.'));card.append(list);board.append(card);
+if(!heavy&&c>0&&c<12&&!t.label.includes('Summer')&&t.ids.some(id=>!S.done.includes(id)))card.append(el('div','flag','Light term: under 12 credits is usually below full-time'));
+if(!t.ids.length)card.append(el('div','mut','Nothing planned here.'));card.append(list);
+const add=el('button','lnk addc','+ Add a course');add.type='button';add.onclick=()=>{if(S.extra.length>=MAX_EXTRA){alert('You can add up to '+MAX_EXTRA+' courses of your own.');return}const name=text(prompt('Course to add to '+t.label+' (for example a minor course or an extra elective):','')||'',60);if(!name)return;const n=parseInt(prompt('How many credits is '+name+'?','3'),10);if(!(n>=0&&n<=9)){alert('Credits must be a whole number from 0 to 9.');return}
+snap();const xid='x'+(Math.max(-1,...S.extra.map(e=>+e.id.slice(1)))+1);S.extra.push({id:xid,label:name,cr:n,t:ti});S=clean(S);put(xid,ti);save();draw()};card.append(add);
+card.ondragover=e=>{e.preventDefault();card.classList.add('drop')};card.ondragleave=()=>card.classList.remove('drop');card.ondrop=e=>{e.preventDefault();card.classList.remove('drop');const id=e.dataTransfer.getData('text/plain');if(D.items[id]&&!t.ids.includes(id)){snap();put(id,ti);save();draw()}};board.append(card);
 const o=el('a',(heavy?'hv':t.label.includes('Summer')?'sm':'')+(tb?' bad':'')),b=el('i');o.href='#t'+ti;o.title=t.label+': '+c+' credits'+(tb?', '+tb+' prerequisite conflict'+(tb>1?'s':''):'');b.style.height=Math.round(c/max*52)+'px';o.append(el('span',null,String(c)),b,el('span',null,short(t.label)));over.append(o)});
 const cf=$('conf');cf.textContent=bad?bad+' prerequisite conflict'+(bad>1?'s':'')+' in this layout. ':'No prerequisite conflicts.';cf.className=bad?'flag':'mut';
 if(firstBad){const go=el('button','lnk','Show the first one');go.type='button';go.onclick=()=>{firstBad.scrollIntoView({behavior:'smooth',block:'center'});firstBad.classList.add('pulse');setTimeout(()=>firstBad.classList.remove('pulse'),1600)};cf.append(go)}
-$('shared').hidden=!shared;$('prog').textContent=doneCr>=D.total&&D.total>0?'All '+D.total+' credits done. Congratulations.':doneCr+' of '+D.total+' credits done';$('bar').style.width=Math.min(100,doneCr/D.total*100)+'%';
+const xc=S.extra.reduce((a,e)=>a+e.cr,0),all=D.total+xc;$('shared').hidden=!shared;$('prog').textContent=(doneCr>=all&&all>0?'All '+all+' credits done. Congratulations.':doneCr+' of '+all+' credits done')+(xc?' ('+D.total+' for the degree, '+xc+' you added)':'');$('bar').style.width=Math.min(100,doneCr/all*100)+'%';
 [...yearsEl.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.y===S.years)));$('note').hidden=S.years===D.base;$('summer').hidden=!(+S.years<4)}
 const say=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1600)};
 yearsEl.addEventListener('click',e=>{const y=e.target.dataset.y;if(y&&y!==S.years){snap();S.years=y;save();draw();gpTrack('years',y)}});
 $('undo').onclick=()=>{if(!U.length)return;gpTrack('undo');S=clean(JSON.parse(U.pop()));$('undo').disabled=!U.length;save();draw()};
 $('balance').onclick=e=>{gpTrack('balance');const n=balance();say(e.target,n?'Moved '+n+' elective'+(n>1?'s':''):'Already even')};
-$('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+terms().map(t=>t.label+' ('+cr(t.ids)+' cr)\\n'+t.ids.map(id=>'  '+(S.done.includes(id)?'[x] ':'[ ] ')+(D.items[id].code?D.items[id].code+' ':'')+D.items[id].label).join('\\n')).join('\\n');try{await navigator.clipboard.writeText(txt);say(e.target,'Copied')}catch{say(e.target,'Copy blocked')}};
-$('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.');gpTrack('share');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
+$('copy').onclick=async e=>{const txt=D.name+' plan ('+S.years+' years)\\n'+terms().map(t=>t.label+' ('+cr(t.ids)+' cr)\\n'+t.ids.map(id=>'  '+(S.done.includes(id)?'[x] ':'[ ] ')+(D.items[id].code?D.items[id].code+' ':'')+(S.names[id]?S.names[id]+' ['+D.items[id].label+']':D.items[id].label)+' ('+D.items[id].cr+')').join('\\n')).join('\\n');try{await navigator.clipboard.writeText(txt);say(e.target,'Copied')}catch{say(e.target,'Copy blocked')}};
+$('share').onclick=async e=>{const p=S.pos[S.years]||{},u=location.href.split('#')[0]+'#y='+S.years+'&d='+S.done.map(x=>x.slice(1)).join('.')+'&m='+Object.keys(p).map(k=>k.slice(1)+'_'+p[k]).join('.')+(Object.keys(S.names).length?'&n='+encodeURIComponent(Object.keys(S.names).map(k=>k.slice(1)+'~'+S.names[k].replace(/[|]/g,' ')).join('|')):'')+(S.extra.length?'&x='+encodeURIComponent(S.extra.map(e=>e.t+'~'+e.cr+'~'+e.label.replace(/[|]/g,' ')).join('|')):'');gpTrack('share');try{await navigator.clipboard.writeText(u);say(e.target,'Link copied')}catch{prompt('Copy this link',u)}};
 $('print').onclick=()=>{gpTrack('print');print()};
 $('keep').onclick=()=>{gpTrack('keep');shared=false;save();history.replaceState(null,'',location.pathname);draw()};
-$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S={years:S.years,pos:{},done:[]};save();draw()}};draw()})();`;
+$('reset').onclick=()=>{if(confirm('Clear your moves and checkmarks for this major?')){snap();S=clean({years:S.years});save();draw()}};draw()})();`;
 
 const CATALOG = 'https://catalog.vt.edu/undergraduate/';
 
@@ -122,7 +136,7 @@ ${r.draft ? `<p class="note warn"><b>Draft plan, not an official roadmap.</b> Th
 <p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the ${r.draft ? 'draft plan' : '4-year roadmap'} over the length you chose and keeps prerequisites in order where it can. It does not know which term a course is offered. Take it to your advisor before you rely on it.</p>
 <p class="note" id="summer" hidden>Finishing in under 4 years uses summer terms. AP, IB or transfer credit can replace some of them: tick those courses as done.</p>
 <details class="help"><summary>How to use this page</summary>
-<ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Arrows</b> move a course one term. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>"Can't slip"</b> means later courses chain off this one with no spare term.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li><b>Share link</b> copies a link to this exact plan. <b>Print</b> gives you a paper or PDF copy for an advising meeting.</li>${site ? '<li><b>"Instructor matters"</b> means grades differ a lot by who teaches it.</li>' : `<li>Course codes open the catalog description. For past grades see ${ext(UDC_URL, "Virginia Tech's grade distribution page")}, and for instructor reviews ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}.</li>`}<li>Your plan is saved in this browser only.</li></ul></details>
+<ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Drag</b> a course to another term, or use the <b>arrows</b> to move it one term. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>Name it</b> on an elective or Pathways slot records the course you plan to take there.</li><li><b>Add a course</b> at the bottom of a term adds one of your own, such as a minor course.</li><li><b>"Can't slip"</b> means later courses chain off this one with no spare term.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li><b>Share link</b> copies a link to this exact plan. <b>Print</b> gives you a paper or PDF copy for an advising meeting.</li>${site ? '<li><b>"Instructor matters"</b> means grades differ a lot by who teaches it.</li>' : `<li>Course codes open the catalog description. For past grades see ${ext(UDC_URL, "Virginia Tech's grade distribution page")}, and for instructor reviews ${ext(RMP_SCHOOL_URL, 'RateMyProfessors')}.</li>`}<li>Your plan is saved in this browser only.</li></ul></details>
 <noscript><p class="note warn">The planner needs JavaScript. The official roadmap is on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <script type="application/json" id="plan-data">${json}</script>`;
@@ -143,6 +157,13 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, 
 ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} catalog programs have no roadmap and could not be turned into a draft. Each link opens its catalog page.</p>${none}` : ''}
 <div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
 <a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
+}
+
+/** Shown by nginx for any address that is not a page (deploy/nginx.conf, error_page 404). Links are absolute because the bad address can be at any depth. */
+export function renderNotFound(): string {
+  return layout(`Page not found · ${brand()}`, 'That page does not exist.', '/', '',
+    `<div class="hero"><h1>That page <em>isn't here</em>.</h1><p>The link may be old or mistyped. Your saved plans are safe: they live in your browser.</p></div>
+<div class="paths"><a href="/index.html"><b>Find your major</b><span>All 213 plans, with a filter box.</span></a><a href="/ask.html"><b>Ask a question</b><span>Prerequisites, what a course unlocks, which majors need it.</span></a></div>`, undefined, 'plan');
 }
 
 export function renderPlanAbout(): string {
