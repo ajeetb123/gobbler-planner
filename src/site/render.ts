@@ -112,7 +112,7 @@ const page=((location.pathname.split('/').pop()||'index.html').replace(/\\.html$
 const quiet=navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
 window.gpTrack=(t,v)=>{if(quiet||!navigator.sendBeacon)return;try{navigator.sendBeacon(root+'api/event',new Blob([JSON.stringify({t,p:page,v:v==null?'':String(v).slice(0,120)})],{type:'text/plain'}))}catch{}};
 gpTrack('view');
-const tb=document.getElementById('theme');if(tb)tb.onclick=()=>{const el=document.documentElement,next=(el.dataset.theme||'dark')==='dark'?'light':'dark';el.dataset.theme=next;try{localStorage.setItem('gobblerplan:theme',next)}catch{}};
+const tb=document.getElementById('theme');if(tb)tb.onclick=()=>{const el=document.documentElement,next=(el.dataset.theme||'light')==='dark'?'light':'dark';el.dataset.theme=next;try{localStorage.setItem('gobblerplan:theme',next)}catch{}};
 const open=()=>{if(!dlg.open){dlg.showModal();q.value='';r.textContent='';q.focus()}};
 document.querySelectorAll('[data-search]').forEach(b=>b.addEventListener('click',open));
 document.addEventListener('keydown',e=>{const t=e.target.tagName;if((e.key==='/'&&t!=='INPUT'&&t!=='TEXTAREA')||((e.metaKey||e.ctrlKey)&&e.key==='k')){e.preventDefault();open()}});

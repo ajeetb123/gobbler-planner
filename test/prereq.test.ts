@@ -128,8 +128,9 @@ test('compare data: CS to Computer Engineering after year one keeps the shared f
 test('planner-only build: no grade pages linked, links out to UDC and RMP, scripts are valid JavaScript', () => {
   const html = renderPlan(cs, courses);
   assert.ok(!html.includes('course/'));
-  assert.ok(html.includes('https://udc.vt.edu/irdata/data/courses/grades'));
-  assert.ok(html.includes('https://www.ratemyprofessors.com/school/1349'));
+  // Grade and review links live in the course panel, which the page script builds.
+  assert.ok(PLAN_JS.includes('https://udc.vt.edu/irdata/data/courses/grades'));
+  assert.ok(PLAN_JS.includes('https://www.ratemyprofessors.com/school/1349'));
   assert.ok(html.includes('compare.html#from=computer-science'));
   assert.ok(!html.includes('>Grades</a>'));
   const data = JSON.parse(/id="plan-data">(.*?)<\/script>/s.exec(html)![1]!);
