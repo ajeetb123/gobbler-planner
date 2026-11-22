@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { askEngine, type AskDoc } from '../src/ask/engine.ts';
 import { baselineRank, docs, engineRank, evaluate, evaluateHandWritten, ix } from '../bench/ask.eval.ts';
 import { ASK_JS, EXAMPLES, MODEL_F16, MODEL_F32, renderAsk } from '../src/site/ask-page.ts';
-import { ragMessages, RAG_DOCS } from '../src/ask/rag.ts';
+import { ragGrounded, ragMessages, RAG_DOCS, RAG_OFF_TOPIC } from '../src/ask/rag.ts';
 import { readFileSync, existsSync } from 'node:fs';
 
 const E = askEngine();
@@ -97,24 +97,33 @@ test('hand-written student-style questions: the honest score, far below the gene
   assert.ok(r.right >= 26, `right: ${r.right}`);
 });
 
-test('ragMessages: numbered facts from retrieval, the lookup result, and firm instructions', () => {
+test('ragMessages: numbered facts from retrieval and firm instructions', () => {
   const t = E.buildIndex(tiny);
   const a = E.answer(t, 'what do I need before CS 2114');
-  const [system, user] = ragMessages('what do I need before CS 2114', a.lines, a.related.map((h) => h.doc));
+  const [system, user] = ragMessages('what do I need before CS 2114', a.related.map((h) => h.doc));
   assert.equal(system!.role, 'system');
-  assert.ok(system!.content.includes('using only the numbered facts') && system!.content.includes('Never invent'));
-  assert.ok(user!.content.includes('Lookup result: CS 2114 Software Design and Data Structures lists these prerequisites: CS 1114 or CS 2064.'));
+  assert.ok(system!.content.includes('using ONLY the facts') && system!.content.includes('Never add'));
   assert.ok(user!.content.includes('[1] CS 2114 Software Design and Data Structures. Prerequisites: CS 1114 or CS 2064.'));
-  assert.ok(user!.content.endsWith('Question: what do I need before CS 2114'));
+  assert.ok(user!.content.includes('Question: what do I need before CS 2114'));
   // Nothing found: the prompt says so instead of leaving the model to guess.
-  const none = ragMessages('zzzz', [], []);
-  assert.ok(none[1]!.content.includes('no direct match') && none[1]!.content.includes('none found'));
+  const none = ragMessages('zzzz', []);
+  assert.ok(none[1]!.content.includes('none found'));
   // Real data: at most RAG_DOCS facts, each clipped, whole prompt small enough for a 4,096-token model.
   const q = 'which majors require PHYS 2305 and what does it unlock';
   const real = E.answer(ix, q);
-  const msgs = ragMessages(q, real.lines, real.related.map((h) => h.doc));
+  const msgs = ragMessages(q, real.related.map((h) => h.doc));
   assert.ok((msgs[1]!.content.match(/^\[\d\] /gm) ?? []).length <= RAG_DOCS);
   assert.ok(msgs[0]!.content.length + msgs[1]!.content.length < 6000);
+});
+
+test('rag guards: off-topic questions skip the model, answers naming unknown courses are rejected', () => {
+  for (const q of ['best professor for calculus', 'is CS 3214 hard', 'easiest pathways class', 'average grade in MATH 2114']) assert.ok(RAG_OFF_TOPIC.test(q), q);
+  for (const q of ['what do I need before CS 3214', 'which majors require PHYS 2305', 'when do CS majors take CS 2114']) assert.ok(!RAG_OFF_TOPIC.test(q), q);
+  const prompt = 'Facts:\n[1] CS 3214 Computer Systems. Prerequisites: (CS 2506 and CS 2114) or (ECE 2564 and ECE 3574).';
+  assert.ok(ragGrounded('You need CS 2506 and cs2114. [1]', prompt));
+  assert.ok(ragGrounded('I do not know.', prompt));
+  assert.ok(!ragGrounded('You need CS 2505 first. [1]', prompt));
+  assert.ok(ASK_JS.includes('ragGrounded(got') && ASK_JS.includes('OFF_TOPIC.test(text)'));
 });
 
 test('the model ids exist in the installed library, and the page script uses them', () => {

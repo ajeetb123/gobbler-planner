@@ -1,7 +1,7 @@
 // "Ask" page: a question box answered in the browser by src/ask/engine.ts. The knowledge base (ask.json) is
 // fetched once when the page opens; questions never leave the browser.
 import { askEngine } from '../ask/engine.ts';
-import { ragMessages } from '../ask/rag.ts';
+import { ragGrounded, ragMessages, RAG_OFF_TOPIC } from '../ask/rag.ts';
 import { brand, layout } from './render.ts';
 import type { Site } from './model.ts';
 
@@ -28,7 +28,7 @@ export const EXAMPLES = [
  * back button works. A hash is never sent to the server.
  */
 export const ASK_JS = `(()=>{const E=(${askEngine.toString()})();
-const ragMessages=${ragMessages.toString()};
+const ragMessages=${ragMessages.toString()};const ragGrounded=${ragGrounded.toString()};const OFF_TOPIC=${RAG_OFF_TOPIC.toString()};
 // The version tag on this script's own address, reused for the model library so it is cached the same way.
 const VER=document.currentScript?new URL(document.currentScript.src).search:'';
 const root=document.body.dataset.root,$=id=>document.getElementById(id),el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
@@ -48,13 +48,16 @@ function loadModel(){if(llm)return Promise.resolve(llm);if(loading)return loadin
 loading=(async()=>{if(!navigator.gpu)throw new Error('This browser cannot run the model. It needs WebGPU: try a recent Chrome, Edge or Safari on a laptop or desktop.');
 const ad=await navigator.gpu.requestAdapter();if(!ad)throw new Error('No graphics adapter is available for the model on this device.');
 aiBar.parentElement.hidden=false;aiMsg.textContent='Loading the model library\u2026';
-const lib=await import(root+'vendor/web-llm.js'+VER);
+// A dynamic import needs a full or ./-style address: a bare 'vendor/...' is rejected as a module name.
+const lib=await import(new URL(root+'vendor/web-llm.js'+VER,location.href).href);
 llm=await lib.CreateMLCEngine(ad.features.has('shader-f16')?'${MODEL_F16}':'${MODEL_F32}',{initProgressCallback:p=>{const pct=Math.round((p.progress||0)*100);aiBar.style.width=pct+'%';aiMsg.textContent='Getting the model ready: '+pct+'%. The first time downloads about 1 GB; after that it starts from your browser\u2019s storage.'}});
 aiBar.parentElement.hidden=true;aiMsg.textContent='AI answers are on. The model runs in your browser; your question is not sent anywhere.';return llm})();
 loading.catch(e=>{loading=null;aiBar.parentElement.hidden=true;aiMsg.textContent=e&&e.message?e.message:'The model could not be loaded.'});return loading}
 async function aiAnswer(text,a){const mine=++turn,box=el('div','ans aians'),head=el('p','mut','AI answer \u00b7 written in your browser from the facts above \u00b7 can be wrong, check the sources'),body=el('p',null,'Thinking\u2026');box.append(head,body);out.querySelector('.ans').after(box);
-try{const e=await loadModel();if(mine!==turn)return;const stream=await e.chat.completions.create({messages:ragMessages(text,a.lines,a.related.slice(0,4).map(h=>h.doc)),stream:true,temperature:0.2,max_tokens:220});let got='';
+if(OFF_TOPIC.test(text)){body.textContent='The facts here cover prerequisites, what a course unlocks and degree plans. They say nothing about professors, grades or how hard a course is, so the model is not asked.';return}
+try{const e=await loadModel();if(mine!==turn)return;const msgs=ragMessages(text,a.related.slice(0,4).map(h=>h.doc));const stream=await e.chat.completions.create({messages:msgs,stream:true,temperature:0,max_tokens:160});let got='';
 for await(const part of stream){if(mine!==turn){e.interruptGenerate();return}got+=(part.choices[0]&&part.choices[0].delta&&part.choices[0].delta.content)||'';body.textContent=got}
+if(!ragGrounded(got,msgs[1].content)){body.textContent='The model named a course that is not in the facts it was given, so its answer was thrown away. Use the answer above.';return}
 if(!got.trim())body.textContent='The model returned nothing. Use the answer above.'}catch(err){if(mine===turn)body.textContent='AI answer unavailable: '+(err&&err.message?err.message:'the model could not run')+'. The answer above still stands.'}}
 aiBtn.onclick=()=>{const on=!aiOn();try{localStorage.setItem('gobblerplan:ai',on?'on':'off')}catch{}aiLabel();gpTrack('ai',on?'on':'off');if(on){loadModel().then(()=>{if(q.value.trim())show(q.value)}).catch(()=>{})}else{turn++;aiMsg.textContent='AI answers are off. Answers come from the catalog lookup only.';document.querySelectorAll('.aians').forEach(x=>x.remove())}};
 aiLabel();if(aiOn())aiMsg.textContent='AI answers are on. The model loads when you ask your first question.';

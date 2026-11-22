@@ -13,11 +13,12 @@ export const RAG_DOCS = 4;
 export const RAG_DOC_CHARS = 700;
 
 /**
- * Build the chat messages for one question.
- * `lookup` is the rule-based answer for the best match (already checked facts); `docs` are the top retrieval hits.
+ * Build the chat messages for one question from the top retrieval hits.
+ * The wording was picked by trying four prompts on the real model (see skills.md): a worked example made the
+ * 1B model fluent but wrong (it dropped "or" branches and leaked the example), so there is none.
  * Self-contained on purpose: ask-page.ts ships this function's source to the browser. Do not use imports in it.
  */
-export function ragMessages(question: string, lookup: string[], docs: AskDoc[]): ChatMessage[] {
+export function ragMessages(question: string, docs: AskDoc[]): ChatMessage[] {
   const clip = (s: string, n: number) => (s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s);
   const fact = (d: AskDoc): string => {
     if (d.k === 'c') {
@@ -31,10 +32,27 @@ export function ragMessages(question: string, lookup: string[], docs: AskDoc[]):
     return `${d.title} degree plan (${d.college}): ${d.total} credits over ${(d.terms || []).length} terms${d.draft ? ', term order suggested by this site' : ''}. ${terms}`;
   };
   const facts = docs.slice(0, 4).map((d, i) => `[${i + 1}] ${clip(fact(d), 700)}`);
-  const system = 'You are the assistant on Gobbler Plan, an unofficial degree planner for Virginia Tech students. ' +
-    'Answer the question using only the numbered facts and the lookup result below. Mention the fact number you used, like [1]. ' +
-    'If they do not contain the answer, say you do not know and suggest the catalog or an advisor. ' +
-    'Never invent course codes, prerequisites, professors, grades or opinions about difficulty. Answer in at most 80 words.';
-  const user = `Lookup result: ${lookup.length ? lookup.join(' ') : 'no direct match.'}\n\nFacts:\n${facts.length ? facts.join('\n') : 'none found.'}\n\nQuestion: ${clip(question.trim(), 300)}`;
+  const system = 'You answer questions for Virginia Tech students using ONLY the facts given. Rules: 1) Answer in one or two short sentences. ' +
+    '2) End with the fact number in brackets, like [1]. 3) The facts cover only course prerequisites, what a course unlocks, and degree plans. ' +
+    'If the question asks about anything else (professors, grades, difficulty, opinions) or the facts do not answer it, reply exactly: ' +
+    '"I do not know. Check the catalog or ask your advisor." 4) Never add information that is not in the facts.';
+  const user = `Facts:\n${facts.length ? facts.join('\n') : 'none found.'}\n\nQuestion: ${clip(question.trim(), 300)}\n\nAnswer using only the facts:`;
   return [{ role: 'system', content: system }, { role: 'user', content: user }];
+}
+
+/**
+ * Questions the facts cannot answer (people, grades, difficulty, opinions). The page does not run the model on
+ * these: in testing the model refused them only some of the time, and once called a course "challenging".
+ */
+export const RAG_OFF_TOPIC = /\b(prof|professors?|teachers?|instructors?|hard|hardest|easy|easiest|difficult|difficulty|gpa|grades?|curve|best|worst|recommend|worth)\b/i;
+
+/**
+ * True when every course code in the model's answer also appears in the prompt it was given.
+ * An answer that names a course the facts never mentioned is made up, so the page throws it away.
+ * Self-contained on purpose: shipped to the browser like ragMessages.
+ */
+export function ragGrounded(answer: string, prompt: string): boolean {
+  const codes = (s: string) => (s.toUpperCase().match(/\b[A-Z]{2,4} ?\d{4}H?\b/g) || []).map((c) => c.replace(' ', ''));
+  const known = new Set(codes(prompt));
+  return codes(answer).every((c) => known.has(c));
 }
