@@ -190,14 +190,16 @@ test('every saved requirement list becomes a balanced draft with few conflicts',
   assert.ok(conflicts <= 2, `conflicts: ${conflicts}`);
 });
 
-test('draft pages say they are drafts; official pages do not', () => {
+test('plans built from requirements say their order is a suggestion; roadmap pages do not', () => {
   const r = draftRoadmap(reqs.find((q) => q.slug === 'psychology-bs')!, courses);
   const html = renderPlan(r, courses);
-  assert.ok(html.includes('Draft plan, not an official roadmap'));
+  assert.ok(html.includes('Suggested order.') && html.includes('the term-by-term order is a suggestion'));
+  // Never call a generated order an official roadmap.
+  assert.ok(!html.includes('official roadmap') && !html.includes('official 2026-2027 roadmap'));
   assert.ok(!html.includes('#roadmaptext'));
-  assert.ok(!renderPlan(cs, courses).includes('Draft plan, not an official roadmap'));
+  assert.ok(!renderPlan(cs, courses).includes('Suggested order.'));
   const index = renderPlanIndex([cs, r], undefined, true);
-  assert.equal(index.split('<span><i class="tag">draft</i>').length - 1, 1);
+  assert.ok(index.includes('the order shown is a suggested one') && !index.includes('>draft<'));
   const arch = draftRoadmap(reqs.find((q) => q.slug === 'architecture-barch')!, courses);
   assert.equal(JSON.parse(/id="plan-data">(.*?)<\/script>/s.exec(renderPlan(arch, courses))![1]!).base, '5');
 });

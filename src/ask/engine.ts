@@ -178,7 +178,7 @@ export function askEngine() {
 
     if (planFirst && bestPlan) {
       const p = bestPlan.doc, terms = p.terms || [];
-      const kind = p.draft ? 'a draft plan built from the catalog requirements (the catalog has no official roadmap for it)' : 'the official catalog roadmap';
+      const kind = p.draft ? 'the official catalog requirements, in a suggested term order' : 'the official catalog roadmap';
       const sources = [{ label: `${p.title} plan`, href: `plan/${p.id}.html` }];
       if (intent === 'credits') return { intent, related, sources, lines: [`${p.title} takes ${p.total} credits, laid out over ${terms.length} terms.`, `Source: ${kind}.`] };
       const year = YEARS.find(([re]) => re.test(q.toLowerCase()));
