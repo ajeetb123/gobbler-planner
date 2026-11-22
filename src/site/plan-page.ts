@@ -184,7 +184,7 @@ ${r.draft ? `<p class="note"><b>Suggested order.</b> The courses and credits her
 </div></div>
 <aside class="panel" id="panel" aria-label="Course details" hidden></aside>
 <script type="application/json" id="plan-data">${json}</script>`;
-  return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a Virginia Tech ${r.name} degree term by term from the official roadmap, with prerequisite checks.`, '../',
+  return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a Virginia Tech ${r.name} degree term by term from the official ${r.draft ? 'requirements' : 'roadmap'}, with prerequisite checks.`, '../',
     `<a href="index.html">Degree planner</a>`, body, site, 'plan', `<script src="../plan.js" defer></script>`);
 }
 
