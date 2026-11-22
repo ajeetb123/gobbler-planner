@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { askEngine, type AskDoc } from '../src/ask/engine.ts';
-import { baselineRank, docs, engineRank, evaluate, ix } from '../bench/ask.eval.ts';
+import { baselineRank, docs, engineRank, evaluate, evaluateHandWritten, ix } from '../bench/ask.eval.ts';
 import { ASK_JS, EXAMPLES, renderAsk } from '../src/site/ask-page.ts';
 
 const E = askEngine();
@@ -82,4 +82,13 @@ test('ask page: script is valid JavaScript, says no AI is involved, and carries 
   assert.ok(text.includes('No AI model is involved'));
   assert.ok(text.includes('Not affiliated with, endorsed by, or sponsored by Virginia Tech'));
   assert.ok(!/\bVT\b|Hokie/.test(text));
+});
+
+test('hand-written student-style questions: the honest score, far below the generated sets', () => {
+  const r = evaluateHandWritten();
+  assert.equal(r.total, 40);
+  // 27 of 40 on Nov 21, 2026. Misses are slang ("orgo", "calc 2", "comp org", "compe"), questions about meaning
+  // ("easy math class") and two-course questions. The floor only guards against getting worse; do not tune the
+  // engine to this list, or it stops measuring anything.
+  assert.ok(r.right >= 26, `right: ${r.right}`);
 });

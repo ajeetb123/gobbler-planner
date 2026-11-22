@@ -61,6 +61,68 @@ export function evaluate(rank: (query: string, k: number, kind: 'c' | 'p') => As
 export const engineRank = (q: string, k: number, kind: 'c' | 'p') => E.search(ix, q, k, kind).map((h) => h.doc);
 export const baselineRank = (q: string, k: number, kind: 'c' | 'p') => overlap(ix, q, k, kind);
 
+/**
+ * Questions written by hand in the way a student might type them (lowercase, slang, typos, no course code).
+ * They are NOT from real users: the site has not launched. Replace them with real questions from the dashboard's
+ * "questions with no answer" list and from students once there are some. `want` lists every acceptable course
+ * code or plan slug; `intent` is checked when given.
+ */
+export const HAND_WRITTEN: Array<{ q: string; want: string[]; intent?: string }> = [
+  { q: 'what do i need to take before computer systems', want: ['CS 3214'], intent: 'prereq' },
+  { q: 'prereqs for data structures and algorithms', want: ['CS 3114'], intent: 'prereq' },
+  { q: 'can i take orgo without gen chem', want: ['CHEM 2535', 'CHEM 2565'], intent: 'prereq' },
+  { q: 'organic chem prerequisites', want: ['CHEM 2535', 'CHEM 2565', 'CHEM 2536', 'CHEM 2566'], intent: 'prereq' },
+  { q: 'what comes after calc 2', want: ['MATH 1226'], intent: 'unlocks' },
+  { q: 'what does linear algebra unlock', want: ['MATH 2114'], intent: 'unlocks' },
+  { q: 'whats needed for thermo', want: ['ME 3124', 'CHE 2164', 'BSE 3154'], intent: 'prereq' },
+  { q: 'thermodynamics prereqs', want: ['ME 3124', 'CHE 2164', 'BSE 3154', 'MSE 4034'], intent: 'prereq' },
+  { q: 'do i need physics for statics', want: ['ESM 2104'], intent: 'prereq' },
+  { q: 'dynamics prerequisites', want: ['ESM 2304'], intent: 'prereq' },
+  { q: 'what classes need multivariable calculus', want: ['MATH 2204'] },
+  { q: 'differential equations before or after linear algebra', want: ['MATH 2214', 'MATH 2114'] },
+  { q: 'which majors take foundations of physics', want: ['PHYS 2305', 'PHYS 2306'], intent: 'majors' },
+  { q: 'who needs first year writing', want: ['ENGL 1105', 'ENGL 1106'], intent: 'majors' },
+  { q: 'is cs 2505 required for computer engineering', want: ['CS 2505', 'computer-engineering'], intent: 'majors' },
+  { q: 'is stat 4714 in the electrical engineering major', want: ['STAT 4714', 'electrical-engineering'], intent: 'majors' },
+  { q: 'comp org prereqs', want: ['CS 2505', 'CS 2506'], intent: 'prereq' },
+  { q: 'intro to software design', want: ['CS 1114'] },
+  { q: 'circuits and devices requirements', want: ['ECE 2024'], intent: 'prereq' },
+  { q: 'what is ENGE 1216', want: ['ENGE 1216'] },
+  { q: 'prinicples of economics', want: ['ECON 2005', 'ECON 2006'] },
+  { q: 'genral microbiology prereq', want: ['BIOL 2604'], intent: 'prereq' },
+  { q: 'tech writing prerequisite', want: ['ENGL 3764'], intent: 'prereq' },
+  { q: 'senior design mechanical', want: ['ME 4015', 'ME 4016'] },
+  { q: 'fluid mechanics', want: ['ME 3404', 'CEE 3304', 'BSE 2504', 'ESM 3024', 'AOE 3014'] },
+  { q: 'how many credits is mechanical engineering', want: ['mechanical-engineering'], intent: 'credits' },
+  { q: 'how long is architecture', want: ['architecture-barch'], intent: 'credits' },
+  { q: 'what do you take freshman year in computer science', want: ['computer-science'], intent: 'year' },
+  { q: 'sophomore year civil engineering classes', want: ['civil-engineering'], intent: 'year' },
+  { q: 'senior year psychology', want: ['psychology-bs'], intent: 'year' },
+  { q: 'chemical engineering plan', want: ['chemical-engineering'] },
+  { q: 'aerospace', want: ['aerospace-engineering'] },
+  { q: 'biochem major', want: ['biochemistry-bs'] },
+  { q: 'physics degree', want: ['physics-bs', 'physics-ba', 'physics-ba-pre-health', 'physics-ba-pre-law', 'physics-ba-physics-education'] },
+  { q: 'econ major first year', want: ['economics-ba', 'economics-ba-business', 'economics-ba-policy-regulation', 'economics-ba-managerial-economics-data-science'], intent: 'year' },
+  { q: 'industrial and systems engineering credits', want: ['industrial-systems-engineering'], intent: 'credits' },
+  { q: 'mining engineering', want: ['mining-engineering'] },
+  { q: 'compe', want: ['computer-engineering'] },
+  { q: 'easy math class', want: [] },
+  { q: 'best professor for calculus', want: [] },
+];
+
+/** Share of hand-written questions where the answer is about an acceptable course or plan (and the intent matches when given). `want: []` means the honest answer is "I can't answer that". */
+export function evaluateHandWritten() {
+  const rows = HAND_WRITTEN.map((h) => {
+    const a = E.answer(ix, h.q);
+    // What the answer is about, read from its first source: "<CODE> in the catalog" or "<Plan name> plan".
+    const label = a.sources[0]?.label ?? '';
+    const subject = docs.find((d) => h.want.includes(d.id) && label === (d.k === 'c' ? `${d.id} in the catalog` : `${d.title} plan`));
+    const right = h.want.length === 0 ? a.intent === 'none' : Boolean(subject) && (!h.intent || a.intent === h.intent);
+    return { ...h, got: a.intent, right };
+  });
+  return { rows, right: rows.filter((r) => r.right).length, total: rows.length };
+}
+
 if (import.meta.main) {
   const pct = (a: number, n: number) => ((100 * a) / n).toFixed(1).padStart(5) + '%';
   const eng = evaluate(engineRank), base = evaluate(baselineRank);
@@ -78,6 +140,9 @@ if (import.meta.main) {
     }
   }
   console.log(`\nQuestions with a course code (3 phrasings each): ${codeOk} of ${n} answered about the right course with the right kind of answer`);
+  const hw = evaluateHandWritten();
+  console.log(`\nHand-written questions (not from real users): ${hw.right} of ${hw.total} right`);
+  for (const r of hw.rows.filter((x) => !x.right)) console.log(`  missed: "${r.q}" -> answered as ${r.got}`);
   const t0 = performance.now(); for (let i = 0; i < 200; i++) E.answer(ix, 'what do I need before organic chemistry lab');
   console.log(`Speed: ${((performance.now() - t0) / 200).toFixed(2)} ms per question`);
 }

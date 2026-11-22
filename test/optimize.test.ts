@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { balanceBound, optimize } from '../src/plan/optimize.ts';
-import { credits, parseRoadmaps, repack, slots, smooth, type PlanItem, type Term } from '../src/plan/roadmap.ts';
+import { credits, parseRoadmaps, repack, type PlanItem, type Term } from '../src/plan/roadmap.ts';
 import { checkItems, parsePrereqs, planIssues, type CheckItem } from '../src/plan/prereq.ts';
 
 const item = (id: string, cr: number, code?: string): PlanItem => ({ id, code, alt: [], label: code ?? 'Elective', credits: cr, choices: [], src: 0 });
@@ -55,7 +55,7 @@ test('optimize: a layout that is already best is returned unchanged; a tiny budg
 test('optimize on real roadmaps: never more conflicts than the greedy layout it starts from', () => {
   const courses = parsePrereqs(readFileSync('data/prereqs.txt', 'utf8'));
   const real = parseRoadmaps(readFileSync('data/roadmaps/engineering.txt', 'utf8'));
-  let before = 0, after = 0;
+  let after = 0;
   for (const r of real) {
     const check = checkItems(r.terms, courses);
     for (const y of [3, 5]) {
@@ -65,5 +65,4 @@ test('optimize on real roadmaps: never more conflicts than the greedy layout it 
     }
   }
   assert.ok(after <= 6, `conflicts after: ${after}`);
-  void before; void smooth; void slots;
 });

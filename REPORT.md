@@ -1,8 +1,10 @@
-# Course and professor grade pages: build, backtest, verdict (private grade engine)
+# Grade engine report (private part of Gobbler Plan): build, backtest, verdict
+
+> Scope: this report covers only the grade-estimate engine in `src/grades/`, which is NOT part of the public site (the university declined reuse of its grade data). It was written on Nov 15, 2026, before the degree planner grew into the product. For the current project (213 plans, prerequisite checking, scheduler, Ask, API and dashboard, 66 tests) see `README.md` and `skills.md`.
 
 **Verdict:** the engine is sound and it measurably beats what every VT grade site shows today. That alone will not pull students off RateMyProfessors. The data says this works as a second tab students open next to RMP, not as a replacement for it. One unverified blocker could cap it further: whether the public timetable still shows instructor names.
 
-## What was built (TypeScript, no runtime dependencies, 32 unit tests)
+## What was built (TypeScript, no runtime dependencies; 32 unit tests at the time of this report, 66 in the project now)
 
 **#5 Honest grade estimates.** Predicts next-term section GPA for a (course, instructor) pair:
 - Small samples are pulled toward the course mean (shrinkage).
@@ -18,8 +20,7 @@
 - Instructor pages: the same key numbers and lane chart, one row per course, with term history in each row's detail. Flagged names get a warning and no cross-course total.
 - Search palette: opens with "/" or Cmd/Ctrl+K from any page, groups results into courses, instructors and degree plans, and works with arrow keys.
 - Subject lists and a method page.
-- Degree planner (`plan/`): pick a major, start from its official roadmap in the 2026-2027 VT catalog, choose 3, 3.5, 4, 4.5 or 5 years, move courses between terms, tick off finished ones, rebalance heavy terms with one button, and copy the plan as text. A bar overview shows credits per term. Each course shows its average GPA and an "Instructor matters" tag, and each term shows credits, a typical GPA, and flags for a heavy load or several low-GPA courses together. 15 College of Engineering majors so far. The plan is saved in the visitor's browser.
-- Planner limit: plans other than 4 years are a rearrangement of the official roadmap. Prerequisites and term offerings are not checked, and the page says so.
+- Degree planner: at the time of this report it covered 15 majors and did not check prerequisites. Both statements are out of date; the planner is documented in `README.md`.
 - Every instructor links out to a RateMyProfessors search for that last name at VT, so reviews are one click away. Reviews are never copied.
 - `npm run pilot` builds only the 30 most-taken courses (22% of undergrad enrollments).
 
