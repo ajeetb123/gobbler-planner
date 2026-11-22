@@ -25,7 +25,7 @@ export function buildDocs(roadmaps: Roadmap[], courses: Map<string, CourseInfo>)
     const mj = (plans.get(c.code) ?? []).sort((a, b) => a[1].localeCompare(b[1]));
     return {
       k: 'c', id: c.code, title: c.title, text: c.code.split(' ')[0]!,
-      ...(c.preText ? { pre: c.preText } : {}), ...(c.coText ? { co: c.coText } : {}),
+      ...(c.preText ? { pre: c.preText } : {}), ...(c.coText ? { co: c.coText } : {}), ...(c.pre ? { pe: c.pre } : {}),
       un: [...(unlocks.get(c.code) ?? [])].sort(), mj: mj.slice(0, MAX_PLANS_LISTED), n: mj.length,
     };
   });

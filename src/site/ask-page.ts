@@ -14,6 +14,7 @@ export const MODEL_F16 = 'Llama-3.2-3B-Instruct-q4f16_1-MLC';
 export const MODEL_F32 = 'Llama-3.2-3B-Instruct-q4f32_1-MLC';
 
 export const EXAMPLES = [
+  'I have CS 2114 and CS 2505. Can I take CS 3114?',
   'What do I need before CS 3214?',
   'What does MATH 2114 unlock?',
   'Which majors require PHYS 2305?',
@@ -55,6 +56,7 @@ aiBar.parentElement.hidden=true;aiMsg.textContent='AI answers are on. The model 
 // A failed load switches the toggle back off, so one press tries again.
 loading.catch(e=>{loading=null;aiBar.parentElement.hidden=true;try{localStorage.setItem('gobblerplan:ai','off')}catch{}aiLabel();const m=e&&e.message?e.message:'';aiMsg.textContent=/network|fetch|Cache/i.test(m)?'The download was interrupted. Press the button to try again; the parts already downloaded are usually kept.':m||'The model could not be loaded.'});return loading}
 async function aiAnswer(text,a){const mine=++turn,box=el('div','ans aians'),head=el('p','mut','AI answer \u00b7 written in your browser from the facts above \u00b7 can be wrong, check the sources'),body=el('p',null,'Thinking\u2026');box.append(head,body);out.querySelector('.ans').after(box);
+if(a.intent==='eligible'){body.textContent='The yes or no above was worked out exactly from the prerequisite list, so the model is not asked. In testing it said yes to questions like this even when the answer was no.';return}
 if(OFF_TOPIC.test(text)){body.textContent='The facts here cover prerequisites, what a course unlocks and degree plans. They say nothing about professors, grades or how hard a course is, so the model is not asked.';return}
 try{const e=await loadModel();if(mine!==turn)return;const msgs=ragMessages(text,a.related.slice(0,4).map(h=>h.doc));const stream=await e.chat.completions.create({messages:msgs,stream:true,temperature:0,max_tokens:160});let got='';
 for await(const part of stream){if(mine!==turn){e.interruptGenerate();return}got+=(part.choices[0]&&part.choices[0].delta&&part.choices[0].delta.content)||'';body.textContent=got}

@@ -116,6 +116,34 @@ test('ragMessages: numbered facts from retrieval and firm instructions', () => {
   assert.ok(msgs[0]!.content.length + msgs[1]!.content.length < 6000);
 });
 
+test('eligibility: "I have A, can I take X" is worked out from the prerequisite tree, not left to a model', () => {
+  const t = E.buildIndex([
+    { k: 'c', id: 'CS 3214', title: 'Computer Systems', text: 'CS', pre: '(CS 2506 and CS 2114) or (ECE 2564 and ECE 3574)', pe: ['|', ['&', 'CS 2506', 'CS 2114'], ['&', 'ECE 2564', 'ECE 3574']], un: [], mj: [], n: 0 },
+    { k: 'c', id: 'CS 2506', title: 'Computer Organization II', text: 'CS', pre: 'CS 2505', pe: 'CS 2505', un: ['CS 3214'], mj: [], n: 0 },
+    { k: 'c', id: 'ENGL 1105', title: 'First-Year Writing', text: 'ENGL', un: [], mj: [], n: 0 },
+    { k: 'c', id: 'XX 1000', title: 'Odd One', text: 'XX', pre: 'Junior standing', un: [], mj: [], n: 0 },
+  ]);
+  const yes = E.answer(t, 'I took cs2506 and CS 2114, can I take CS 3214?');
+  assert.equal(yes.intent, 'eligible');
+  assert.ok(yes.checked!.startsWith('Yes. CS 2506 and CS 2114 cover'));
+  assert.equal(yes.related[0]!.doc.id, 'CS 3214');
+  // One of two "and" parts held: the other is still needed, or the whole other branch.
+  const no = E.answer(t, 'I have taken CS 2506. Can I take CS 3214?');
+  assert.equal(no.checked, 'No, not yet. Before CS 3214 Computer Systems you still need CS 2114 or (ECE 2564 and ECE 3574).');
+  assert.ok(no.lines.some((l) => l.includes('not minimum grades')));
+  // The other branch works too, and a course outside the index still counts as held.
+  assert.ok(E.answer(t, 'with ECE 2564 and ECE 3574 am I eligible for CS 3214').checked!.startsWith('Yes'));
+  // No prerequisites listed: yes. Prerequisites the site cannot parse: no verdict, and it says so.
+  assert.ok(E.answer(t, 'I have CS 2506, can I take ENGL 1105').checked!.startsWith('Yes, as far as prerequisites go'));
+  const odd = E.answer(t, 'I have CS 2506, can I take XX 1000');
+  assert.equal(odd.checked, undefined);
+  assert.ok(odd.lines[0]!.includes('cannot check'));
+  // Without a course in hand it stays the plain prerequisite lookup.
+  assert.equal(E.answer(t, 'can I take CS 3214').intent, 'prereq');
+  // The page does not ask the model these: it contradicted the computed answer in testing.
+  assert.ok(ASK_JS.includes("a.intent==='eligible'"));
+});
+
 test('rag guards: off-topic questions skip the model, answers naming unknown courses are rejected', () => {
   for (const q of ['best professor for calculus', 'is CS 3214 hard', 'easiest pathways class', 'average grade in MATH 2114']) assert.ok(RAG_OFF_TOPIC.test(q), q);
   for (const q of ['what do I need before CS 3214', 'which majors require PHYS 2305', 'when do CS majors take CS 2114']) assert.ok(!RAG_OFF_TOPIC.test(q), q);

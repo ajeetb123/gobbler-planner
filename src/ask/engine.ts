@@ -13,6 +13,9 @@
 // Everything lives inside askEngine() and uses nothing outside it: ask-page.ts ships this function's source to
 // the browser with toString(), so the tested code and the code users run are the same. Do not use imports in it.
 
+/** Prerequisites as a tree: a course code, or ['&', ...] (all of) / ['|', ...] (one of). Same shape as plan/prereq.ts. */
+export type AskExpr = string | ['&' | '|', ...AskExpr[]];
+
 /** One retrievable thing: a course or a degree plan. `title` and `text` are searched; the rest are facts to answer from. */
 export interface AskDoc {
   /** 'c' = course, 'p' = degree plan. */
@@ -25,6 +28,8 @@ export interface AskDoc {
   // Course facts
   pre?: string;
   co?: string;
+  /** `pre` parsed into a tree, when the catalog text is a clean and/or list. Used to check "can I take it" exactly. */
+  pe?: AskExpr;
   /** Courses that list this one as a prerequisite or corequisite. */
   un?: string[];
   /** Plans that include this course: [slug, name]. `n` is the full count (the list is capped). */
@@ -53,9 +58,11 @@ export interface AskIndex {
 export interface AskHit { doc: AskDoc; score: number }
 export interface AskSource { label: string; href: string; external?: boolean }
 export interface AskAnswer {
-  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'none'. */
+  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'none'. */
   intent: string;
   lines: string[];
+  /** A yes or no worked out by code for "can I take X with what I have". The page never asks the language model these. */
+  checked?: string;
   sources: AskSource[];
   /** Other close matches, so a wrong guess is easy to correct. */
   related: AskHit[];
@@ -152,6 +159,22 @@ export function askEngine() {
     ...(d.mj || []).slice(0, 3).map(([slug, name]) => ({ label: `${name} plan`, href: `plan/${slug}.html` })),
   ];
 
+  // ---- 5a. "can I take it": evaluate a prerequisite tree against the courses the student lists ----
+  /** The course being asked about is the code right after one of these phrases; every other code in the question is one they have. */
+  const TARGET = /\b(?:can i (?:take|enroll in|register for|get into)|could i take|able to take|eligible (?:for|to take)|ready (?:for|to take)|(?:need|missing|left) (?:for|before|to take))\s+([a-z]{2,4})[\s-]?(\d{4}h?)\b/;
+  const evE = (e: AskExpr, has: (c: string) => boolean): boolean =>
+    typeof e === 'string' ? has(e) : e[0] === '&' ? e.slice(1).every((x) => evE(x as AskExpr, has)) : e.slice(1).some((x) => evE(x as AskExpr, has));
+  /** What is still missing, as a smaller tree. null = nothing. An "or" group is met by any one branch; an "and" group keeps only its unmet parts. */
+  const rest = (e: AskExpr, has: (c: string) => boolean): AskExpr | null => {
+    if (typeof e === 'string') return has(e) ? null : e;
+    const parts = e.slice(1).map((x) => rest(x as AskExpr, has));
+    if (e[0] === '|') return parts.some((p) => p === null) ? null : ['|', ...(parts as AskExpr[])];
+    const left = parts.filter((p) => p !== null) as AskExpr[];
+    return left.length === 0 ? null : left.length === 1 ? left[0]! : ['&', ...left];
+  };
+  const show = (e: AskExpr, top = true): string =>
+    typeof e === 'string' ? e : (top ? '' : '(') + e.slice(1).map((x) => show(x as AskExpr, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
+
   function answer(ix: AskIndex, query: string): AskAnswer {
     const q = query.trim();
     const related = search(ix, q, 6);
@@ -167,6 +190,28 @@ export function askEngine() {
     const planTitle = bestPlan ? tokenize(bestPlan.doc.title) : [];
     const namesPlan = !intent && tokenize(q).length > 0 && tokenize(q).every((t) => planTitle.includes(t));
     const planFirst = !coded[0] && bestPlan && (intent === 'credits' || intent === 'year' || namesPlan || !bestCourse || bestPlan.score >= bestCourse.score);
+
+    // "I have taken CS 2506. Can I take CS 3214?": the course asked about, plus what the student already has.
+    // Worked out here from the and/or tree, exactly. A small language model gets this wrong: in testing it said
+    // yes to all 16 such questions, 8 of which were no (see skills.md).
+    const ask = TARGET.exec(q.toLowerCase());
+    const target = ask ? ix.docs[ix.byCode[ask[1]! + ask[2]!] ?? -1] : undefined;
+    const held = [...new Set(words(q).filter((w) => /^[a-z]{2,4}\d{4}h?$/.test(w)).map((w) => w.replace(/^([a-z]+)/, '$1 ').toUpperCase()))].filter((c) => c !== target?.id);
+    if (target && held.length) {
+      const name = `${target.id} ${target.title}`;
+      const has = (c: string) => held.includes(c);
+      const first = !target.pre ? `Yes, as far as prerequisites go: the catalog lists none for ${name}.`
+        : !target.pe ? ''
+        : evE(target.pe, has) ? `Yes. ${held.join(' and ')} cover${held.length === 1 ? 's' : ''} the prerequisites the catalog lists for ${name}.`
+        : `No, not yet. Before ${name} you still need ${show(rest(target.pe, has)!)}.`;
+      const lines = [
+        first || `This site cannot check ${name} automatically: its prerequisites are not written as a plain and/or list.`,
+        ...(target.pre ? [`Its listed prerequisites: ${target.pre}.`] : []),
+        ...(target.co ? [`Corequisites (same term or earlier): ${target.co}.`] : []),
+        'This checks listed course prerequisites only, not minimum grades, placement scores or major restrictions.',
+      ];
+      return { intent: 'eligible', lines, sources: courseSources(target), related: [{ doc: target, score: Infinity }, ...related.filter((h) => h.doc !== target)], ...(first ? { checked: first } : {}) };
+    }
 
     // "Is CS 3114 required for Computer Engineering?": a course AND a plan. Answer yes or no from the plan's own terms.
     if (coded[0] && bestPlan && intent === 'majors' && bestPlan.score > 2) {
