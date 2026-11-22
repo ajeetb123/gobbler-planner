@@ -1,4 +1,4 @@
-// The site's look (7th pass, Nov 2026): clean and polished. White background, soft rounded surfaces, real buttons
+// The site's look (7th pass, Nov 2026; recolored to maroon and orange at the owner's request): clean and polished. White background, soft rounded surfaces, real buttons
 // with icons, each term tinted by season (fall amber, spring green, summer blue), a product-style home page.
 // Appended after CSS in render.ts, so it wins the cascade. Light is the default; <html data-theme="dark"> switches.
 // Fonts are self-hosted from assets/fonts: Bricolage Grotesque (headings), Schibsted Grotesk (text),
@@ -23,15 +23,15 @@ export const THEME_CSS = `
 @font-face{font-family:"Schibsted Grotesk";src:url(fonts/schibsted-grotesk.woff2) format("woff2");font-weight:400 900;font-display:swap}
 @font-face{font-family:"Martian Mono";src:url(fonts/martian-mono.woff2) format("woff2");font-weight:100 800;font-display:swap}
 :root{--display:"Bricolage Grotesque","Trebuchet MS",sans-serif;--font:"Schibsted Grotesk","Trebuchet MS",sans-serif;--mono:"Martian Mono",ui-monospace,Menlo,monospace;
---paper:#fff;--bg2:#f6f7fb;--sheet:#fff;--soft:#f1f3f9;--lift:#fff;--ink:#131a2e;--mut:#667091;--rule:#e3e7f0;--acc:#3757f5;--acc-d:#2742d1;--acc-soft:#eaeeff;--acc2:#12b886;--onacc:#fff;
---ok:#0f9d6b;--bad:#e0453a;--amber:#b7791f;--warn:#fff8e6;--band:#dfe6ff;
+--paper:#fff;--bg2:#f8f6f4;--sheet:#fff;--soft:#f3efec;--lift:#fff;--ink:#231a1d;--mut:#75686c;--rule:#e9e2df;--acc:#861f41;--acc-d:#6a1733;--acc-soft:#f9ecf0;--acc2:#e5751f;--onacc:#fff;
+--ok:#0f9d6b;--bad:#e0453a;--amber:#b7791f;--warn:#fff8e6;--band:#f6dbe3;
 --fall:#fff6e9;--fall-b:#f6d9a8;--fall-t:#a35a00;--spring:#eafaf1;--spring-b:#b5e6cb;--spring-t:#0b7a4d;--summer:#eaf4ff;--summer-b:#b9d8f8;--summer-t:#1362b0;
---ga:#1c2f8f;--gb:#3757f5;--gc:#9aaafb;--gd:#d5dcfe;--gf:#f0a58f;--gw:#c8cedd;
+--ga:#5a1029;--gb:#861f41;--gc:#d391a6;--gd:#f1d5dd;--gf:#f0a58f;--gw:#c8cedd;
 --sh1:0 1px 2px rgba(19,26,46,.06),0 1px 3px rgba(19,26,46,.05);--sh2:0 6px 16px rgba(19,26,46,.08),0 2px 4px rgba(19,26,46,.05);--shadow:0 18px 50px rgba(19,26,46,.18);color-scheme:light}
-:root[data-theme=dark]{--paper:#0f131c;--bg2:#141925;--sheet:#1a2030;--soft:#222a3c;--lift:#1e2536;--ink:#eef1f8;--mut:#9aa4c0;--rule:#2b344a;--acc:#6f8bff;--acc-d:#8ea4ff;--acc-soft:#232e55;--acc2:#3ddc97;--onacc:#0f131c;
---ok:#3ddc97;--bad:#ff7d73;--amber:#f2c063;--warn:#2b2513;--band:#27336a;
+:root[data-theme=dark]{--paper:#0f131c;--bg2:#141925;--sheet:#1a2030;--soft:#222a3c;--lift:#1e2536;--ink:#eef1f8;--mut:#9aa4c0;--rule:#2b344a;--acc:#f08a3c;--acc-d:#ffa25c;--acc-soft:#3a2416;--acc2:#d9668a;--onacc:#0f131c;
+--ok:#3ddc97;--bad:#ff7d73;--amber:#f2c063;--warn:#2b2513;--band:#4a2c18;
 --fall:#2a2217;--fall-b:#5c4420;--fall-t:#f2b866;--spring:#162a22;--spring-b:#24553f;--spring-t:#62dba4;--summer:#152536;--summer-b:#234b73;--summer-t:#7bbcf5;
---ga:#c5d0ff;--gb:#6f8bff;--gc:#4458b8;--gd:#2c3877;--gf:#a8674a;--gw:#4b5468;
+--ga:#ffd2b0;--gb:#f08a3c;--gc:#a85a26;--gd:#5c3318;--gf:#a8674a;--gw:#4b5468;
 --sh1:0 1px 2px rgba(0,0,0,.4);--sh2:0 6px 16px rgba(0,0,0,.4);--shadow:0 18px 50px rgba(0,0,0,.6);color-scheme:dark}
 html{background:var(--paper)}body{font-family:var(--font);background:var(--paper);background-image:none;color:var(--ink);font-size:15.5px;line-height:1.55;letter-spacing:0}
 h1,h2,h3,.lede,.term h3,.cols h3,.paths b,.brand,.hero h1{font-family:var(--display);letter-spacing:-.015em}
@@ -69,7 +69,7 @@ a.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none}a.btn.
 /* home */
 .hero{padding:28px 0 20px}.hero.split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}.hero h1{font-size:clamp(2.6rem,5.4vw,4.2rem);font-weight:800;line-height:1.02;max-width:none;letter-spacing:-.03em}.hero h1 em{font-style:normal;color:var(--acc);background:none;padding:0}.hero p{font-size:1.12rem;color:var(--mut);max-width:48ch;margin:1em 0 0}
 .hero .facts{display:flex;border:0;grid-template-columns:none}.hero .facts>div{border:0;padding:0;margin:0}.side .hint{border:0;padding:0;text-align:left}.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.facts{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;color:var(--mut);font-size:.88rem}.facts b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--ink);line-height:1.1}
-.mock{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:22px;box-shadow:var(--shadow);padding:16px;transform:rotate(1.2deg)}.mock:before{content:"";position:absolute;inset:-28px -18px -22px 30px;border-radius:32px;background:linear-gradient(135deg,var(--acc-soft),var(--spring));z-index:-1;transform:rotate(-3deg)}
+.mock{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:22px;box-shadow:var(--shadow);padding:16px;transform:rotate(1.2deg)}.mock:before{content:"";position:absolute;inset:-28px -18px -22px 30px;border-radius:32px;background:linear-gradient(135deg,var(--acc-soft),#fdebd9);z-index:-1;transform:rotate(-3deg)}
 .mock .mt{display:flex;gap:6px;margin-bottom:12px}.mock .mt i{width:10px;height:10px;border-radius:50%;background:var(--rule)}.mock .mg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mock .mc{border-radius:14px;padding:10px;border:1px solid}.mock .mc b{display:block;font-size:.8rem;font-weight:700;margin-bottom:8px}
 .mock .mi{display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:9px;padding:8px 9px;margin-top:6px;font-size:.76rem;color:var(--mut);box-shadow:var(--sh1);border-left:4px solid var(--c)}.mock .mi u{text-decoration:none;font-family:var(--mono);font-size:.62rem;font-weight:700;color:var(--ink)}.mock .mp{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.76rem;color:var(--mut)}.mock .mp i{flex:1;height:8px;border-radius:99px;background:var(--soft);overflow:hidden;display:block}.mock .mp i:after{content:"";display:block;width:38%;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
 .paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;border-top:0;margin-top:44px}.paths a,.paths a+a{display:block;border:1px solid var(--rule);border-radius:18px;background:var(--sheet);padding:20px 22px;color:var(--ink);text-decoration:none;box-shadow:var(--sh1);transition:transform .15s,box-shadow .15s,border-color .15s}.paths a:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--acc);color:var(--ink)}.paths b{display:block;font-size:1.15rem;font-weight:700;margin-bottom:4px}.paths span{color:var(--mut);font-size:.9rem}

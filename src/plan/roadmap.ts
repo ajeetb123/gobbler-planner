@@ -114,7 +114,14 @@ export function parseNoRoadmap(text: string): Array<{ name: string; catalogPath:
 export const credits = (items: PlanItem[]) => items.reduce((a, i) => a + i.credits, 0);
 const subject = (i: PlanItem) => i.code?.split(' ')[0];
 
-export const YEAR_OPTIONS = [3, 3.5, 4, 4.5, 5] as const;
+/**
+ * Plan lengths offered. 2 and 2.5 years put roughly 24 to 30 credits in a term and cannot fit most prerequisite
+ * chains, so they only make sense for students who arrive with a lot of credit (transfer, AP, dual enrollment)
+ * and tick it off as done. The page says so (#fast note).
+ */
+export const YEAR_OPTIONS = [2, 2.5, 3, 3.5, 4, 4.5, 5] as const;
+/** Lengths a student can do from scratch: quality limits in the tests apply to these. */
+export const FULL_LOAD_YEARS = [3, 3.5, 4, 4.5, 5] as const;
 const ORDINAL = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh'];
 
 /** A summer term is planned at half the credits of a Fall or Spring term. */

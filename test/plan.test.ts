@@ -106,7 +106,7 @@ test('planData: grade data is attached to known courses, elective slots stay pla
   assert.equal(elective.g, undefined);
   assert.equal(elective.h, undefined);
   assert.equal(d.total, 123);
-  assert.deepEqual(Object.keys(d.plans).sort(), ['3', '3.5', '4', '4.5', '5']);
+  assert.deepEqual(Object.keys(d.plans).sort(), ['2', '2.5', '3', '3.5', '4', '4.5', '5']);
   assert.equal(d.plans['4']!.length, 8);
   // Every plan length holds every course exactly once.
   for (const p of Object.values(d.plans)) assert.equal(p.flatMap((t) => t.ids).length, Object.keys(d.items).length);

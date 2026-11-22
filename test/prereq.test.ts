@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { readdirSync } from 'node:fs';
-import { byCollege, credits, parseNoRoadmap, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
+import { byCollege, credits, FULL_LOAD_YEARS, parseNoRoadmap, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
 import { checkItems, parseExpr, parsePrereqs, planIssues } from '../src/plan/prereq.ts';
 import { doubleMajor, switchCost, type SwitchItem } from '../src/plan/switch.ts';
 import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
@@ -89,6 +89,9 @@ test('repack with prerequisites: few conflicts left, every course kept, loads st
     for (const y of YEAR_OPTIONS) {
       const terms = repack(r, y, check);
       assert.equal(terms.flatMap((t) => t.items).length, r.terms.flatMap((t) => t.items).length, `${r.slug} ${y}`);
+      // 2 and 2.5 years are for students who bring in credit: they must hold every course, but the load and
+      // conflict limits only apply to lengths a student can do from scratch.
+      if (!(FULL_LOAD_YEARS as readonly number[]).includes(y)) continue;
       assert.ok(Math.max(...terms.map((t) => credits(t.items))) <= 23, `${r.slug} ${y}: ${terms.map((t) => credits(t.items))}`);
       conflicts += Object.values(planIssues(check, ids(terms), [])).filter((v) => v.late.length || v.coLate.length).length;
     }
