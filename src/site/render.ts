@@ -297,7 +297,7 @@ export function renderIndex(site: Site, links: Links, majors: number): string {
 <p>Real grades for ${num(site.courses.length)} Virginia Tech courses and ${num(site.profs.length)} instructor names, and a planner that lays out your whole degree with those numbers in view.</p>
 <button type="button" class="ask" data-search><span>Search a course, a last name or a major</span><kbd>/</kbd></button></div>
 <div class="paths"><a href="#browse"><b>Look up grades</b><span>See what a course gives, how each instructor compares on one chart, and whether the choice even matters.</span></a>
-<a href="plan/index.html"><b>Plan your degree</b><span>Start from your major's official roadmap. Pick 3 to 5 years, rebalance terms, and tick off what's done. ${majors} majors so far.</span></a></div>
+<a href="plan/index.html"><b>Plan your degree</b><span>Start from your major's official roadmap. Pick 2 to 5 years, rebalance terms, and tick off what's done. ${majors} majors so far.</span></a></div>
 <h2>Most-taken courses</h2><div class="chips">${popular.map((c) => `<a href="course/${links.course.get(c.course)}.html" title="${esc(c.title)}">${esc(c.course)}</a>`).join('')}</div>
 <h2 id="browse">Browse by subject</h2><div class="chips">${subjects.map((s) => `<a href="subject/${esc(s)}.html">${esc(s)}</a>`).join('')}</div>`, site);
 }

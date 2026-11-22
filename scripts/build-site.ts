@@ -43,11 +43,14 @@ write('theme.js', THEME_JS);
 // The in-browser model runtime for Ask's AI answers (WebLLM, Apache-2.0), served from our own site so no script
 // comes from another server. It is only fetched when a visitor turns AI answers on.
 const webllm = 'node_modules/@mlc-ai/web-llm/lib/index.js';
-if (existsSync(webllm)) { mkdirSync(join(OUT, 'vendor'), { recursive: true }); copyFileSync(webllm, join(OUT, 'vendor', 'web-llm.js')); }
+if (existsSync(webllm)) { mkdirSync(join(OUT, 'vendor'), { recursive: true }); copyFileSync(webllm, join(OUT, 'vendor', 'web-llm.js'));
+  // Apache-2.0 asks that a copy of the license travel with the library.
+  copyFileSync('node_modules/@mlc-ai/web-llm/LICENSE', join(OUT, 'vendor', 'web-llm.LICENSE.txt')); }
 else console.warn('web-llm is not installed (run npm ci): AI answers on the Ask page will not load.');
 // Self-hosted fonts (assets/fonts, open licenses): copied as they are.
 mkdirSync(join(OUT, 'fonts'), { recursive: true });
-for (const f of readdirSync('assets/fonts').filter((x) => x.endsWith('.woff2'))) copyFileSync(join('assets/fonts', f), join(OUT, 'fonts', f));
+// The font licenses (SIL Open Font License) ship next to the fonts, as the license asks.
+for (const f of readdirSync('assets/fonts').filter((x) => x.endsWith('.woff2') || x.endsWith('.LICENSE.txt'))) copyFileSync(join('assets/fonts', f), join(OUT, 'fonts', f));
 write('app.js', APP_JS);
 const roadmaps = readdirSync('data/roadmaps').filter((f) => f.endsWith('.txt')).sort()
   .flatMap((f) => parseRoadmaps(readFileSync(join('data/roadmaps', f), 'utf8')));
