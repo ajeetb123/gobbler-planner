@@ -7,11 +7,11 @@ import type { Site } from './model.ts';
 
 /**
  * The language model for AI answers, run in the visitor's browser by WebLLM (WebGPU). Two builds of the same
- * model: 16-bit when the graphics card supports it (smaller, faster), 32-bit otherwise. About 0.9 to 1.1 GB.
+ * model: 16-bit when the graphics card supports it (smaller, faster), 32-bit otherwise. About 1.8 to 2 GB; the 1B model was tried first and was wrong too often (see skills.md).
  * Ids come from the library's own list (node_modules/@mlc-ai/web-llm, prebuiltAppConfig).
  */
-export const MODEL_F16 = 'Llama-3.2-1B-Instruct-q4f16_1-MLC';
-export const MODEL_F32 = 'Llama-3.2-1B-Instruct-q4f32_1-MLC';
+export const MODEL_F16 = 'Llama-3.2-3B-Instruct-q4f16_1-MLC';
+export const MODEL_F32 = 'Llama-3.2-3B-Instruct-q4f32_1-MLC';
 
 export const EXAMPLES = [
   'What do I need before CS 3214?',
@@ -39,7 +39,7 @@ const box=el('div','ans');a.lines.forEach(l=>box.append(el('p',null,l)));out.app
 if(a.sources.length){const s=el('p','mut','Sources: ');a.sources.forEach((x,i)=>{const l=el('a',null,x.label+(x.external?' \\u2197':''));l.href=x.external?x.href:root+x.href;if(x.external){l.target='_blank';l.rel='noopener noreferrer'}s.append(l,i<a.sources.length-1?' \\u00b7 ':'')});out.append(s)}
 const rel=a.related.filter(h=>h.score>0);if(rel.length){out.append(el('h2',null,'Closest matches'));const g=el('div','chips');rel.forEach(h=>{const b=el('button',null,h.doc.k==='c'?h.doc.id+' '+h.doc.title:h.doc.title);b.type='button';b.onclick=()=>ask(h.doc.k==='c'?h.doc.id:h.doc.title+' plan');g.append(b)});out.append(g)}if(wantAi)aiAnswer(text,a)}
 // ---- AI answers: retrieval-augmented generation with a model that runs in this browser ----
-// Off until the visitor turns it on (it downloads about 1 GB once). The retrieval answer above always shows first;
+// Off until the visitor turns it on (it downloads about 2 GB once). The retrieval answer above always shows first;
 // the model's answer is added under it and is told to use only the retrieved facts.
 let llm=null,loading=null,turn=0;const aiBtn=$('aion'),aiMsg=$('aimsg'),aiBar=$('aibar');
 const aiOn=()=>{try{return localStorage.getItem('gobblerplan:ai')==='on'}catch{return false}};
@@ -50,9 +50,10 @@ const ad=await navigator.gpu.requestAdapter();if(!ad)throw new Error('No graphic
 aiBar.parentElement.hidden=false;aiMsg.textContent='Loading the model library\u2026';
 // A dynamic import needs a full or ./-style address: a bare 'vendor/...' is rejected as a module name.
 const lib=await import(new URL(root+'vendor/web-llm.js'+VER,location.href).href);
-llm=await lib.CreateMLCEngine(ad.features.has('shader-f16')?'${MODEL_F16}':'${MODEL_F32}',{initProgressCallback:p=>{const pct=Math.round((p.progress||0)*100);aiBar.style.width=pct+'%';aiMsg.textContent='Getting the model ready: '+pct+'%. The first time downloads about 1 GB; after that it starts from your browser\u2019s storage.'}});
+llm=await lib.CreateMLCEngine(ad.features.has('shader-f16')?'${MODEL_F16}':'${MODEL_F32}',{initProgressCallback:p=>{const pct=Math.round((p.progress||0)*100);aiBar.style.width=pct+'%';aiMsg.textContent='Getting the model ready: '+pct+'%. The first time downloads about 2 GB; after that it starts from your browser\u2019s storage.'}});
 aiBar.parentElement.hidden=true;aiMsg.textContent='AI answers are on. The model runs in your browser; your question is not sent anywhere.';return llm})();
-loading.catch(e=>{loading=null;aiBar.parentElement.hidden=true;aiMsg.textContent=e&&e.message?e.message:'The model could not be loaded.'});return loading}
+// A failed load switches the toggle back off, so one press tries again.
+loading.catch(e=>{loading=null;aiBar.parentElement.hidden=true;try{localStorage.setItem('gobblerplan:ai','off')}catch{}aiLabel();const m=e&&e.message?e.message:'';aiMsg.textContent=/network|fetch|Cache/i.test(m)?'The download was interrupted. Press the button to try again; the parts already downloaded are usually kept.':m||'The model could not be loaded.'});return loading}
 async function aiAnswer(text,a){const mine=++turn,box=el('div','ans aians'),head=el('p','mut','AI answer \u00b7 written in your browser from the facts above \u00b7 can be wrong, check the sources'),body=el('p',null,'Thinking\u2026');box.append(head,body);out.querySelector('.ans').after(box);
 if(OFF_TOPIC.test(text)){body.textContent='The facts here cover prerequisites, what a course unlocks and degree plans. They say nothing about professors, grades or how hard a course is, so the model is not asked.';return}
 try{const e=await loadModel();if(mine!==turn)return;const msgs=ragMessages(text,a.related.slice(0,4).map(h=>h.doc));const stream=await e.chat.completions.create({messages:msgs,stream:true,temperature:0,max_tokens:160});let got='';
@@ -71,7 +72,7 @@ export function renderAsk(site?: Site): string {
     `<div class="hero"><h1>Ask about <em>courses and majors</em>.</h1><p>Type a question. The answer is put together from catalog facts this site already holds, and it names its sources.</p></div>
 <form id="aform" class="askf" role="search"><input class="sel" id="aq" type="search" placeholder="For example: what do I need before CS 3214?" aria-label="Your question" autocomplete="off"><button type="submit" class="btn">Ask</button></form>
 <div class="chips">${EXAMPLES.map((x) => `<button type="button" data-q="${x}">${x}</button>`).join('')}</div>
-<div class="aibox"><button type="button" class="btn" id="aion" aria-pressed="false">Turn on AI answers</button><span class="mut" id="aimsg">Optional. Runs a small language model in your browser to write the answer from the facts found. First use downloads about 1 GB and needs a recent Chrome, Edge or Safari on a laptop or desktop.</span><div class="meter" hidden><i id="aibar" style="width:0"></i></div></div>
+<div class="aibox"><button type="button" class="btn" id="aion" aria-pressed="false">Turn on AI answers</button><span class="mut" id="aimsg">Optional. Runs a small language model in your browser to write the answer from the facts found. First use downloads about 2 GB and needs a recent Chrome, Edge or Safari on a laptop or desktop.</span><div class="meter" hidden><i id="aibar" style="width:0"></i></div></div>
 <noscript><p class="note warn">Ask needs JavaScript.</p></noscript>
 <div id="aout" aria-live="polite"></div>
 <p class="note"><b>How this works.</b> Your question is matched against 2,000 or so courses and degree plans with a search ranking built for this site, and the first answer is assembled by fixed rules from the facts stored for the best match: no AI is involved in that part. If you turn on AI answers, a language model that runs inside your browser also writes a short answer from the same retrieved facts (this is retrieval-augmented generation). It is a small model and can still get things wrong. The answer is worked out in your browser. A question that finds no match is saved, with nothing identifying you, so the site can learn to answer it (<a href="about.html#privacy">privacy</a>). It can pick the wrong course or major, so check "Closest matches" and the catalog link, and ask your advisor before you rely on it.</p>`, site, 'ask', `<script src="ask.js" defer></script>`);

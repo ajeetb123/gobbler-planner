@@ -83,7 +83,7 @@ test('ask page: script is valid JavaScript, explains what is and is not AI, and 
   const text = renderAsk().replace(/<[^>]+>/g, ' ');
   assert.ok(text.includes('no AI is involved in that part') && text.includes('retrieval-augmented generation'));
   // AI answers are opt-in: the page must say what turning them on costs.
-  assert.ok(text.includes('Turn on AI answers') && text.includes('downloads about 1 GB'));
+  assert.ok(text.includes('Turn on AI answers') && text.includes('downloads about 2 GB'));
   assert.ok(text.includes('Not affiliated with, endorsed by, or sponsored by Virginia Tech'));
   assert.ok(!/\bVT\b|Hokie/.test(text));
 });
