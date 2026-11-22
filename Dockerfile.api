@@ -5,8 +5,10 @@ WORKDIR /app
 COPY package.json ./
 COPY server ./server
 # The database lives in /data. Mount a volume there or the counts are lost when the container is replaced.
-RUN mkdir /data && chown node:node /data
-USER node
+# su-exec lets the start script drop from root to the "node" user (see deploy/api-entrypoint.sh).
+RUN apk add --no-cache su-exec && mkdir /data && chown node:node /data
+COPY deploy/api-entrypoint.sh /usr/local/bin/api-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/api-entrypoint.sh"]
 ENV PORT=3000 DB_PATH=/data/gobbler.db
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD wget -q -O /dev/null http://127.0.0.1:3000/api/healthz || exit 1

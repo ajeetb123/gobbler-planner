@@ -7,3 +7,9 @@ bench
 test
 data/*.csv
 *.md
+.env
+.env.*
+*.db
+docs
+learning
+fly*.toml

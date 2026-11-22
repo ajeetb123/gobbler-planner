@@ -1,0 +1,32 @@
+# Fly.io: the private API (usage counts and the owner's dashboard). Deploy with:  fly deploy -c fly.api.toml
+# No [http_service] on purpose: this app gets no public address. Only the website app reaches it, over Fly's
+# private network at gobbler-plan-api.internal:3000 (see deploy/api-upstream.fly.conf).
+# ADMIN_PASSWORD is a Fly secret, set by the owner:  fly secrets set ADMIN_PASSWORD=... -a gobbler-plan-api
+app = "gobbler-plan-api"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile.api"
+
+[env]
+  PORT = "3000"
+  DB_PATH = "/data/gobbler.db"
+
+# The SQLite file lives on a volume so counts survive deploys. A volume belongs to one machine: run exactly one.
+[mounts]
+  source = "gobbler_data"
+  destination = "/data"
+
+[checks]
+  [checks.health]
+    type = "http"
+    port = 3000
+    method = "GET"
+    path = "/api/healthz"
+    interval = "30s"
+    timeout = "3s"
+    grace_period = "10s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
