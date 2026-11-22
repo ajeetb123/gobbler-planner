@@ -1,7 +1,7 @@
 {
   "name": "gobbler-plan",
   "version": "1.0.0",
-  "description": "Virginia Tech course and instructor grade estimates with calibrated ranges",
+  "description": "Unofficial degree planner: roadmaps, prerequisite checks, major comparison",
   "directories": {
     "test": "test"
   },

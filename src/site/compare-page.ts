@@ -92,7 +92,7 @@ F.onchange=()=>{if(T.value===F.value)T.value=D.find(m=>m.slug!==F.value).slug;fi
 
 export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseInfo>, site?: Site): string {
   const json = JSON.stringify(packCompare(compareData(roadmaps, courses))).replace(/</g, '\\u003c');
-  return layout(`Switch majors · ${brand(site)}`, 'See what carries over when you switch between Virginia Tech majors, and how many credits are left.', '../',
+  return layout(`Switch majors · ${brand(site)}`, 'See what carries over when you switch between majors, and how many credits are left.', '../',
     `<a href="index.html">Degree planner</a>`,
     `<h1>Switch majors, or add one</h1><p class="sub">See what carries over if you switch, or what a second major adds.</p>
 <div class="ctl"><div class="seg" id="mode" role="group" aria-label="What to compare"><button type="button" data-m="switch" aria-pressed="true">Switch majors</button><button type="button" data-m="double" aria-pressed="false">Double major</button></div></div>

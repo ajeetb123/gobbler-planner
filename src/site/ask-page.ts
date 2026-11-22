@@ -70,7 +70,7 @@ document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>
 const start=new URLSearchParams(location.hash.slice(1)).get('q');if(start)ask(start);else q.focus()})();`;
 
 export function renderAsk(site?: Site): string {
-  return layout(`Ask · ${brand(site)}`, 'Ask about Virginia Tech course prerequisites, what a course unlocks, and which majors need it. Answers come from catalog facts.', '', '',
+  return layout(`Ask · ${brand(site)}`, 'Ask about course prerequisites, what a course unlocks, and which majors need it. Answers come from catalog facts.', '', '',
     `<div class="hero"><h1>Ask about <em>courses and majors</em>.</h1><p>Type a question. The answer is put together from catalog facts this site already holds, and it names its sources.</p></div>
 <form id="aform" class="askf" role="search"><input class="sel" id="aq" type="search" placeholder="For example: what do I need before CS 3214?" aria-label="Your question" autocomplete="off"><button type="submit" class="btn">Ask</button></form>
 <div class="chips">${EXAMPLES.map((x) => `<button type="button" data-q="${x}">${x}</button>`).join('')}</div>

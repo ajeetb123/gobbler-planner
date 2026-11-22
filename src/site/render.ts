@@ -23,7 +23,7 @@ export function slugs(keys: string[]): Map<string, string> {
   return out;
 }
 
-/** Virginia Tech's school id on RateMyProfessors (checked Nov 14, 2026). */
+/** The school's id on RateMyProfessors (checked Nov 14, 2026). */
 export const RMP_SCHOOL_ID = 1349;
 /**
  * Link to a RateMyProfessors search for this last name at VT. A search, not a profile: the grade
@@ -149,17 +149,17 @@ export const UDC_URL = 'https://udc.vt.edu/irdata/data/courses/grades';
 export const RMP_SCHOOL_URL = `https://www.ratemyprofessors.com/school/${RMP_SCHOOL_ID}`;
 /** Site name. Without grade data (`site` undefined) the build is the planner alone. */
 export const brand = (site?: Site) => (site ? 'Gobbler Grades' : 'Gobbler Plan');
-/** Shown on every page. The site may name Virginia Tech to say what it covers, never to suggest it speaks for the university. */
+/** Shown on every page. The site does not name the university at all (owner's decision, Nov 22, 2026: its licensing rules ask for written permission to use the name on a website). */
 /** What the site records, in one place so every page says the same thing. Keep in step with server/app.ts and server/db.ts. */
 export const PRIVACY = 'Your plan stays in your browser. The site counts page views and feature use anonymously: no names, no accounts, no cookies, and no address is stored. Turn on Do Not Track or Global Privacy Control in your browser and nothing is counted.';
-export const DISCLAIMER = 'An independent student project. Not affiliated with, endorsed by, or sponsored by Virginia Tech.';
+export const DISCLAIMER = 'An independent student project. Not affiliated with, endorsed by, or sponsored by any university.';
 
 export function layout(title: string, desc: string, root: string, crumb: string, body: string, site?: Site, tab: Tab = 'grades', extraScript = ''): string {
   const cur = (t: Tab) => (t === tab ? ' aria-current="page"' : '');
   const nav = `${site ? `<a href="${root}index.html"${cur('grades')}>Grades</a>` : ''}<a href="${root}plan/index.html"${cur('plan')}>Degree planner</a><a href="${root}plan/compare.html"${cur('switch')}>Switch majors</a><a href="${root}ask.html"${cur('ask')}>Ask</a>`;
   const source = site
-    ? `Source: Virginia Tech University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. ${DISCLAIMER} Not affiliated with RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.`
-    : `Roadmaps and prerequisites come from the Virginia Tech 2026-2027 Academic Catalog. This is a planning aid, not a degree audit: confirm your plan with your advisor and the university's own planning tools. ${DISCLAIMER} <a href="${root}about.html">How it works</a>.`;
+    ? `Source: University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. ${DISCLAIMER} Not affiliated with RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.`
+    : `Roadmaps and prerequisites come from the university's 2026-2027 Academic Catalog. This is a planning aid, not a degree audit: confirm your plan with your advisor and the university's own planning tools. ${DISCLAIMER} <a href="${root}about.html">How it works</a>.`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg transform='translate(16 26)'%3E%3Cellipse rx='3.8' ry='11' cy='-11' fill='%23f3b27a' transform='rotate(-62)'/%3E%3Cellipse rx='3.8' ry='12' cy='-12' fill='%23e5751f' transform='rotate(-31)'/%3E%3Cellipse rx='3.8' ry='13' cy='-13' fill='%23861f41'/%3E%3Cellipse rx='3.8' ry='12' cy='-12' fill='%23e5751f' transform='rotate(31)'/%3E%3Cellipse rx='3.8' ry='11' cy='-11' fill='%23f3b27a' transform='rotate(62)'/%3E%3Ccircle r='5' cy='-1' fill='%233b0f1d'/%3E%3C/g%3E%3C/svg%3E"><meta name="description" content="${esc(desc)}"><link rel="stylesheet" href="${root}style.css"><script src="${root}theme.js"></script></head><body data-root="${root}">
 <header class="top"><a class="brand" href="${root}index.html"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><g transform="translate(16 25)"><ellipse rx="3.6" ry="11" cy="-11" fill="#f3b27a" transform="rotate(-62)"/><ellipse rx="3.6" ry="12" cy="-12" fill="#e5751f" transform="rotate(-31)"/><ellipse rx="3.6" ry="13" cy="-13" fill="#861f41"/><ellipse rx="3.6" ry="12" cy="-12" fill="#e5751f" transform="rotate(31)"/><ellipse rx="3.6" ry="11" cy="-11" fill="#f3b27a" transform="rotate(62)"/><circle r="5" cy="-1" fill="#3b0f1d"/></g></svg>${brand(site)}</a>
@@ -276,14 +276,14 @@ ${mix(x.dist)}<p><b>${bOrBetter(x.dist).toFixed(0)}%</b> of ${num(x.dist.student
 <div class="lanes">${axis(false)}
 ${lanes}</div>
 <p class="mut">The RateMyProfessors search can return several people with this last name: match the department and first name.</p>`;
-  return layout(`${p.name} (${p.subject}) grades · ${brand(site)}`, `Grades given by ${p.name} in ${p.subject} at Virginia Tech, by course, from official grade data.`, '../',
+  return layout(`${p.name} (${p.subject}) grades · ${brand(site)}`, `Grades given by ${p.name} in ${p.subject} by course, from official grade data.`, '../',
     `<a href="../index.html">Grades</a> / <a href="../subject/${esc(p.subject)}.html">${esc(p.subject)}</a>`, body, site);
 }
 
 export function renderSubject(subject: string, site: Site, links: Links): string {
   const cs = site.courses.filter((c) => c.subject === subject);
   const ps = site.profs.filter((p) => p.subject === subject).sort((a, b) => a.name.localeCompare(b.name));
-  return layout(`${subject} courses and instructors · ${brand(site)}`, `Grades for ${subject} courses at Virginia Tech.`, '../', `<a href="../index.html">Grades</a>`,
+  return layout(`${subject} courses and instructors · ${brand(site)}`, `Grades for ${subject} courses.`, '../', `<a href="../index.html">Grades</a>`,
     `<h1>${esc(subject)}</h1><p class="sub">${plural(cs.length, 'course')}, ${plural(ps.length, 'instructor name')}</p>
 <h2>Courses</h2><p class="mut">Strip = grade mix over the last 4 offered terms. Number = GPA given.</p><div class="rows">${cs.map((c) => `<a href="../course/${links.course.get(c.course)}.html"><span class="c">${esc(c.course)}</span><span class="t">${esc(c.title)}</span>${mix(c.dist, false)}<span class="val">${c.dist.gpa.toFixed(2)}</span></a>`).join('')}</div>
 <h2>Instructors</h2><ul class="plain cols">${ps.map((p) => `<li><a href="../prof/${links.prof.get(p.key)}.html">${esc(p.name)}</a>${p.ambiguous ? ' ⚠' : ''}</li>`).join('')}</ul>`, site);
@@ -292,9 +292,9 @@ export function renderSubject(subject: string, site: Site, links: Links): string
 export function renderIndex(site: Site, links: Links, majors: number): string {
   const subjects = [...new Set(site.courses.map((c) => c.subject))].sort();
   const popular = [...site.courses].sort((a, b) => b.students - a.students).slice(0, 12).sort((a, b) => a.course.localeCompare(b.course, 'en', { numeric: true }));
-  return layout(`${brand(site)}: unofficial Virginia Tech grades and degree planner`, 'Grades by course and instructor from official Virginia Tech data, plus a degree planner built on the official roadmaps.', '', '',
+  return layout(`${brand(site)}: unofficial grades and degree planner`, 'Grades by course and instructor from official university data, plus a degree planner built on the official roadmaps.', '', '',
     `<div class="hero"><h1>Know the class <em>before</em> you take it.</h1>
-<p>Real grades for ${num(site.courses.length)} Virginia Tech courses and ${num(site.profs.length)} instructor names, and a planner that lays out your whole degree with those numbers in view.</p>
+<p>Real grades for ${num(site.courses.length)} courses and ${num(site.profs.length)} instructor names, and a planner that lays out your whole degree with those numbers in view.</p>
 <button type="button" class="ask" data-search><span>Search a course, a last name or a major</span><kbd>/</kbd></button></div>
 <div class="paths"><a href="#browse"><b>Look up grades</b><span>See what a course gives, how each instructor compares on one chart, and whether the choice even matters.</span></a>
 <a href="plan/index.html"><b>Plan your degree</b><span>Start from your major's official roadmap. Pick 2 to 5 years, rebalance terms, and tick off what's done. ${majors} majors so far.</span></a></div>
@@ -304,13 +304,13 @@ export function renderIndex(site: Site, links: Links, majors: number): string {
 
 export function renderAbout(site: Site): string {
   const p = site.params;
-  return layout(`How it works · ${brand(site)}`, 'Method and backtest behind the Virginia Tech grade estimates.', '', '',
+  return layout(`How it works · ${brand(site)}`, 'Method and backtest behind the grade estimates.', '', '',
     `<h1>How it works</h1><p class="sub">What each number means, how it was checked, and where it stops.</p>
 <h2>Grade mix, "B or higher", GPA given</h2><p>Plain facts: the grades that were given, added up over the terms named next to them. Withdrawals are shown as a hatched segment.</p>
 <h2>Expected section GPA</h2><p>An estimate of the average GPA of one section next term (${termLabel(site.target)}) under a given instructor name. It is not a prediction of your grade. It differs from the plain GPA in four ways:</p>
 <ul><li>Small samples are pulled toward the course average (prior worth ${p.kIC} students).</li><li>Each term back counts ${p.decay} times the one after it, so recent terms weigh more.</li><li>An instructor's record in other courses is used only when the last name is not flagged as possibly several people.</li><li>The shaded band comes from how far past estimates missed, grouped by amount of history and section size.</li></ul>
 <h2>The compare sentence</h2><p>When you pick two instructors, the page turns their estimates and bands into "would average higher about N times in 10". It treats the two sections as independent and bell-shaped, which is an approximation. Read it as a rough guide.</p>
 <h2>How it was checked</h2><p>Each term from Fall 2022 to Spring 2024 was predicted using only earlier terms: 15,122 undergraduate sections, 579,589 graded students. Average error was 0.185 GPA points against 0.193 for the plain instructor average (3.7% lower, 95% interval 2.8% to 4.6%). The bands contained the real result 79.7% of the time against a target of 80%. For first-time instructor and course pairings nothing beat the course average, and the page says so.</p>
-<h2>The degree planner</h2><p>Roadmaps come from the 2026-2027 Virginia Tech catalog. The 4-year view is the official plan. Other lengths rearrange it and keep each subject's courses in order, but they do not check prerequisites or which term a course is offered.</p>
+<h2>The degree planner</h2><p>Roadmaps come from the university's 2026-2027 catalog. The 4-year view is the official plan. Other lengths rearrange it and keep each subject's courses in order, but they do not check prerequisites or which term a course is offered.</p>
 <h2>Limits</h2><ul><li>Grades are not teaching quality. This says nothing about clarity, fairness or workload. Each instructor links to a RateMyProfessors search for that.</li><li>Last names only: a flagged name may be more than one person.</li><li>Sections with fewer than 5 graded students are missing from the source.</li><li>Next term's instructor assignments are not on this site.</li></ul>`, site, 'about');
 }

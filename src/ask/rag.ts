@@ -24,7 +24,7 @@ export function ragMessages(question: string, docs: AskDoc[]): ChatMessage[] {
     if (d.k === 'c') {
       const parts = [`${d.id} ${d.title}.`, `Prerequisites: ${d.pre || 'none listed'}.`];
       if (d.co) parts.push(`Corequisites: ${d.co}.`);
-      if (d.un && d.un.length) parts.push(`Courses that require it first: ${d.un.slice(0, 10).join(', ')}${d.un.length > 10 ? ' and others' : ''}.`);
+      if (d.un && d.un.length) parts.push(`It unlocks these courses (they require it first): ${d.un.slice(0, 10).join(', ')}${d.un.length > 10 ? ' and others' : ''}.`);
       if (d.n) parts.push(`It is on ${d.n} degree plan${d.n === 1 ? '' : 's'}, such as ${(d.mj || []).slice(0, 4).map((m) => m[1]).join('; ')}.`);
       return parts.join(' ');
     }
@@ -32,7 +32,7 @@ export function ragMessages(question: string, docs: AskDoc[]): ChatMessage[] {
     return `${d.title} degree plan (${d.college}): ${d.total} credits over ${(d.terms || []).length} terms${d.draft ? ', term order suggested by this site' : ''}. ${terms}`;
   };
   const facts = docs.slice(0, 4).map((d, i) => `[${i + 1}] ${clip(fact(d), 700)}`);
-  const system = 'You answer questions for Virginia Tech students using ONLY the facts given. Rules: 1) Answer in one or two short sentences. ' +
+  const system = 'You answer questions for students using ONLY the facts given. Rules: 1) Answer in one or two short sentences. ' +
     '2) End with the fact number in brackets, like [1]. 3) The facts cover only course prerequisites, what a course unlocks, and degree plans. ' +
     'If the question asks about anything else (professors, grades, difficulty, opinions) or the facts do not answer it, reply exactly: ' +
     '"I do not know. Check the catalog or ask your advisor." 4) Never add information that is not in the facts.';
