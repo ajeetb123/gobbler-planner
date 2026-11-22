@@ -187,4 +187,6 @@ h2{text-align:left}.col{font-weight:600;font-size:1.3rem}.majors a,.majors butto
 .panel{top:86px;border-radius:22px}
 @media(max-width:860px){.top{top:8px;margin-top:8px;height:54px}.side{margin:12px;height:auto;position:static}.hero.split{padding:30px 0 0}.hero .facts{gap:22px}.mock{margin-top:36px}}
 @media print{body:before{display:none}.side{margin:0;border:0;box-shadow:none}}
+.aibox{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;max-width:720px;margin:14px 0 4px;padding:12px 14px;border:1px dashed var(--rule);border-radius:14px;background:color-mix(in srgb,var(--sheet) 70%,transparent)}.aibox .mut{flex:1 1 280px;font-size:.84rem;line-height:1.45}.aibox .meter{flex-basis:100%}.aibox .btn[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.aians{border-left:4px solid var(--acc2);margin-top:12px}.aians .mut{font-family:var(--font);font-size:.74rem;font-weight:600;margin:0 0 6px}.aians p:last-child{font-family:var(--font);font-size:1rem;font-weight:400;white-space:pre-wrap}
 `;

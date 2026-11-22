@@ -4,8 +4,9 @@
 
 FROM node:24-alpine AS build
 WORKDIR /app
-# The build script needs no npm packages: Node runs the TypeScript directly.
-COPY package.json ./
+# One runtime package is needed in the image: the in-browser model library, copied into the site by the build.
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 COPY src ./src
 COPY scripts ./scripts
 COPY data ./data

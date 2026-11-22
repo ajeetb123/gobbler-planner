@@ -42,7 +42,11 @@ jobs:
           curl -fsS http://localhost:8080/ | grep -q "Gobbler Plan"
           curl -fsS http://localhost:8080/plan/computer-science.html | grep -q "Not affiliated with, endorsed by, or sponsored by Virginia Tech"
           curl -fsS -o /dev/null http://localhost:8080/plan.js
-          curl -fsS http://localhost:8080/ask.html | grep -q "No AI model is involved"
+          curl -fsS http://localhost:8080/ask.html | grep -q "retrieval-augmented generation"
+          # The model runtime is served from our own site, and only the Ask page may reach the model hosts.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/vendor/web-llm.js)" = "200"
+          curl -sI http://localhost:8080/ask.html | grep -i content-security-policy | grep -q huggingface.co
+          ! curl -sI http://localhost:8080/index.html | grep -i content-security-policy | grep -q huggingface.co
           curl -fsS http://localhost:8080/ask.json | head -c 200 | grep -q '"k":"c"'
           # The image must never carry grade data or grade pages.
           test "$(docker exec web sh -c 'ls /usr/share/nginx/html | grep -c -E "^(course|prof|subject)$"')" = "0"

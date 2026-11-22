@@ -20,10 +20,15 @@
   "author": "",
   "license": "ISC",
   "private": true,
-  "engines": { "node": ">=22.18" },
+  "engines": {
+    "node": ">=22.18"
+  },
   "devDependencies": {
     "@types/node": "^22.20.5",
     "typescript": "^5.9.3"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.89"
+  }
 }

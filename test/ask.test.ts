@@ -2,7 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { askEngine, type AskDoc } from '../src/ask/engine.ts';
 import { baselineRank, docs, engineRank, evaluate, evaluateHandWritten, ix } from '../bench/ask.eval.ts';
-import { ASK_JS, EXAMPLES, renderAsk } from '../src/site/ask-page.ts';
+import { ASK_JS, EXAMPLES, MODEL_F16, MODEL_F32, renderAsk } from '../src/site/ask-page.ts';
+import { ragMessages, RAG_DOCS } from '../src/ask/rag.ts';
+import { readFileSync, existsSync } from 'node:fs';
 
 const E = askEngine();
 const tiny: AskDoc[] = [
@@ -76,10 +78,12 @@ test('real knowledge base: the example questions on the page all get a real answ
   assert.ok(E.answer(ix, 'Is STAT 4714 required for Electrical Engineering?').lines[0]!.startsWith('Yes.'));
 });
 
-test('ask page: script is valid JavaScript, says no AI is involved, and carries the site name rules', () => {
+test('ask page: script is valid JavaScript, explains what is and is not AI, and carries the site name rules', () => {
   assert.doesNotThrow(() => new Function(ASK_JS));
   const text = renderAsk().replace(/<[^>]+>/g, ' ');
-  assert.ok(text.includes('No AI model is involved'));
+  assert.ok(text.includes('no AI is involved in that part') && text.includes('retrieval-augmented generation'));
+  // AI answers are opt-in: the page must say what turning them on costs.
+  assert.ok(text.includes('Turn on AI answers') && text.includes('downloads about 1 GB'));
   assert.ok(text.includes('Not affiliated with, endorsed by, or sponsored by Virginia Tech'));
   assert.ok(!/\bVT\b|Hokie/.test(text));
 });
@@ -91,4 +95,35 @@ test('hand-written student-style questions: the honest score, far below the gene
   // ("easy math class") and two-course questions. The floor only guards against getting worse; do not tune the
   // engine to this list, or it stops measuring anything.
   assert.ok(r.right >= 26, `right: ${r.right}`);
+});
+
+test('ragMessages: numbered facts from retrieval, the lookup result, and firm instructions', () => {
+  const t = E.buildIndex(tiny);
+  const a = E.answer(t, 'what do I need before CS 2114');
+  const [system, user] = ragMessages('what do I need before CS 2114', a.lines, a.related.map((h) => h.doc));
+  assert.equal(system!.role, 'system');
+  assert.ok(system!.content.includes('using only the numbered facts') && system!.content.includes('Never invent'));
+  assert.ok(user!.content.includes('Lookup result: CS 2114 Software Design and Data Structures lists these prerequisites: CS 1114 or CS 2064.'));
+  assert.ok(user!.content.includes('[1] CS 2114 Software Design and Data Structures. Prerequisites: CS 1114 or CS 2064.'));
+  assert.ok(user!.content.endsWith('Question: what do I need before CS 2114'));
+  // Nothing found: the prompt says so instead of leaving the model to guess.
+  const none = ragMessages('zzzz', [], []);
+  assert.ok(none[1]!.content.includes('no direct match') && none[1]!.content.includes('none found'));
+  // Real data: at most RAG_DOCS facts, each clipped, whole prompt small enough for a 4,096-token model.
+  const q = 'which majors require PHYS 2305 and what does it unlock';
+  const real = E.answer(ix, q);
+  const msgs = ragMessages(q, real.lines, real.related.map((h) => h.doc));
+  assert.ok((msgs[1]!.content.match(/^\[\d\] /gm) ?? []).length <= RAG_DOCS);
+  assert.ok(msgs[0]!.content.length + msgs[1]!.content.length < 6000);
+});
+
+test('the model ids exist in the installed library, and the page script uses them', () => {
+  const lib = 'node_modules/@mlc-ai/web-llm/lib/index.js';
+  assert.ok(existsSync(lib), 'run npm ci');
+  const src = readFileSync(lib, 'utf8');
+  for (const id of [MODEL_F16, MODEL_F32]) {
+    assert.ok(src.includes(`model_id: "${id}"`), id);
+    assert.ok(ASK_JS.includes(id));
+  }
+  assert.ok(src.includes('CreateMLCEngine'));
 });

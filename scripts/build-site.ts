@@ -3,7 +3,7 @@
 //      npm run build -- --grades --top 30 (pilot: the 30 most-taken courses)
 // Writes a static site to dist/. UDC has not authorized republishing its grade data, so grades are opt-in.
 import { createHash } from 'node:crypto';
-import { copyFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadUdc } from '../src/grades/udc.ts';
 import { buildSite, termLabel } from '../src/site/model.ts';
@@ -40,6 +40,11 @@ const write = (path: string, html: string) => { writeFileSync(join(OUT, path), h
 setAssetVersion(createHash('sha256').update([CSS, THEME_CSS, THEME_JS, APP_JS, PLAN_JS, COMPARE_JS, ASK_JS].join('\n')).digest('hex').slice(0, 10));
 write('style.css', CSS + THEME_CSS);
 write('theme.js', THEME_JS);
+// The in-browser model runtime for Ask's AI answers (WebLLM, Apache-2.0), served from our own site so no script
+// comes from another server. It is only fetched when a visitor turns AI answers on.
+const webllm = 'node_modules/@mlc-ai/web-llm/lib/index.js';
+if (existsSync(webllm)) { mkdirSync(join(OUT, 'vendor'), { recursive: true }); copyFileSync(webllm, join(OUT, 'vendor', 'web-llm.js')); }
+else console.warn('web-llm is not installed (run npm ci): AI answers on the Ask page will not load.');
 // Self-hosted fonts (assets/fonts, open licenses): copied as they are.
 mkdirSync(join(OUT, 'fonts'), { recursive: true });
 for (const f of readdirSync('assets/fonts').filter((x) => x.endsWith('.woff2'))) copyFileSync(join('assets/fonts', f), join(OUT, 'fonts', f));

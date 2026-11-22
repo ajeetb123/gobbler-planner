@@ -21,7 +21,7 @@ Not affiliated with Virginia Tech.
 - Term-by-term plans for 213 majors and options (128 official roadmaps, 85 drafts built from requirement lists), 3 to 5 years
 - Prerequisite checking with a branch-and-bound scheduler for rearranged plans
 - Switch-major and double-major comparison
-- Ask: retrieval over catalog facts (BM25, typo handling), no AI model
+- Ask: a hand-built BM25 retriever with rule-based answers, plus optional retrieval-augmented generation with a language model that runs in the visitor's browser (WebLLM, WebGPU)
 - A small API with anonymous usage counts and a password-protected dashboard
 
 ## Run in Docker
