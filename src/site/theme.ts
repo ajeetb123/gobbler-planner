@@ -1,3 +1,4 @@
+// Buttons follow the 9th-pass block at the end of THEME_CSS.
 // The site's look (7th pass, Nov 2026; recolored to maroon and orange at the owner's request): clean and polished. White background, soft rounded surfaces, real buttons
 // with icons, each term tinted by season (fall amber, spring green, summer blue), a product-style home page.
 // Appended after CSS in render.ts, so it wins the cascade. Light is the default; <html data-theme="dark"> switches.
@@ -189,4 +190,17 @@ h2{text-align:left}.col{font-weight:600;font-size:1.3rem}.majors a,.majors butto
 @media print{body:before{display:none}.side{margin:0;border:0;box-shadow:none}}
 .aibox{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;max-width:720px;margin:14px 0 4px;padding:12px 14px;border:1px dashed var(--rule);border-radius:14px;background:color-mix(in srgb,var(--sheet) 70%,transparent)}.aibox .mut{flex:1 1 280px;font-size:.84rem;line-height:1.45}.aibox .meter{flex-basis:100%}.aibox .btn[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
 .aians{border-left:4px solid var(--acc2);margin-top:12px}.aians .mut{font-family:var(--font);font-size:.74rem;font-weight:600;margin:0 0 6px}.aians p:last-child{font-family:var(--font);font-size:1rem;font-weight:400;white-space:pre-wrap}
+/* ---- 9th pass: buttons after the owner's reference site. Compact, 8px corners, a hairline border that catches
+   an orange glint on its top-left edge, no lift on hover (the glint spreads instead), and an arrow that slides out and back in. ---- */
+.btn{font-size:.84rem;font-weight:500;letter-spacing:.005em;border-radius:8px;padding:9px 16px;border:1px solid transparent;box-shadow:none;background:linear-gradient(var(--sheet),var(--sheet)) padding-box,radial-gradient(70% 130% at 22% 0%,var(--acc2),var(--rule) 62%) border-box;transition:box-shadow .2s,color .15s,filter .15s}
+.btn:hover{transform:none;border-color:transparent;box-shadow:0 0 0 3px var(--acc-soft);background:linear-gradient(var(--sheet),var(--sheet)) padding-box,radial-gradient(130% 170% at 22% 0%,var(--acc2),var(--rule) 80%) border-box}
+.btn:active{transform:translateY(1px);box-shadow:none}
+.btn:disabled,.btn:disabled:hover{background:var(--sheet);border-color:var(--rule);box-shadow:none;transform:none}
+.acts .btn,.acts .btn:nth-child(2n),.panel .btn,.panel .btn:hover{border:1px solid transparent}
+.btn.pri,.btn.pri:hover,#share,#share:hover,.askf .btn,.askf .btn:hover,.panel .btn.pri,.aibox .btn[aria-pressed=true]{color:#fff;background:linear-gradient(var(--acc),var(--acc)) padding-box,radial-gradient(80% 140% at 22% 0%,var(--acc2),var(--acc-d) 65%) border-box;box-shadow:0 8px 20px -8px color-mix(in srgb,var(--acc) 60%,transparent);filter:none}
+.btn.pri:hover,#share:hover,.askf .btn:hover{box-shadow:0 10px 26px -8px color-mix(in srgb,var(--acc) 75%,transparent),0 0 0 3px var(--acc-soft);filter:brightness(1.07)}
+.btn.big,a.btn.big{border-radius:8px;padding:11px 18px;font-size:.9rem}.btn.big:after{display:inline-block;margin-left:4px;transition:none}.btn.big:hover:after{transform:none;animation:gp-arrow .38s ease}
+@keyframes gp-arrow{0%{transform:translate(0,0);opacity:1}45%{transform:translate(9px,-9px);opacity:0}55%{transform:translate(-9px,9px);opacity:0}100%{transform:translate(0,0);opacity:1}}
+.seg{border-radius:8px}.seg button{border-radius:6px}.sel{border-radius:8px}.icon{border-radius:8px}
+@media(prefers-reduced-motion:reduce){.btn.big:hover:after{animation:none}}
 `;
