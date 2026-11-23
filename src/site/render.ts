@@ -104,35 +104,193 @@ main{padding:20px 16px 110px}.tabs{display:flex;position:fixed;left:0;right:0;bo
  * Compare: two .pick buttons carry an estimate (data-g) and its spread (data-s, from the 80% range);
  * the bar says how often one section would average higher, treating both as independent normals.
  */
-export const APP_JS = `(()=>{const root=document.body.dataset.root,dlg=document.getElementById('pal'),q=document.getElementById('q'),r=document.getElementById('r');let d,sel=0;
-// Anonymous usage counts for the owner's dashboard: an event type, this page's name and a short value. Nothing is
-// sent if the browser asks not to be tracked (Do Not Track or Global Privacy Control), and nothing breaks if no
-// server is listening (the static-only build).
-const page=((location.pathname.split('/').pop()||'index.html').replace(/\\.html$/,'')||'index').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,80)||'index';
-const quiet=navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
-window.gpTrack=(t,v)=>{if(quiet||!navigator.sendBeacon)return;try{navigator.sendBeacon(root+'api/event',new Blob([JSON.stringify({t,p:page,v:v==null?'':String(v).slice(0,120)})],{type:'text/plain'}))}catch{}};
-gpTrack('view');
-const tb=document.getElementById('theme');if(tb)tb.onclick=()=>{const el=document.documentElement,next=(el.dataset.theme||'light')==='dark'?'light':'dark';el.dataset.theme=next;try{localStorage.setItem('gobblerplan:theme',next)}catch{}};
-const open=()=>{if(!dlg.open){dlg.showModal();q.value='';r.textContent='';q.focus()}};
-document.querySelectorAll('[data-search]').forEach(b=>b.addEventListener('click',open));
-document.addEventListener('keydown',e=>{const t=e.target.tagName;if((e.key==='/'&&t!=='INPUT'&&t!=='TEXTAREA')||((e.metaKey||e.ctrlKey)&&e.key==='k')){e.preventDefault();open()}});
-dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-const K={c:'Courses',i:'Instructors',m:'Degree plans'},score=(t,s)=>{const l=t.toLowerCase();return l.startsWith(s)?0:(' '+l).includes(' '+s)?1:l.includes(s)?2:-1};
-const paint=()=>[...r.querySelectorAll('a')].forEach((a,i)=>a.setAttribute('aria-selected',String(i===sel)));
-q.addEventListener('input',async()=>{d??=await(await fetch(root+'search.json')).json();const s=q.value.trim().toLowerCase().replace(/\\s+/g,' ');r.textContent='';sel=0;if(s.length<2)return;
-const hits=[];for(const[t,h,k]of d){const sc=score(t,s);if(sc>=0)hits.push([sc,t,h,k])}hits.sort((a,b)=>a[0]-b[0]);let n=0;
-const best=k=>Math.min(9,...hits.filter(x=>x[3]===k).map(x=>x[0]));for(const k of['c','i','m'].sort((x,y)=>best(x)-best(y))){const g=hits.filter(x=>x[3]===k).slice(0,8);if(!g.length)continue;const h=document.createElement('li');h.className='grp';h.textContent=K[k];r.append(h);
-for(const[,t,href]of g){const li=document.createElement('li'),a=document.createElement('a');a.href=root+href;a.textContent=t;li.append(a);r.append(li);n++}}
-if(!n){const li=document.createElement('li');li.className='grp';li.textContent='No match.';r.append(li)}paint()});
-const mf=document.getElementById('mf');if(mf)mf.addEventListener('input',()=>{const w=mf.value.toLowerCase().split(/\\s+/).filter(Boolean);let any=false;document.querySelectorAll('.majors').forEach(g=>{let n=0;g.querySelectorAll('a').forEach(a=>{const t=a.textContent.toLowerCase(),ok=w.every(x=>t.includes(x));a.hidden=!ok;if(ok)n++});g.hidden=!n;if(g.previousElementSibling&&g.previousElementSibling.classList.contains('col'))g.previousElementSibling.hidden=!n;if(n)any=true});document.getElementById('mfnone').hidden=any});
-q.addEventListener('keydown',e=>{const as=r.querySelectorAll('a');if(e.key==='ArrowDown'){sel=Math.min(sel+1,as.length-1);paint();as[sel]&&as[sel].scrollIntoView({block:'nearest'});e.preventDefault()}else if(e.key==='ArrowUp'){sel=Math.max(sel-1,0);paint();as[sel]&&as[sel].scrollIntoView({block:'nearest'});e.preventDefault()}else if(e.key==='Enter'&&as[sel])location.href=as[sel].href});
-const bar=document.getElementById('cmp'),picks=[];if(!bar)return;
-const phi=x=>{const t=1/(1+.2316419*Math.abs(x)),p=1-Math.exp(-x*x/2)/Math.sqrt(2*Math.PI)*t*(.31938153+t*(-.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>=0?p:1-p};
-document.querySelectorAll('.pick').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const i=picks.indexOf(b);if(i>=0)picks.splice(i,1);else{picks.push(b);if(picks.length>2)picks.shift()}
-document.querySelectorAll('.pick').forEach(x=>x.setAttribute('aria-pressed',String(picks.includes(x))));bar.hidden=!picks.length;
-if(picks.length<2){bar.textContent=picks.length?'Now pick a second one to compare with '+picks[0].dataset.n+'.':'';return}
-let[a,b2]=picks.map(p=>({n:p.dataset.n,g:+p.dataset.g,s:+p.dataset.s}));if(b2.g>a.g)[a,b2]=[b2,a];const gap=a.g-b2.g,t=Math.round(phi(gap/Math.hypot(a.s,b2.s))*10);
-bar.textContent=t<=5||gap<.005?'Too close to call. A section under '+a.n+' and one under '+b2.n+' are expected to land about the same.':'A section under '+a.n+' would average higher than one under '+b2.n+(t>=10?' more than 9':' about '+t)+' times in 10. Expected gap: '+gap.toFixed(2)+' GPA.'}))})();`;
+export const APP_JS = `
+(() => {
+  const root = document.body.dataset.root,
+    dlg = document.getElementById('pal'),
+    q = document.getElementById('q'),
+    r = document.getElementById('r');
+  let d,
+    sel = 0;
+  // Anonymous usage counts for the owner's dashboard: an event type, this page's name and a short value. Nothing is
+  // sent if the browser asks not to be tracked (Do Not Track or Global Privacy Control), and nothing breaks if no
+  // server is listening (the static-only build).
+  const page =
+    ((location.pathname.split('/').pop() || 'index.html').replace(/\\.html$/, '') || 'index')
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, '')
+      .slice(0, 80) || 'index';
+  const quiet = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+  window.gpTrack = (t, v) => {
+    if (quiet || !navigator.sendBeacon) return;
+    try {
+      navigator.sendBeacon(
+        root + 'api/event',
+        new Blob([JSON.stringify({ t, p: page, v: v == null ? '' : String(v).slice(0, 120) })], { type: 'text/plain' }),
+      );
+    } catch {}
+  };
+  gpTrack('view');
+  const tb = document.getElementById('theme');
+  if (tb)
+    tb.onclick = () => {
+      const el = document.documentElement,
+        next = (el.dataset.theme || 'light') === 'dark' ? 'light' : 'dark';
+      el.dataset.theme = next;
+      try {
+        localStorage.setItem('gobblerplan:theme', next);
+      } catch {}
+    };
+  const open = () => {
+    if (!dlg.open) {
+      dlg.showModal();
+      q.value = '';
+      r.textContent = '';
+      q.focus();
+    }
+  };
+  document.querySelectorAll('[data-search]').forEach((b) => b.addEventListener('click', open));
+  document.addEventListener('keydown', (e) => {
+    const t = e.target.tagName;
+    if ((e.key === '/' && t !== 'INPUT' && t !== 'TEXTAREA') || ((e.metaKey || e.ctrlKey) && e.key === 'k')) {
+      e.preventDefault();
+      open();
+    }
+  });
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close();
+  });
+  const K = { c: 'Courses', i: 'Instructors', m: 'Degree plans' },
+    score = (t, s) => {
+      const l = t.toLowerCase();
+      return l.startsWith(s) ? 0 : (' ' + l).includes(' ' + s) ? 1 : l.includes(s) ? 2 : -1;
+    };
+  const paint = () =>
+    [...r.querySelectorAll('a')].forEach((a, i) => a.setAttribute('aria-selected', String(i === sel)));
+  q.addEventListener('input', async () => {
+    d ??= await (await fetch(root + 'search.json')).json();
+    const s = q.value.trim().toLowerCase().replace(/\\s+/g, ' ');
+    r.textContent = '';
+    sel = 0;
+    if (s.length < 2) return;
+    const hits = [];
+    for (const [t, h, k] of d) {
+      const sc = score(t, s);
+      if (sc >= 0) hits.push([sc, t, h, k]);
+    }
+    hits.sort((a, b) => a[0] - b[0]);
+    let n = 0;
+    const best = (k) => Math.min(9, ...hits.filter((x) => x[3] === k).map((x) => x[0]));
+    for (const k of ['c', 'i', 'm'].sort((x, y) => best(x) - best(y))) {
+      const g = hits.filter((x) => x[3] === k).slice(0, 8);
+      if (!g.length) continue;
+      const h = document.createElement('li');
+      h.className = 'grp';
+      h.textContent = K[k];
+      r.append(h);
+      for (const [, t, href] of g) {
+        const li = document.createElement('li'),
+          a = document.createElement('a');
+        a.href = root + href;
+        a.textContent = t;
+        li.append(a);
+        r.append(li);
+        n++;
+      }
+    }
+    if (!n) {
+      const li = document.createElement('li');
+      li.className = 'grp';
+      li.textContent = 'No match.';
+      r.append(li);
+    }
+    paint();
+  });
+  const mf = document.getElementById('mf');
+  if (mf)
+    mf.addEventListener('input', () => {
+      const w = mf.value.toLowerCase().split(/\\s+/).filter(Boolean);
+      let any = false;
+      document.querySelectorAll('.majors').forEach((g) => {
+        let n = 0;
+        g.querySelectorAll('a').forEach((a) => {
+          const t = a.textContent.toLowerCase(),
+            ok = w.every((x) => t.includes(x));
+          a.hidden = !ok;
+          if (ok) n++;
+        });
+        g.hidden = !n;
+        if (g.previousElementSibling && g.previousElementSibling.classList.contains('col'))
+          g.previousElementSibling.hidden = !n;
+        if (n) any = true;
+      });
+      document.getElementById('mfnone').hidden = any;
+    });
+  q.addEventListener('keydown', (e) => {
+    const as = r.querySelectorAll('a');
+    if (e.key === 'ArrowDown') {
+      sel = Math.min(sel + 1, as.length - 1);
+      paint();
+      as[sel] && as[sel].scrollIntoView({ block: 'nearest' });
+      e.preventDefault();
+    } else if (e.key === 'ArrowUp') {
+      sel = Math.max(sel - 1, 0);
+      paint();
+      as[sel] && as[sel].scrollIntoView({ block: 'nearest' });
+      e.preventDefault();
+    } else if (e.key === 'Enter' && as[sel]) location.href = as[sel].href;
+  });
+  const bar = document.getElementById('cmp'),
+    picks = [];
+  if (!bar) return;
+  const phi = (x) => {
+    const t = 1 / (1 + 0.2316419 * Math.abs(x)),
+      p =
+        1 -
+        (Math.exp((-x * x) / 2) / Math.sqrt(2 * Math.PI)) *
+          t *
+          (0.31938153 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    return x >= 0 ? p : 1 - p;
+  };
+  document.querySelectorAll('.pick').forEach((b) =>
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const i = picks.indexOf(b);
+      if (i >= 0) picks.splice(i, 1);
+      else {
+        picks.push(b);
+        if (picks.length > 2) picks.shift();
+      }
+      document.querySelectorAll('.pick').forEach((x) => x.setAttribute('aria-pressed', String(picks.includes(x))));
+      bar.hidden = !picks.length;
+      if (picks.length < 2) {
+        bar.textContent = picks.length ? 'Now pick a second one to compare with ' + picks[0].dataset.n + '.' : '';
+        return;
+      }
+      let [a, b2] = picks.map((p) => ({ n: p.dataset.n, g: +p.dataset.g, s: +p.dataset.s }));
+      if (b2.g > a.g) [a, b2] = [b2, a];
+      const gap = a.g - b2.g,
+        t = Math.round(phi(gap / Math.hypot(a.s, b2.s)) * 10);
+      bar.textContent =
+        t <= 5 || gap < 0.005
+          ? 'Too close to call. A section under ' +
+            a.n +
+            ' and one under ' +
+            b2.n +
+            ' are expected to land about the same.'
+          : 'A section under ' +
+            a.n +
+            ' would average higher than one under ' +
+            b2.n +
+            (t >= 10 ? ' more than 9' : ' about ' + t) +
+            ' times in 10. Expected gap: ' +
+            gap.toFixed(2) +
+            ' GPA.';
+    }),
+  );
+})();
+`;
 
 /**
  * Cache busting. Stylesheets and scripts are cached by browsers for a long time, so every page links them as
@@ -156,7 +314,7 @@ export const DISCLAIMER = 'An independent student project. Not affiliated with, 
 
 export function layout(title: string, desc: string, root: string, crumb: string, body: string, site?: Site, tab: Tab = 'grades', extraScript = ''): string {
   const cur = (t: Tab) => (t === tab ? ' aria-current="page"' : '');
-  const nav = `${site ? `<a href="${root}index.html"${cur('grades')}>Grades</a>` : ''}<a href="${root}plan/index.html"${cur('plan')}>Degree planner</a><a href="${root}plan/compare.html"${cur('switch')}>Switch majors</a><a href="${root}ask.html"${cur('ask')}>Ask</a>`;
+  const nav = `${site ? `<a href="${root}index.html"${cur('grades')}>Grades</a>` : ''}<a href="${root}plan/index.html"${cur('plan')}>Degree planner</a><a href="${root}plan/compare.html"${cur('switch')}>Switch majors</a><a href="${root}ask.html"${cur('ask')}>Ask<sup class="beta">beta</sup></a>`;
   const source = site
     ? `Source: University DataCommons grade distributions, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. Instructors appear by last name only, and sections with fewer than 5 graded students are missing. Expected GPA is for one section's average, not for an individual student. ${DISCLAIMER} Not affiliated with RateMyProfessors. <a href="${root}about.html">How the numbers are made</a>.`
     : `Roadmaps and prerequisites come from the university's 2026-2027 Academic Catalog. This is a planning aid, not a degree audit: confirm your plan with your advisor and the university's own planning tools. ${DISCLAIMER} <a href="${root}about.html">How it works</a>.`;

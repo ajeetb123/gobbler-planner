@@ -141,7 +141,7 @@ test('eligibility: "I have A, can I take X" is worked out from the prerequisite 
   // Without a course in hand it stays the plain prerequisite lookup.
   assert.equal(E.answer(t, 'can I take CS 3214').intent, 'prereq');
   // The page does not ask the model these: it contradicted the computed answer in testing.
-  assert.ok(ASK_JS.includes("a.intent==='eligible'"));
+  assert.ok(ASK_JS.includes("a.intent === 'eligible'"));
 });
 
 test('rag guards: off-topic questions skip the model, answers naming unknown courses are rejected', () => {

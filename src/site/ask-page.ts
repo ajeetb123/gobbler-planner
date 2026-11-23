@@ -28,50 +28,226 @@ export const EXAMPLES = [
  * The question is kept in the URL hash (#q=...), so an answer can be bookmarked or shared and the browser's
  * back button works. A hash is never sent to the server.
  */
-export const ASK_JS = `(()=>{const E=(${askEngine.toString()})();
-const ragMessages=${ragMessages.toString()};const ragGrounded=${ragGrounded.toString()};const OFF_TOPIC=${RAG_OFF_TOPIC.toString()};
-// The version tag on this script's own address, reused for the model library so it is cached the same way.
-const VER=document.currentScript?new URL(document.currentScript.src).search:'';
-const root=document.body.dataset.root,$=id=>document.getElementById(id),el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
-const q=$('aq'),out=$('aout');let ix;
-const ready=fetch(root+'ask.json').then(r=>r.json()).then(d=>{ix=E.buildIndex(d)}).catch(()=>{out.textContent='Could not load the course data. Reload the page to try again.'});
-function show(text){out.textContent='';if(!ix||!text.trim())return;const a=E.answer(ix,text);gpTrack('ask',a.intent);if(a.intent==='none')gpTrack('ask-miss',text);const wantAi=aiOn()&&a.lines.length;
-const box=el('div','ans');a.lines.forEach(l=>box.append(el('p',null,l)));out.append(box);
-if(a.sources.length){const s=el('p','mut','Sources: ');a.sources.forEach((x,i)=>{const l=el('a',null,x.label+(x.external?' \\u2197':''));l.href=x.external?x.href:root+x.href;if(x.external){l.target='_blank';l.rel='noopener noreferrer'}s.append(l,i<a.sources.length-1?' \\u00b7 ':'')});out.append(s)}
-const rel=a.related.filter(h=>h.score>0);if(rel.length){out.append(el('h2',null,'Closest matches'));const g=el('div','chips');rel.forEach(h=>{const b=el('button',null,h.doc.k==='c'?h.doc.id+' '+h.doc.title:h.doc.title);b.type='button';b.onclick=()=>ask(h.doc.k==='c'?h.doc.id:h.doc.title+' plan');g.append(b)});out.append(g)}if(wantAi)aiAnswer(text,a)}
-// ---- AI answers: retrieval-augmented generation with a model that runs in this browser ----
-// Off until the visitor turns it on (it downloads about 2 GB once). The retrieval answer above always shows first;
-// the model's answer is added under it and is told to use only the retrieved facts.
-let llm=null,loading=null,turn=0;const aiBtn=$('aion'),aiMsg=$('aimsg'),aiBar=$('aibar');
-const aiOn=()=>{try{return localStorage.getItem('gobblerplan:ai')==='on'}catch{return false}};
-const aiLabel=()=>{aiBtn.textContent=aiOn()?'Turn off AI answers':'Turn on AI answers';aiBtn.setAttribute('aria-pressed',String(aiOn()))};
-function loadModel(){if(llm)return Promise.resolve(llm);if(loading)return loading;
-loading=(async()=>{if(!navigator.gpu)throw new Error('This browser cannot run the model. It needs WebGPU: try a recent Chrome, Edge or Safari on a laptop or desktop.');
-const ad=await navigator.gpu.requestAdapter();if(!ad)throw new Error('No graphics adapter is available for the model on this device.');
-aiBar.parentElement.hidden=false;aiMsg.textContent='Loading the model library\u2026';
-// A dynamic import needs a full or ./-style address: a bare 'vendor/...' is rejected as a module name.
-const lib=await import(new URL(root+'vendor/web-llm.js'+VER,location.href).href);
-llm=await lib.CreateMLCEngine(ad.features.has('shader-f16')?'${MODEL_F16}':'${MODEL_F32}',{initProgressCallback:p=>{const pct=Math.round((p.progress||0)*100);aiBar.style.width=pct+'%';aiMsg.textContent='Getting the model ready: '+pct+'%. The first time downloads about 2 GB; after that it starts from your browser\u2019s storage.'}});
-aiBar.parentElement.hidden=true;aiMsg.textContent='AI answers are on. The model runs in your browser; your question is not sent anywhere.';return llm})();
-// A failed load switches the toggle back off, so one press tries again.
-loading.catch(e=>{loading=null;aiBar.parentElement.hidden=true;try{localStorage.setItem('gobblerplan:ai','off')}catch{}aiLabel();const m=e&&e.message?e.message:'';aiMsg.textContent=/network|fetch|Cache/i.test(m)?'The download was interrupted. Press the button to try again; the parts already downloaded are usually kept.':m||'The model could not be loaded.'});return loading}
-async function aiAnswer(text,a){const mine=++turn,box=el('div','ans aians'),head=el('p','mut','AI answer \u00b7 written in your browser from the facts above \u00b7 can be wrong, check the sources'),body=el('p',null,'Thinking\u2026');box.append(head,body);out.querySelector('.ans').after(box);
-if(a.intent==='eligible'){body.textContent='The yes or no above was worked out exactly from the prerequisite list, so the model is not asked. In testing it said yes to questions like this even when the answer was no.';return}
-if(OFF_TOPIC.test(text)){body.textContent='The facts here cover prerequisites, what a course unlocks and degree plans. They say nothing about professors, grades or how hard a course is, so the model is not asked.';return}
-try{const e=await loadModel();if(mine!==turn)return;const msgs=ragMessages(text,a.related.slice(0,4).map(h=>h.doc));const stream=await e.chat.completions.create({messages:msgs,stream:true,temperature:0,max_tokens:160});let got='';
-for await(const part of stream){if(mine!==turn){e.interruptGenerate();return}got+=(part.choices[0]&&part.choices[0].delta&&part.choices[0].delta.content)||'';body.textContent=got}
-if(!ragGrounded(got,msgs[1].content)){body.textContent='The model named a course that is not in the facts it was given, so its answer was thrown away. Use the answer above.';return}
-if(!got.trim())body.textContent='The model returned nothing. Use the answer above.'}catch(err){if(mine===turn)body.textContent='AI answer unavailable: '+(err&&err.message?err.message:'the model could not run')+'. The answer above still stands.'}}
-aiBtn.onclick=()=>{const on=!aiOn();try{localStorage.setItem('gobblerplan:ai',on?'on':'off')}catch{}aiLabel();gpTrack('ai',on?'on':'off');if(on){loadModel().then(()=>{if(q.value.trim())show(q.value)}).catch(()=>{})}else{turn++;aiMsg.textContent='AI answers are off. Answers come from the catalog lookup only.';document.querySelectorAll('.aians').forEach(x=>x.remove())}};
-aiLabel();if(aiOn())$('aiexp').open=true;if(aiOn())aiMsg.textContent='AI answers are on. The model loads when you ask your first question.';
-function ask(text){q.value=text;history.replaceState(null,'','#q='+encodeURIComponent(text));ready.then(()=>show(text))}
-$('aform').addEventListener('submit',e=>{e.preventDefault();ask(q.value)});
-document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>ask(b.dataset.q)));
-const start=new URLSearchParams(location.hash.slice(1)).get('q');if(start)ask(start);else q.focus()})();`;
+export const ASK_JS = `
+(() => {
+  const E = ${askEngine.toString()}();
+  const ragMessages = ${ragMessages.toString()};
+  const ragGrounded = ${ragGrounded.toString()};
+  const OFF_TOPIC = ${RAG_OFF_TOPIC.toString()};
+  // The version tag on this script's own address, reused for the model library so it is cached the same way.
+  const VER = document.currentScript ? new URL(document.currentScript.src).search : '';
+  const root = document.body.dataset.root,
+    $ = (id) => document.getElementById(id),
+    el = (t, c, x) => {
+      const e = document.createElement(t);
+      if (c) e.className = c;
+      if (x != null) e.textContent = x;
+      return e;
+    };
+  const q = $('aq'),
+    out = $('aout');
+  let ix;
+  const ready = fetch(root + 'ask.json')
+    .then((r) => r.json())
+    .then((d) => {
+      ix = E.buildIndex(d);
+    })
+    .catch(() => {
+      out.textContent = 'Could not load the course data. Reload the page to try again.';
+    });
+  function show(text) {
+    out.textContent = '';
+    if (!ix || !text.trim()) return;
+    const a = E.answer(ix, text);
+    gpTrack('ask', a.intent);
+    if (a.intent === 'none') gpTrack('ask-miss', text);
+    const wantAi = aiOn() && a.lines.length;
+    const box = el('div', 'ans');
+    a.lines.forEach((l) => box.append(el('p', null, l)));
+    out.append(box);
+    if (a.sources.length) {
+      const s = el('p', 'mut', 'Sources: ');
+      a.sources.forEach((x, i) => {
+        const l = el('a', null, x.label + (x.external ? ' \\u2197' : ''));
+        l.href = x.external ? x.href : root + x.href;
+        if (x.external) {
+          l.target = '_blank';
+          l.rel = 'noopener noreferrer';
+        }
+        s.append(l, i < a.sources.length - 1 ? ' \\u00b7 ' : '');
+      });
+      out.append(s);
+    }
+    const rel = a.related.filter((h) => h.score > 0);
+    if (rel.length) {
+      out.append(el('h2', null, 'Closest matches'));
+      const g = el('div', 'chips');
+      rel.forEach((h) => {
+        const b = el('button', null, h.doc.k === 'c' ? h.doc.id + ' ' + h.doc.title : h.doc.title);
+        b.type = 'button';
+        b.onclick = () => ask(h.doc.k === 'c' ? h.doc.id : h.doc.title + ' plan');
+        g.append(b);
+      });
+      out.append(g);
+    }
+    if (wantAi) aiAnswer(text, a);
+  }
+  // ---- AI answers: retrieval-augmented generation with a model that runs in this browser ----
+  // Off until the visitor turns it on (it downloads about 2 GB once). The retrieval answer above always shows first;
+  // the model's answer is added under it and is told to use only the retrieved facts.
+  let llm = null,
+    loading = null,
+    turn = 0;
+  const aiBtn = $('aion'),
+    aiMsg = $('aimsg'),
+    aiBar = $('aibar');
+  const aiOn = () => {
+    try {
+      return localStorage.getItem('gobblerplan:ai') === 'on';
+    } catch {
+      return false;
+    }
+  };
+  const aiLabel = () => {
+    aiBtn.textContent = aiOn() ? 'Turn off AI answers' : 'Turn on AI answers';
+    aiBtn.setAttribute('aria-pressed', String(aiOn()));
+  };
+  function loadModel() {
+    if (llm) return Promise.resolve(llm);
+    if (loading) return loading;
+    loading = (async () => {
+      if (!navigator.gpu)
+        throw new Error(
+          'This browser cannot run the model. It needs WebGPU: try a recent Chrome, Edge or Safari on a laptop or desktop.',
+        );
+      const ad = await navigator.gpu.requestAdapter();
+      if (!ad) throw new Error('No graphics adapter is available for the model on this device.');
+      aiBar.parentElement.hidden = false;
+      aiMsg.textContent = 'Loading the model library…';
+      // A dynamic import needs a full or ./-style address: a bare 'vendor/...' is rejected as a module name.
+      const lib = await import(new URL(root + 'vendor/web-llm.js' + VER, location.href).href);
+      llm = await lib.CreateMLCEngine(ad.features.has('shader-f16') ? '${MODEL_F16}' : '${MODEL_F32}', {
+        initProgressCallback: (p) => {
+          const pct = Math.round((p.progress || 0) * 100);
+          aiBar.style.width = pct + '%';
+          aiMsg.textContent =
+            'Getting the model ready: ' +
+            pct +
+            '%. The first time downloads about 2 GB; after that it starts from your browser’s storage.';
+        },
+      });
+      aiBar.parentElement.hidden = true;
+      aiMsg.textContent = 'AI answers are on. The model runs in your browser; your question is not sent anywhere.';
+      return llm;
+    })();
+    // A failed load switches the toggle back off, so one press tries again.
+    loading.catch((e) => {
+      loading = null;
+      aiBar.parentElement.hidden = true;
+      try {
+        localStorage.setItem('gobblerplan:ai', 'off');
+      } catch {}
+      aiLabel();
+      const m = e && e.message ? e.message : '';
+      aiMsg.textContent = /network|fetch|Cache/i.test(m)
+        ? 'The download was interrupted. Press the button to try again; the parts already downloaded are usually kept.'
+        : m || 'The model could not be loaded.';
+    });
+    return loading;
+  }
+  async function aiAnswer(text, a) {
+    const mine = ++turn,
+      box = el('div', 'ans aians'),
+      head = el(
+        'p',
+        'mut',
+        'AI answer · written in your browser from the facts above · can be wrong, check the sources',
+      ),
+      body = el('p', null, 'Thinking…');
+    box.append(head, body);
+    out.querySelector('.ans').after(box);
+    if (a.intent === 'eligible') {
+      body.textContent =
+        'The yes or no above was worked out exactly from the prerequisite list, so the model is not asked. In testing it said yes to questions like this even when the answer was no.';
+      return;
+    }
+    if (OFF_TOPIC.test(text)) {
+      body.textContent =
+        'The facts here cover prerequisites, what a course unlocks and degree plans. They say nothing about professors, grades or how hard a course is, so the model is not asked.';
+      return;
+    }
+    try {
+      const e = await loadModel();
+      if (mine !== turn) return;
+      const msgs = ragMessages(
+        text,
+        a.related.slice(0, 4).map((h) => h.doc),
+      );
+      const stream = await e.chat.completions.create({ messages: msgs, stream: true, temperature: 0, max_tokens: 160 });
+      let got = '';
+      for await (const part of stream) {
+        if (mine !== turn) {
+          e.interruptGenerate();
+          return;
+        }
+        got += (part.choices[0] && part.choices[0].delta && part.choices[0].delta.content) || '';
+        body.textContent = got;
+      }
+      if (!ragGrounded(got, msgs[1].content)) {
+        body.textContent =
+          'The model named a course that is not in the facts it was given, so its answer was thrown away. Use the answer above.';
+        return;
+      }
+      if (!got.trim()) body.textContent = 'The model returned nothing. Use the answer above.';
+    } catch (err) {
+      if (mine === turn)
+        body.textContent =
+          'AI answer unavailable: ' +
+          (err && err.message ? err.message : 'the model could not run') +
+          '. The answer above still stands.';
+    }
+  }
+  aiBtn.onclick = () => {
+    const on = !aiOn();
+    try {
+      localStorage.setItem('gobblerplan:ai', on ? 'on' : 'off');
+    } catch {}
+    aiLabel();
+    gpTrack('ai', on ? 'on' : 'off');
+    if (on) {
+      loadModel()
+        .then(() => {
+          if (q.value.trim()) show(q.value);
+        })
+        .catch(() => {});
+    } else {
+      turn++;
+      aiMsg.textContent = 'AI answers are off. Answers come from the catalog lookup only.';
+      document.querySelectorAll('.aians').forEach((x) => x.remove());
+    }
+  };
+  aiLabel();
+  if (aiOn()) $('aiexp').open = true;
+  if (aiOn()) aiMsg.textContent = 'AI answers are on. The model loads when you ask your first question.';
+  function ask(text) {
+    q.value = text;
+    history.replaceState(null, '', '#q=' + encodeURIComponent(text));
+    ready.then(() => show(text));
+  }
+  $('aform').addEventListener('submit', (e) => {
+    e.preventDefault();
+    ask(q.value);
+  });
+  document.querySelectorAll('[data-q]').forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
+  const start = new URLSearchParams(location.hash.slice(1)).get('q');
+  if (start) ask(start);
+  else q.focus();
+})();
+`;
 
 export function renderAsk(site?: Site): string {
   return layout(`Ask · ${brand(site)}`, 'Ask about course prerequisites, what a course unlocks, and which majors need it. Answers come from catalog facts.', '', '',
-    `<div class="hero"><h1>Ask about <em>courses and majors</em>.</h1><p>Type a question. The answer is put together from catalog facts this site already holds, and it names its sources.</p></div>
+    `<div class="hero"><h1>Ask about <em>courses and majors</em>.</h1><p><span class="beta">Beta</span> Type a question. The answer is put together from catalog facts this site already holds, and it names its sources. It still picks the wrong course or major on some questions, so check the sources.</p></div>
 <form id="aform" class="askf" role="search"><input class="sel" id="aq" type="search" placeholder="For example: what do I need before CS 3214?" aria-label="Your question" autocomplete="off"><button type="submit" class="btn">Ask</button></form>
 <div class="chips">${EXAMPLES.map((x) => `<button type="button" data-q="${x}">${x}</button>`).join('')}</div>
 <details class="exp" id="aiexp"><summary>Experimental: AI-written answers <span class="mut">(off, 2 GB download)</span></summary><div class="aibox"><button type="button" class="btn" id="aion" aria-pressed="false">Turn on AI answers</button><span class="mut" id="aimsg">Optional. Runs a small language model in your browser to write the answer from the facts found. First use downloads about 2 GB and needs a recent Chrome, Edge or Safari on a laptop or desktop.</span><div class="meter" hidden><i id="aibar" style="width:0"></i></div></div></details>
