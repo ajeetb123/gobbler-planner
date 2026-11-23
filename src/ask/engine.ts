@@ -58,7 +58,7 @@ export interface AskIndex {
 export interface AskHit { doc: AskDoc; score: number }
 export interface AskSource { label: string; href: string; external?: boolean }
 export interface AskAnswer {
-  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'group', 'none'. */
+  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'group', 'scope', 'none'. */
   intent: string;
   lines: string[];
   /** A yes or no worked out by code for "can I take X with what I have". The page never asks the language model these. */
@@ -175,6 +175,9 @@ export function askEngine() {
   const show = (e: AskExpr, top = true): string =>
     typeof e === 'string' ? e : (top ? '' : '(') + e.slice(1).map((x) => show(x as AskExpr, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
 
+  /** Questions about ease, grades, people, or "gen eds" in general: nothing in the stored facts answers them. */
+  const OPINION = /\b(eas(?:y|ier|iest)|hard(?:er|est)?|difficult|best|worst|professors?|profs?|teachers?|instructors?|gpa|grades?|curve|workload|blow ?off|gen ?eds?)\b/;
+
   // ---- 5b. "what <subject> do <group> majors take" ----
   const GROUP = /\b(?:what|which)\s+(?:kind of\s+|level of\s+)?([a-z]+)\s*(?:class|classes|course|courses)?\s*(?:do|does|should|will|would)\s+(.+?)\s+(?:majors?|students?)\s+(?:take|need|have to take|start with)\b/;
   /** Everyday words for a subject -> its course prefix. `title` narrows it ("calc" means calculus courses, not all of MATH). */
@@ -204,6 +207,13 @@ export function askEngine() {
     const planTitle = bestPlan ? tokenize(bestPlan.doc.title) : [];
     const namesPlan = !intent && tokenize(q).length > 0 && tokenize(q).every((t) => planTitle.includes(t));
     const planFirst = !coded[0] && bestPlan && (intent === 'credits' || intent === 'year' || namesPlan || !bestCourse || bestPlan.score >= bestCourse.score);
+
+    // "easy gen eds", "best professor for calc": opinions, grades and people are not in the catalog facts. Without
+    // this rule the search still found some course ("Plants, Genes, and People" for "gen eds") and answered about it.
+    if (!coded[0] && OPINION.test(q.toLowerCase()))
+      return { intent: 'scope', related: [], sources: [], lines: [
+        'Ask only knows catalog facts: prerequisites, what a course unlocks, and what each degree plan contains. It has nothing on how easy a course is, grades, or who teaches it.',
+        'For general education (Pathways) choices, open your major\'s plan: every Pathways slot is listed there, and your advisor can suggest courses that fit.'] };
 
     // "I have taken CS 2506. Can I take CS 3214?": the course asked about, plus what the student already has.
     // Worked out here from the and/or tree, exactly. A small language model gets this wrong: in testing it said
@@ -272,6 +282,21 @@ export function askEngine() {
       const p = bestPlan.doc, terms = p.terms || [];
       const kind = p.draft ? 'the official catalog requirements, in a suggested term order' : 'the official catalog roadmap';
       const sources = [{ label: `${p.title} plan`, href: `plan/${p.id}.html` }];
+      // "credits for finance": Finance is four options here, and the search liked the one with "Credit" in its name.
+      // When the question names only the major, list every option of it; a word from one option's name picks that option.
+      const base = p.title.split(/ Major\b/)[0]!, baseWords = tokenize(base);
+      const family = ix.docs.filter((d) => d.k === 'p' && (d.title === base || d.title.startsWith(base + ' Major')));
+      const onlyTheMajor = tokenize(q).every((t) => baseWords.includes(t) || /^(credit|hour|long|total|option)$/.test(t));
+      if (family.length > 1 && onlyTheMajor && intent !== 'year') {
+        const short = (d: AskDoc) => d.title.replace(base + ' Major with ', '').replace(/ Option$/, '').replace(/ Major$/, '') || d.title;
+        const totals = [...new Set(family.map((d) => d.total))];
+        const links = family.slice(0, 8).map((d) => ({ label: `${d.title} plan`, href: `plan/${d.id}.html` }));
+        return { intent: intent === 'credits' ? 'credits' : 'plan', related, sources: links, lines: [
+          totals.length === 1
+            ? `${base} has ${family.length} options on this site, and each takes ${totals[0]} credits: ${family.map(short).join('; ')}.`
+            : `${base} has ${family.length} options on this site: ${family.map((d) => `${short(d)} (${d.total} credits)`).join('; ')}.`,
+          'Pick one below to see its term-by-term plan.'] };
+      }
       if (intent === 'credits') return { intent, related, sources, lines: [`${p.title} takes ${p.total} credits, laid out over ${terms.length} terms.`, `Source: ${kind}.`] };
       const year = YEARS.find(([re]) => re.test(q.toLowerCase()));
       if (intent === 'year' && year) {
@@ -286,6 +311,17 @@ export function askEngine() {
       const pre = c.pre ? `${name} lists these prerequisites: ${c.pre}.` : `The catalog lists no prerequisites for ${name}.`;
       const co = c.co ? `Corequisites (same term or earlier): ${c.co}.` : '';
       const un = c.un && c.un.length ? `Courses that list ${c.id} as a prerequisite or corequisite: ${list(c.un, 12)}.` : `No course in this site's data lists ${c.id} as a prerequisite.`;
+      // "data structures prereqs": CS 2114, CS 3114 and ECE 3514 all have "Data Structures" in the title. When no
+      // code was typed and other courses match about as well, answer for each instead of silently picking one.
+      const close = coded[0] ? [] : search(ix, q, 4, 'c').filter((h) => h.doc !== c && h.score >= bestCourse.score * 0.9).slice(0, 2);
+      if (close.length && (intent === 'prereq' || intent === 'unlocks')) {
+        const all = [c, ...close.map((h) => h.doc)];
+        const line = (d: AskDoc) => intent === 'prereq'
+          ? `${d.id} ${d.title}: ${d.pre ? d.pre : 'no prerequisites listed'}.`
+          : `${d.id} ${d.title}: ${d.un && d.un.length ? list(d.un, 8) : 'nothing lists it as a prerequisite'}.`;
+        return { intent, related, sources: all.map((d) => courseSources(d)[0]!), lines: [
+          `${all.length} courses match that name. ${intent === 'prereq' ? 'Prerequisites for each' : 'Courses that need each one first'}:`, ...all.map(line)] };
+      }
       const mj = c.n ? `${c.n} plan${c.n === 1 ? ' on this site includes' : 's on this site include'} ${c.id}: ${list((c.mj || []).map((m) => m[1]), 8)}.` : `No plan on this site names ${c.id} as a required course.`;
       if (intent === 'prereq') return { intent, related, sources, lines: [pre, co].filter(Boolean) };
       if (intent === 'unlocks') return { intent, related, sources, lines: [un] };

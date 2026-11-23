@@ -9,6 +9,8 @@ import type { Site } from './model.ts';
 export const HEAVY_CREDITS = 18;
 /** Three or more unfinished courses under this course average in one term get a flag. */
 export const LOW_GPA = 2.8;
+/** University limit for a Fall or Spring term (Policy 6320, Maximum Loads): more than this needs the academic dean's approval. */
+export const LIMIT_CREDITS = 19;
 
 export interface PlanData {
   slug: string;
@@ -17,6 +19,7 @@ export interface PlanData {
   /** Plan length the page opens on: the roadmap's own layout (4 years, or 5 for a 160-credit draft). */
   base: string;
   heavy: number;
+  limit: number;
   low: number;
   /** g = course average GPA, v = instructor-matters verdict, h = link to the course page (all three only with grade data).
    *  cs / pre / co = what planIssues needs: codes this slot stands for, prerequisites, corequisites. */
@@ -40,7 +43,7 @@ export function planData(r: Roadmap, courses: Map<string, CourseInfo>, site?: Si
   }
   const plans: PlanData['plans'] = {};
   for (const y of YEAR_OPTIONS) plans[String(y)] = repack(r, y, check).map((t) => ({ label: t.label, ids: t.items.map((i) => i.id) }));
-  return { slug: r.slug, name: r.name, total: credits(r.terms.flatMap((t) => t.items)), base: String(baseYears(r)), heavy: HEAVY_CREDITS, low: LOW_GPA, items, plans };
+  return { slug: r.slug, name: r.name, total: credits(r.terms.flatMap((t) => t.items)), base: String(baseYears(r)), heavy: HEAVY_CREDITS, limit: LIMIT_CREDITS, low: LOW_GPA, items, plans };
 }
 
 /**
@@ -52,6 +55,27 @@ export function planData(r: Roadmap, courses: Map<string, CourseInfo>, site?: Si
  * Balance: moves unfinished elective slots (items without a course code) from the heaviest
  * Fall/Spring term to the lightest until they are within 3 credits. Named courses never move on their own.
  */
+/**
+ * Every catalog course the planner can add by hand: code -> [title, credits (0 = not known), prerequisites, corequisites].
+ * The course list has no credit values, so credits come from the roadmaps and requirement lists: the value a course
+ * most often has when it is a slot of its own. Written to courses.json and fetched only when someone adds a course.
+ */
+export function courseCatalog(roadmaps: Roadmap[], courses: Map<string, CourseInfo>): Record<string, [string, number, Expr | 0, Expr | 0]> {
+  const seen = new Map<string, Map<number, number>>();
+  for (const r of roadmaps)
+    for (const i of r.terms.flatMap((t) => t.items))
+      if (i.code && i.alt.length === 0 && i.credits > 0) {
+        const m = seen.get(i.code) ?? new Map<number, number>();
+        seen.set(i.code, m.set(i.credits, (m.get(i.credits) ?? 0) + 1));
+      }
+  const out: Record<string, [string, number, Expr | 0, Expr | 0]> = {};
+  for (const c of courses.values()) {
+    const m = seen.get(c.code);
+    out[c.code] = [c.title, m ? [...m].sort((a, b) => b[1] - a[1])[0]![0] : 0, c.pre ?? 0, c.co ?? 0];
+  }
+  return out;
+}
+
 export const PLAN_JS = `
 (() => {
   const planIssues = ${planIssues.toString()};
@@ -100,6 +124,29 @@ export const PLAN_JS = `
   // Courses the student added themselves live in S.extra and are merged into the roadmap data here, so the rest of the page treats them like any other course.
   const MAX_EXTRA = 12,
     text = (v, n) => (typeof v === 'string' ? v.replace(/\\s+/g, ' ').trim().slice(0, n) : '');
+  // Catalog courses for "Add a course": code -> [title, credits (0 = unknown), prerequisites, corequisites].
+  // Fetched once, the first time it is needed.
+  let COURSES = null,
+    coursesP = null;
+  const loadCourses = () =>
+    coursesP ||
+    (coursesP = fetch(root + 'courses.json')
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}))
+      .then((c) => (COURSES = c)));
+  // "cs2114 ..." or "CS 2114 ..." at the start of the text -> "CS 2114". Empty when it does not start with a course code.
+  const CODE_AT_START = /^([A-Za-z]{2,4})[ -]?(\\d{4}[Hh]?)(?![0-9A-Za-z])\\s*/;
+  const codeOf = (s) => {
+    const m = CODE_AT_START.exec(s);
+    return m ? m[1].toUpperCase() + ' ' + m[2].toUpperCase() : '';
+  };
+  // A prerequisite tree: a code, or ['&', ...] (all of) / ['|', ...] (one of). evx tests it, showx prints it.
+  const evx = (e, f) =>
+      typeof e === 'string' ? f(e) : e[0] === '&' ? e.slice(1).every((x) => evx(x, f)) : e.slice(1).some((x) => evx(x, f)),
+    showx = (e, top) =>
+      typeof e === 'string'
+        ? e
+        : (top ? '' : '(') + e.slice(1).map((x) => showx(x, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
   function merge(extra) {
     for (const id in D.items) if (D.items[id].custom) delete D.items[id];
     for (const y in D.plans)
@@ -107,7 +154,24 @@ export const PLAN_JS = `
         t.ids = t.ids.filter((id) => !id.startsWith('x'));
       });
     extra.forEach((e) => {
-      D.items[e.id] = { label: e.label, cr: e.cr, alt: [], ch: [], cs: [], custom: true };
+      // A catalog course keeps its code, so its prerequisites are checked like any other course in the plan.
+      // Until the catalog has loaded, a label that starts with a code is trusted; once loaded, only real codes are.
+      const code = codeOf(e.label),
+        info = code && COURSES && COURSES[code];
+      D.items[e.id] =
+        code && (info || !COURSES)
+          ? {
+              code,
+              label: info ? info[0] : e.label.replace(CODE_AT_START, '') || 'Added course',
+              cr: e.cr,
+              alt: [],
+              ch: [],
+              cs: [code],
+              pre: (info && info[2]) || undefined,
+              co: (info && info[3]) || undefined,
+              custom: true,
+            }
+          : { label: e.label, cr: e.cr, alt: [], ch: [], cs: [], custom: true };
       for (const y in D.plans) D.plans[y][Math.min(e.t, D.plans[y].length - 1)].ids.push(e.id);
     });
   }
@@ -275,6 +339,103 @@ export const PLAN_JS = `
     for (const ch of c.split(' ')[0]) h = (h * 31 + ch.charCodeAt(0)) % PALETTE.length;
     return PALETTE[h];
   };
+  // ---- "Add a course" dialog: pick a catalog course (prerequisites get checked) or type any name ----
+  const AD = $('addc'),
+    AQ = $('ac-q'),
+    AC = $('ac-c'),
+    AM = $('ac-m'),
+    AS = $('ac-s');
+  let addTo = 0;
+  const acSay = (m) => {
+    AM.textContent = m;
+    AM.hidden = !m;
+  };
+  // The term a course already sits in (as itself, not as an alternative in some slot), or ''.
+  const whereIs = (code) => {
+    const t = terms().find((t) => t.ids.some((id) => D.items[id].code === code));
+    return t ? t.label : '';
+  };
+  const suggest = () => {
+    AS.textContent = '';
+    acSay('');
+    const s = AQ.value.trim().toLowerCase(),
+      code = codeOf(AQ.value),
+      known = code && COURSES && COURSES[code] && COURSES[code][1];
+    // Credits the catalog data already knows are filled in and locked.
+    if (known) AC.value = String(known);
+    AC.readOnly = !!known;
+    if (!COURSES || s.length < 2) return;
+    const key = s.replace(/[ -]/g, ''),
+      out = [];
+    for (const c in COURSES) {
+      if (c.toLowerCase().replace(' ', '').startsWith(key) || (s.length > 2 && COURSES[c][0].toLowerCase().includes(s))) out.push(c);
+      if (out.length >= 6) break;
+    }
+    if (out.length === 1 && out[0] === code) return;
+    out.forEach((c) => {
+      const b = el('button', null, c + ' ' + COURSES[c][0]);
+      b.type = 'button';
+      b.onclick = () => {
+        AQ.value = c + ' ' + COURSES[c][0];
+        suggest();
+        AQ.focus();
+      };
+      AS.append(b);
+    });
+  };
+  AQ.addEventListener('input', suggest);
+  function openAdd(ti, label) {
+    addTo = ti;
+    AQ.value = '';
+    AC.value = '3';
+    AC.readOnly = false;
+    AS.textContent = '';
+    acSay(S.extra.length >= MAX_EXTRA ? 'You can add up to ' + MAX_EXTRA + ' courses of your own. Remove one first.' : '');
+    $('ac-t').textContent = 'Into ' + label + '.';
+    AD.showModal();
+    AQ.focus();
+    loadCourses().then(suggest);
+  }
+  $('ac-x').onclick = () => AD.close();
+  AD.addEventListener('click', (e) => {
+    if (e.target === AD) AD.close();
+  });
+  $('ac-f').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (S.extra.length >= MAX_EXTRA) return acSay('You can add up to ' + MAX_EXTRA + ' courses of your own. Remove one first.');
+    const typed = text(AQ.value, 60),
+      code = codeOf(typed),
+      info = code && COURSES && COURSES[code];
+    if (!typed) return acSay('Type a course code or a name.');
+    const n = parseInt(AC.value, 10);
+    if (!(n >= 0 && n <= 9) || String(n) !== AC.value.trim()) return acSay('Credits must be a whole number from 0 to 9.');
+    const at = info ? whereIs(code) : '';
+    if (at) return acSay(code + ' is already in this plan, in ' + at + '. Move that one instead of adding it twice.');
+    const name = info ? text(code + ' ' + info[0], 60) : typed;
+    if (S.extra.some((x) => x.label.toLowerCase() === name.toLowerCase())) return acSay('"' + name + '" is already in this plan.');
+    snap();
+    const xid = 'x' + (Math.max(-1, ...S.extra.map((x) => +x.id.slice(1))) + 1);
+    S.extra.push({ id: xid, label: name, cr: n, t: addTo });
+    S = clean(S);
+    put(xid, addTo);
+    save();
+    draw();
+    AD.close();
+  });
+  // "remove" link on a course the student added.
+  const removeButton = (id, name) => {
+    const x = el('button', 'lnk', 'remove');
+    x.type = 'button';
+    x.setAttribute('aria-label', 'Remove ' + name);
+    x.onclick = () => {
+      snap();
+      S.extra = S.extra.filter((e) => e.id !== id);
+      S = clean(S);
+      save();
+      draw();
+    };
+    return x;
+  };
   function draw() {
     board.textContent = '';
     over.textContent = '';
@@ -284,7 +445,9 @@ export const PLAN_JS = `
         ts.map((t) => t.ids),
         S.done,
       ),
-      nm2 = (j) => D.items[j].code || D.items[j].label;
+      nm2 = (j) => D.items[j].code || D.items[j].label,
+      // Every course code some slot in the plan stands for (the course, its alternatives, its listed choices).
+      inPlan = new Set(ts.flatMap((t) => t.ids).flatMap((id) => D.items[id].cs || []));
     let doneCr = 0,
       bad = 0,
       firstBad = null;
@@ -361,20 +524,11 @@ export const PLAN_JS = `
             a.rel = 'noopener noreferrer';
             a.title = 'Catalog description';
           }
-          nm.append(a, ' ' + it.label);
+          nm.append(a, ' ' + it.label + ' ');
+          if (it.custom) nm.append(el('span', 'tag', 'added by you'), removeButton(id, it.code));
         } else if (it.custom) {
           nm.textContent = it.label + ' ';
-          const x = el('button', 'lnk', 'remove');
-          x.type = 'button';
-          x.setAttribute('aria-label', 'Remove ' + it.label);
-          x.onclick = () => {
-            snap();
-            S.extra = S.extra.filter((e) => e.id !== id);
-            S = clean(S);
-            save();
-            draw();
-          };
-          nm.append(el('span', 'tag', 'added by you'), x);
+          nm.append(el('span', 'tag', 'added by you'), removeButton(id, it.label));
         } else {
           nm.textContent = (S.names[id] || it.label) + ' ';
           const ed = el('button', 'lnk', S.names[id] ? 'change' : 'name it');
@@ -424,7 +578,21 @@ export const PLAN_JS = `
           tb++;
           mid.append(el('div', 'flag', 'Take ' + v.coLate.map(nm2).join(', ') + ' in the same term or earlier'));
         }
-        if (v.late.length || v.coLate.length) {
+        // An added course can need courses that are nowhere in this plan. For roadmap courses such a requirement
+        // is skipped (a placement test often covers it); for a course the student chose to add, it is said out loud.
+        let missing = false;
+        if (it.custom && !done)
+          [
+            [it.pre, 'Prerequisites'],
+            [it.co, 'Corequisites'],
+          ].forEach(([e, word]) => {
+            if (!e || evx(e, (c) => inPlan.has(c))) return;
+            missing = true;
+            bad++;
+            tb++;
+            mid.append(el('div', 'flag', word + ' not in this plan: ' + showx(e, true)));
+          });
+        if (v.late.length || v.coLate.length || missing) {
           li.classList.add('conflict');
           if (!firstBad) firstBad = li;
         }
@@ -454,7 +622,19 @@ export const PLAN_JS = `
         el('div', 'mut', c + ' credits' + (gw ? ' · typical GPA ' + (gs / gw).toFixed(2) : '')),
         load,
       );
-      if (heavy) card.append(el('div', 'flag', 'Heavy load: ' + c + ' credits'));
+      if (c > D.limit && !t.label.includes('Summer'))
+        card.append(
+          el(
+            'div',
+            'flag',
+            'Over the limit: ' +
+              c +
+              ' credits. More than ' +
+              D.limit +
+              ' in a Fall or Spring term needs approval from your academic dean. Tick off credit you already have, or pick a longer plan.',
+          ),
+        );
+      else if (heavy) card.append(el('div', 'flag', 'Heavy load: ' + c + ' credits'));
       if (low >= 3) card.append(el('div', 'flag', low + ' courses here average below ' + D.low.toFixed(1)));
       if (!heavy && c > 0 && c < 12 && !t.label.includes('Summer') && t.ids.some((id) => !S.done.includes(id)))
         card.append(el('div', 'flag', 'Light term: under 12 credits is usually below full-time'));
@@ -462,29 +642,7 @@ export const PLAN_JS = `
       card.append(list);
       const add = el('button', 'lnk addc', '+ Add a course');
       add.type = 'button';
-      add.onclick = () => {
-        if (S.extra.length >= MAX_EXTRA) {
-          alert('You can add up to ' + MAX_EXTRA + ' courses of your own.');
-          return;
-        }
-        const name = text(
-          prompt('Course to add to ' + t.label + ' (for example a minor course or an extra elective):', '') || '',
-          60,
-        );
-        if (!name) return;
-        const n = parseInt(prompt('How many credits is ' + name + '?', '3'), 10);
-        if (!(n >= 0 && n <= 9)) {
-          alert('Credits must be a whole number from 0 to 9.');
-          return;
-        }
-        snap();
-        const xid = 'x' + (Math.max(-1, ...S.extra.map((e) => +e.id.slice(1))) + 1);
-        S.extra.push({ id: xid, label: name, cr: n, t: ti });
-        S = clean(S);
-        put(xid, ti);
-        save();
-        draw();
-      };
+      add.onclick = () => openAdd(ti, t.label);
       card.append(add);
       card.ondragover = (e) => {
         e.preventDefault();
@@ -849,6 +1007,12 @@ export const PLAN_JS = `
   // The staggered entrance plays once, on load. Later redraws (every click) must not replay it.
   document.body.classList.add('boot');
   setTimeout(() => document.body.classList.remove('boot'), 1500);
+  // A saved or shared plan with added catalog courses needs the catalog to check their prerequisites.
+  if (S.extra.some((e) => codeOf(e.label)))
+    loadCourses().then(() => {
+      S = clean(S);
+      draw();
+    });
   draw();
 })();
 `;
@@ -883,6 +1047,12 @@ ${r.draft ? `<p class="note"><b>Suggested order.</b> The courses and credits her
 <ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Drag</b> a course to another term, or use the arrows that appear on it. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>Click</b> a course to see what it needs, what it unlocks, and links to its catalog page, past grades and instructor reviews.</li><li><b>Name it</b> on an elective or Pathways slot records the course you plan to take there.</li><li><b>Add a course</b> at the bottom of a term adds one of your own, such as a minor course.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li>Your plan is saved in this browser only.</li></ul></details>
 </div></div>
 <aside class="panel" id="panel" aria-label="Course details" hidden></aside>
+<dialog id="addc" aria-labelledby="ac-h"><form id="ac-f" novalidate><h3 id="ac-h">Add a course</h3><p class="mut" id="ac-t"></p>
+<label for="ac-q">Course</label><input class="sel" id="ac-q" autocomplete="off" maxlength="60" placeholder="CS 3114, or any name">
+<p class="hint">Pick a catalog course and its prerequisites are checked. Or type any name, for a minor course or an elective.</p><div class="chips" id="ac-s"></div>
+<label for="ac-c">Credits</label><input class="sel" id="ac-c" type="number" inputmode="numeric" min="0" max="9" step="1" value="3">
+<p class="flag" id="ac-m" role="alert" hidden></p>
+<div class="row"><button type="button" class="btn" id="ac-x">Cancel</button><button type="submit" class="btn pri">Add to plan</button></div></form></dialog>
 <script type="application/json" id="plan-data">${json}</script>`;
   return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a ${r.name} degree term by term from the official ${r.draft ? 'requirements' : 'roadmap'}, with prerequisite checks.`, '../',
     `<a href="index.html">Degree planner</a>`, body, site, 'plan', `<script src="../plan.js" defer></script>`);

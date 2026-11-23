@@ -37,6 +37,16 @@ export interface SwitchResult {
  */
 export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[]): SwitchResult {
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  // General-education slots are worded differently on every roadmap ("Pathway 2", "Pathways 2, 3, 6a, or 7",
+  // "Critical Thinking in the Humanities (Pathways Concept 2)", "Natural Science Elective"). Two such slots match
+  // when they share a Pathways concept: general education is one university-wide requirement, met once.
+  const concepts = (label: string): string[] => {
+    const l = label.toLowerCase();
+    const m = /pathways?\s*(?:concepts?\s*)?(\d[a-z]?(?:\s*(?:,|or|and|\/)\s*(?:or\s*)?\d[a-z]?)*)/.exec(l);
+    return m ? m[1]!.match(/\d[a-z]?/g) ?? [] : /natural science/.test(l) ? ['4'] : [];
+  };
+  const sameConcept = (a: string, b: string) => a === b || (a[0] === b[0] && (a.length === 1 || b.length === 1));
+  const genEd = (a: SwitchItem, b: SwitchItem) => concepts(a.label).some((x) => concepts(b.label).some((y) => sameConcept(x, y)));
   const used: Record<string, boolean> = {};
   const res: SwitchResult = { carried: [], likely: [], free: [], freeUsed: 0, unmatched: [], counted: 0, kept: 0, doneCredits: 0, remaining: 0 };
   const mine = from.filter((i) => done.includes(i.id));
@@ -44,7 +54,8 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
   for (const i of mine) {
     res.doneCredits += i.cr;
     const named = i.cs.length > 0;
-    const hit = to.find((t) => !used[t.id] && (named ? t.cs.some((c) => i.cs.includes(c)) : t.cs.length === 0 && norm(t.label) === norm(i.label)));
+    const hit = to.find((t) => !used[t.id] && (named ? t.cs.some((c) => i.cs.includes(c)) : t.cs.length === 0 && norm(t.label) === norm(i.label)))
+      ?? (named ? undefined : to.find((t) => !used[t.id] && t.cs.length === 0 && genEd(i, t)));
     if (!hit) { left.push(i); continue; }
     used[hit.id] = true;
     (named ? res.carried : res.likely).push([i.id, hit.id]);
@@ -77,8 +88,9 @@ export interface DoubleResult {
 
 /**
  * Cost of adding a second major. Each course is counted once:
- * 1) a first-major course fills a second-major slot that lists it (named course, or elective slot with the same
- *    name). Free-elective slots are left out of this step on both sides;
+ * 1) a first-major course fills a second-major slot that lists it (named course, elective slot with the same
+ *    name, or a general-education slot for the same Pathways concept). Free-elective slots are left out of this
+ *    step on both sides;
  * 2) what the second major still needs is "extra work";
  * 3) the first major's free electives are room to put that extra work in at no added credits, and the second
  *    major's own free electives are already met by the first major's other courses.
@@ -89,12 +101,23 @@ export interface DoubleResult {
 export function doubleMajor(first: SwitchItem[], second: SwitchItem[]): DoubleResult {
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
   const isFree = (i: SwitchItem) => i.cs.length === 0 && /free elective/i.test(i.label);
+  // General-education slots are worded differently on every roadmap ("Pathway 2", "Pathways 2, 3, 6a, or 7",
+  // "Critical Thinking in the Humanities (Pathways Concept 2)", "Natural Science Elective"). Two such slots match
+  // when they share a Pathways concept: general education is one university-wide requirement, met once.
+  const concepts = (label: string): string[] => {
+    const l = label.toLowerCase();
+    const m = /pathways?\s*(?:concepts?\s*)?(\d[a-z]?(?:\s*(?:,|or|and|\/)\s*(?:or\s*)?\d[a-z]?)*)/.exec(l);
+    return m ? m[1]!.match(/\d[a-z]?/g) ?? [] : /natural science/.test(l) ? ['4'] : [];
+  };
+  const sameConcept = (a: string, b: string) => a === b || (a[0] === b[0] && (a.length === 1 || b.length === 1));
+  const genEd = (a: SwitchItem, b: SwitchItem) => concepts(a.label).some((x) => concepts(b.label).some((y) => sameConcept(x, y)));
   const used: Record<string, boolean> = {};
   const shared: Array<[string, string]> = [];
   for (const a of first) {
     if (isFree(a)) continue;
     const named = a.cs.length > 0;
-    const hit = second.find((b) => !used[b.id] && !isFree(b) && (named ? b.cs.some((c) => a.cs.includes(c)) : b.cs.length === 0 && norm(b.label) === norm(a.label)));
+    const hit = second.find((b) => !used[b.id] && !isFree(b) && (named ? b.cs.some((c) => a.cs.includes(c)) : b.cs.length === 0 && norm(b.label) === norm(a.label)))
+      ?? (named ? undefined : second.find((b) => !used[b.id] && !isFree(b) && b.cs.length === 0 && genEd(a, b)));
     if (hit) { used[hit.id] = true; shared.push([a.id, hit.id]); }
   }
   const sum = (xs: SwitchItem[]) => xs.reduce((t, i) => t + i.cr, 0);

@@ -10,7 +10,7 @@ import { buildSite, termLabel } from '../src/site/model.ts';
 import { parseNoRoadmap, parseRoadmaps } from '../src/plan/roadmap.ts';
 import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { parsePrereqs } from '../src/plan/prereq.ts';
-import { PLAN_JS, renderNotFound, renderPlan, renderPlanAbout, renderPlanIndex } from '../src/site/plan-page.ts';
+import { PLAN_JS, renderNotFound, renderPlan, renderPlanAbout, renderPlanIndex, courseCatalog } from '../src/site/plan-page.ts';
 import { COMPARE_JS, renderCompare } from '../src/site/compare-page.ts';
 import { buildDocs } from '../src/ask/docs.ts';
 import { THEME_CSS, THEME_JS } from '../src/site/theme.ts';
@@ -61,6 +61,8 @@ for (const f of readdirSync('data/requirements').filter((x) => x.endsWith('.txt'
   for (const q of parseRequirements(readFileSync(join('data/requirements', f), 'utf8'))) roadmaps.push(draftRoadmap(q, courses));
 const planned = new Set(roadmaps.map((r) => r.catalogPath));
 write('plan.js', PLAN_JS);
+// Catalog courses for the planner's "Add a course" dialog (fetched only when someone opens it).
+write('courses.json', JSON.stringify(courseCatalog(roadmaps, courses)));
 write('compare.js', COMPARE_JS);
 write('ask.js', ASK_JS);
 write('ask.html', renderAsk(site));
@@ -71,7 +73,18 @@ write('plan/index.html', renderPlanIndex(roadmaps, site, false, noRoadmap));
 write('plan/compare.html', renderCompare(roadmaps, courses, site));
 for (const r of roadmaps) write(`plan/${r.slug}.html`, renderPlan(r, courses, site, links));
 // [label, link, kind]: c = course, i = instructor, m = degree plan. The palette groups by kind.
-const search: string[][] = [...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm']), ['Switch majors: what carries over', 'plan/compare.html', 'm'], ['Ask about courses and majors', 'ask.html', 'm']];
+// Short names students type for a major. The palette matches them as hidden keywords (4th field).
+const SHORT_NAMES: Array<[RegExp, string]> = [
+  [/^Computer Science/, 'cs compsci'], [/^Computer Engineering/, 'cpe'], [/^Electrical Engineering/, 'ee ece'], [/^Mechanical Engineering/, 'me meche'],
+  [/^Aerospace Engineering/, 'ae aoe aero'], [/^Ocean Engineering/, 'oe'], [/^Civil Engineering/, 'cee'], [/^Chemical Engineering/, 'che cheme'],
+  [/^Industrial and Systems Engineering/, 'ise'], [/^Materials Science and Engineering/, 'mse'], [/^Biomedical Engineering/, 'bme bmes'],
+  [/^Biological Systems Engineering/, 'bse'], [/^Construction Engineering and Management/, 'cem'], [/^Computational Modeling and Data Analytics/, 'cmda'],
+  [/^Business Information Technology/, 'bit'], [/^Psychology/, 'psych'], [/^Economics/, 'econ'], [/^Biological Sciences/, 'bio'], [/^Biochemistry/, 'biochem'],
+  [/^Mathematics/, 'math'], [/^Statistics/, 'stat stats'], [/^Finance/, 'fin'], [/^Accounting/, 'acis'], [/^Marketing/, 'mktg'], [/^Management/, 'mgt'],
+  [/^Political Science/, 'psci polisci'], [/^Hospitality and Tourism Management/, 'htm'], [/^Human Nutrition, Foods, and Exercise/, 'hnfe'], [/^Neuroscience/, 'neuro'],
+];
+const shortNames = (name: string) => SHORT_NAMES.find(([re]) => re.test(name))?.[1] ?? '';
+const search: string[][] = [...roadmaps.map((r) => [`${r.name} degree plan`, `plan/${r.slug}.html`, 'm', shortNames(r.name)]), ['Switch majors: what carries over', 'plan/compare.html', 'm'], ['Ask about courses and majors', 'ask.html', 'm']];
 if (site && links) {
   write('index.html', renderIndex(site, links, roadmaps.length));
   write('about.html', renderAbout(site));
@@ -85,6 +98,8 @@ if (site && links) {
   write('about.html', renderPlanAbout());
   write('404.html', renderNotFound());
   write('robots.txt', 'User-agent: *\nDisallow: /admin\nDisallow: /api/\n');
+  // The public site has no course pages, so a course in the palette opens its Ask answer (prerequisites, what it unlocks, which majors use it).
+  search.push(...[...courses.values()].map((c) => [`${c.code} ${c.title}`, `ask.html#q=${encodeURIComponent(c.code)}`, 'c']));
 }
 write('search.json', JSON.stringify(search));
 

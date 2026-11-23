@@ -161,27 +161,39 @@ export const APP_JS = `
     if (e.target === dlg) dlg.close();
   });
   const K = { c: 'Courses', i: 'Instructors', m: 'Degree plans' },
-    score = (t, s) => {
-      const l = t.toLowerCase();
-      return l.startsWith(s) ? 0 : (' ' + l).includes(' ' + s) ? 1 : l.includes(s) ? 2 : -1;
+    // Every word typed must begin a word of the label: "comp sci" and "mech e" find their majors, and "cs" no
+    // longer matches the letters inside "Economics". kw holds short names for a major ("cs", "compsci", "ece").
+    // Lower is better: 0 = short name or start of the label, 1 = first word matches, 2 = words match further in.
+    score = (t, s, kw) => {
+      const l = t.toLowerCase(),
+        lw = l.split(/[^a-z0-9]+/).filter(Boolean),
+        q = s.split(' ').filter(Boolean);
+      if ((kw || '').split(' ').includes(s.replace(/ /g, ''))) return 0;
+      if (!q.every((w) => lw.some((x) => x.startsWith(w)))) return -1;
+      return l.startsWith(s) ? 0 : lw[0].startsWith(q[0]) ? 1 : 2;
     };
   const paint = () =>
     [...r.querySelectorAll('a')].forEach((a, i) => a.setAttribute('aria-selected', String(i === sel)));
   q.addEventListener('input', async () => {
     d ??= await (await fetch(root + 'search.json')).json();
-    const s = q.value.trim().toLowerCase().replace(/\\s+/g, ' ');
+    // "cs2114" is read as "cs 2114".
+    const s = q.value
+      .trim()
+      .toLowerCase()
+      .replace(/\\s+/g, ' ')
+      .replace(/^([a-z]{2,4})(\\d{4}h?)$/, '$1 $2');
     r.textContent = '';
     sel = 0;
     if (s.length < 2) return;
     const hits = [];
-    for (const [t, h, k] of d) {
-      const sc = score(t, s);
+    for (const [t, h, k, kw] of d) {
+      const sc = score(t, s, kw);
       if (sc >= 0) hits.push([sc, t, h, k]);
     }
     hits.sort((a, b) => a[0] - b[0]);
     let n = 0;
     const best = (k) => Math.min(9, ...hits.filter((x) => x[3] === k).map((x) => x[0]));
-    for (const k of ['c', 'i', 'm'].sort((x, y) => best(x) - best(y))) {
+    for (const k of ['m', 'c', 'i'].sort((x, y) => best(x) - best(y))) {
       const g = hits.filter((x) => x[3] === k).slice(0, 8);
       if (!g.length) continue;
       const h = document.createElement('li');
@@ -327,7 +339,7 @@ export function layout(title: string, desc: string, root: string, crumb: string,
 ${body}
 <footer>${site ? `Official grade data, ${termLabel(site.dataFirst)} to ${termLabel(site.dataLast)}. ` : ''}${source} <a href="${root}about.html#privacy">Privacy</a>.</footer></main>
 <nav class="tabs" aria-label="Sections">${nav}<button type="button" data-search>Search</button></nav>
-<dialog id="pal" aria-label="Search"><input id="q" type="search" placeholder="${site ? 'Course, last name or major' : 'Search a major'}" autocomplete="off" aria-label="Search"><ul id="r"></ul><div class="hint">↑ ↓ to move · Enter to open · Esc to close</div></dialog>
+<dialog id="pal" aria-label="Search"><input id="q" type="search" placeholder="${site ? 'Course, last name or major' : 'Major or course'}" autocomplete="off" aria-label="Search"><ul id="r"></ul><div class="hint">↑ ↓ to move · Enter to open · Esc to close</div></dialog>
 <script src="${root}app.js" defer></script>${extraScript}</body></html>`.replace(/((?:href|src)="[^"]*\.(?:css|js))"/g, `$1?v=${assetVersion}"`);
 }
 

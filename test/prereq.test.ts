@@ -281,3 +281,47 @@ test('switchCost: the credits shown as kept never exceed the credits finished', 
   assert.equal(r.remaining, 3);
   assert.ok(r.kept <= r.doneCredits);
 });
+
+test('double major and switching: general-education slots match by Pathways concept, however the roadmap words them', async () => {
+  const { doubleMajor, switchCost } = await import('../src/plan/switch.ts');
+  const slot = (id: string, label: string, cr = 3) => ({ id, cs: [] as string[], label, cr });
+  const first = [slot('a', 'Pathways 2, 3, 6a, or 7'), slot('b', 'Natural Science Elective', 4), slot('c', 'CS 4XXX')];
+  const second = [slot('x', 'Pathway 2'), slot('y', 'Select three credits in Pathway 4'), slot('z', 'Pathway 1a'), slot('w', 'MATH 4XXX')];
+  const r = doubleMajor(first, second);
+  assert.deepEqual(r.shared, [['a', 'x'], ['b', 'y']]);
+  assert.deepEqual(r.extraItems, ['z', 'w']);
+  // "Pathways Concept 6 - ..." meets "Pathway 6a"; 1a does not meet 1f.
+  assert.equal(doubleMajor([slot('a', 'Pathways Concept 6 - Critique and Practice in Design and the Arts')], [slot('x', 'Pathway 6a')]).shared.length, 1);
+  assert.equal(doubleMajor([slot('a', 'Pathway 1a')], [slot('x', 'Pathway 1f')]).shared.length, 0);
+  assert.equal(switchCost([slot('a', 'Pathway 7')], [slot('x', 'Pathways 2, 3, 6a, or 7')], ['a']).likely.length, 1);
+});
+
+test('planner: catalog for added courses, no browser popups for adding, and the over-limit warning', async () => {
+  const { courseCatalog, PLAN_JS, planData, renderPlan, LIMIT_CREDITS } = await import('../src/site/plan-page.ts');
+  const cat = courseCatalog(real, courses);
+  assert.equal(cat['CS 3114']![0], 'Data Structures and Algorithms');
+  assert.equal(cat['CS 3114']![1], 3);
+  assert.deepEqual(cat['CS 3114']![2], ['&', ['|', 'CS 2114', 'ECE 3514'], ['|', 'CS 2505', 'ECE 2564'], ['|', 'MATH 2534', 'MATH 3034']]);
+  assert.ok(Object.keys(cat).length > 1800);
+  // Adding a course goes through the page's own dialog; duplicates and missing prerequisites are reported there.
+  assert.ok(!PLAN_JS.includes('How many credits is') && !PLAN_JS.includes("alert('Credits must be"));
+  assert.ok(PLAN_JS.includes('is already in this plan') && PLAN_JS.includes('not in this plan: '));
+  const cs = real.find((r) => r.slug === 'computer-science')!;
+  assert.ok(renderPlan(cs, courses).includes('<dialog id="addc"'));
+  assert.equal(planData(cs, courses).limit, LIMIT_CREDITS);
+  assert.equal(LIMIT_CREDITS, 19);
+  assert.ok(PLAN_JS.includes('needs approval from your academic dean'));
+});
+
+test('search palette: words match word starts, short names find majors, codes may be typed without a space', async () => {
+  const { APP_JS } = await import('../src/site/render.ts');
+  const at = APP_JS.indexOf('score = (t, s, kw) =>');
+  const score = (0, eval)('(' + APP_JS.slice(at + 'score = '.length, APP_JS.indexOf('\n    };', at) + 6) + ')') as (t: string, s: string, kw?: string) => number;
+  assert.equal(score('Computer Science degree plan', 'comp sci', 'cs compsci'), 0);
+  assert.equal(score('Computer Science degree plan', 'cs', 'cs compsci'), 0);
+  assert.equal(score('Environmental Economics, Management, and Policy Major degree plan', 'cs', ''), -1);
+  assert.ok(score('Mechanical Engineering degree plan', 'mech e', 'me meche') >= 0);
+  assert.ok(score('CS 2114 Software Design and Data Structures', 'cs 2114') >= 0);
+  assert.ok(score('MATH 1225 Calculus of a Single Variable', 'calc') >= 0);
+  assert.ok(APP_JS.includes("'$1 $2'"));
+});

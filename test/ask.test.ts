@@ -179,3 +179,20 @@ test('"what subject do these majors take" answers from the majors\' plans, not f
   // Questions with a course code keep their old meaning.
   assert.equal(E.answer(ix, 'which majors require PHYS 2305').intent, 'majors');
 });
+
+test('Ask: opinions are out of scope, a bare major lists its options, and a shared course name answers for each course', () => {
+  const easy = E.answer(ix, 'easy gen eds');
+  assert.equal(easy.intent, 'scope');
+  assert.ok(!easy.lines.join(' ').includes('PPWS'));
+  assert.equal(E.answer(ix, 'best professor for calc').intent, 'scope');
+  const fin = E.answer(ix, 'credits for finance');
+  assert.ok(fin.lines[0]!.startsWith('Finance has 4 options') && fin.lines[0]!.includes('Corporate Financial Management'));
+  assert.equal(fin.sources.length, 4);
+  // A word from one option's name still picks that option.
+  assert.ok(E.answer(ix, 'finance investment management credits').lines[0]!.startsWith('Finance Major with Investment Management'));
+  const ds = E.answer(ix, 'data structures prereqs');
+  assert.ok(ds.lines[0]!.startsWith('3 courses match'));
+  assert.ok(ds.lines.some((l) => l.startsWith('CS 2114')) && ds.lines.some((l) => l.startsWith('CS 3114')));
+  // A typed code is never treated as ambiguous.
+  assert.ok(E.answer(ix, 'CS 3114 prereqs').lines[0]!.startsWith('CS 3114 Data Structures and Algorithms lists'));
+});
