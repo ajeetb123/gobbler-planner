@@ -1,5 +1,5 @@
 # Fly.io: the public website (nginx serving the static planner). Deploy with:  fly deploy
-# The API is a second app, see fly.api.toml. Steps and costs: skills.md, "Deploying to Fly.io".
+# The API is a second app, see fly.api.toml.
 app = "gobbler-plan"
 primary_region = "iad" # Ashburn, Virginia
 

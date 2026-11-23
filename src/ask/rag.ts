@@ -14,7 +14,7 @@ export const RAG_DOC_CHARS = 700;
 
 /**
  * Build the chat messages for one question from the top retrieval hits.
- * The wording was picked by trying four prompts on the real model (see skills.md): a worked example made the
+ * The wording was picked by trying four prompts on the real model (bench/rag.eval.ts): a worked example made the
  * 1B model fluent but wrong (it dropped "or" branches and leaked the example), so there is none.
  * Self-contained on purpose: ask-page.ts ships this function's source to the browser. Do not use imports in it.
  */

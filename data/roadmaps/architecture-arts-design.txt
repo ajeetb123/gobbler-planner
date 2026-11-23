@@ -1,5 +1,5 @@
 # Roadmaps read from the Roadmap tab of each major's page in the 2026-2027 VT Academic Catalog, Nov 21, 2026.
-# Converted from the catalog plan grid by script (see skills.md). A credit range like 3-4 is stored as its low end.
+# Converted from the catalog plan grid by script (scripts/catalog/). A credit range like 3-4 is stored as its low end.
 
 ## consumer-studies | Consumer Studies Major | architecture-arts-design/apparel-housing-resource-management/consumer-studies/
 First Year

@@ -165,7 +165,7 @@ export function coursePage(course: string, rs: UdcRow[], f: Fit): CoursePage {
     const a = f.ambiguity.get(key);
     instructors.push({ name, key, ...est(pred.gpa, pred.students), ...spanOf(mine), dist: gradeDist(mine), students: pred.students, sections: pred.sections, ambiguous: !!a?.ambiguous, reason: a?.reason ?? '' });
   }
-  // Sorted by name, never by GPA (see skills.md editing rules).
+  // Sorted by name, never by GPA.
   instructors.sort((a, b) => a.name.localeCompare(b.name));
   earlier.sort((a, b) => a.name.localeCompare(b.name));
 

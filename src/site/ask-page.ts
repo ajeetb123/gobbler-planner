@@ -7,7 +7,7 @@ import type { Site } from './model.ts';
 
 /**
  * The language model for AI answers, run in the visitor's browser by WebLLM (WebGPU). Two builds of the same
- * model: 16-bit when the graphics card supports it (smaller, faster), 32-bit otherwise. About 1.8 to 2 GB; the 1B model was tried first and was wrong too often (see skills.md).
+ * model: 16-bit when the graphics card supports it (smaller, faster), 32-bit otherwise. About 1.8 to 2 GB; the 1B model was tried first and was wrong too often.
  * Ids come from the library's own list (node_modules/@mlc-ai/web-llm, prebuiltAppConfig).
  */
 export const MODEL_F16 = 'Llama-3.2-3B-Instruct-q4f16_1-MLC';

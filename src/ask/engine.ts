@@ -193,7 +193,7 @@ export function askEngine() {
 
     // "I have taken CS 2506. Can I take CS 3214?": the course asked about, plus what the student already has.
     // Worked out here from the and/or tree, exactly. A small language model gets this wrong: in testing it said
-    // yes to all 16 such questions, 8 of which were no (see skills.md).
+    // yes to all 16 such questions, 8 of which were no (bench/rag.eval.ts).
     const ask = TARGET.exec(q.toLowerCase());
     const target = ask ? ix.docs[ix.byCode[ask[1]! + ask[2]!] ?? -1] : undefined;
     const held = [...new Set(words(q).filter((w) => /^[a-z]{2,4}\d{4}h?$/.test(w)).map((w) => w.replace(/^([a-z]+)/, '$1 ').toUpperCase()))].filter((c) => c !== target?.id);

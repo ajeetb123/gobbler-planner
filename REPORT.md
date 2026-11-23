@@ -1,6 +1,6 @@
 # Grade engine report (private part of Gobbler Plan): build, backtest, verdict
 
-> Scope: this report covers only the grade-estimate engine in `src/grades/`, which is NOT part of the public site (the university declined reuse of its grade data). It was written on Nov 15, 2026, before the degree planner grew into the product. For the current project (213 plans, prerequisite checking, scheduler, Ask, API and dashboard, 66 tests) see `README.md` and `skills.md`.
+> Scope: this report covers only the grade-estimate engine in `src/grades/`, which is NOT part of the public site (the university declined reuse of its grade data). It was written on Nov 15, 2026, before the degree planner grew into the product. For the current project (213 plans, prerequisite checking, scheduler, Ask, API and dashboard, 66 tests) see `README.md`.
 
 **Verdict:** the engine is sound and it measurably beats what every VT grade site shows today. That alone will not pull students off RateMyProfessors. The data says this works as a second tab students open next to RMP, not as a replacement for it. One unverified blocker could cap it further: whether the public timetable still shows instructor names.
 

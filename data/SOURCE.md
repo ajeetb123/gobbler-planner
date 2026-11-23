@@ -1,7 +1,7 @@
 # Data provenance
 
 ## Catalog data (used by the public planner)
-`roadmaps/`, `requirements/`, `prereqs.txt` and `no-roadmap.txt` are facts read from the public 2026-2027 Virginia Tech Academic Catalog on Nov 14 and Nov 21, 2026 (see `skills.md` for the method). Permission to reuse catalog content was given to the owner verbally; written confirmation is still pending.
+`roadmaps/`, `requirements/`, `prereqs.txt` and `no-roadmap.txt` are facts read from the public 2026-2027 Virginia Tech Academic Catalog on Nov 14 and Nov 21, 2026 (the method is in `scripts/catalog/`). Permission to reuse catalog content was given to the owner verbally; written confirmation is still pending.
 
 ## Grade data (not in this repository)
 The grade engine in `src/grades/` was backtested on two University DataCommons (UDC) grade distribution exports that other people had republished in public GitHub repos (github.com/jrudman25/CourseSearch and github.com/gsoni1/GradeDistVis). Nothing was scraped from UDC.

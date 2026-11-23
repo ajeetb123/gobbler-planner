@@ -1,4 +1,4 @@
-# Local receiver for catalog pages: a browser tab showing a catalog page posts its own content here; saved under <dir>/<name>. See skills.md.
+# Local receiver for catalog pages: a browser tab showing a catalog page posts its own content here; saved under <dir>/<name>.
 import sys, re
 from http.server import BaseHTTPRequestHandler, HTTPServer
 OUT = sys.argv[1]

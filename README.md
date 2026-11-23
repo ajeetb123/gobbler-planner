@@ -12,7 +12,7 @@ npm run build      # public site into dist/: degree planner only, no grade data
 npm run build:grades  # private build that adds the grade pages
 ```
 
-Results, method and open risks: [REPORT.md](REPORT.md). Working notes for contributors: [skills.md](skills.md).
+Results, method and open risks for the grade engine: [REPORT.md](REPORT.md).
 
 
 ## What it does
