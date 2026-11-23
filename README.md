@@ -1,32 +1,67 @@
 # Gobbler Plan
 
-An unofficial degree planner built from one university's public catalog. Not affiliated with, endorsed by, or sponsored by any university.
+An unofficial degree planner built from one university's public catalog. Pick a major, get its full term-by-term plan, rearrange it, and see prerequisite problems as you go. Free, no login.
 
-A private build can also add course and instructor grade pages: expected section GPA with calibrated 80% ranges, name-collision warnings, and a verdict on whether instructor choice matters. Static site, no runtime dependencies.
+**Live site:** https://gobbler-plan.fly.dev
 
-```bash
-npm install
-npm run check      # typecheck + tests
-npm run backtest   # walk-forward accuracy backtest
-npm run build      # public site into dist/: degree planner only, no grade data
-npm run build:grades  # private build that adds the grade pages
-```
-
-Results, method and open risks for the grade engine: [REPORT.md](REPORT.md).
-
+Not affiliated with, endorsed by, or sponsored by any university. A planning aid, not a degree audit.
 
 ## What it does
 
-- Term-by-term plans for 213 majors and options (128 official roadmaps, 85 drafts built from requirement lists), 3 to 5 years
-- Prerequisite checking with a branch-and-bound scheduler for rearranged plans
-- Switch-major and double-major comparison
-- Ask: a hand-built BM25 retriever with rule-based answers, plus optional retrieval-augmented generation with a language model that runs in the visitor's browser (WebLLM, WebGPU)
-- A small API with anonymous usage counts and a password-protected dashboard
+- **213 majors and options, already laid out.** 128 come from official catalog roadmaps; 85 are built from requirement lists and shown as a suggested order.
+- **2 to 5 year plans.** The 4-year roadmap is rearranged to fit other lengths while keeping prerequisites in order.
+- **Prerequisite and corequisite checks** on every move, including courses you add yourself, with a "can't slip" tag on courses that would delay graduation.
+- **Switch majors or add a second one:** what carries over, what is left, and which majors cost the fewest extra credits.
+- **Share links** that hold the whole plan in the address, so nothing is uploaded.
+- **Ask (beta):** questions like "what do I need before CS 3214?" or "I have CS 2114 and CS 2505, can I take CS 3114?", answered from catalog facts with sources.
+- **A private dashboard** with anonymous usage counts. No accounts, no stored addresses.
 
-## Run in Docker
+## How it is built
+
+| Part | What it is |
+|---|---|
+| Prerequisite parser | Recursive descent over the catalog's "A and (B or C)" text (`src/plan/prereq.ts`) |
+| Scheduler | Greedy packing, local repair, then branch and bound with a load-balance lower bound (`src/plan/roadmap.ts`, `src/plan/optimize.ts`) |
+| Draft plans | Topological ordering by course level for majors with no published roadmap (`src/plan/draft.ts`) |
+| Major comparison | Slot matching by course, elective name and general-education category (`src/plan/switch.ts`) |
+| Ask | Tokenizer, inverted index and BM25 ranking written from scratch, with rule-based answers (`src/ask/engine.ts`) |
+| Site | A static generator in TypeScript, no framework. Tested functions are shipped to the browser as they are, so the code under test is the code that runs (`src/site/`, `scripts/build-site.ts`) |
+| API | `node:http` and the built-in `node:sqlite`, no packages (`server/`) |
+
+TypeScript runs directly on Node (type stripping), so there is no compile step.
+
+## Measured, not assumed
+
+- **79 tests** (`npm run check`), including every official roadmap at every plan length.
+- **Ask retrieval:** 27 of 40 on a hand-written question set (`npm run eval:ask`). That is why the page is labeled beta.
+- **Language model, lookups:** an optional in-browser model (WebLLM, Llama 3.2 3B) rewords single-fact answers. It scored 14 of 15 on first measurement, and 15 of 15 after one fact was reworded on that same set, so read the second number as optimistic (`npm run eval:rag`, needs a local Ollama).
+- **Language model, yes/no reasoning:** on "I have these courses, can I take X?" the model alone got 8 of 16. That path was replaced with an exact check of the prerequisite tree, which is 16 of 16 by construction, and the model is never asked those questions.
+
+## Run it
 
 ```bash
-docker compose up --build   # site and API together at http://localhost:8080
+npm ci
+npm run check    # typecheck + tests
+npm run build    # static site into dist/
 ```
 
-The image is built in two stages (Node builds the static pages, nginx serves them as a non-root user) and has a `/healthz` endpoint. Every push runs the tests, builds the image and smoke-tests the running container in GitHub Actions; pushes to `main` publish it to GitHub Container Registry.
+With Docker, site and API together at http://localhost:8080:
+
+```bash
+docker compose up --build
+```
+
+Set `ADMIN_PASSWORD` in a `.env` file to turn the dashboard on at `/admin`.
+
+## Deployment
+
+Two containers: nginx serving the static site (multi-stage build, non-root) and the API with a volume for its SQLite file. The API has no public address; only the web container reaches it.
+
+- **CI** (GitHub Actions): tests, image build, a smoke test of the running container, and an integration test of both containers together. Pushes to `main` publish the images to GitHub Container Registry.
+- **Hosting** (Fly.io): `fly.toml` for the site and `fly.api.toml` for the API, connected over Fly's private network.
+
+## Data
+
+Course codes, titles, prerequisites and roadmaps are facts restated from the university's public 2026-2027 catalog; see [data/SOURCE.md](data/SOURCE.md) for how they were collected and what was corrected by hand. The catalog is the authority. Confirm any plan with an advisor.
+
+The repository also contains a grade-estimate engine (`src/grades/`, [REPORT.md](REPORT.md)). It needs grade data that is not in this repository and is not part of the public site.
