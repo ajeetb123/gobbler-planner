@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { readdirSync } from 'node:fs';
 import { byCollege, credits, FULL_LOAD_YEARS, parseNoRoadmap, parseRoadmaps, repack, YEAR_OPTIONS } from '../src/plan/roadmap.ts';
-import { checkItems, parseExpr, parsePrereqs, planIssues } from '../src/plan/prereq.ts';
+import { checkItems, parseExpr, parsePrereqs, planIssues, type Expr } from '../src/plan/prereq.ts';
 import { doubleMajor, switchCost, type SwitchItem } from '../src/plan/switch.ts';
 import { draftRoadmap, parseRequirements } from '../src/plan/draft.ts';
 import { baseYears } from '../src/plan/roadmap.ts';
@@ -96,8 +96,10 @@ test('repack with prerequisites: few conflicts left, every course kept, loads st
       conflicts += Object.values(planIssues(check, ids(terms), [])).filter((v) => v.late.length || v.coLate.length).length;
     }
   }
-  // 25 over 512 rearranged layouts on Nov 21, 2026 with the branch-and-bound scheduler (47 greedy, 37 with repair). The page flags them.
-  assert.ok(conflicts <= 25, `conflicts: ${conflicts}`);
+  // 25 over 512 rearranged layouts on Nov 21, 2026 with the branch-and-bound scheduler (47 greedy, 37 with repair).
+  // 26 on Nov 22, 2026, after planIssues started checking the in-plan parts of requirements it used to skip whole.
+  // The page flags them.
+  assert.ok(conflicts <= 26, `conflicts: ${conflicts}`);
 });
 
 test('switchCost: same course carries, same-name electives likely carry, each target slot is used once', () => {
@@ -344,4 +346,37 @@ test('suggested plans: electives in the major field do not come before its first
   const first = psych.terms.findIndex((t) => t.items.some((i) => i.code?.startsWith('PSYC ')));
   const firstElective = psych.terms.findIndex((t) => t.items.some((i) => /within Psychology/.test(i.label)));
   assert.ok(first >= 0 && firstElective >= first, `first PSYC course in term ${first}, first psych elective in term ${firstElective}`);
+});
+
+test('planIssues checks the parts of a requirement that are in the plan, not all or nothing', () => {
+  const items: Record<string, { cs: string[]; pre?: Expr }> = {
+    a: { cs: ['ME 3624'] },
+    b: { cs: ['ME 4015'], pre: ['&', 'ME 3624', 'ME 3414', 'ME 2134'] }, // two parts are off the plan
+    c: { cs: ['PHYS 3704'], pre: ['|', 'PHYS 3324', 'PHYS 9999'] },
+    d: { cs: ['PHYS 3324'] },
+    e: { cs: ['XX 1000'], pre: ['|', 'YY 1000', 'ZZ 1000'] }, // no option in the plan: skipped
+  };
+  const r = planIssues(items, [['b', 'c', 'e'], ['a', 'd']], []);
+  assert.deepEqual(r.b!.late, ['a']);
+  assert.deepEqual(r.c!.late, ['d']);
+  assert.deepEqual(r.e!.late, []);
+  assert.deepEqual(planIssues(items, [['a', 'd'], ['b', 'c', 'e']], []).b!.late, []);
+});
+
+test('fourth review: done credits, named electives, share links, copy, switch totals and address, filter counts', async () => {
+  const { PLAN_JS } = await import('../src/site/plan-page.ts');
+  const { COMPARE_JS } = await import('../src/site/compare-page.ts');
+  const { APP_JS } = await import('../src/site/render.ts');
+  const { switchCost } = await import('../src/plan/switch.ts');
+  assert.ok(PLAN_JS.includes("' to take, '") && PLAN_JS.includes('S.done.includes(id) ? 0 : D.items[id].cr'));
+  assert.ok(PLAN_JS.includes('const checked = () =>') && PLAN_JS.includes('is already in this plan, in '));
+  assert.ok(PLAN_JS.includes("addEventListener('hashchange'"));
+  assert.ok(PLAN_JS.includes("'.\\nOpen it: ' +") || PLAN_JS.includes('Open it: '));
+  assert.ok(PLAN_JS.includes("'Move ' + (S.names[id] || it.code || it.label)"));
+  assert.ok(COMPARE_JS.includes('history.replaceState') && COMPARE_JS.includes(' finished credits fill '));
+  assert.ok(APP_JS.includes(' majors match.'));
+  // First-year writing is general education everywhere: it fills a Pathway 1f slot on a roadmap that does not name it.
+  const r = switchCost([{ id: 'a', cs: ['ENGL 1105'], label: 'First-Year Writing', cr: 3 }], [{ id: 'x', cs: [], label: 'Pathway 1f', cr: 3 }, { id: 'y', cs: [], label: 'Free Elective', cr: 3 }], ['a']);
+  assert.deepEqual(r.likely, [['a', 'x']]);
+  assert.equal(r.freeUsed, 0);
 });

@@ -32,7 +32,7 @@ TypeScript runs directly on Node (type stripping), so there is no compile step.
 
 ## Measured, not assumed
 
-- **79 tests** (`npm run check`), including every official roadmap at every plan length.
+- **84 tests** (`npm run check`), including every official roadmap at every plan length.
 - **Ask retrieval:** 27 of 40 on a hand-written question set (`npm run eval:ask`). That is why the page is labeled beta.
 - **Language model, lookups:** an optional in-browser model (WebLLM, Llama 3.2 3B) rewords single-fact answers. It scored 14 of 15 on first measurement, and 15 of 15 after one fact was reworded on that same set, so read the second number as optimistic (`npm run eval:rag`, needs a local Ollama).
 - **Language model, yes/no reasoning:** on "I have these courses, can I take X?" the model alone got 8 of 16. That path was replaced with an exact check of the prerequisite tree, which is 16 of 16 by construction, and the model is never asked those questions.

@@ -228,4 +228,6 @@ body:before{background-image:repeating-linear-gradient(180deg,transparent 0 31px
 .side #conf{border:0;padding:0;background:none;border-radius:0}
 .year>h2{gap:0}
 .side #conf .lnk{white-space:nowrap}
+/* Dark mode: course-code labels use their subject color, which is too dark to read on a dark card. Lighten the text only. */
+:root[data-theme=dark] .it .nm a{color:color-mix(in srgb,var(--c,var(--ink)) 45%,#fff)}
 `;

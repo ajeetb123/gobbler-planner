@@ -45,8 +45,12 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
     const m = /pathways?\s*(?:concepts?\s*)?(\d[a-z]?(?:\s*(?:,|or|and|\/)\s*(?:or\s*)?\d[a-z]?)*)/.exec(l);
     return m ? m[1]!.match(/\d[a-z]?/g) ?? [] : /natural science/.test(l) ? ['4'] : [];
   };
+  // Named courses every major takes for general education: first-year writing and its speech alternative are
+  // Pathways concept 1f, so they fill a "Pathway 1f" slot on a roadmap that does not name them.
+  const KNOWN: Record<string, string> = { 'ENGL 1105': '1f', 'ENGL 1106': '1f', 'COMM 1015': '1f', 'COMM 1016': '1f' };
+  const conceptsOf = (i: SwitchItem) => [...i.cs.flatMap((c) => (KNOWN[c] ? [KNOWN[c]!] : [])), ...concepts(i.label)];
   const sameConcept = (a: string, b: string) => a === b || (a[0] === b[0] && (a.length === 1 || b.length === 1));
-  const genEd = (a: SwitchItem, b: SwitchItem) => concepts(a.label).some((x) => concepts(b.label).some((y) => sameConcept(x, y)));
+  const genEd = (a: SwitchItem, b: SwitchItem) => conceptsOf(a).some((x) => conceptsOf(b).some((y) => sameConcept(x, y)));
   const used: Record<string, boolean> = {};
   const res: SwitchResult = { carried: [], likely: [], free: [], freeUsed: 0, unmatched: [], counted: 0, kept: 0, doneCredits: 0, remaining: 0 };
   const mine = from.filter((i) => done.includes(i.id));
@@ -55,10 +59,10 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
     res.doneCredits += i.cr;
     const named = i.cs.length > 0;
     const hit = to.find((t) => !used[t.id] && (named ? t.cs.some((c) => i.cs.includes(c)) : t.cs.length === 0 && norm(t.label) === norm(i.label)))
-      ?? (named ? undefined : to.find((t) => !used[t.id] && t.cs.length === 0 && genEd(i, t)));
+      ?? to.find((t) => !used[t.id] && t.cs.length === 0 && genEd(i, t));
     if (!hit) { left.push(i); continue; }
     used[hit.id] = true;
-    (named ? res.carried : res.likely).push([i.id, hit.id]);
+    (named && hit.cs.length ? res.carried : res.likely).push([i.id, hit.id]);
     res.counted += hit.cr;
     res.kept += i.cr;
   }
@@ -109,15 +113,19 @@ export function doubleMajor(first: SwitchItem[], second: SwitchItem[]): DoubleRe
     const m = /pathways?\s*(?:concepts?\s*)?(\d[a-z]?(?:\s*(?:,|or|and|\/)\s*(?:or\s*)?\d[a-z]?)*)/.exec(l);
     return m ? m[1]!.match(/\d[a-z]?/g) ?? [] : /natural science/.test(l) ? ['4'] : [];
   };
+  // Named courses every major takes for general education: first-year writing and its speech alternative are
+  // Pathways concept 1f, so they fill a "Pathway 1f" slot on a roadmap that does not name them.
+  const KNOWN: Record<string, string> = { 'ENGL 1105': '1f', 'ENGL 1106': '1f', 'COMM 1015': '1f', 'COMM 1016': '1f' };
+  const conceptsOf = (i: SwitchItem) => [...i.cs.flatMap((c) => (KNOWN[c] ? [KNOWN[c]!] : [])), ...concepts(i.label)];
   const sameConcept = (a: string, b: string) => a === b || (a[0] === b[0] && (a.length === 1 || b.length === 1));
-  const genEd = (a: SwitchItem, b: SwitchItem) => concepts(a.label).some((x) => concepts(b.label).some((y) => sameConcept(x, y)));
+  const genEd = (a: SwitchItem, b: SwitchItem) => conceptsOf(a).some((x) => conceptsOf(b).some((y) => sameConcept(x, y)));
   const used: Record<string, boolean> = {};
   const shared: Array<[string, string]> = [];
   for (const a of first) {
     if (isFree(a)) continue;
     const named = a.cs.length > 0;
     const hit = second.find((b) => !used[b.id] && !isFree(b) && (named ? b.cs.some((c) => a.cs.includes(c)) : b.cs.length === 0 && norm(b.label) === norm(a.label)))
-      ?? (named ? undefined : second.find((b) => !used[b.id] && !isFree(b) && b.cs.length === 0 && genEd(a, b)));
+      ?? second.find((b) => !used[b.id] && !isFree(b) && b.cs.length === 0 && genEd(a, b));
     if (hit) { used[hit.id] = true; shared.push([a.id, hit.id]); }
   }
   const sum = (xs: SwitchItem[]) => xs.reduce((t, i) => t + i.cr, 0);

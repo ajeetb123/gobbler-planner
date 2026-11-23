@@ -74,8 +74,10 @@ export interface Issue {
 
 /**
  * Check a laid-out plan. `terms` is item ids per term; `done` items count as already taken.
- * A requirement is checked only if the courses in this plan can meet it at all. Placement tests, honors
- * versions and courses off the roadmap cannot be seen here, so those requirements are skipped, not flagged.
+ * Only the parts of a requirement that this plan's courses can meet are checked: in an "and", every part with a
+ * course in the plan is checked and parts with none are skipped; in an "or", the options in the plan are checked,
+ * and the whole "or" is skipped only when none of its options is in the plan (a placement test, an honors
+ * version or a course off the roadmap may cover it, and this page cannot see those).
  * Self-contained on purpose: plan-page.ts ships this function's source to the browser. Do not use imports in it.
  */
 export function planIssues(items: Record<string, CheckItem>, terms: string[][], done: string[]): Record<string, Issue> {
@@ -93,14 +95,23 @@ export function planIssues(items: Record<string, CheckItem>, terms: string[][], 
     const tt = done.includes(id) ? -1 : t;
     for (const c of items[id]!.cs) if (at[c] === undefined || tt < at[c]) { at[c] = tt; owner[c] = id; }
   }));
+  // The part of e that courses in this plan can meet, or null when none can. In an "and" the parts with nothing
+  // in the plan drop out; in an "or" only the options in the plan remain.
+  const inPlanPart = (e: Expr): Expr | null => {
+    if (typeof e === 'string') return at[e] !== undefined ? e : null;
+    const parts = e.slice(1).map((x) => inPlanPart(x)).filter((x): x is Expr => x !== null);
+    if (parts.length === 0) return null;
+    return parts.length === 1 ? parts[0]! : ([e[0], ...parts] as Expr);
+  };
   const out: Record<string, Issue> = {};
   const edges: Record<string, Array<[string, number]>> = {};
   for (const id in where) out[id] = { late: [], coLate: [], unlocks: [], needs: [] };
   for (const id in where) {
     if (done.includes(id)) continue;
     const it = items[id]!, t = where[id]!;
-    ([[it.pre, 1, out[id]!.late], [it.co, 0, out[id]!.coLate]] as const).forEach(([e, gap, list]) => {
-      if (!e || !ev(e, (c) => at[c] !== undefined)) return;
+    ([[it.pre, 1, out[id]!.late], [it.co, 0, out[id]!.coLate]] as const).forEach(([full, gap, list]) => {
+      const e = full ? inPlanPart(full) : null;
+      if (!e) return;
       const ok = (c: string) => at[c] !== undefined && at[c] <= t - gap;
       const inPlan = [...new Set(leaves(e, []).filter((c) => at[c] !== undefined && owner[c] !== id).map((c) => owner[c]!))];
       // An item is needed when the requirement cannot be met without it.

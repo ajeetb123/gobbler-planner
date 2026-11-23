@@ -243,7 +243,8 @@ export const PLAN_JS = `
     board = $('board'),
     yearsEl = $('years'),
     over = $('over');
-  const cr = (ids) => ids.reduce((a, id) => a + D.items[id].cr, 0),
+  // Credits still to take: done courses are not part of a term's load.
+  const cr = (ids) => ids.reduce((a, id) => a + (S.done.includes(id) ? 0 : D.items[id].cr), 0),
     short = (l) =>
       l
         .replace(' year, ', ' ')
@@ -351,9 +352,24 @@ export const PLAN_JS = `
     AM.hidden = !m;
   };
   // The term a course already sits in (as itself, not as an alternative in some slot), or ''.
-  const whereIs = (code) => {
-    const t = terms().find((t) => t.ids.some((id) => D.items[id].code === code));
+  const whereIs = (code, except) => {
+    const t = terms().find((t) =>
+      t.ids.some((id) => id !== except && (D.items[id].code === code || (S.names[id] && codeOf(S.names[id]) === code))),
+    );
     return t ? t.label : '';
+  };
+  // A named elective whose name starts with a catalog code is checked as that course: prerequisites, corequisites,
+  // and the courses it stands for. Returns a copy of D.items with those slots filled in.
+  const checked = () => {
+    const o = {};
+    for (const id in D.items) {
+      const code = S.names[id] && codeOf(S.names[id]),
+        info = code && COURSES && COURSES[code];
+      o[id] = info
+        ? { ...D.items[id], cs: [code], pre: info[2] || undefined, co: info[3] || undefined, named: code, ncr: info[1] }
+        : D.items[id];
+    }
+    return o;
   };
   const suggest = () => {
     AS.textContent = '';
@@ -428,6 +444,8 @@ export const PLAN_JS = `
   let naming = null;
   function openName(id) {
     naming = id;
+    $('nc-m').hidden = true;
+    loadCourses();
     $('nc-t').textContent = 'For "' + D.items[id].label + '". Leave it empty to clear.';
     NQ.value = S.names[id] || '';
     ND.showModal();
@@ -440,6 +458,13 @@ export const PLAN_JS = `
   $('nc-f').addEventListener('submit', (e) => {
     e.preventDefault();
     if (!naming || !D.items[naming]) return ND.close();
+    const code = codeOf(NQ.value),
+      at = code && COURSES && COURSES[code] ? whereIs(code, naming) : '';
+    if (at) {
+      $('nc-m').textContent = code + ' is already in this plan, in ' + at + '.';
+      $('nc-m').hidden = false;
+      return;
+    }
     snap();
     if (text(NQ.value, 60)) S.names[naming] = text(NQ.value, 60);
     else delete S.names[naming];
@@ -465,14 +490,15 @@ export const PLAN_JS = `
     board.textContent = '';
     over.textContent = '';
     const ts = terms(),
+      E = checked(),
       I = planIssues(
-        D.items,
+        E,
         ts.map((t) => t.ids),
         S.done,
       ),
       nm2 = (j) => D.items[j].code || D.items[j].label,
       // Every course code some slot in the plan stands for (the course, its alternatives, its listed choices).
-      inPlan = new Set(ts.flatMap((t) => t.ids).flatMap((id) => D.items[id].cs || []));
+      inPlan = new Set(ts.flatMap((t) => t.ids).flatMap((id) => E[id].cs || []));
     let doneCr = 0,
       bad = 0,
       firstBad = null;
@@ -500,15 +526,19 @@ export const PLAN_JS = `
         list = el('div');
       card.id = 't' + ti;
       let c = 0,
+        dn = 0,
         gs = 0,
         gw = 0,
         low = 0,
         tb = 0;
       t.ids.forEach((id) => {
-        const it = D.items[id],
+        const it = E[id],
           done = S.done.includes(id);
-        c += it.cr;
-        if (done) doneCr += it.cr;
+        // A course ticked as done (AP, IB, transfer, or already taken) is not a seat in this term: it does not count toward the term's load.
+        if (done) {
+          doneCr += it.cr;
+          dn += it.cr;
+        } else c += it.cr;
         if (it.g != null) {
           gs += it.g * it.cr;
           gw += it.cr;
@@ -595,7 +625,10 @@ export const PLAN_JS = `
         // An added course can need courses that are nowhere in this plan. For roadmap courses such a requirement
         // is skipped (a placement test often covers it); for a course the student chose to add, it is said out loud.
         let missing = false;
-        if (it.custom && !done)
+        // A catalog course written into an elective slot whose credits differ from the slot's: say so.
+        if (it.named && it.ncr && it.ncr !== it.cr && !done)
+          mid.append(el('div', 'mut', it.named + ' is ' + it.ncr + ' cr; this slot asks for ' + it.cr + '.'));
+        if ((it.custom || it.named) && !done)
           [
             [it.pre, 'Prerequisites'],
             [it.co, 'Corequisites'],
@@ -613,8 +646,8 @@ export const PLAN_JS = `
         const mv = el('div', 'mv'),
           l = el('button', null, '\\u2190'),
           r = el('button', null, '\\u2192');
-        l.setAttribute('aria-label', 'Move to the term before');
-        r.setAttribute('aria-label', 'Move to the term after');
+        l.setAttribute('aria-label', 'Move ' + (S.names[id] || it.code || it.label) + ' to the term before');
+        r.setAttribute('aria-label', 'Move ' + (S.names[id] || it.code || it.label) + ' to the term after');
         l.title = 'Earlier';
         r.title = 'Later';
         l.disabled = ti === 0;
@@ -635,7 +668,7 @@ export const PLAN_JS = `
       load.append(fill);
       card.append(
         el('h3', null, t.label.split(', ')[1] || t.label),
-        el('div', 'mut', c + ' credits' + (gw ? ' · typical GPA ' + (gs / gw).toFixed(2) : '')),
+        el('div', 'mut', c + ' credits' + (dn ? ' to take, ' + dn + ' done' : '') + (gw ? ' · typical GPA ' + (gs / gw).toFixed(2) : '')),
         load,
       );
       if (c > D.limit && !t.label.includes('Summer'))
@@ -937,21 +970,33 @@ export const PLAN_JS = `
   $('balance').onclick = (e) => {
     gpTrack('balance');
     const n = balance();
-    say(e.target, n ? 'Moved ' + n + ' elective' + (n > 1 ? 's' : '') : 'Already even');
+    say(e.target, n ? 'Moved ' + n + ' elective' + (n > 1 ? 's' : '') : 'Already even: terms are within 3 credits');
   };
   $('copy').onclick = async (e) => {
+    const all = terms().flatMap((t) => t.ids),
+      total = all.reduce((a, id) => a + D.items[id].cr, 0),
+      doneC = all.filter((id) => S.done.includes(id)).reduce((a, id) => a + D.items[id].cr, 0),
+      conf = $('conf').textContent.split('.')[0];
     const txt =
       D.name +
       ' plan (' +
       S.years +
       ' years)\\n' +
+      total +
+      ' credits, ' +
+      doneC +
+      ' done. ' +
+      conf +
+      '.\\nOpen it: ' +
+      shareUrl() +
+      '\\n\\n' +
       terms()
         .map(
           (t) =>
             t.label +
             ' (' +
             cr(t.ids) +
-            ' cr)\\n' +
+            ' cr to take)\\n' +
             t.ids
               .map(
                 (id) =>
@@ -973,9 +1018,10 @@ export const PLAN_JS = `
       say(e.target, 'Copy blocked');
     }
   };
-  $('share').onclick = async (e) => {
-    const p = S.pos[S.years] || {},
-      u =
+  // The link that holds this whole plan (see the hash reader near the top).
+  const shareUrl = () => {
+    const p = S.pos[S.years] || {};
+    return (
         location.href.split('#')[0] +
         '#y=' +
         S.years +
@@ -996,7 +1042,11 @@ export const PLAN_JS = `
         (S.extra.length
           ? '&x=' +
             encodeURIComponent(S.extra.map((e) => e.t + '~' + e.cr + '~' + e.label.replace(/[|]/g, ' ')).join('|'))
-          : '');
+          : '')
+    );
+  };
+  $('share').onclick = async (e) => {
+    const u = shareUrl();
     gpTrack('share');
     try {
       await navigator.clipboard.writeText(u);
@@ -1028,11 +1078,15 @@ export const PLAN_JS = `
   document.body.classList.add('boot');
   setTimeout(() => document.body.classList.remove('boot'), 1500);
   // A saved or shared plan with added catalog courses needs the catalog to check their prerequisites.
-  if (S.extra.some((e) => codeOf(e.label)))
+  if (S.extra.some((e) => codeOf(e.label)) || Object.values(S.names).some((n) => codeOf(n)))
     loadCourses().then(() => {
       S = clean(S);
       draw();
     });
+  // Opening a share link in a tab that already shows this plan only changes the hash: load it like a fresh visit.
+  window.addEventListener('hashchange', () => {
+    if (new URLSearchParams(location.hash.slice(1)).has('y')) location.reload();
+  });
   draw();
 })();
 `;
@@ -1075,6 +1129,7 @@ ${r.draft ? `<p class="note"><b>Suggested order.</b> These are the official requ
 <div class="row"><button type="button" class="btn" id="ac-x">Cancel</button><button type="submit" class="btn pri">Add to plan</button></div></form></dialog>
 <dialog id="namec" aria-labelledby="nc-h"><form id="nc-f" novalidate><h3 id="nc-h">Which course will you take?</h3><p class="mut" id="nc-t"></p>
 <label for="nc-q">Course</label><input class="sel" id="nc-q" autocomplete="off" maxlength="60" placeholder="For example PHYS 2305">
+<p class="flag" id="nc-m" role="alert" hidden></p>
 <div class="row"><button type="button" class="btn" id="nc-x">Cancel</button><button type="submit" class="btn pri">Save</button></div></form></dialog>
 <script type="application/json" id="plan-data">${json}</script>`;
   return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a ${r.name} degree term by term from the official ${r.draft ? 'requirements' : 'roadmap'}, with prerequisite checks.`, '../',
@@ -1090,7 +1145,7 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, 
   const none = byCollege(noRoadmap).map(([college, xs]) => `<p class="mut"><b>${esc(college)}:</b> ${xs.map((x) => `<a href="${CATALOG}${esc(x.catalogPath)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a>`).join(' · ')}</p>`).join('');
   return layout(`${home ? 'Unofficial degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your degree from the official roadmap: 2 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
     `<div class="intro"><h1>Plan your degree, term by term</h1><p>Pick your major. You get its catalog roadmap laid out by term, and it flags prerequisite problems as you move courses around. No login.</p></div>
-<input class="sel filter" id="mf" type="search" placeholder="Find your major: computer science, finance, biology..." aria-label="Filter majors" autocomplete="off"><p class="mut" id="mfnone" hidden>No major matches that. Try a shorter word.</p><p class="mut">${roadmaps.length} majors and options. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
+<input class="sel filter" id="mf" type="search" placeholder="Find your major: computer science, finance, biology..." aria-label="Filter majors" autocomplete="off"><p class="mut" id="mfnone" hidden>No major matches that. Try part of a name, like "comp" or "bio".</p><p class="mut"><span id="mfn" data-all="${roadmaps.length}">${roadmaps.length} majors and options.</span> Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
 ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} catalog programs have no roadmap and could not be turned into a draft. Each link opens its catalog page.</p>${none}` : ''}
 <div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
 <a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
@@ -1109,7 +1164,7 @@ export function renderPlanAbout(): string {
 <h2>Roadmaps</h2><p>Each major's plan is the official 8-semester roadmap from the university's 2026-2027 catalog. The 4-year view is that roadmap unchanged. Every term's credits are checked against the totals the catalog prints.</p>
 <h2>Majors without a published roadmap</h2><p>About 85 majors have no term-by-term roadmap in the catalog, only a list of requirements. For those, the courses and credits shown are the official requirements, and the planner suggests an order: courses go by level (1000-level first), a course waits for its prerequisites, and Pathways and elective credits are spread evenly. Where the catalog lists fewer credits than the degree total, the gap is shown as "Pathways, electives and other requirements" slots. Each of these plans says that its order is a suggestion.</p>
 <h2>2 to 5 years</h2><p>Other lengths spread the same courses over more or fewer terms. Plans under 4 years use summer terms at half load. A course waits until its prerequisites sit in an earlier term, and corequisites move together. The planner does not know which term a course is offered.</p>
-<h2>Prerequisite checks</h2><p>Prerequisites and corequisites are read from each course's catalog description. Move a course ahead of something it needs and a note appears under it. Three limits: a requirement only placement scores or off-roadmap courses can meet is not checked; a requirement the official roadmap itself does not follow is not checked; and a few corequisites the catalog writes in free text are skipped.</p>
+<h2>Prerequisite checks</h2><p>Prerequisites and corequisites are read from each course's catalog description. Move a course ahead of something it needs and a note appears under it. What is checked: every part of a requirement that a course in your plan can meet. If a course needs A and B and only A is in your plan, A is still checked; if it needs A or B and neither is in your plan (a placement test or an honors version may cover it), that part is skipped. Courses you add yourself, or write into an elective slot, are also flagged when they need something that is not in the plan at all. Not checked: a requirement the official roadmap itself does not follow, and a few corequisites the catalog writes in free text.</p>
 <h2>"Can't slip"</h2><p>A course gets this tag when later courses chain off it and there is no spare term left: moving it one term later pushes the end of the chain past your last term.</p>
 <h2>Switching majors</h2><p>The comparison matches what you've finished against the other major's roadmap: same course first, then elective slots with the same name, then free electives. It is an estimate from the two roadmaps. The department you're moving into decides what really counts.</p>
 <h2>Ask</h2><p>The Ask page answers questions like "what do I need before CS 3214?". A search ranking built for this site finds the course or major you mean, and fixed rules assemble the first answer from the catalog facts stored for it, with links to the sources. That part uses no AI. You can also turn on AI answers: a small language model then runs inside your own browser and writes a short answer from the same retrieved facts (retrieval-augmented generation). Turning it on downloads about 2 GB once, straight from the model's public host to your browser; your questions still stay on your device. Either answer can be wrong, so check the catalog link.</p>

@@ -226,7 +226,8 @@ export const APP_JS = `
   if (mf)
     mf.addEventListener('input', () => {
       const w = mf.value.toLowerCase().split(/\\s+/).filter(Boolean);
-      let any = false;
+      let any = false,
+        shown = 0;
       document.querySelectorAll('.majors').forEach((g) => {
         let n = 0;
         g.querySelectorAll('a').forEach((a) => {
@@ -236,10 +237,18 @@ export const APP_JS = `
           if (ok) n++;
         });
         g.hidden = !n;
-        if (g.previousElementSibling && g.previousElementSibling.classList.contains('col'))
-          g.previousElementSibling.hidden = !n;
+        const h = g.previousElementSibling;
+        if (h && h.classList.contains('col')) {
+          h.hidden = !n;
+          // The college's count shows how many of its majors match.
+          const c = h.querySelector('span');
+          if (c) c.textContent = String(n);
+        }
+        shown += n;
         if (n) any = true;
       });
+      const mfn = document.getElementById('mfn');
+      if (mfn) mfn.textContent = w.length ? shown + ' of ' + mfn.dataset.all + ' majors match.' : mfn.dataset.all + ' majors and options.';
       document.getElementById('mfnone').hidden = any;
     });
   q.addEventListener('keydown', (e) => {

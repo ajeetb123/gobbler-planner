@@ -230,8 +230,15 @@ export const COMPARE_JS = `
     $('rankp').textContent =
       mode === 'double'
         ? 'The ${RANK_SHOWN} majors that add the fewest credits to your first one. Tap one to see it.'
-        : 'The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.';
-    $('rankh').hidden = $('rankp').hidden = !a;
+        : 'The ${RANK_SHOWN} majors where the most of your credits fill real requirements, not just free electives. Tap one to compare.';
+    $('rankh').hidden = $('rankp').hidden = !a || a === b;
+    // Keep the choices in the address, so a refresh or a shared link opens the same comparison.
+    const st = new URLSearchParams();
+    if (F.value) st.set('from', F.value);
+    if (T.value) st.set('to', T.value);
+    if (mode === 'double') st.set('mode', 'double');
+    if (W.value && F.value) st.set('done', W.value);
+    history.replaceState(null, '', st.toString() ? '#' + st : location.pathname);
     if (!a) {
       $('donerow').hidden = true;
       out.append(el('p', 'note', mode === 'double' ? 'Choose your first major to start.' : 'Choose your current major to start.'));
@@ -247,12 +254,14 @@ export const COMPARE_JS = `
     }
     if (!b) out.append(el('p', 'note', 'Now choose the major you are thinking about, or tap one from the list below.'));
     else {
+    // All figures in this lede come from the same two sums, so they add up: filled + left = the new major's total.
     const r = switchCost(arr(a), arr(b), done),
-      stay = a.total - r.doneCredits,
+      sum = (m) => arr(m).reduce((t, i) => t + i.cr, 0),
+      stay = sum(a) - r.doneCredits,
       extra = tm(r.remaining) - tm(stay),
       lede = el('p', 'lede');
     lede.textContent = r.doneCredits
-      ? r.kept + ' of your ' + r.doneCredits + ' finished credits count toward ' + b.name + '.'
+      ? 'Your ' + r.doneCredits + ' finished credits fill ' + r.counted + ' of the ' + (r.counted + r.remaining) + ' credits ' + b.name + ' needs.'
       : 'Nothing finished yet, so nothing is lost by switching.';
     lede.append(
       el(
@@ -298,11 +307,12 @@ export const COMPARE_JS = `
     }
     const rows = D.filter((m) => m !== a)
       .map((m) => ({ m, r: switchCost(arr(a), arr(m), done) }))
-      .sort((x, y) => x.r.remaining - y.r.remaining);
+      // Rank by credits that fill named requirements; credits that only land in free electives count least.
+      .sort((x, y) => y.r.counted - y.r.freeUsed - (x.r.counted - x.r.freeUsed) || x.r.remaining - y.r.remaining);
     rows.slice(0, ${RANK_SHOWN}).forEach(({ m, r }) => {
       const bt = el('button');
       bt.type = 'button';
-      bt.append(el('b', null, m.name), el('span', null, r.kept + ' count · ' + r.remaining + ' left'));
+      bt.append(el('b', null, m.name), el('span', null, r.counted - r.freeUsed + ' fill requirements · ' + r.remaining + ' left'));
       if (m === b) bt.setAttribute('aria-current', 'true');
       bt.onclick = () => {
         T.value = m.slug;
@@ -331,6 +341,7 @@ export const COMPARE_JS = `
   };
   W.onchange = draw;
   fillDone();
+  if (h.get('done') && [...W.options].some((o) => o.value === h.get('done'))) W.value = h.get('done');
   draw();
 })();
 `;
