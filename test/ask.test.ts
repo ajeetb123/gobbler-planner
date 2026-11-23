@@ -81,7 +81,7 @@ test('real knowledge base: the example questions on the page all get a real answ
 test('ask page: script is valid JavaScript, explains what is and is not AI, and carries the site name rules', () => {
   assert.doesNotThrow(() => new Function(ASK_JS));
   const text = renderAsk().replace(/<[^>]+>/g, ' ');
-  assert.ok(text.includes('no AI is involved in that part') && text.includes('retrieval-augmented generation'));
+  assert.ok(text.includes('by fixed rules, not AI') && text.includes('Built with Llama'));
   // AI answers are opt-in: the page must say what turning them on costs.
   assert.ok(text.includes('Turn on AI answers') && text.includes('downloads about 2 GB'));
   assert.ok(text.includes('Not affiliated with, endorsed by, or sponsored by any university'));

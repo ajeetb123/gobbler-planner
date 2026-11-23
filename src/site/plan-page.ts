@@ -487,7 +487,7 @@ export const PLAN_JS = `
           n = board.querySelectorAll('.year').length;
         y.style.setProperty('--i', String(n));
         const h = el('h2');
-        h.append(el('span', null, String(n + 1).padStart(2, '0')), yr + ' year');
+        h.append(yr + ' year');
         y.append(h);
         yrow = el('div', 'yrow');
         y.append(yrow);
@@ -1056,11 +1056,11 @@ export function renderPlan(r: Roadmap, courses: Map<string, CourseInfo>, site?: 
 </details>
 <div class="over" id="over" hidden></div>
 </aside><div class="stage">
-${r.draft ? `<p class="note"><b>Suggested order.</b> The courses and credits here are this major's official requirements. The catalog does not say which term to take each one in, so the term-by-term order is a suggestion: by course level, with prerequisites first. Confirm it with your advisor.</p>` : ''}
+${r.draft ? `<p class="note"><b>Suggested order.</b> These are the official requirements, but the catalog gives no term order for this major, so the term-by-term order is a suggestion.</p>` : ''}
 <p class="note warn" id="shared" hidden><b>You're viewing a shared plan.</b> Changes you make here are not saved. <button type="button" class="btn" id="keep">Keep as my plan</button></p>
-<p class="note warn" id="note" hidden><b>This layout is a rearrangement, not an official plan.</b> It spreads the ${r.draft ? 'suggested plan' : '4-year roadmap'} over the length you chose and keeps prerequisites in order where it can. It does not know which term a course is offered. Take it to your advisor before you rely on it.</p>
-<p class="note warn" id="fast" hidden><b>A plan this short only works if you already have a lot of credit.</b> It puts far more than a normal load in every term, and prerequisite chains may not fit. Tick off what you bring in (transfer, AP, IB, dual enrollment), then see what is left.</p>
-<p class="note" id="summer" hidden>Finishing in under 4 years uses summer terms. AP, IB or transfer credit can replace some of them: tick those courses as done.</p>
+<p class="note warn" id="note" hidden>Rearranged from the ${r.draft ? 'suggested plan' : '4-year roadmap'}. It doesn't know which terms a course is offered.</p>
+<p class="note warn" id="fast" hidden>This only works with a lot of AP, IB or transfer credit. Tick what you have.</p>
+<p class="note" id="summer" hidden>Under 4 years means summer terms.</p>
 <noscript><p class="note warn">The planner needs JavaScript. The official ${r.draft ? 'requirements are' : 'roadmap is'} on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <details class="help"><summary>How to use this page</summary>
@@ -1089,14 +1089,8 @@ export function renderPlanIndex(roadmaps: Roadmap[], site?: Site, home = false, 
   const drafts = roadmaps.filter((r) => r.draft).length;
   const none = byCollege(noRoadmap).map(([college, xs]) => `<p class="mut"><b>${esc(college)}:</b> ${xs.map((x) => `<a href="${CATALOG}${esc(x.catalogPath)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a>`).join(' · ')}</p>`).join('');
   return layout(`${home ? 'Unofficial degree planner' : 'Degree planner'} · ${brand(site)}`, 'Plan your degree from the official roadmap: 2 to 5 years, prerequisite checks, major-switch comparison, shareable link. No login.', home ? '' : '../', '',
-    `<div class="hero split"><div><h1>Plan Your Whole Degree, <em>Term By Term</em></h1><p>Start from your major's official roadmap. Drag courses between terms, catch prerequisite problems as you go, and send the plan to your advisor as a link. Free, no login.</p>
-<div class="cta"><a class="btn pri big" href="#majors">Find your major</a><a class="btn big" href="${home ? '' : '../'}ask.html">Ask about a course</a></div>
-<div class="facts"><div><b>${roadmaps.length}</b>majors and options</div><div><b>2 to 5</b>year plans</div><div><b>0</b>accounts needed</div></div></div>
-<div class="mock" aria-hidden="true"><div class="mt"><i></i><i></i><i></i></div><div class="mg">
-<div class="mc" style="background:var(--fall);border-color:var(--fall-b)"><b style="color:var(--fall-t)">Fall</b><div class="mi" style="--c:#861f41"><u>CS 1114</u>Software Design</div><div class="mi" style="--c:#b8860b"><u>MATH 1225</u>Calculus</div><div class="mi" style="--c:#6b7a2a"><u>ENGE 1215</u>Foundations</div></div>
-<div class="mc" style="background:var(--spring);border-color:var(--spring-b)"><b style="color:var(--spring-t)">Spring</b><div class="mi" style="--c:#861f41"><u>CS 2114</u>Data Structures</div><div class="mi" style="--c:#b8860b"><u>MATH 1226</u>Calculus</div><div class="mi" style="--c:#c2552d"><u>ENGL 1106</u>Writing</div></div>
-</div><div class="mp"><span>32 of 123 credits</span><i></i></div></div></div>
-<h2 id="majors">Choose a major</h2><input class="sel filter" id="mf" type="search" placeholder="Type to filter, for example: computer, finance, biology" aria-label="Filter majors" autocomplete="off"><p class="mut" id="mfnone" hidden>No major matches that. Try a shorter word.</p><p class="mut">${roadmaps.length} majors and options from the 2026-2027 catalog${drafts ? `. For ${drafts} of them the catalog lists requirements without a term order, so the order shown is a suggested one` : ''}. Press <kbd>/</kbd> to search by name. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
+    `<div class="intro"><h1>Plan your degree, term by term</h1><p>Pick your major. You get its catalog roadmap laid out by term, and it flags prerequisite problems as you move courses around. No login.</p></div>
+<input class="sel filter" id="mf" type="search" placeholder="Find your major: computer science, finance, biology..." aria-label="Filter majors" autocomplete="off"><p class="mut" id="mfnone" hidden>No major matches that. Try a shorter word.</p><p class="mut">${roadmaps.length} majors and options. Jump to: ${groups.map(([c]) => `<a href="#${esc(c.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(c)}</a>`).join(' · ')}</p>${majors}
 ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} catalog programs have no roadmap and could not be turned into a draft. Each link opens its catalog page.</p>${none}` : ''}
 <div class="paths"><a href="${pre}compare.html"><b>Thinking of switching?</b><span>Pick two majors and what you've finished. See what carries over and how many credits are left.</span></a>
 <a href="${home ? '' : '../'}about.html"><b>How it works</b><span>Where the roadmaps and prerequisites come from, what is checked, and what is not.</span></a></div>`, site, 'plan');
@@ -1105,7 +1099,7 @@ ${none ? `<h2>Not in the planner</h2><p class="mut">These ${noRoadmap.length} ca
 /** Shown by nginx for any address that is not a page (deploy/nginx.conf, error_page 404). Links are absolute because the bad address can be at any depth. */
 export function renderNotFound(): string {
   return layout(`Page not found · ${brand()}`, 'That page does not exist.', '/', '',
-    `<div class="hero"><h1>That page <em>isn't here</em>.</h1><p>The link may be old or mistyped. Your saved plans are safe: they live in your browser.</p></div>
+    `<div class="hero"><h1>That page isn't here</h1><p>The link may be old or mistyped. Your saved plans are safe: they live in your browser.</p></div>
 <div class="paths"><a href="/index.html"><b>Find your major</b><span>All 213 plans, with a filter box.</span></a><a href="/ask.html"><b>Ask a question</b><span>Prerequisites, what a course unlocks, which majors need it.</span></a></div>`, undefined, 'plan');
 }
 

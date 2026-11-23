@@ -346,6 +346,6 @@ export function renderCompare(roadmaps: Roadmap[], courses: Map<string, CourseIn
 <noscript><p class="note warn">This page needs JavaScript.</p></noscript>
 <div id="out" aria-live="polite"></div>
 <h2 id="rankh">Where your credits go furthest</h2><p class="mut" id="rankp">The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.</p><div class="majors" id="rank"></div>
-<p class="note">An estimate from the two roadmaps: same course first, then elective slots with the same name, then free electives. The department you're moving into decides what really counts, changing majors can have its own requirements, and a double major has limits on how many courses may count twice. Ask an advisor before you act on this.</p>
+<p class="note">An estimate from the two roadmaps. The department decides what actually counts.</p>
 <script type="application/json" id="cmp-data">${json}</script>`, site, 'switch', `<script src="../compare.js" defer></script>`);
 }

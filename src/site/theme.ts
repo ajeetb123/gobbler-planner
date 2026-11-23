@@ -216,4 +216,16 @@ h2{text-align:left}.col{font-weight:600;font-size:1.3rem}.majors a,.majors butto
 #addc,#namec{width:min(460px,calc(100vw - 28px));padding:20px;background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:18px;box-shadow:var(--shadow)}#addc::backdrop,#namec::backdrop{background:rgba(15,19,28,.45);backdrop-filter:blur(3px)}
 #addc h3,#namec h3{margin:0 0 2px;font-size:1.15rem}#addc label,#namec label{display:block;font-size:.8rem;font-weight:600;margin:14px 0 5px}#addc .sel,#namec .sel{width:100%;box-sizing:border-box;cursor:text;background:var(--bg2)}#addc #ac-c,#namec #ac-c{width:90px}#addc #ac-c[readonly],#namec #ac-c[readonly]{opacity:.7}
 #addc .hint,#namec .hint{margin:6px 0 0;font-size:.78rem}#addc .chips,#namec .chips{margin-top:8px;gap:6px}#addc .chips button,#namec .chips button{font-size:.8rem;padding:5px 10px;text-align:left}#addc .flag,#namec .flag{margin:12px 0 0}#addc .row,#namec .row{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+/* ---- 10th pass (Nov 22, 2026): less template. Same colors. Ruled planner-paper lines instead of the dot grid,
+   a plain left-aligned intro instead of a landing-page hero, single-color headlines, no pills, no numbered year chips. ---- */
+:root{--ruled:rgba(74,52,36,.08)}:root[data-theme=dark]{--ruled:rgba(255,236,214,.05)}
+body:before{background-image:repeating-linear-gradient(180deg,transparent 0 31px,var(--ruled) 31px 32px);background-size:auto;
+-webkit-mask-image:linear-gradient(180deg,#000 0,#000 30%,transparent 85%);mask-image:linear-gradient(180deg,#000 0,#000 30%,transparent 85%)}
+.intro{max-width:720px;padding:36px 0 8px}.intro h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;margin:0}.intro p{margin:.7em 0 0;color:var(--mut);font-size:1.04rem;max-width:60ch}
+.intro+.filter{margin-top:22px}
+.hero h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:600;line-height:1.1}.hero h1 em,h1 em{color:inherit;font-style:normal}.hero{text-align:left}.hero p{margin-left:0;margin-right:0}
+.chips a,.chips button{border-radius:8px}
+.side #conf{border:0;padding:0;background:none;border-radius:0}
+.year>h2{gap:0}
+.side #conf .lnk{white-space:nowrap}
 `;

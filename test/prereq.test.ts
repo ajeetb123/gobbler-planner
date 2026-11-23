@@ -200,7 +200,8 @@ test('plans built from requirements say their order is a suggestion; roadmap pag
   assert.ok(!html.includes('#roadmaptext'));
   assert.ok(!renderPlan(cs, courses).includes('Suggested order.'));
   const index = renderPlanIndex([cs, r], undefined, true);
-  assert.ok(index.includes('the order shown is a suggested one') && !index.includes('>draft<'));
+  // The home page no longer explains drafts; each draft's own page says its order is a suggestion.
+  assert.ok(!index.includes('>draft<'));
   const arch = draftRoadmap(reqs.find((q) => q.slug === 'architecture-barch')!, courses);
   assert.equal(JSON.parse(/id="plan-data">(.*?)<\/script>/s.exec(renderPlan(arch, courses))![1]!).base, '5');
 });
