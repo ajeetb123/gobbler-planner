@@ -58,7 +58,7 @@ export interface AskIndex {
 export interface AskHit { doc: AskDoc; score: number }
 export interface AskSource { label: string; href: string; external?: boolean }
 export interface AskAnswer {
-  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'group', 'scope', 'none'. */
+  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'group', 'scope', 'compare', 'next', 'none'. */
   intent: string;
   lines: string[];
   /** A yes or no worked out by code for "can I take X with what I have". The page never asks the language model these. */
@@ -77,7 +77,8 @@ export function askEngine() {
   const words = (s: string): string[] => s.toLowerCase().replace(/['\u2019]s\b/g, '').replace(/\b([a-z]{2,4})[\s-]?(\d{4}h?)\b/g, '$1$2').split(/[^a-z0-9]+/).filter(Boolean);
   /** Crude stemming: "prerequisites" and "prerequisite" should be the same word. */
   const stem = (w: string): string => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w);
-  const tokenize = (s: string): string[] => words(s).filter((w) => !STOP.has(w)).map(stem);
+  // Single letters carry no meaning here ("b" matched the "B" in "(B.A.)"), so they are dropped.
+  const tokenize = (s: string): string[] => words(s).filter((w) => !STOP.has(w) && w.length > 1).map(stem);
 
   // ---- 3a. build the inverted index ----
   const TITLE_WEIGHT = 2;
@@ -172,9 +173,23 @@ export function askEngine() {
     const left = parts.filter((p) => p !== null) as AskExpr[];
     return left.length === 0 ? null : left.length === 1 ? left[0]! : ['&', ...left];
   };
+  const leavesE = (e: AskExpr): string[] => (typeof e === 'string' ? [e] : e.slice(1).flatMap((x) => leavesE(x as AskExpr)));
+  /** The tree with these courses removed: an "or" group loses those branches, an "and" group that needs one becomes impossible (null). */
+  const prune = (e: AskExpr, gone: string[]): AskExpr | null => {
+    if (typeof e === 'string') return gone.includes(e) ? null : e;
+    const parts = e.slice(1).map((x) => prune(x as AskExpr, gone));
+    if (e[0] === '&') return parts.some((x) => x === null) ? null : parts.length === 1 ? parts[0]! : ['&', ...(parts as AskExpr[])];
+    const ok = parts.filter((x) => x !== null) as AskExpr[];
+    return ok.length === 0 ? null : ok.length === 1 ? ok[0]! : ['|', ...ok];
+  };
+  const NEGATION = /\b(without|w\/o|except|haven'?t (?:taken|had|done)|have not (?:taken|had|done)|never (?:took|taken|had)|didn'?t take|did not take|not taking|no)\b/;
+  /** "what can I take now / next / after that": which courses the listed ones open up. */
+  const NEXT = /\bwhat (?:can|could|should) i take (?:now|next|after)\b|\bwhat(?:'s| is) next\b|\bwhat (?:does|do) (?:that|those|these|they) (?:unlock|open)\b|\bwhat (?:am i|i am) (?:eligible|ready) for\b/;
   const show = (e: AskExpr, top = true): string =>
     typeof e === 'string' ? e : (top ? '' : '(') + e.slice(1).map((x) => show(x as AskExpr, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
 
+  /** The same, for questions that name a course: offerings, sections and people are not in the facts either. */
+  const SCOPE_ANY = /\b(offered|offering|sections?|seats|who teach(?:es)?|teaches|taught|professors?|profs?|instructors?|eas(?:y|ier|iest)|hard(?:er|est)?|difficult|gpa|grades?|curve|workload)\b/;
   /** Questions about ease, grades, people, or "gen eds" in general: nothing in the stored facts answers them. */
   const OPINION = /\b(eas(?:y|ier|iest)|hard(?:er|est)?|difficult|best|worst|professors?|profs?|teachers?|instructors?|gpa|grades?|curve|workload|blow ?off|gen ?eds?)\b/;
 
@@ -193,14 +208,26 @@ export function askEngine() {
   };
 
   function answer(ix: AskIndex, query: string): AskAnswer {
-    const q = query.trim();
+    // "MATH 1225 and 1226" means "MATH 1225 and MATH 1226": a bare number after a code takes that code's subject.
+    const q = query.trim().replace(/\b([A-Za-z]{2,4})[\s-]?(\d{4}[Hh]?)((?:\s*(?:,|and|or|&|\/)\s*\d{4}[Hh]?\b)+)/g,
+      (_m, sub: string, n: string, more: string) => `${sub} ${n}${more.replace(/(\d{4}[Hh]?)/g, `${sub} $1`)}`);
     const related = search(ix, q, 6);
     if (!q) return { intent: 'none', lines: [], sources: [], related: [] };
     let intent = intentOf(q);
     // A course code written out is an exact lookup: no ranking needed.
     const coded = words(q).map((w) => ix.byCode[w]).filter((i) => i !== undefined).map((i) => ix.docs[i!]!);
     const bestCourse = coded[0] ? { doc: coded[0], score: Infinity } : search(ix, q, 1, 'c')[0];
-    const bestPlan = search(ix, q, 1, 'p')[0];
+    // For "how many credits is Architecture", the word "credits" must not pick a major with "Credit" in its name.
+    const bestPlan = search(ix, intent === 'credits' ? q.replace(/\b(credits?|credit hours?|hours?)\b/gi, ' ') : q, 1, 'p')[0];
+    // "Mathematics (Major)" means the main Mathematics Major, not whichever option ranked first, unless a word of
+    // the question names an option.
+    const preferBase = (p: AskDoc): AskDoc => {
+      const base = p.title.split(/ Major\b/)[0]!, baseWords = tokenize(base);
+      const own = ix.docs.find((d) => d.k === 'p' && (d.title === base + ' Major' || d.title === base));
+      if (!own || own === p) return p;
+      const extra = tokenize(q).filter((t) => !baseWords.includes(t) && !/^[a-z]{2,4}\d{4}h?$/.test(t) && !/^(require|required|credit|hour|option|plan|need|part|course|take|long|total)$/.test(t));
+      return extra.some((t) => tokenize(p.title).includes(t)) ? p : own;
+    };
     // Course or plan? A written code decides it. Otherwise questions about credits or a year are about a plan,
     // and after that the higher retrieval score wins.
     // A bare major name ("finance") should open the major, even if some course title matches the word more tightly.
@@ -210,6 +237,16 @@ export function askEngine() {
 
     // "easy gen eds", "best professor for calc": opinions, grades and people are not in the catalog facts. Without
     // this rule the search still found some course ("Plants, Genes, and People" for "gen eds") and answered about it.
+    // "who teaches CS 3114", "when is CS 3114 offered": a course code does not make these answerable.
+    if (coded[0] && SCOPE_ANY.test(q.toLowerCase()))
+      return { intent: 'scope', related: [], sources: courseSources(coded[0]).slice(0, 1), lines: [
+        'Ask only knows catalog facts: prerequisites, what a course unlocks, and which plans include it. It has nothing on when a course is offered, who teaches it, grades, or how hard it is.',
+        `The university's timetable of classes lists when ${coded[0].id} is offered and who teaches it. To see what it requires, ask "what do I need before ${coded[0].id}".`] };
+    // "Can I double major in CS and Math?": that is what the Switch majors page is for.
+    if (/\b(double major|second major|dual degree|switch(?:ing)? (?:my )?majors?|chang(?:e|ing) (?:my )?majors?)\b/i.test(q))
+      return { intent: 'compare', related: [], sources: [{ label: 'Switch majors or add one', href: 'plan/compare.html' }], lines: [
+        'Use Switch majors on this site: pick two majors to see which courses carry over, and how many extra credits a switch or a double major takes.',
+        'It is an estimate from the two plans. The departments decide what counts twice, so confirm a double major with both advisors.'] };
     if (!coded[0] && OPINION.test(q.toLowerCase()))
       return { intent: 'scope', related: [], sources: [], lines: [
         'Ask only knows catalog facts: prerequisites, what a course unlocks, and what each degree plan contains. It has nothing on how easy a course is, grades, or who teaches it.',
@@ -220,14 +257,27 @@ export function askEngine() {
     // yes to all 16 such questions, 8 of which were no (bench/rag.eval.ts).
     const ask = TARGET.exec(q.toLowerCase());
     const target = ask ? ix.docs[ix.byCode[ask[1]! + ask[2]!] ?? -1] : undefined;
-    const held = [...new Set(words(q).filter((w) => /^[a-z]{2,4}\d{4}h?$/.test(w)).map((w) => w.replace(/^([a-z]+)/, '$1 ').toUpperCase()))].filter((c) => c !== target?.id);
-    if (target && held.length) {
+    // Codes after "without", "haven't taken" and the like are courses the student does NOT have.
+    const codesIn = (t: string) => [...new Set(words(t).filter((w) => /^[a-z]{2,4}\d{4}h?$/.test(w)).map((w) => w.replace(/^([a-z]+)/, '$1 ').toUpperCase()))];
+    const neg = NEGATION.exec(q.toLowerCase());
+    const lacking = neg ? codesIn(q.slice(neg.index)).filter((c) => c !== target?.id) : [];
+    const held = codesIn(neg ? q.slice(0, neg.index) : q).filter((c) => c !== target?.id && !lacking.includes(c));
+    if (target && (held.length || lacking.length)) {
       const name = `${target.id} ${target.title}`;
       const has = (c: string) => held.includes(c);
+      const leaves = target.pe ? leavesE(target.pe) : [];
+      const notListed = lacking.filter((c) => !leaves.includes(c));
+      // The tree with the lacking courses taken out: null when there is no route left.
+      const pruned = target.pe ? prune(target.pe, lacking) : null;
+      const without = lacking.length ? ` without ${lacking.join(' or ')}` : '';
       const first = !target.pre ? `Yes, as far as prerequisites go: the catalog lists none for ${name}.`
         : !target.pe ? ''
-        : evE(target.pe, has) ? `Yes. ${held.join(' and ')} cover${held.length === 1 ? 's' : ''} the prerequisites the catalog lists for ${name}.`
-        : `No, not yet. Before ${name} you still need ${show(rest(target.pe, has)!)}.`;
+        : lacking.length && notListed.length === lacking.length
+          ? `${lacking.join(' and ')} ${lacking.length === 1 ? 'is not a listed prerequisite' : 'are not listed prerequisites'} for ${name}. ` +
+            (held.length ? (evE(target.pe, has) ? `And ${held.join(' and ')} cover what it does list.` : `It still needs ${show(rest(target.pe, has)!)}.`) : `It needs ${show(target.pe)}.`)
+        : pruned === null ? `No. ${name} requires ${lacking.join(' and ')}: the catalog lists no other way in.`
+        : evE(pruned, has) ? `Yes. ${held.join(' and ')} cover${held.length === 1 ? 's' : ''} the prerequisites the catalog lists for ${name}${without}.`
+        : `${held.length ? 'No, not yet' : 'Not with nothing else'}. ${without ? `Without ${lacking.join(' or ')}, before` : 'Before'} ${name} you still need ${show(rest(pruned, has)!)}.`;
       const lines = [
         first || `This site cannot check ${name} automatically: its prerequisites are not written as a plain and/or list.`,
         ...(target.pre ? [`Its listed prerequisites: ${target.pre}.`] : []),
@@ -235,6 +285,26 @@ export function askEngine() {
         'This checks listed course prerequisites only, not minimum grades, placement scores or major restrictions.',
       ];
       return { intent: 'eligible', lines, sources: courseSources(target), related: [{ doc: target, score: Infinity }, ...related.filter((h) => h.doc !== target)], ...(first ? { checked: first } : {}) };
+    }
+
+    // "I took MATH 1225 and 1226, what can I take now?": courses whose listed prerequisites those now meet.
+    const mine = codesIn(q).filter((c) => ix.byCode[c.toLowerCase().replace(' ', '')] !== undefined);
+    if (mine.length && NEXT.test(q.toLowerCase())) {
+      const has = (c: string) => mine.includes(c);
+      const open = ix.docs.filter((d) => d.k === 'c' && d.pe && !mine.includes(d.id) && leavesE(d.pe).some(has) && evE(d.pe, has));
+      const partly = ix.docs.filter((d) => d.k === 'c' && d.pe && !mine.includes(d.id) && leavesE(d.pe).some(has) && !evE(d.pe, has)).length;
+      return { intent: 'next', related, sources: mine.map((c) => courseSources(ix.docs[ix.byCode[c.toLowerCase().replace(' ', '')]!]!)[0]!), lines: [
+        open.length ? `With ${mine.join(' and ')}, you meet the listed prerequisites for: ${list(open.map((d) => `${d.id} ${d.title}`), 15)}.`
+          : `No course has its prerequisites fully met by ${mine.join(' and ')} alone.`,
+        ...(partly ? [`${partly} more course${partly === 1 ? '' : 's'} also need${partly === 1 ? 's' : ''} ${mine.length === 1 ? 'it' : 'one of these'} plus something else. Ask "what does ${mine[0]} unlock" to see them.`] : []),
+        'Prerequisites only: corequisites, minimum grades and major restrictions are not checked.'] };
+    }
+
+    // "CS 2114 vs CS 2505": answer for each course, side by side.
+    if (coded.length >= 2 && /\bvs\.?\b|\bversus\b|\bcompare\b|\bdifference\b|\bdiffer\b/i.test(q)) {
+      const cs = [...new Set(coded)].slice(0, 3);
+      return { intent: 'compare', related, sources: cs.map((d) => courseSources(d)[0]!), lines: cs.map((d) =>
+        `${d.id} ${d.title}: prerequisites ${d.pre || 'none listed'}; needed first by ${d.un && d.un.length ? list(d.un, 6) : 'no course'}; on ${d.n || 0} plan${d.n === 1 ? '' : 's'}.`) };
     }
 
     // "What calc class do business majors take?": a subject and a group of majors, not one course. Without this
@@ -272,7 +342,7 @@ export function askEngine() {
 
     // "Is CS 3114 required for Computer Engineering?": a course AND a plan. Answer yes or no from the plan's own terms.
     if (coded[0] && bestPlan && intent === 'majors' && bestPlan.score > 2) {
-      const c = coded[0], p = bestPlan.doc;
+      const c = coded[0], p = preferBase(bestPlan.doc);
       const term = (p.terms || []).find(([, items]) => items.some((x) => x.startsWith(c.id)));
       return { intent: 'majors', related, sources: [{ label: `${p.title} plan`, href: `plan/${p.id}.html` }, ...courseSources(c).slice(0, 1)],
         lines: [term ? `Yes. ${c.id} ${c.title} is on the ${p.title} plan, in ${term[0]}.` : `${c.id} ${c.title} is not a named course on the ${p.title} plan. It could still count as an elective: check the plan's elective slots.`] };
@@ -322,7 +392,9 @@ export function askEngine() {
         return { intent, related, sources: all.map((d) => courseSources(d)[0]!), lines: [
           `${all.length} courses match that name. ${intent === 'prereq' ? 'Prerequisites for each' : 'Courses that need each one first'}:`, ...all.map(line)] };
       }
-      const mj = c.n ? `${c.n} plan${c.n === 1 ? ' on this site includes' : 's on this site include'} ${c.id}: ${list((c.mj || []).map((m) => m[1]), 8)}.` : `No plan on this site names ${c.id} as a required course.`;
+      // c.mj holds at most 12 names while c.n is the full count, so "and N more" is worked out from c.n.
+      const named = (c.mj || []).map((m) => m[1]).slice(0, 8);
+      const mj = c.n ? `${c.n} plan${c.n === 1 ? ' on this site includes' : 's on this site include'} ${c.id}: ${named.join(', ')}${c.n > named.length ? ` and ${c.n - named.length} more` : ''}.` : `No plan on this site names ${c.id} as a required course.`;
       if (intent === 'prereq') return { intent, related, sources, lines: [pre, co].filter(Boolean) };
       if (intent === 'unlocks') return { intent, related, sources, lines: [un] };
       if (intent === 'majors') return { intent, related, sources: [sources[0]!, ...(c.mj || []).slice(0, 8).map(([slug, n]) => ({ label: `${n} plan`, href: `plan/${slug}.html` }))], lines: [mj] };

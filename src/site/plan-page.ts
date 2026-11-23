@@ -422,6 +422,31 @@ export const PLAN_JS = `
     draw();
     AD.close();
   });
+  // ---- "name it" dialog: write which course will fill an elective slot ----
+  const ND = $('namec'),
+    NQ = $('nc-q');
+  let naming = null;
+  function openName(id) {
+    naming = id;
+    $('nc-t').textContent = 'For "' + D.items[id].label + '". Leave it empty to clear.';
+    NQ.value = S.names[id] || '';
+    ND.showModal();
+    NQ.focus();
+  }
+  $('nc-x').onclick = () => ND.close();
+  ND.addEventListener('click', (e) => {
+    if (e.target === ND) ND.close();
+  });
+  $('nc-f').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!naming || !D.items[naming]) return ND.close();
+    snap();
+    if (text(NQ.value, 60)) S.names[naming] = text(NQ.value, 60);
+    else delete S.names[naming];
+    save();
+    draw();
+    ND.close();
+  });
   // "remove" link on a course the student added.
   const removeButton = (id, name) => {
     const x = el('button', 'lnk', 'remove');
@@ -534,18 +559,7 @@ export const PLAN_JS = `
           const ed = el('button', 'lnk', S.names[id] ? 'change' : 'name it');
           ed.type = 'button';
           ed.setAttribute('aria-label', 'Write the course you plan to take for ' + it.label);
-          ed.onclick = () => {
-            const v = prompt(
-              'Which course will you take for "' + it.label + '"? Leave empty to clear.',
-              S.names[id] || '',
-            );
-            if (v === null) return;
-            snap();
-            if (text(v, 60)) S.names[id] = text(v, 60);
-            else delete S.names[id];
-            save();
-            draw();
-          };
+          ed.onclick = () => openName(id);
           nm.append(ed);
         }
         mid.append(
@@ -605,8 +619,10 @@ export const PLAN_JS = `
         r.title = 'Later';
         l.disabled = ti === 0;
         r.disabled = ti === ts.length - 1;
-        l.onclick = () => move(id, ti, -1);
-        r.onclick = () => move(id, ti, 1);
+        // After a move the board redraws and another card's arrow can land under the pointer, so the second click
+        // of a double click is ignored (e.detail counts rapid clicks; keyboard presses have detail 0).
+        l.onclick = (e) => e.detail < 2 && move(id, ti, -1);
+        r.onclick = (e) => e.detail < 2 && move(id, ti, 1);
         mv.append(l, r);
         li.append(cb, mid, mv);
         list.append(li);
@@ -835,7 +851,11 @@ export const PLAN_JS = `
       });
       P2.append(ul);
     };
-    rows('Needs first, in your plan', pre, (j) => v.late.includes(j) || v.coLate.includes(j));
+    // A corequisite (gap 0) may sit in the same term, so it is listed apart from what must come first.
+    const before = v.needs.filter((x) => x[1] === 1).map((x) => x[0]),
+      along = v.needs.filter((x) => x[1] === 0).map((x) => x[0]);
+    rows('Needs first, in your plan', before, (j) => v.late.includes(j));
+    rows('Take with it, same term or earlier', along, (j) => v.coLate.includes(j));
     rows('Unlocks', post);
     sec('Move');
     const row = el('div', 'row'),
@@ -1053,6 +1073,9 @@ ${r.draft ? `<p class="note"><b>Suggested order.</b> The courses and credits her
 <label for="ac-c">Credits</label><input class="sel" id="ac-c" type="number" inputmode="numeric" min="0" max="9" step="1" value="3">
 <p class="flag" id="ac-m" role="alert" hidden></p>
 <div class="row"><button type="button" class="btn" id="ac-x">Cancel</button><button type="submit" class="btn pri">Add to plan</button></div></form></dialog>
+<dialog id="namec" aria-labelledby="nc-h"><form id="nc-f" novalidate><h3 id="nc-h">Which course will you take?</h3><p class="mut" id="nc-t"></p>
+<label for="nc-q">Course</label><input class="sel" id="nc-q" autocomplete="off" maxlength="60" placeholder="For example PHYS 2305">
+<div class="row"><button type="button" class="btn" id="nc-x">Cancel</button><button type="submit" class="btn pri">Save</button></div></form></dialog>
 <script type="application/json" id="plan-data">${json}</script>`;
   return layout(`${r.name} degree plan · ${brand(site)}`, `Plan a ${r.name} degree term by term from the official ${r.draft ? 'requirements' : 'roadmap'}, with prerequisite checks.`, '../',
     `<a href="index.html">Degree planner</a>`, body, site, 'plan', `<script src="../plan.js" defer></script>`);

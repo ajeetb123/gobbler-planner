@@ -196,3 +196,28 @@ test('Ask: opinions are out of scope, a bare major lists its options, and a shar
   // A typed code is never treated as ambiguous.
   assert.ok(E.answer(ix, 'CS 3114 prereqs').lines[0]!.startsWith('CS 3114 Data Structures and Algorithms lists'));
 });
+
+test('Ask, third review: credits, negation, counts, base major, scope, double major, what next, compare, single letters', () => {
+  const at = (q: string) => E.answer(ix, q);
+  assert.ok(at('How many credits is Architecture?').lines[0]!.startsWith('Architecture Major takes 160 credits'));
+  assert.ok(at('Architecture credits').lines[0]!.startsWith('Architecture Major takes 160'));
+  assert.ok(at('Can I take MATH 1226 without MATH 1225?').lines[0]!.startsWith('No. MATH 1226'));
+  assert.ok(at('Can I take CHEM 2535 without CHEM 1036?').lines[0]!.includes('CHEM 1056 or'));
+  assert.ok(at('Can I take CS 3114 without MATH 1225?').lines[0]!.startsWith('MATH 1225 is not a listed prerequisite'));
+  const phys = at('Which majors require PHYS 2305?').lines[0]!;
+  assert.ok(phys.startsWith('42 plans') && phys.endsWith('and 34 more.'), phys.slice(-40));
+  assert.ok(at('Is MATH 2114 required for Mathematics (Major)?').lines[0]!.includes('on the Mathematics Major plan'));
+  assert.ok(at('Is MATH 2114 required for the applied computational mathematics option?').lines[0]!.includes('Applied Computational Mathematics'));
+  for (const q of ['who teaches CS 3114', 'when is CS 3114 offered', 'is CS 3114 hard']) assert.equal(at(q).intent, 'scope', q);
+  assert.equal(at('Can I double major in CS and Math?').intent, 'compare');
+  const next = at('I took MATH 1225 and 1226, what can I take now?');
+  assert.equal(next.intent, 'next');
+  assert.ok(next.lines[0]!.startsWith('With MATH 1225 and MATH 1226, you meet'));
+  const vs = at('CS 2114 vs CS 2505');
+  assert.equal(vs.lines.length, 2);
+  assert.ok(vs.lines[1]!.startsWith('CS 2505'));
+  for (const q of ['b', '<b>']) assert.equal(at(q).intent, 'none', q);
+  // Unchanged: a plain eligibility question and a plain prerequisite question.
+  assert.ok(at('I have CS 2114 and CS 2505. Can I take CS 3114?').lines[0]!.startsWith('No, not yet'));
+  assert.equal(at('What do I need before CS 3214?').intent, 'prereq');
+});

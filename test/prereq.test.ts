@@ -325,3 +325,22 @@ test('search palette: words match word starts, short names find majors, codes ma
   assert.ok(score('MATH 1225 Calculus of a Single Variable', 'calc') >= 0);
   assert.ok(APP_JS.includes("'$1 $2'"));
 });
+
+test('planner, third review: no native prompt for naming electives, corequisites listed apart, double clicks ignored on arrows', async () => {
+  const { PLAN_JS, renderPlan } = await import('../src/site/plan-page.ts');
+  const { APP_JS } = await import('../src/site/render.ts');
+  assert.ok(!PLAN_JS.includes('Which course will you take for'));
+  assert.ok(renderPlan(real.find((r) => r.slug === 'computer-science')!, courses).includes('<dialog id="namec"'));
+  assert.ok(PLAN_JS.includes('Take with it, same term or earlier'));
+  assert.ok(PLAN_JS.includes('e.detail < 2 && move('));
+  assert.ok(APP_JS.includes('enterPending'));
+});
+
+test('suggested plans: electives in the major field do not come before its first course', async () => {
+  const { parseRequirements, draftRoadmap } = await import('../src/plan/draft.ts');
+  const text = readFileSync('data/requirements/college-science.txt', 'utf8');
+  const psych = draftRoadmap(parseRequirements(text).find((q) => q.slug === 'psychology-bs')!, courses);
+  const first = psych.terms.findIndex((t) => t.items.some((i) => i.code?.startsWith('PSYC ')));
+  const firstElective = psych.terms.findIndex((t) => t.items.some((i) => /within Psychology/.test(i.label)));
+  assert.ok(first >= 0 && firstElective >= first, `first PSYC course in term ${first}, first psych elective in term ${firstElective}`);
+});

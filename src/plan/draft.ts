@@ -95,11 +95,32 @@ export function draftRoadmap(req: Requirements, courses: Map<string, CourseInfo>
     }
     placed.push(items);
   }
+  // An elective in the major's own field ("Electives within Psychology") should not come before the first course of
+  // that field. Swap any such slot with a general placeholder of the same credits from that term or later; named
+  // courses stay where they are. The field is the subject code most of the major's named courses use.
+  const subjects: Record<string, number> = {};
+  for (const i of queueAll) subjects[i.code!.split(' ')[0]!] = (subjects[i.code!.split(' ')[0]!] ?? 0) + 1;
+  const mainSubject = Object.entries(subjects).sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
+  const field = req.name.split(/\s/)[0]!.toLowerCase();
+  const inField = (i: PlanItem) => !i.code && /\b(elective|within)\b/i.test(i.label) && (i.label.toLowerCase().includes(field) || (mainSubject !== '' && i.label.includes(mainSubject)));
+  const firstMain = placed.findIndex((items) => items.some((i) => i.code?.startsWith(mainSubject + ' ')));
+  for (let k = 0; k < firstMain; k++)
+    for (const slot of placed[k]!.filter(inField)) {
+      let swapped = false;
+      for (let j = firstMain; j < placed.length && !swapped; j++) {
+        const other = placed[j]!.find((i) => !i.code && !inField(i) && upper(i) === 0 && i.credits === slot.credits);
+        if (!other) continue;
+        placed[k]!.splice(placed[k]!.indexOf(slot), 1, other);
+        placed[j]!.splice(placed[j]!.indexOf(other), 1, slot);
+        swapped = true;
+      }
+    }
   // Same repair and balancing pass the rearranged layouts get, then final ids by term.
   const ones = placed.map(() => 1);
   // The search may rebalance, but a named course keeps its level floor (no 4000-level course in year one).
-  const floor = Object.fromEntries(queueAll.map((i) => [i.id, earliest(i)]));
-  const fixed = optimize(smooth(placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items })), ones, check), ones, check, undefined, floor).terms;
+  // Major electives keep the floor set above, so balancing does not move them back in front.
+  const floor = Object.fromEntries([...queueAll.map((i) => [i.id, earliest(i)]), ...all.filter(inField).map((i) => [i.id, Math.max(0, firstMain)])]);
+  const fixed = optimize(smooth(placed.map((items, t) => ({ label: plainSlots(n)[t]!.label, items })), ones, check, floor), ones, check, undefined, floor).terms;
   const terms: Term[] = fixed.map((t, ti) => ({ label: t.label, items: t.items.map((i, k) => ({ ...i, id: `t${ti}-${k}`, src: ti })) }));
   return { slug: req.slug, name: req.name, catalogPath: req.catalogPath, total: req.total, terms, printedSums: terms.map((t) => credits(t.items)), draft: true };
 }

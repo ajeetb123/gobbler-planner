@@ -174,6 +174,7 @@ export const APP_JS = `
     };
   const paint = () =>
     [...r.querySelectorAll('a')].forEach((a, i) => a.setAttribute('aria-selected', String(i === sel)));
+  let enterPending = false;
   q.addEventListener('input', async () => {
     d ??= await (await fetch(root + 'search.json')).json();
     // "cs2114" is read as "cs 2114".
@@ -217,6 +218,9 @@ export const APP_JS = `
       r.append(li);
     }
     paint();
+    const first = r.querySelector('a');
+    if (enterPending && first) location.href = first.href;
+    enterPending = false;
   });
   const mf = document.getElementById('mf');
   if (mf)
@@ -250,7 +254,11 @@ export const APP_JS = `
       paint();
       as[sel] && as[sel].scrollIntoView({ block: 'nearest' });
       e.preventDefault();
-    } else if (e.key === 'Enter' && as[sel]) location.href = as[sel].href;
+    } else if (e.key === 'Enter') {
+      // Results may still be loading (the list is fetched on first use): remember the Enter and act on it then.
+      if (as[sel]) location.href = as[sel].href;
+      else enterPending = true;
+    }
   });
   const bar = document.getElementById('cmp'),
     picks = [];
