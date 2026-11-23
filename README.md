@@ -1,6 +1,6 @@
 # Gobbler Plan
 
-An unofficial degree planner built from one university's public catalog. An independent student project, not affiliated with, endorsed by, or sponsored by any university.
+An unofficial degree planner built from one university's public catalog. Not affiliated with, endorsed by, or sponsored by any university.
 
 A private build can also add course and instructor grade pages: expected section GPA with calibrated 80% ranges, name-collision warnings, and a verdict on whether instructor choice matters. Static site, no runtime dependencies.
 
