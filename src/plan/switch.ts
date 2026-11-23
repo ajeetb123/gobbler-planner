@@ -20,6 +20,8 @@ export interface SwitchResult {
   unmatched: string[];
   /** Credits carried: named + same-name electives + free electives. */
   counted: number;
+  /** Of the student's own finished credits, how many found a place. Never more than doneCredits; this is the number to show. `counted` is in the new major's credits (a 3-credit course can fill a 4-credit slot) and is what `remaining` is worked out from. */
+  kept: number;
   doneCredits: number;
   /** Credits still to take in the new major. */
   remaining: number;
@@ -36,7 +38,7 @@ export interface SwitchResult {
 export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[]): SwitchResult {
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
   const used: Record<string, boolean> = {};
-  const res: SwitchResult = { carried: [], likely: [], free: [], freeUsed: 0, unmatched: [], counted: 0, doneCredits: 0, remaining: 0 };
+  const res: SwitchResult = { carried: [], likely: [], free: [], freeUsed: 0, unmatched: [], counted: 0, kept: 0, doneCredits: 0, remaining: 0 };
   const mine = from.filter((i) => done.includes(i.id));
   const left: SwitchItem[] = [];
   for (const i of mine) {
@@ -47,6 +49,7 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
     used[hit.id] = true;
     (named ? res.carried : res.likely).push([i.id, hit.id]);
     res.counted += hit.cr;
+    res.kept += i.cr;
   }
   let free = 0;
   for (const t of to) if (!used[t.id] && /free elective/i.test(t.label)) free += t.cr;
@@ -54,6 +57,7 @@ export function switchCost(from: SwitchItem[], to: SwitchItem[], done: string[])
     if (i.cr > 0 && res.freeUsed + i.cr <= free) { res.freeUsed += i.cr; res.free.push(i.id); } else res.unmatched.push(i.id);
   }
   res.counted += res.freeUsed;
+  res.kept += res.freeUsed;
   res.remaining = to.reduce((a, t) => a + t.cr, 0) - res.counted;
   return res;
 }

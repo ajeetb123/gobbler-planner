@@ -13,3 +13,9 @@ On Nov 20, 2026 UDC told me that course planning is not an authorized purpose fo
 
 Columns: Academic Year, Term, Subject, Course No., Course Title, Instructor (last name only), GPA,
 A (%) ... F (%), Withdraws, Graded Enrollment, CRN, Credits.
+
+## Names corrected by hand (Nov 22, 2026)
+Three major names differ from the catalog page text, on purpose:
+- "Constructioning Engineering and Management ..." is written "Construction Engineering and Management ...".
+- "Statistics Majors with ..." is written "Statistics Major with ...".
+- The catalog lists two programs both named "Physics Major". They are shown as "Physics Major (B.A.)" and "Physics Major (B.S.)" so they can be told apart.

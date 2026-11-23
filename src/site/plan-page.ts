@@ -58,6 +58,8 @@ export const PLAN_JS = `
   const D = JSON.parse(document.getElementById('plan-data').textContent),
     root = document.body.dataset.root,
     KEY = 'gobblerplan:' + D.slug;
+  // On a phone the tools start folded away so the courses show sooner; on a wide screen they are always open.
+  if (matchMedia('(max-width:860px)').matches) document.getElementById('tools').open = false;
   let S;
   try {
     S = JSON.parse(localStorage.getItem(KEY)) || {};
@@ -212,6 +214,11 @@ export const PLAN_JS = `
     save();
     draw();
   }
+  // Lowest level an elective slot names ("CS 4/5XXX" -> 4). Balancing keeps 3XXX and 4XXX slots out of the early terms.
+  const slotLevel = (x) => {
+    const m = /\\b([1-5])(?:\\/[1-5])*XXX\\b|\\b([1-5])000[- ]level/i.exec(D.items[x].label || '');
+    return m ? Math.min(4, +(m[1] || m[2])) : 0;
+  };
   function balance() {
     snap();
     let moved = 0;
@@ -229,7 +236,8 @@ export const PLAN_JS = `
           !S.names[x] &&
           !S.done.includes(x) &&
           D.items[x].cr > 0 &&
-          D.items[x].cr < hi.c - lo.c,
+          D.items[x].cr < hi.c - lo.c &&
+          (slotLevel(x) < 3 || lo.i >= Math.floor(((slotLevel(x) - 1) * terms().length) / 4) - 1),
       );
       if (!id) break;
       put(id, lo.i);
@@ -856,10 +864,12 @@ export function renderPlan(r: Roadmap, courses: Map<string, CourseInfo>, site?: 
 <div class="prog"><span id="prog"></span><b id="pct">0%</b></div><div class="meter"><i id="ringfg" style="width:0"></i></div>
 <div class="stats"><div class="stat"><b id="s-cr">0</b><span>credits done</span></div><div class="stat" id="s-conf"><b>0</b><span>conflicts</span></div><div class="stat"><b id="s-load">0</b><span>heaviest term</span></div></div>
 <h4>Years to graduate</h4><div class="seg" id="years" role="group" aria-label="Years to graduate">${YEAR_OPTIONS.map((y) => `<button type="button" data-y="${y}" aria-pressed="${y === baseYears(r)}" title="${y} years">${y}</button>`).join('')}</div>
-<h4>Plan</h4><div class="acts"><button type="button" class="btn" id="undo" disabled title="Undo your last change">Undo</button><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="share" title="Copy a link that opens this exact plan">Share link</button><button type="button" class="btn" id="print" title="Print this plan or save it as a PDF">Print</button><button type="button" class="btn" id="copy">Copy as text</button><button type="button" class="btn" id="reset">Start over</button></div>
 <h4>Prerequisites</h4><p id="conf" role="status"></p>
+<details class="tools" id="tools" open><summary>Plan tools: undo, balance, share, print</summary>
+<h4>Plan</h4><div class="acts"><button type="button" class="btn" id="undo" disabled title="Undo your last change">Undo</button><button type="button" class="btn" id="balance" title="Move elective slots from the heaviest terms to the lightest">Balance terms</button><button type="button" class="btn" id="share" title="Copy a link that opens this exact plan">Share link</button><button type="button" class="btn" id="print" title="Print this plan or save it as a PDF">Print</button><button type="button" class="btn" id="copy">Copy as text</button><button type="button" class="btn" id="reset">Start over</button></div>
 <h4>More</h4><p class="hint"><a href="compare.html#from=${esc(r.slug)}">Switch or double major</a><br><a href="../ask.html">Ask about a course</a></p>
 <p class="hint">Click a course for details. Drag it to another term to move it. Tick the box when it's done.</p>
+</details>
 <div class="over" id="over" hidden></div>
 </aside><div class="stage">
 ${r.draft ? `<p class="note"><b>Suggested order.</b> The courses and credits here are this major's official requirements. The catalog does not say which term to take each one in, so the term-by-term order is a suggestion: by course level, with prerequisites first. Confirm it with your advisor.</p>` : ''}

@@ -80,11 +80,11 @@ Clinical Neuroscience Major | college-science/neuroscience/neuroscience-bs-clini
 Cognitive and Behavioral Neuroscience Major | college-science/neuroscience/neuroscience-bs-cognitive-behavioral-neuroscience/
 Computational and Systems Neuroscience Major | college-science/neuroscience/neuroscience-bs-computational-systems-neuroscience/
 Neuroscience Major | college-science/neuroscience/neuroscience-bs-neuroscience/
-Physics Major | college-science/physics/physics-ba/
+Physics Major (B.A.) | college-science/physics/physics-ba/
 Physics Major with Physics Education Option | college-science/physics/physics-ba-physics-education/
 Physics Major with Pre-Health Option | college-science/physics/physics-ba-pre-health/
 Physics Major with Pre-Law Option | college-science/physics/physics-ba-pre-law/
-Physics Major | college-science/physics/physics-bs/
+Physics Major (B.S.) | college-science/physics/physics-bs/
 Psychology Major | college-science/psychology/psychology-bs/
-Statistics Majors with Statistical Data Science Option | college-science/statistics/statistical-data-science/
-Statistics Majors with Statistical Methods and Theory Option | college-science/statistics/statistical-methods-theory/
+Statistics Major with Statistical Data Science Option | college-science/statistics/statistical-data-science/
+Statistics Major with Statistical Methods and Theory Option | college-science/statistics/statistical-methods-theory/

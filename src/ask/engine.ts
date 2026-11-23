@@ -58,7 +58,7 @@ export interface AskIndex {
 export interface AskHit { doc: AskDoc; score: number }
 export interface AskSource { label: string; href: string; external?: boolean }
 export interface AskAnswer {
-  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'none'. */
+  /** Which rule produced the answer: 'prereq', 'unlocks', 'majors', 'course', 'credits', 'year', 'plan', 'eligible', 'group', 'none'. */
   intent: string;
   lines: string[];
   /** A yes or no worked out by code for "can I take X with what I have". The page never asks the language model these. */
@@ -175,6 +175,20 @@ export function askEngine() {
   const show = (e: AskExpr, top = true): string =>
     typeof e === 'string' ? e : (top ? '' : '(') + e.slice(1).map((x) => show(x as AskExpr, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
 
+  // ---- 5b. "what <subject> do <group> majors take" ----
+  const GROUP = /\b(?:what|which)\s+(?:kind of\s+|level of\s+)?([a-z]+)\s*(?:class|classes|course|courses)?\s*(?:do|does|should|will|would)\s+(.+?)\s+(?:majors?|students?)\s+(?:take|need|have to take|start with)\b/;
+  /** Everyday words for a subject -> its course prefix. `title` narrows it ("calc" means calculus courses, not all of MATH). */
+  const SUBJECTS: Record<string, { code: string; word: string; title?: RegExp }> = {
+    calc: { code: 'MATH', word: 'calculus', title: /calcul/i }, calculus: { code: 'MATH', word: 'calculus', title: /calcul/i },
+    math: { code: 'MATH', word: 'math' }, maths: { code: 'MATH', word: 'math' },
+    physics: { code: 'PHYS', word: 'physics' }, chem: { code: 'CHEM', word: 'chemistry' }, chemistry: { code: 'CHEM', word: 'chemistry' },
+    english: { code: 'ENGL', word: 'English' }, writing: { code: 'ENGL', word: 'writing' },
+    stats: { code: 'STAT', word: 'statistics' }, statistics: { code: 'STAT', word: 'statistics' },
+    programming: { code: 'CS', word: 'programming' }, coding: { code: 'CS', word: 'programming' },
+    bio: { code: 'BIOL', word: 'biology' }, biology: { code: 'BIOL', word: 'biology' },
+    econ: { code: 'ECON', word: 'economics' }, economics: { code: 'ECON', word: 'economics' }, accounting: { code: 'ACIS', word: 'accounting' },
+  };
+
   function answer(ix: AskIndex, query: string): AskAnswer {
     const q = query.trim();
     const related = search(ix, q, 6);
@@ -211,6 +225,39 @@ export function askEngine() {
         'This checks listed course prerequisites only, not minimum grades, placement scores or major restrictions.',
       ];
       return { intent: 'eligible', lines, sources: courseSources(target), related: [{ doc: target, score: Infinity }, ...related.filter((h) => h.doc !== target)], ...(first ? { checked: first } : {}) };
+    }
+
+    // "What calc class do business majors take?": a subject and a group of majors, not one course. Without this
+    // rule the question matched the course "Business Calculus" and listed two unrelated majors that require it.
+    const grp = !coded[0] ? GROUP.exec(q.toLowerCase()) : null;
+    const subj = grp ? SUBJECTS[grp[1]!] ?? (ix.docs.some((d) => d.k === 'c' && d.id.startsWith(grp[1]!.toUpperCase() + ' ')) ? { code: grp[1]!.toUpperCase(), word: grp[1]!.toUpperCase() } : undefined) : undefined;
+    const planHits = grp && subj ? search(ix, grp[2]!, 40, 'p') : [];
+    if (grp && subj && planHits[0]) {
+      // "business" names a whole college; "finance" names one major.
+      const want = tokenize(grp[2]!);
+      const inCollege = ix.docs.filter((d) => d.k === 'p' && want.length > 0 && want.every((t) => tokenize(d.college || '').includes(t)));
+      const group = inCollege.length > 1 ? inCollege : [planHits[0].doc];
+      const titleOf = (code: string) => ix.docs[ix.byCode[code.toLowerCase().replace(' ', '')] ?? -1]?.title ?? '';
+      const slotsOf = (p: AskDoc, strict: boolean): Array<[string, string]> =>
+        (p.terms || []).flatMap(([label, items]) => items
+          .filter((x) => (x.match(/[A-Z]{2,4} \d{4}H?/g) || []).some((c) => c.startsWith(subj.code + ' ') && (!strict || !subj.title || subj.title.test(titleOf(c)))))
+          .map((x): [string, string] => [x, label]));
+      const strict = group.some((p) => slotsOf(p, true).length > 0);
+      const sources = group.slice(0, 4).map((p) => ({ label: `${p.title} plan`, href: `plan/${p.id}.html` }));
+      if (group.length === 1) {
+        const p = group[0]!, found = slotsOf(p, strict);
+        return { intent: 'group', related, sources, lines: [found.length
+          ? `On the ${p.title} plan, the ${subj.word} courses are: ${found.map(([x, label]) => `${x} (${label})`).join('; ')}.`
+          : `The ${p.title} plan does not name a ${subj.word} course. It may still fit an elective slot: open the plan to check.`,
+          'If you meant a different major, pick it from "Closest matches".'] };
+      }
+      const count: Record<string, number> = {};
+      for (const p of group) for (const x of new Set(slotsOf(p, strict).map(([slot]) => slot))) count[x] = (count[x] || 0) + 1;
+      const top = Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      return { intent: 'group', related, sources, lines: [top.length
+        ? `Across the ${group.length} ${group[0]!.college} majors on this site, the ${subj.word} courses are: ${top.map(([x, n]) => `${x} (${n} of ${group.length} plans)`).join('; ')}.`
+        : `None of the ${group.length} ${group[0]!.college} plans on this site names a ${subj.word} course.`,
+        'It depends on the major: open yours to see the exact course and term.'] };
     }
 
     // "Is CS 3114 required for Computer Engineering?": a course AND a plan. Answer yes or no from the plan's own terms.

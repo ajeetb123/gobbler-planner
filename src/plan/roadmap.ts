@@ -114,6 +114,24 @@ export function parseNoRoadmap(text: string): Array<{ name: string; catalogPath:
 export const credits = (items: PlanItem[]) => items.reduce((a, i) => a + i.credits, 0);
 const subject = (i: PlanItem) => i.code?.split(' ')[0];
 
+/** Lowest level an elective slot names: "CS 4/5XXX" -> 4, "3000-level elective" -> 3. Undefined for a named course or a slot with no level. */
+export const slotLevel = (i: { code?: string; label: string }): number | undefined => {
+  if (i.code) return undefined;
+  const m = /\b([1-5])(?:\/[1-5])*XXX\b|\b([1-5])000[- ]level/i.exec(i.label);
+  return m ? Math.min(4, Number(m[1] ?? m[2])) : undefined;
+};
+
+/**
+ * Earliest term (of n) an upper-level elective slot may be moved to when a roadmap is rearranged: a 4XXX slot
+ * stays out of the first half of the plan, a 3XXX slot out of the first quarter or so. Never later than where the
+ * official roadmap itself puts it (src of total), so the catalog's own order is always allowed. 0 = no limit.
+ */
+export const slotFloor = (i: PlanItem, n: number, total: number): number => {
+  const level = slotLevel(i);
+  if (level === undefined || level < 3) return 0;
+  return Math.max(0, Math.min(Math.floor(((level - 1) * n) / 4) - 1, Math.floor((i.src * n) / total)));
+};
+
 /**
  * Plan lengths offered. 2 and 2.5 years put roughly 24 to 30 credits in a term and cannot fit most prerequisite
  * chains, so they only make sense for students who arrive with a lot of credit (transfer, AP, dual enrollment)
@@ -183,6 +201,7 @@ export function pack(r: Roadmap, sl: Array<{ label: string; weight: number }>, c
       // but never past an earlier course of its own subject, and never next to one from an earlier term.
       const pick = queue.findIndex((next, i) => {
         if (k === sl.length - 1) return true; // last term takes everything left
+        if (k < slotFloor(next, sl.length, r.terms.length)) return false; // an upper-level elective slot waits for the later years
         const sub = subject(next);
         if (sub !== undefined && queue.slice(0, i).some((q) => subject(q) === sub)) return false;
         if (items.some((it) => subject(it) !== undefined && subject(it) === sub && it.src < next.src)) return false;
@@ -210,7 +229,8 @@ export function pack(r: Roadmap, sl: Array<{ label: string; weight: number }>, c
   });
   // Greedy fill, then local repair and balancing, then a bounded exact search starting from that answer (optimize.ts).
   const weights = sl.map((x) => x.weight);
-  return check ? optimize(smooth(terms, weights, check), weights, check).terms : terms;
+  const floor = Object.fromEntries(terms.flatMap((t) => t.items).map((i) => [i.id, slotFloor(i, sl.length, r.terms.length)]));
+  return check ? optimize(smooth(terms, weights, check, floor), weights, check, undefined, floor).terms : terms;
 }
 
 /** Terms may differ by this many credits (per unit of slot weight) before smooth() stops moving courses. */
@@ -221,7 +241,7 @@ export const SMOOTH_GAP = 3;
  * (or a middle term empty). Move one course at a time from the heaviest term to the lightest, placeholders
  * first, and only when the move adds no prerequisite conflict anywhere in the plan.
  */
-export function smooth(terms: Term[], weights: number[], check: Record<string, CheckItem>): Term[] {
+export function smooth(terms: Term[], weights: number[], check: Record<string, CheckItem>, floor: Record<string, number> = {}): Term[] {
   const out = terms.map((t) => ({ label: t.label, items: [...t.items] }));
   const conflicts = () => Object.values(planIssues(check, out.map((t) => t.items.map((i) => i.id)), [])).reduce((a, v) => a + v.late.length + v.coLate.length, 0);
   const load = (k: number) => credits(out[k]!.items) / weights[k]!;
@@ -238,7 +258,7 @@ export function smooth(terms: Term[], weights: number[], check: Record<string, C
       const item = out[from]!.items.find((i) => i.id === id)!;
       let best = -1, bestCount = now;
       for (let to = 0; to < out.length; to++) {
-        if (to === from || load(to) + item.credits / weights[to]! > cap) continue;
+        if (to === from || to < (floor[item.id] ?? 0) || load(to) + item.credits / weights[to]! > cap) continue;
         out[from]!.items.splice(out[from]!.items.indexOf(item), 1);
         out[to]!.items.push(item);
         const c = conflicts();
@@ -264,7 +284,7 @@ export function smooth(terms: Term[], weights: number[], check: Record<string, C
       const candidates = [...out[hi]!.items].filter((i) => i.credits > 0).sort((a, b) => Number(a.code !== undefined) - Number(b.code !== undefined));
       for (const item of candidates) {
         // The move must narrow the gap, not just swap which term is heavy.
-        if (load(lo) + item.credits / weights[lo]! >= load(hi)) continue;
+        if (lo < (floor[item.id] ?? 0) || load(lo) + item.credits / weights[lo]! >= load(hi)) continue;
         out[hi]!.items.splice(out[hi]!.items.indexOf(item), 1);
         out[lo]!.items.push(item);
         const after = conflicts();

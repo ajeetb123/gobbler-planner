@@ -233,3 +233,51 @@ test('doubleMajor on real data: sane for every pair, and close majors cost less 
   const cs = get('computer-science');
   assert.ok(doubleMajor(cs, get('computer-engineering')).extra < doubleMajor(cs, get('mining-engineering')).extra);
 });
+
+test('rearranged plans keep upper-level elective slots out of the early terms', async () => {
+  const { slotLevel, slotFloor, repack, YEAR_OPTIONS } = await import('../src/plan/roadmap.ts');
+  assert.equal(slotLevel({ label: 'CS 4/5XXX' }), 4);
+  assert.equal(slotLevel({ label: 'CS 3/4/5XXX' }), 3);
+  assert.equal(slotLevel({ label: '3000-level elective' }), 3);
+  assert.equal(slotLevel({ label: 'Free Elective' }), undefined);
+  assert.equal(slotLevel({ code: 'CS 4104', label: 'CS 4104' }), undefined);
+  // Never later than where the catalog itself puts the slot.
+  const early = { id: 'a', label: 'CS 4XXX', alt: [], choices: [], credits: 3, src: 0 };
+  assert.equal(slotFloor(early, 6, 8), 0);
+  assert.ok(slotFloor({ ...early, src: 7 }, 6, 8) >= 3);
+  // Every official roadmap, every length: no 4XXX slot in the first quarter of the plan, no 3XXX slot in the first eighth.
+  for (const r of real.filter((x) => !x.draft)) {
+    const check = checkItems(r.terms, courses);
+    for (const y of YEAR_OPTIONS) {
+      const terms = repack(r, y, check);
+      terms.forEach((t, k) => t.items.forEach((i) => {
+        const level = slotLevel(i);
+        if (level === undefined || level < 3) return;
+        assert.ok(!(level >= 4 && k < terms.length / 4) && !(level === 3 && k < terms.length / 8), `${r.slug} ${y} years: "${i.label}" in term ${k + 1} of ${terms.length}`);
+      }));
+    }
+  }
+});
+
+test('major names: no two plans share a name, and known catalog typos are corrected', () => {
+  // Roadmaps and requirement lists both become plans: read every "## slug | Name | path" heading from both folders.
+  const names = ['data/roadmaps', 'data/requirements'].flatMap((dir) => readdirSync(dir).flatMap((f) =>
+    [...readFileSync(`${dir}/${f}`, 'utf8').matchAll(/^## [^|]+\| ([^|]+) \|/gm)].map((m) => m[1]!)));
+  assert.ok(names.length > 200);
+  const twice = names.filter((n, i) => names.indexOf(n) !== i);
+  assert.deepEqual(twice, []);
+  assert.ok(!names.some((n) => /Constructioning|Majors with/.test(n)));
+  assert.ok(names.includes('Physics Major (B.A.)') && names.includes('Physics Major (B.S.)'));
+});
+
+test('switchCost: the credits shown as kept never exceed the credits finished', async () => {
+  const { switchCost } = await import('../src/plan/switch.ts');
+  // A finished 3-credit course fills a 4-credit slot in the new major: 4 credits come off what is left, 3 are "kept".
+  const from = [{ id: 'a', cs: ['MATH 1225'], label: 'Calculus', cr: 3 }];
+  const to = [{ id: 'x', cs: ['MATH 1225'], label: 'Calculus', cr: 4 }, { id: 'y', cs: ['CS 1114'], label: 'Intro', cr: 3 }];
+  const r = switchCost(from, to, ['a']);
+  assert.equal(r.kept, 3);
+  assert.equal(r.counted, 4);
+  assert.equal(r.remaining, 3);
+  assert.ok(r.kept <= r.doneCredits);
+});

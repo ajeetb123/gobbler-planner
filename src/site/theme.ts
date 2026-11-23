@@ -207,4 +207,9 @@ h2{text-align:left}.col{font-weight:600;font-size:1.3rem}.majors a,.majors butto
 .exp{max-width:720px;margin:14px 0 4px}.exp>summary{cursor:pointer;font-size:.84rem;font-weight:500;color:var(--mut);list-style:none;display:inline-flex;align-items:center;gap:8px;padding:6px 2px}.exp>summary::-webkit-details-marker{display:none}.exp>summary:before{content:"+";display:grid;place-items:center;width:18px;height:18px;border:1px solid var(--rule);border-radius:6px;font-family:var(--mono);font-size:.8rem;color:var(--mut)}.exp[open]>summary:before{content:"\\2212"}.exp>summary:hover{color:var(--ink)}.exp .aibox{margin-top:6px}
 /* "Beta" marker for Ask: in the nav and beside the page intro. */
 .beta{display:inline-block;font-family:var(--mono);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--acc2);border:1px solid color-mix(in srgb,var(--acc2) 45%,transparent);border-radius:999px;padding:1px 6px;vertical-align:middle;line-height:1.4}sup.beta{margin-left:5px;vertical-align:super;font-size:.52rem;padding:0 5px}.hero .beta{margin-right:6px;font-size:.66rem}
+/* Planner sidebar: the tools sit in a <details>. Wide screens never show the toggle; phones fold the tools and drop the stat tiles. */
+.tools>summary{display:none}
+@media(max-width:860px){.side .stats{display:none}.side h4{margin-top:12px}
+.tools>summary{display:flex;align-items:center;gap:8px;list-style:none;cursor:pointer;margin-top:12px;padding:9px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);font-size:.84rem;font-weight:500;color:var(--ink)}.tools>summary::-webkit-details-marker{display:none}.tools>summary:before{content:"+";font-family:var(--mono);color:var(--mut)}.tools[open]>summary:before{content:"\\2212"}}
+@media print{.tools>summary{display:none}}
 `;

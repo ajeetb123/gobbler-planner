@@ -164,3 +164,18 @@ test('the model ids exist in the installed library, and the page script uses the
   }
   assert.ok(src.includes('CreateMLCEngine'));
 });
+
+test('"what subject do these majors take" answers from the majors\' plans, not from a course with a similar name', () => {
+  const a = E.answer(ix, 'What calc class do business majors take');
+  assert.equal(a.intent, 'group');
+  assert.ok(a.lines[0]!.includes('Pamplin College of Business majors') && a.lines[0]!.includes('MATH 1025 or MATH 1225'));
+  assert.ok(!a.lines.join(' ').includes('Consumer Studies'));
+  // One major, not a college: its own plan, with the terms.
+  const one = E.answer(ix, 'what english class do psychology majors need');
+  assert.equal(one.intent, 'group');
+  assert.ok(one.lines[0]!.includes('Psychology') && one.lines[0]!.includes('ENGL 1105 (First year, Fall)'));
+  // A subject the plan does not name: it says so, it does not guess.
+  assert.ok(E.answer(ix, 'which physics course do computer science majors take').lines[0]!.includes('does not name a physics course'));
+  // Questions with a course code keep their old meaning.
+  assert.equal(E.answer(ix, 'which majors require PHYS 2305').intent, 'majors');
+});

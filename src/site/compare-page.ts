@@ -86,6 +86,10 @@ export const COMPARE_JS = `
     },
     by = (s) => D.find((m) => m.slug === s);
   for (const s of [F, T]) {
+    // Both lists start on a prompt, not on whichever major sorts first.
+    const first = new Option(s === F ? 'Choose your current major' : 'Choose a major to compare', '');
+    first.disabled = true;
+    s.append(first);
     let g;
     D.slice()
       .sort((a, b) => a.college.localeCompare(b.college) || a.name.localeCompare(b.name))
@@ -99,8 +103,16 @@ export const COMPARE_JS = `
       });
   }
   const h = new URLSearchParams(location.hash.slice(1));
-  if (by(h.get('from'))) F.value = h.get('from');
-  T.value = by(h.get('to')) && h.get('to') !== F.value ? h.get('to') : D.find((m) => m.slug !== F.value).slug;
+  // Start from the link (#from, #to), else from the one major this browser has a saved plan for, else empty.
+  const saved = D.filter((m) => {
+    try {
+      return localStorage.getItem('gobblerplan:' + m.slug) !== null;
+    } catch {
+      return false;
+    }
+  });
+  F.value = by(h.get('from')) ? h.get('from') : saved.length === 1 ? saved[0].slug : '';
+  T.value = by(h.get('to')) && h.get('to') !== F.value ? h.get('to') : '';
   const ticks = (m) => {
     try {
       return ((JSON.parse(localStorage.getItem('gobblerplan:' + m.slug)) || {}).done || []).filter((id) => m.items[id]);
@@ -109,9 +121,10 @@ export const COMPARE_JS = `
     }
   };
   function fillDone() {
-    const m = by(F.value),
-      t = ticks(m);
+    const m = by(F.value);
     W.textContent = '';
+    if (!m) return;
+    const t = ticks(m);
     if (t.length)
       W.append(
         new Option('What I ticked in the planner (' + t.length + (t.length > 1 ? ' courses)' : ' course)'), 'ticks'),
@@ -122,6 +135,7 @@ export const COMPARE_JS = `
   }
   const doneIds = () => {
     const m = by(F.value);
+    if (!m) return [];
     return W.value === 'ticks' ? ticks(m) : m.terms.slice(0, +W.value).flatMap((t) => t.ids);
   };
   const arr = (m) => Object.keys(m.items).map((id) => ({ id, ...m.items[id] })),
@@ -217,17 +231,28 @@ export const COMPARE_JS = `
       mode === 'double'
         ? 'The ${RANK_SHOWN} majors that add the fewest credits to your first one. Tap one to see it.'
         : 'The ${RANK_SHOWN} majors with the fewest credits left for you. Tap one to compare.';
+    $('rankh').hidden = $('rankp').hidden = !a;
+    if (!a) {
+      $('donerow').hidden = true;
+      out.append(el('p', 'note', mode === 'double' ? 'Choose your first major to start.' : 'Choose your current major to start.'));
+      return;
+    }
     if (a === b) {
       out.append(el('p', 'note', 'Pick two different majors.'));
       return;
     }
-    if (mode === 'double') return drawDouble(a, b);
+    if (mode === 'double') {
+      if (!b) return void out.append(el('p', 'note', 'Now choose the second major.'));
+      return drawDouble(a, b);
+    }
+    if (!b) out.append(el('p', 'note', 'Now choose the major you are thinking about, or tap one from the list below.'));
+    else {
     const r = switchCost(arr(a), arr(b), done),
       stay = a.total - r.doneCredits,
       extra = tm(r.remaining) - tm(stay),
       lede = el('p', 'lede');
     lede.textContent = r.doneCredits
-      ? r.counted + ' of your ' + r.doneCredits + ' finished credits count toward ' + b.name + '.'
+      ? r.kept + ' of your ' + r.doneCredits + ' finished credits count toward ' + b.name + '.'
       : 'Nothing finished yet, so nothing is lost by switching.';
     lede.append(
       el(
@@ -270,13 +295,14 @@ export const COMPARE_JS = `
       ),
     );
     out.append(lede, cols);
+    }
     const rows = D.filter((m) => m !== a)
       .map((m) => ({ m, r: switchCost(arr(a), arr(m), done) }))
       .sort((x, y) => x.r.remaining - y.r.remaining);
     rows.slice(0, ${RANK_SHOWN}).forEach(({ m, r }) => {
       const bt = el('button');
       bt.type = 'button';
-      bt.append(el('b', null, m.name), el('span', null, r.counted + ' count · ' + r.remaining + ' left'));
+      bt.append(el('b', null, m.name), el('span', null, r.kept + ' count · ' + r.remaining + ' left'));
       if (m === b) bt.setAttribute('aria-current', 'true');
       bt.onclick = () => {
         T.value = m.slug;
@@ -295,7 +321,7 @@ export const COMPARE_JS = `
     }
   });
   F.onchange = () => {
-    if (T.value === F.value) T.value = D.find((m) => m.slug !== F.value).slug;
+    if (T.value === F.value) T.value = '';
     fillDone();
     draw();
   };

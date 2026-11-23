@@ -46,7 +46,7 @@ Fourth Year
  Spring: CEE Advanced Elective from Environmental Engineering (3), CEE Advanced Elective in an area other than Environmental Engineering and Water Resources Engineering (3), Technical Elective (3), Restricted Elective (3), Pathways (3), sum 15
 TOTAL 128
 
-## construction-safety-leadership-option | Constructioning Engineering and Management Major with Construction Safety Leadership Option | college-engineering/construction-engineering-management/construction-safety-leadership-option/
+## construction-safety-leadership-option | Construction Engineering and Management Major with Construction Safety Leadership Option | college-engineering/construction-engineering-management/construction-safety-leadership-option/
 First Year
  Fall: CHEM 1035 (3), CHEM 1045 (1), ENGE 1215 (2), ENGL 1105 (3), MATH 1225 (4), Pathway 2 (3), sum 16
  Spring: ENGE 1216 (2), ENGL 1106 (3), MATH 1226 (4), MATH 2114 (3), PHYS 2305 (4), sum 16
