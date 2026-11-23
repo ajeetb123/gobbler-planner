@@ -307,7 +307,7 @@ export const UDC_URL = 'https://udc.vt.edu/irdata/data/courses/grades';
 export const RMP_SCHOOL_URL = `https://www.ratemyprofessors.com/school/${RMP_SCHOOL_ID}`;
 /** Site name. Without grade data (`site` undefined) the build is the planner alone. */
 export const brand = (site?: Site) => (site ? 'Gobbler Grades' : 'Gobbler Plan');
-/** Shown on every page. The site does not name the university at all (owner's decision, Nov 22, 2026: its licensing rules ask for written permission to use the name on a website). */
+/** Shown on every page. The site does not name the university at all (decided Nov 22, 2026: its licensing rules ask for written permission to use the name on a website). */
 /** What the site records, in one place so every page says the same thing. Keep in step with server/app.ts and server/db.ts. */
 export const PRIVACY = 'Your plan stays in your browser. The site counts page views and feature use anonymously: no names, no accounts, no cookies, and no address is stored. Turn on Do Not Track or Global Privacy Control in your browser and nothing is counted.';
 export const DISCLAIMER = 'An independent student project. Not affiliated with, endorsed by, or sponsored by any university.';
