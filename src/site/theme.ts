@@ -203,4 +203,6 @@ h2{text-align:left}.col{font-weight:600;font-size:1.3rem}.majors a,.majors butto
 @keyframes gp-arrow{0%{transform:translate(0,0);opacity:1}45%{transform:translate(9px,-9px);opacity:0}55%{transform:translate(-9px,9px);opacity:0}100%{transform:translate(0,0);opacity:1}}
 .seg{border-radius:8px}.seg button{border-radius:6px}.sel{border-radius:8px}.icon{border-radius:8px}
 @media(prefers-reduced-motion:reduce){.btn.big:hover:after{animation:none}}
+/* Experimental AI answers: one closed line until the visitor opens it. */
+.exp{max-width:720px;margin:14px 0 4px}.exp>summary{cursor:pointer;font-size:.84rem;font-weight:500;color:var(--mut);list-style:none;display:inline-flex;align-items:center;gap:8px;padding:6px 2px}.exp>summary::-webkit-details-marker{display:none}.exp>summary:before{content:"+";display:grid;place-items:center;width:18px;height:18px;border:1px solid var(--rule);border-radius:6px;font-family:var(--mono);font-size:.8rem;color:var(--mut)}.exp[open]>summary:before{content:"\\2212"}.exp>summary:hover{color:var(--ink)}.exp .aibox{margin-top:6px}
 `;
