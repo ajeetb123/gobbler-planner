@@ -795,7 +795,7 @@ export const PLAN_JS = `
       if (low >= 3) card.append(el('div', 'flag', low + ' courses here average below ' + D.low.toFixed(1)));
       if (!heavy && c > 0 && c < 12 && !t.label.includes('Summer') && t.ids.some((id) => !S.done.includes(id)))
         card.append(el('div', 'flag', 'Light term: under 12 credits is usually below full-time'));
-      if (!t.ids.length) card.append(el('div', 'mut', 'Nothing planned here.'));
+      if (!t.ids.length) card.append(el('div', 'tnote', 'Nothing planned here.'));
       if (t.add) {
         // A term the student added: it can go again once it is empty.
         const note = el('div', 'tnote', 'You added this term. ');
