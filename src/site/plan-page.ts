@@ -146,7 +146,14 @@ export const PLAN_JS = `
     showx = (e, top) =>
       typeof e === 'string'
         ? e
-        : (top ? '' : '(') + e.slice(1).map((x) => showx(x, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')');
+        : (top ? '' : '(') + e.slice(1).map((x) => showx(x, false)).join(e[0] === '&' ? ' and ' : ' or ') + (top ? '' : ')'),
+    // The part of a tree that f does not satisfy, or null: so a flag names only what is missing.
+    lackx = (e, f) => {
+      if (typeof e === 'string') return f(e) ? null : e;
+      if (e[0] === '|') return evx(e, f) ? null : e;
+      const parts = e.slice(1).map((x) => lackx(x, f)).filter((x) => x !== null);
+      return parts.length === 0 ? null : parts.length === 1 ? parts[0] : ['&', ...parts];
+    };
   function merge(extra) {
     for (const id in D.items) if (D.items[id].custom) delete D.items[id];
     for (const y in D.plans)
@@ -637,7 +644,7 @@ export const PLAN_JS = `
             missing = true;
             bad++;
             tb++;
-            mid.append(el('div', 'flag', word + ' not in this plan: ' + showx(e, true)));
+            mid.append(el('div', 'flag', word + ' not in this plan: ' + showx(lackx(e, (c) => inPlan.has(c)), true)));
           });
         if (v.late.length || v.coLate.length || missing) {
           li.classList.add('conflict');
