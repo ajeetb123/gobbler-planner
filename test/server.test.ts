@@ -128,6 +128,8 @@ test('stats and prune: a returning visitor counts once per day; old events are d
   const s = stats(db, '2026-11-21');
   assert.deepEqual(s.terms, [{ name: 'summer', uses: 2, visitors: 0 }]);
   assert.ok(renderDashboard(s).includes('Summer added'));
+  assert.ok(!/\b1 visitors\b/.test(renderDashboard(s)), 'one visitor is singular');
+  assert.ok(renderDashboard(s).includes('/?count=off'));
   assert.equal(s.totals.visitorDays, 3);
   assert.equal(s.totals.views, 4);
   assert.deepEqual(s.planLengths, [{ name: '3', uses: 1, visitors: 0 }]);

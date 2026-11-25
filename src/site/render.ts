@@ -120,7 +120,25 @@ export const APP_JS = `
       .toLowerCase()
       .replace(/[^a-z0-9-]/g, '')
       .slice(0, 80) || 'index';
-  const quiet = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+  // The owner can keep their own browser out of the counts: ?count=off once (stored in this browser), ?count=on to undo.
+  const cq = new URLSearchParams(location.search).get('count');
+  let mine = false;
+  try {
+    if (cq === 'off') localStorage.setItem('gp-nocount', '1');
+    if (cq === 'on') localStorage.removeItem('gp-nocount');
+    mine = localStorage.getItem('gp-nocount') === '1';
+  } catch {}
+  if (cq === 'off' || cq === 'on') {
+    history.replaceState(null, '', location.pathname + location.hash);
+    const n = document.createElement('p');
+    n.className = 'note';
+    n.setAttribute('role', 'status');
+    n.textContent = mine
+      ? 'This browser is no longer counted on the dashboard.'
+      : 'This browser is counted on the dashboard again.';
+    (document.querySelector('main') || document.body).prepend(n);
+  }
+  const quiet = mine || navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
   window.gpTrack = (t, v) => {
     if (quiet || !navigator.sendBeacon) return;
     try {

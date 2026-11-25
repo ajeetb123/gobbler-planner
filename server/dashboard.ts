@@ -12,8 +12,9 @@ function bars(rows: Array<{ label: string; value: number; note?: string }>, empt
 }
 
 export function renderDashboard(s: Stats): string {
+  const vis = (n: number) => `${n} visitor${n === 1 ? '' : 's'}`;
   const maxDay = Math.max(1, ...s.days.map((d) => d.visitors));
-  const chart = s.days.map((d) => `<div class="col" title="${esc(d.day)}: ${d.visitors} visitors, ${d.views} page views"><i style="height:${Math.round((d.visitors / maxDay) * 100)}%"></i><span>${esc(d.day.slice(8))}</span></div>`).join('');
+  const chart = s.days.map((d) => `<div class="col" title="${esc(d.day)}: ${vis(d.visitors)}, ${d.views} page views"><i style="height:${Math.round((d.visitors / maxDay) * 100)}%"></i><span>${esc(d.day.slice(8))}</span></div>`).join('');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Gobbler Plan dashboard</title>
 <style>:root{--paper:#f5f2ea;--sheet:#fffdf8;--ink:#1c2230;--mut:#687083;--rule:#dcd6c8;--acc:#b4470f;--bar:#417784}
 @media(prefers-color-scheme:dark){:root{--paper:#13151a;--sheet:#1a1d24;--ink:#e9e6df;--mut:#9aa1b0;--rule:#30343e;--acc:#f0935c;--bar:#5aa3b3}}
@@ -26,10 +27,11 @@ ul{list-style:none;padding:0;margin:0;font-size:.92rem}li{border-top:1px solid v
 <h1>Gobbler Plan dashboard</h1><p class="mut">${esc(s.since)} to ${esc(s.until)} (UTC). Anonymous counts only: no names, addresses or cookies are stored.</p>
 <div class="tiles"><div class="tile"><b>${s.totals.visitorDays}</b>visitor-days</div><div class="tile"><b>${s.totals.views}</b>page views</div><div class="tile"><b>${s.totals.events - s.totals.views}</b>feature uses</div><div class="tile"><b>${s.askMisses.length}</b>unanswered questions</div></div>
 <p class="mut">A visitor-day is one browser on one day. The same person on three days counts three times, because visitors cannot be followed from one day to the next.</p>
+<p class="mut">Keep your own visits out of these numbers: open <a href="/?count=off">/?count=off</a> once in each browser you use. <a href="/?count=on">/?count=on</a> counts it again.</p>
 <h2>Visitors per day</h2><div class="chart">${chart}</div>
 <div class="grid">
-<section><h2>Most viewed pages</h2>${bars(s.pages.map((p) => ({ label: p.name, value: p.views, note: `${p.visitors} visitors` })), 'No page views yet.')}</section>
-<section><h2>Features used</h2>${bars(s.features.map((f) => ({ label: f.name, value: f.uses, note: `${f.visitors} visitors` })), 'No feature use yet.')}</section>
+<section><h2>Most viewed pages</h2>${bars(s.pages.map((p) => ({ label: p.name, value: p.views, note: vis(p.visitors) })), 'No page views yet.')}</section>
+<section><h2>Features used</h2>${bars(s.features.map((f) => ({ label: f.name, value: f.uses, note: vis(f.visitors) })), 'No feature use yet.')}</section>
 <section><h2>Plan lengths chosen</h2>${bars(s.planLengths.map((f) => ({ label: `${f.name} years`, value: f.uses })), 'Nobody has changed a plan length yet.')}</section>
 <section><h2>Terms added</h2>${bars(s.terms.map((f) => ({ label: ({ summer: 'Summer added', end: 'Term added at the end', remove: 'Added term removed' } as Record<string, string>)[f.name] ?? f.name, value: f.uses })), 'Nobody has added a term yet.')}</section>
 <section><h2>Ask: kinds of answer</h2>${bars(s.askIntents.map((f) => ({ label: f.name || 'general', value: f.uses })), 'No questions yet.')}</section>
