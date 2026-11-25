@@ -92,7 +92,7 @@ export const PLAN_JS = `
   }
   const P = new URLSearchParams(location.hash.slice(1));
   let shared = P.has('y');
-  // A shared link carries: y (years), d (done ids), m (id_term moves), n (id~name for named elective slots), x (term~credits~name for added courses).
+  // A shared link carries: y (years), d (done ids), m (id_term moves), n (id~name for named elective slots), x (term~credits~name for added courses), a (added terms).
   // Roadmap ids travel without their leading "t" ("0-3"); added courses are plain numbers ("2" = x2). clean() below validates all of it.
   if (shared) {
     const full = (x) => (/^\\d+-\\d+$/.test(x) ? 't' + x : 'x' + x),
@@ -106,8 +106,16 @@ export const PLAN_JS = `
       const i = x.indexOf('~');
       if (i > 0) names[full(x.slice(0, i))] = x.slice(i + 1);
     });
+    // a: added terms, "s1.e2" = a summer after the second year and two terms after the last.
+    const ad = (P.get('a') || '').split('.');
     S = {
       years: P.get('y'),
+      add: {
+        [P.get('y')]: {
+          s: ad.filter((x) => /^s\\d$/.test(x)).map((x) => +x.slice(1)),
+          e: +((ad.find((x) => /^e\\d$/.test(x)) || 'e0').slice(1)),
+        },
+      },
       pos: { [P.get('y')]: p },
       done: (P.get('d') || '').split('.').filter(Boolean).map(full),
       names,
@@ -182,6 +190,42 @@ export const PLAN_JS = `
       for (const y in D.plans) D.plans[y][Math.min(e.t, D.plans[y].length - 1)].ids.push(e.id);
     });
   }
+  // The terms of a plan length with the student's added terms in place. at[ti] is where roadmap term ti now sits.
+  // add[y] = { s: years (0 = first) that get a summer after their spring, e: extra terms after the last one }.
+  const YW = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth'],
+    MAX_END = 4,
+    yearOf = (l) => l.split(' year')[0];
+  function layout(y, add) {
+    const plan = D.plans[y],
+      a = (add && add[y]) || { s: [], e: 0 },
+      out = [],
+      at = [];
+    plan.forEach((t, ti) => {
+      at.push(out.length);
+      out.push({ label: t.label, ids: [] });
+      const yr = yearOf(t.label),
+        next = plan[ti + 1];
+      if (t.label.endsWith('Spring') && (!next || yearOf(next.label) !== yr) && a.s.includes(YW.indexOf(yr)))
+        out.push({ label: yr + ' year, Summer', ids: [], add: 's' + YW.indexOf(yr) });
+    });
+    for (let j = 0; j < a.e; j++) {
+      const last = out[out.length - 1].label,
+        yr = yearOf(last);
+      out.push({
+        label: last.endsWith('Fall') ? yr + ' year, Spring' : YW[YW.indexOf(yr) + 1] + ' year, Fall',
+        ids: [],
+        add: 'e',
+      });
+    }
+    return { out, at };
+  }
+  // Years (0 = first) whose roadmap ends the year with a spring and has no summer: a summer can be added after them.
+  const summerable = (y) =>
+    YW.map((_, k) => k).filter((k) => {
+      const ts = D.plans[y].filter((t) => yearOf(t.label) === YW[k]);
+      return ts.length && ts[ts.length - 1].label.endsWith('Spring');
+    });
+  const addOf = (y) => (S.add[y] = S.add[y] || { s: [], e: 0 });
   const clean = (s) => {
     s = s && typeof s === 'object' && !Array.isArray(s) ? s : {};
     const seen = {},
@@ -215,14 +259,24 @@ export const PLAN_JS = `
       done: Array.isArray(s.done) ? [...new Set(s.done.filter((id) => D.items[id]))] : [],
       names,
       extra,
+      add: {},
     };
+    if (s.add && typeof s.add === 'object')
+      for (const y in D.plans) {
+        const a = s.add[y];
+        if (!a || typeof a !== 'object') continue;
+        const ok = summerable(y),
+          su = Array.isArray(a.s) ? [...new Set(a.s.filter((k) => ok.includes(k)))].sort((x, z) => x - z) : [],
+          e = Number.isInteger(a.e) ? Math.max(0, Math.min(MAX_END, a.e)) : 0;
+        if (su.length || e) o.add[y] = { s: su, e };
+      }
     if (s.pos && typeof s.pos === 'object')
       for (const y in D.plans) {
-        const p = s.pos[y];
+        const p = s.pos[y],
+          n = layout(y, o.add).out.length;
         if (p && typeof p === 'object') {
           o.pos[y] = {};
-          for (const id in p)
-            if (D.items[id] && Number.isInteger(p[id]) && p[id] >= 0 && p[id] < D.plans[y].length) o.pos[y][id] = p[id];
+          for (const id in p) if (D.items[id] && Number.isInteger(p[id]) && p[id] >= 0 && p[id] < n) o.pos[y][id] = p[id];
         }
       }
     return o;
@@ -260,17 +314,19 @@ export const PLAN_JS = `
         .replace('Third', 'Y3')
         .replace('Fourth', 'Y4')
         .replace('Fifth', 'Y5')
+        .replace('Sixth', 'Y6')
+        .replace('Seventh', 'Y7')
+        .replace('Eighth', 'Y8')
         .replace('Spring', 'Sp')
         .replace('Summer', 'Su')
         .replace('Fall', 'F');
   function terms() {
-    const plan = D.plans[S.years],
-      pos = S.pos[S.years] || {},
-      out = plan.map((t) => ({ label: t.label, ids: [] }));
-    plan.forEach((t, ti) =>
+    const { out, at } = layout(S.years, S.add),
+      pos = S.pos[S.years] || {};
+    D.plans[S.years].forEach((t, ti) =>
       t.ids.forEach((id) => {
         const p = pos[id];
-        out[p != null && p < out.length ? p : ti].ids.push(id);
+        out[p != null && p < out.length ? p : at[ti]].ids.push(id);
       }),
     );
     return out;
@@ -278,9 +334,43 @@ export const PLAN_JS = `
   function put(id, to) {
     (S.pos[S.years] = S.pos[S.years] || {})[id] = to;
   }
+  // Terms the student added: a summer inserted after a year's spring, and extra terms after the last one.
+  // Positions in S.pos count these terms, so adding or removing one shifts the positions after it.
+  const shiftPos = (from, by) => {
+    const p = S.pos[S.years] || {};
+    for (const id in p) if (p[id] >= from) p[id] += by;
+  };
+  function addSummer(k) {
+    const { out } = layout(S.years, S.add),
+      i = out.findIndex((t) => t.label === YW[k] + ' year, Spring');
+    if (i < 0) return;
+    snap();
+    const a = addOf(S.years);
+    a.s = [...a.s, k].sort((x, y) => x - y);
+    shiftPos(i + 1, 1);
+    save();
+    draw();
+  }
+  function addEnd() {
+    snap();
+    addOf(S.years).e++;
+    save();
+    draw();
+  }
+  function dropTerm(ti) {
+    const t = layout(S.years, S.add).out[ti];
+    if (!t || !t.add) return;
+    snap();
+    const a = addOf(S.years);
+    if (t.add === 'e') a.e--;
+    else a.s = a.s.filter((k) => 's' + k !== t.add);
+    shiftPos(ti + 1, -1);
+    save();
+    draw();
+  }
   function move(id, from, d) {
     const to = from + d;
-    if (to < 0 || to >= D.plans[S.years].length) return;
+    if (to < 0 || to >= terms().length) return;
     snap();
     put(id, to);
     save();
@@ -519,8 +609,16 @@ export const PLAN_JS = `
         const y = el('section', 'year'),
           n = board.querySelectorAll('.year').length;
         y.style.setProperty('--i', String(n));
-        const h = el('h2');
+        const h = el('h2'),
+          k = YW.indexOf(yr);
         h.append(yr + ' year');
+        if (summerable(S.years).includes(k) && !((S.add[S.years] || { s: [] }).s.includes(k))) {
+          const su = el('button', 'lnk addt', '+ Add a summer');
+          su.type = 'button';
+          su.setAttribute('aria-label', 'Add a summer term after ' + yr.toLowerCase() + ' year');
+          su.onclick = () => addSummer(k);
+          h.append(su);
+        }
         y.append(h);
         yrow = el('div', 'yrow');
         y.append(yrow);
@@ -675,7 +773,7 @@ export const PLAN_JS = `
       load.append(fill);
       card.append(
         el('h3', null, t.label.split(', ')[1] || t.label),
-        el('div', 'mut', c + ' credits' + (dn ? ' to take, ' + dn + ' done' : '') + (gw ? ' · typical GPA ' + (gs / gw).toFixed(2) : '')),
+        el('div', 'mut', c + (c === 1 ? ' credit' : ' credits') + (dn ? ' to take, ' + dn + ' done' : '') + (gw ? ' · typical GPA ' + (gs / gw).toFixed(2) : '')),
         load,
       );
       if (c > D.limit && !t.label.includes('Summer'))
@@ -695,6 +793,19 @@ export const PLAN_JS = `
       if (!heavy && c > 0 && c < 12 && !t.label.includes('Summer') && t.ids.some((id) => !S.done.includes(id)))
         card.append(el('div', 'flag', 'Light term: under 12 credits is usually below full-time'));
       if (!t.ids.length) card.append(el('div', 'mut', 'Nothing planned here.'));
+      if (t.add) {
+        // A term the student added: it can go again once it is empty.
+        const note = el('div', 'tnote', 'You added this term. ');
+        if (t.ids.length) note.append('Move its courses out to remove it.');
+        else {
+          const rm = el('button', 'lnk', 'Remove it');
+          rm.type = 'button';
+          rm.setAttribute('aria-label', 'Remove ' + t.label);
+          rm.onclick = () => dropTerm(ti);
+          note.append(rm);
+        }
+        card.append(note);
+      }
       card.append(list);
       const add = el('button', 'lnk addc', '+ Add a course');
       add.type = 'button';
@@ -726,6 +837,12 @@ export const PLAN_JS = `
       o.append(el('span', null, String(c)), b, el('span', null, short(t.label)));
       over.append(o);
     });
+    if ((S.add[S.years] || { e: 0 }).e < MAX_END) {
+      const more = el('button', 'btn addterm', '+ Add a term after ' + ts[ts.length - 1].label);
+      more.type = 'button';
+      more.onclick = addEnd;
+      board.append(more);
+    }
     lines = document.createElementNS(NS, 'svg');
     board.append(lines);
     LAST = I;
@@ -1046,6 +1163,9 @@ export const PLAN_JS = `
                 .join('|'),
             )
           : '') +
+        (S.add[S.years]
+          ? '&a=' + [...S.add[S.years].s.map((k) => 's' + k), ...(S.add[S.years].e ? ['e' + S.add[S.years].e] : [])].join('.')
+          : '') +
         (S.extra.length
           ? '&x=' +
             encodeURIComponent(S.extra.map((e) => e.t + '~' + e.cr + '~' + e.label.replace(/[|]/g, ' ')).join('|'))
@@ -1125,7 +1245,7 @@ ${r.draft ? `<p class="note"><b>Suggested order.</b> These are the official requ
 <noscript><p class="note warn">The planner needs JavaScript. The official ${r.draft ? 'requirements are' : 'roadmap is'} on catalog.vt.edu.</p></noscript>
 <div class="board" id="board"></div>
 <details class="help"><summary>How to use this page</summary>
-<ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Drag</b> a course to another term, or use the arrows that appear on it. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>Click</b> a course to see what it needs, what it unlocks, and links to its catalog page, past grades and instructor reviews.</li><li><b>Name it</b> on an elective or Pathways slot records the course you plan to take there.</li><li><b>Add a course</b> at the bottom of a term adds one of your own, such as a minor course.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li>Your plan is saved in this browser only.</li></ul></details>
+<ul><li><b>Tick</b> a course when it's done. AP, IB and transfer credit count too.</li><li><b>Drag</b> a course to another term, or use the arrows that appear on it. A note appears if the move breaks a prerequisite, and <b>Undo</b> takes it back.</li><li><b>Click</b> a course to see what it needs, what it unlocks, and links to its catalog page, past grades and instructor reviews.</li><li><b>Name it</b> on an elective or Pathways slot records the course you plan to take there.</li><li><b>Add a course</b> at the bottom of a term adds one of your own, such as a minor course.</li><li><b>Balance terms</b> evens out credits by moving elective slots only.</li><li><b>Add a summer</b> (next to a year's name) or <b>Add a term</b> (at the end) gives you an empty term to move courses into. An added term can be removed once it is empty.</li><li>Your plan is saved in this browser only.</li></ul></details>
 </div></div>
 <aside class="panel" id="panel" aria-label="Course details" hidden></aside>
 <dialog id="addc" aria-labelledby="ac-h"><form id="ac-f" novalidate><h3 id="ac-h">Add a course</h3><p class="mut" id="ac-t"></p>

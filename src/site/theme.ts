@@ -230,4 +230,9 @@ body:before{background-image:repeating-linear-gradient(180deg,transparent 0 31px
 .side #conf .lnk{white-space:nowrap}
 /* Dark mode: course-code labels use their subject color, which is too dark to read on a dark card. Lighten the text only. */
 :root[data-theme=dark] .it .nm a{color:color-mix(in srgb,var(--c,var(--ink)) 45%,#fff)}
+/* Added terms (Nov 25, 2026): "+ Add a summer" sits at the right of a year's heading; "+ Add a term" ends the board. */
+.year>h2 .addt{margin-left:auto;font-family:var(--font);font-size:.76rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--mut)}.year>h2 .addt:hover{color:var(--acc)}
+.board>.addterm{display:block;margin:4px 0 24px}
+.term>.tnote{clear:both;font-size:.76rem;color:var(--mut);margin:2px 4px 6px}
+@media print{.addt,.board>.addterm{display:none!important}}
 `;
