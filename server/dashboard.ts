@@ -31,6 +31,7 @@ ul{list-style:none;padding:0;margin:0;font-size:.92rem}li{border-top:1px solid v
 <section><h2>Most viewed pages</h2>${bars(s.pages.map((p) => ({ label: p.name, value: p.views, note: `${p.visitors} visitors` })), 'No page views yet.')}</section>
 <section><h2>Features used</h2>${bars(s.features.map((f) => ({ label: f.name, value: f.uses, note: `${f.visitors} visitors` })), 'No feature use yet.')}</section>
 <section><h2>Plan lengths chosen</h2>${bars(s.planLengths.map((f) => ({ label: `${f.name} years`, value: f.uses })), 'Nobody has changed a plan length yet.')}</section>
+<section><h2>Terms added</h2>${bars(s.terms.map((f) => ({ label: ({ summer: 'Summer added', end: 'Term added at the end', remove: 'Added term removed' } as Record<string, string>)[f.name] ?? f.name, value: f.uses })), 'Nobody has added a term yet.')}</section>
 <section><h2>Ask: kinds of answer</h2>${bars(s.askIntents.map((f) => ({ label: f.name || 'general', value: f.uses })), 'No questions yet.')}</section>
 </div>
 <h2>Ask: questions with no answer</h2><p class="mut">The most recent 50. These show what to teach the Ask rules next.</p>

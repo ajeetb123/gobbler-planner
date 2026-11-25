@@ -50,6 +50,8 @@ export interface Stats {
   features: Array<{ name: string; uses: number; visitors: number }>;
   planLengths: Array<{ name: string; uses: number }>;
   askIntents: Array<{ name: string; uses: number }>;
+  /** Terms students added or removed on a plan: summer, end, remove. */
+  terms: Array<{ name: string; uses: number }>;
   askMisses: Array<{ day: string; question: string }>;
 }
 
@@ -77,6 +79,7 @@ export function stats(db: Db, today: string, windowDays = 30): Stats {
       .map((r) => ({ name: String(r.name), views: Number(r.uses), visitors: Number(r.visitors) })),
     features: named(all(`SELECT type AS name, COUNT(*) AS uses, COUNT(DISTINCT day || visitor) AS visitors FROM events WHERE day >= ? AND type NOT IN ('view', 'ask-miss') GROUP BY type ORDER BY uses DESC, type`, since)),
     planLengths: named(all(`SELECT value AS name, COUNT(*) AS uses FROM events WHERE day >= ? AND type = 'years' GROUP BY value ORDER BY uses DESC, value`, since)),
+    terms: named(all(`SELECT value AS name, COUNT(*) AS uses FROM events WHERE day >= ? AND type = 'term' GROUP BY value ORDER BY uses DESC, value`, since)),
     askIntents: named(all(`SELECT value AS name, COUNT(*) AS uses FROM events WHERE day >= ? AND type = 'ask' GROUP BY value ORDER BY uses DESC, value`, since)),
     askMisses: all(`SELECT day, value FROM events WHERE day >= ? AND type = 'ask-miss' ORDER BY rowid DESC LIMIT 50`, since).map((r) => ({ day: String(r.day), question: String(r.value) })),
   };

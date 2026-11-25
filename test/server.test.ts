@@ -123,8 +123,11 @@ test('stats and prune: a returning visitor counts once per day; old events are d
   const db = openDb(':memory:');
   const add = (day: string, visitor: string, type = 'view', page = 'index', value = '') => insertEvent(db, { day, type, page, value, visitor });
   add('2026-11-20', 'aaa'); add('2026-11-20', 'aaa'); add('2026-11-20', 'bbb'); add('2026-11-21', 'ccc'); add('2026-11-21', 'ccc', 'years', 'computer-science', '3');
+  add('2026-11-21', 'ccc', 'term', 'computer-science', 'summer'); add('2026-11-21', 'ccc', 'term', 'computer-science', 'summer');
   add('2026-01-01', 'old');
   const s = stats(db, '2026-11-21');
+  assert.deepEqual(s.terms, [{ name: 'summer', uses: 2, visitors: 0 }]);
+  assert.ok(renderDashboard(s).includes('Summer added'));
   assert.equal(s.totals.visitorDays, 3);
   assert.equal(s.totals.views, 4);
   assert.deepEqual(s.planLengths, [{ name: '3', uses: 1, visitors: 0 }]);

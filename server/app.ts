@@ -11,7 +11,7 @@ import { insertEvent, saltFor, stats, type Db } from './db.ts';
 import { renderDashboard } from './dashboard.ts';
 
 /** Event types the site may send. Anything else is refused, so the table cannot fill with junk. */
-export const EVENT_TYPES = ['view', 'years', 'share', 'print', 'balance', 'undo', 'keep', 'compare', 'double', 'ask', 'ask-miss', 'ai'] as const;
+export const EVENT_TYPES = ['view', 'years', 'share', 'print', 'balance', 'term', 'undo', 'keep', 'compare', 'double', 'ask', 'ask-miss', 'ai'] as const;
 export const MAX_BODY_BYTES = 1024;
 export const MAX_VALUE_CHARS = 120;
 /** Per visitor, per minute. A real session sends a handful. */

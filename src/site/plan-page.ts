@@ -348,12 +348,14 @@ export const PLAN_JS = `
     const a = addOf(S.years);
     a.s = [...a.s, k].sort((x, y) => x - y);
     shiftPos(i + 1, 1);
+    gpTrack('term', 'summer');
     save();
     draw();
   }
   function addEnd() {
     snap();
     addOf(S.years).e++;
+    gpTrack('term', 'end');
     save();
     draw();
   }
@@ -365,6 +367,7 @@ export const PLAN_JS = `
     if (t.add === 'e') a.e--;
     else a.s = a.s.filter((k) => 's' + k !== t.add);
     shiftPos(ti + 1, -1);
+    gpTrack('term', 'remove');
     save();
     draw();
   }
